@@ -1,0 +1,165 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+global $var_yttheme;    
+class YT_BasicMenu extends Mage_Catalog_Block_Navigation {
+  	/**
+  	 * Enter description here...
+  	 *
+  	 * @param Mage_Catalog_Model_Category $category
+  	 * @param int $level
+  	 * @param boolean $last
+  	 * @return string
+  	 */
+  	protected $_isNotParent = false;
+  	public function getParentItem ($category, $level=0, $last=false, $id)
+  	{
+  		$html = '';
+  		if (!$category->getIsActive()) {
+  			return $html;
+  		}
+  		if (Mage::helper('catalog/category_flat')->isEnabled()) {
+  			$children = $category->getChildrenNodes();
+  			$childrenCount = count($children);
+  		} else {
+  			$children = $category->getChildren();
+  			$childrenCount = $children->count();
+  		}
+  		$hasChildren = $children && $childrenCount;
+
+  		$html.= '<li id="parent_menu'.$id.'" ';
+  		if ($hasChildren) {
+  			$html.= '';
+  		}
+  		$html.= ' class="level'.$level;
+  		$html.= ' nav-'.str_replace('/', '-', Mage::helper('catalog/category')->getCategoryUrlPath($category->getRequestPath()));
+  		if ($this->isCategoryActive($category)) {
+  			$html.= ' active';
+  		}
+  		if ($last) {
+  			$html .= ' last';
+  		}
+  		if ($hasChildren) {
+  			$cnt = 0;
+  			foreach ($children as $child) {
+  				if ($child->getIsActive()) {
+  					$cnt++;
+  				}
+  			}
+  			if(!$this->_isNotParent){
+  				if ($cnt > 0) {
+  					$html .= ' parent';
+  				}
+  			}
+  		}
+  		$html.= '">'."\n";
+  		$html.= '<a onmouseover="toggleMenu(this,1); hideAllMenu(); displayChildMenu('.$id.');" onmouseout="toggleMenu(this,0);" href="'.$this->getCategoryUrl($category).'"><span>'.$this->htmlEscape($category->getName()).'</span></a>'."\n";
+  		$html.= '</li>'."\n";
+  		return $html;
+  	}
+
+  	/**
+  	 * Enter description here...
+  	 *
+  	 * @param Mage_Catalog_Model_Category $category
+  	 * @param int $level
+  	 * @param boolean $last
+  	 * @return string
+  	 */
+  	public function getChildItem ($category, $level=0, $last=false)
+  	{
+  		$html = '';
+  		if (!$category->getIsActive()) {
+  			return $html;
+  		}
+  		if (Mage::helper('catalog/category_flat')->isEnabled()) {
+  			$children = $category->getChildrenNodes();
+  			$childrenCount = count($children);
+  		} else {
+  			$children = $category->getChildren();
+  			$childrenCount = $children->count();
+  		}
+  		$hasChildren = $children && $childrenCount;
+
+  		$html.= '<li ';
+  		if ($hasChildren) {
+  			$html.= '';
+  		}
+
+  		$html.= ' class="level'.$level;
+  		$html.= ' nav-'.str_replace('/', '-', Mage::helper('catalog/category')->getCategoryUrlPath($category->getRequestPath()));
+  		if ($this->isCategoryActive($category)) {
+            $html.= ' active';
+        }
+        if ($last) {
+            $html .= ' last';
+        }
+        if ($hasChildren) {
+            $cnt = 0;
+            foreach ($children as $child) {
+                if ($child->getIsActive()) {
+                    $cnt++;
+                }
+            }
+            if(!$this->_isNotParent){
+				if ($cnt > 0) {
+					$html .= ' parent over';
+				}
+			}
+        }
+        $html.= '">'."\n";
+        $html.= '<a onmouseover="toggleMenu(this,1)" onmouseout="toggleMenu(this,0)" href="'.$this->getCategoryUrl($category).'"><span>'.$this->htmlEscape($category->getName()).'</span></a>'."\n";
+
+        $html.= '</li>'."\n";
+
+        return $html;
+  	}
+  	public function setIsNotParent($boolean){
+		$this->_isNotParent = $boolean;
+	}
+	public function getIsNotParent(){
+		return $this->_isNotParent;
+	}
+}
+
+$yt_basicmenu = new YT_BasicMenu();
+
+if ( $var_yttheme->isHomepage() === FALSE ) {
+	$homecls='class="nav-home"';
+} else {
+	$homecls='class="nav-home active"';
+}?>
+
+<div class="yt-menu-container<?php if ($var_yttheme->isHomepage()): echo "-home"; endif; ?>">
+	<div class="yt-menu-nav">
+		<ul id="nav" class="clearfix">
+			<?php foreach ( $this->getStoreCategories() as $_category ){
+				echo $this->drawItem($_category);
+			} ?>
+		</ul>
+	</div>
+	<?php echo $this->getChildHtml('topLeftLinks') ?>
+</div>

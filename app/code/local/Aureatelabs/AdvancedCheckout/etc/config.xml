@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aureatelabs_AdvancedCheckout>
+            <version>0.1.0</version>
+        </Aureatelabs_AdvancedCheckout>
+    </modules>
+    <frontend>
+        <routers>
+            <checkout>
+                <args>
+                    <modules>
+                        <Aureatelabs_AdvancedCheckout before="Mage_Checkout">Aureatelabs_AdvancedCheckout_Checkout</Aureatelabs_AdvancedCheckout>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+    </frontend>
+</config>

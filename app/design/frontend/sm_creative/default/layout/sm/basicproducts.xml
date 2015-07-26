@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="1.0">
+	<default>
+		<reference name="head">
+		</reference>
+	</default>
+	<basicproducts_index_index>
+		<reference name="content">
+			<block type="basicproducts/list" name="basicproducts.list.default" template="sm/basicproducts/default.phtml">
+			</block>
+		</reference>
+	</basicproducts_index_index>
+</layout>   
+	

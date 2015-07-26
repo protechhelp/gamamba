@@ -1,0 +1,24 @@
+diff -aurBb Z:/1702/app/design/frontend/base/default/template/paypal/express/review.phtml Z:/cc1702/app/design/frontend/base/default/template/paypal/express/review.phtml
+--- Z:/1702/app/design/frontend/base/default/template/paypal/express/review.phtml	Mon Jul 09 17:31:49 2012
++++ Z:/cc1702/app/design/frontend/base/default/template/paypal/express/review.phtml	Tue Feb 19 14:38:42 2013
+@@ -67,10 +67,13 @@
+             <?php endif; ?>
+         </div>
+     <?php if ($shippingAddress): ?>
++    <?php if(Mage::getStoreConfig('aitconfcheckout/shipping/active')): ?>
+         <div class="col-2" id="shipping-address">
+             <h2 class="legend"><?php echo $this->__('Shipping Address') ?></h2>
+             <?php echo $this->getChild('shipping')->setFieldNamePrefix('shipping')->setHideEmailAddress(true)->toHtml(); ?>
+         </div>
++        <?php else:?><style type="text/css">.paypal-review-order .col2-set .col-2{float: left;} .paypal-review-order .col2-set .col-1{width: 100%;}</style><?php endif; ?>
++        <?php if(Mage::getStoreConfig('aitconfcheckout/shipping_method/active')): ?>
+     </div>
+ 
+     <div class="info-set col2-set">
+@@ -84,6 +87,7 @@
+                 </div>
+             </div>
+         </div>
++        <?php endif; ?>
+     <?php endif; ?>
+     </div>

@@ -1,0 +1,20 @@
+<?php
+/**
+ * Configurable Checkout
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitconfcheckout
+ * @version      2.1.27
+ * @license:     2qI6oAD8hvvkjMutXwa7Vp1gcsMrnxn0DqZRLmfWz9
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+/**
+ * @var $this Aitoc_Aitsys_Block_Rewriter_Notifications
+ */ 
+if ($this->isShow()) { ?>
+<div class="notification-global">
+    <strong><?php echo $this->helper('aitsys')->__('Class Rewrites cache is disabled.') ?></strong>
+    <?php echo $this->helper('aitsys')->__('It is strongly recommended to turn it on! Do not turn it off except for development purposes!') ?>
+    <?php echo $this->helper('aitsys')->__('Click here to go to <a href="%s">Cache Management</a> and enable Class Rewrites cache.', $this->getManageUrl());?>
+</div>
+<?php } ?>

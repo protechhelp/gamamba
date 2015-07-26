@@ -1,0 +1,191 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+ /*navbar-fixed-top*/
+global $var_yttheme;
+?>
+
+<?php if($this->getIsHomePage()) { ?>
+<div style="display:none;">
+<section itemscope itemtype="http://schema.org/Game">
+    <section itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <span itemprop="priceCurrency">$</span><span itemprop="price">20</span>
+        <a href="/" itemprop="availableAtOrFrom">Download</a>
+    </section>
+    <span itemprop="audience" itemscope itemtype="http://schema.org/PeopleAudience">
+      Ages: <span itemprop="suggestedMinAge">3</span> YEARS & UP
+    </span>
+      <h4>Game  Description:</h4>
+    <p itemprop="description">Download latest Games from Gamamba.com, Quick buy with Best price. Veiw, compare and make your games wishlist<br/><br/>Includes <span itemprop="gameItem">files</span>, <span itemprop="gameItem">1 license</span>, <div itemprop="numberOfPlayers" itemscope itemtype="http://schema.org/QuantitativeValue">
+<span itemprop="minValue">1</span> to <span itemprop="maxValue">1000</span>  players </div>.<br/><br/>Ages 3 and up.<br/><br/>Monopoly and all related characters are trademarks of <span itemprop="copyrightHolder">Camamba.com</span>. <P></p>
+</section>
+</div>
+<?php } else { ?>
+<?php } ?>
+
+
+<?php if($this->getLayout()->createBlock('cms/block')->setBlockId('banner-promotion')->toHtml()) { ?>              
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('banner-promotion')->toHtml(); ?>
+<?php } ?>
+<div class="yt-header-top">
+    <div class="container">
+        <div class="row">
+            <div class="head-top-right col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="inner-left hidden-xs">
+                    <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></p>
+                    <div class="login-regis">
+                        
+                        <?php if(!$this->helper('customer')->isLoggedIn() ){ ?>
+                            <a title="<?php echo $this->__("Login"); ?>" class="login-lnk" href="<?php echo $this->getUrl('customer/account/login/') ?>">
+                                <?php echo $this->__("Login"); ?>                                
+                            </a>
+                            <?php echo $this->__("or"); ?>
+                        <?php } else{ ?>
+                            <a title="<?php echo $this->__("Logout"); ?>" class="login-lnk" href="<?php echo $this->getUrl('customer/account/logout') ?>">
+                                <?php echo $this->__("Logout"); ?>
+                            </a>
+                        <?php } ?>
+                        <?php 
+                        
+                        if(!$this->helper('customer')->isLoggedIn() ){ ?>                            
+                            <a title="<?php echo $this->__("Create an Account"); ?>" class="regis-lnk" href="<?php if(!$this->helper('customer')->isLoggedIn() ){  echo "javascript:apptha_sociallogin();"; } else{ echo Mage::getBaseUrl()."customer/account/create/";  } ?>">
+                            <?php echo $this->__("Create an Account"); ?></a>
+                        <?php } ?>
+                    </div> 
+                </div>
+            	<div class="inner-right">
+                    <div class="fright">
+                    	<div class="customer_credit_main">
+                        	<?php if(!$this->helper('customer')->isLoggedIn() ){ ?>
+                                <div class="customer_credit_main_top_cate"><a href="<?php echo $this->getUrl('customercredit') ?>">Purchase store credit<?php //echo Magestore_Customercredit_Block_Sumary::getBalanceLabel(); ?></a></div>
+                            <?php } else{ ?>
+                                <div class="customer_credit_main_top">My wallet balance is <a href="<?php echo $this->getUrl('store-credit-1.html') ?>"><?php echo Magestore_Customercredit_Block_Sumary::getBalanceLabel(); ?></a></div>
+                                <div class="customer_credit_main_bottom">
+                                    <ul>
+                                    	<li><a href="<?php echo $this->getUrl('store-credit-1-1195.html') ?>">Purchase credit</a></li>
+                                        <li><a href="<?php echo $this->getUrl('customercredit/index/share/') ?>">Send Credit</a></li>
+                                        <li><a href="<?php echo $this->getUrl('customercredit/index/redeem/') ?>">Redeem Credit</a></li>
+                                    </ul>
+                                </div>
+                            <?php } ?>
+                        </div> 
+                        
+						<?php if(!$this->helper('customer')->isLoggedIn() ){ ?>
+                           	<?php if($this->getLayout()->createBlock('cms/block')->setBlockId('custom-myaccount-not-login')->toHtml()) { ?>
+								<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('custom-myaccount-not-login')->toHtml(); ?>
+							<?php } ?>
+                        <?php } else{ ?>
+                           <?php if($this->getLayout()->createBlock('cms/block')->setBlockId('custom-myaccount-login')->toHtml()) { ?>
+								<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('custom-myaccount-login')->toHtml(); ?>
+							<?php } ?>
+                        <?php } ?>
+                        
+                        
+						
+                        
+                         	
+						<div class="header-account">
+							<span class="hidden-lg hidden-md hidden-sm"></span>
+							<?php echo $this->getChildHtml('topLinks');?>
+						</div>						
+						<div class="language-currency">
+							<?php //echo $this->getChildHtml('store_language') ?>
+							<?php echo $this->getChildHtml('currency'); ?>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="yt-header-bottom">
+	<div class="container">
+    <div class="row">
+        <div class="logo col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" />
+            </a>
+        </div>
+        <div class="header-bottom-right col-lg-9 col-md-9 col-sm-12 col-xs-12">
+			<div class="header-bottom-right-inner">
+				<div id="yt-responsivemenu" class="yt-responsivemenu hidden-lg hidden-md">
+					<?php //echo $this->getChildHtml('mobiMenu'); ?>
+                    <h2 style=" color: #666; "><img src="<?php echo $this->getSkinUrl('images/mo_menu.png') ?>" alt="menu" />menu</h2>
+				</div>
+				<div class="yt-menu hidden-sm hidden-xs">                
+					<div class="yt-menu-content">
+						<?php echo $this->getChildHtml('megamenu-horizontal');?>
+					</div>
+				</div>
+				<div class="head-search">				
+					<?php echo $this->getChildHtml('topSearch') ?>
+				</div>			
+				<div class="head-cart">
+					<?php echo $this->getChildHtml('mini-cartpro') ?>
+				</div>
+			</div>
+        </div>		
+    </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+// <![CDATA[
+jQuery.noConflict();
+    jQuery(document).ready(function($){
+		
+		$("#yt-responsivemenu h2").click(function(){
+           $("#yt_wrapper").toggleClass("mobile_menu");
+		   $(".mobile_menu_main").slideToggle();
+        });
+		
+        $("#banner-promotion .btn-close").click(function(){
+            $this = $(this);
+            $("#banner-promotion .content-promo").slideToggle("fast");
+            $this.toggleClass("closed");  
+            if( $this.hasClass('closed') ){
+                $('.yt-header-top .inner-right').addClass('have-padding');
+            }else {
+                $('.yt-header-top .inner-right').removeClass('have-padding');
+            }
+        });
+		
+		$(".language-switcher .overwrite-switch").click(function(){
+			$(this).next('ul').toggleClass('active_dropdown');
+			
+			$(".currency-switcher .switch-content").removeClass("active_dropdown");
+		});
+		
+		$(".currency-switcher .overwrite-switch").click(function(){
+			$(this).next('ul').toggleClass('active_dropdown');
+			
+			$(".language-switcher .switch-content").removeClass("active_dropdown");
+		});
+    });
+	
+// ]]>
+</script>
+
+
+

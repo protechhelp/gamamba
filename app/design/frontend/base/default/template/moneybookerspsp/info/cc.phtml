@@ -1,0 +1,37 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   design_default
+ * @package    Skrill_MoneybookersPsp
+ * @copyright  Copyright (c) 2012 Skrill Holdings Ltd. (http://www.skrill.com)
+ */
+?>
+<?php if ($_info = $this->getInfo()): ?>
+<?php $method = explode('_',$_info->getCcNumberEnc()); ?>
+<?php switch($method[0]){ ?>
+<?php case 'CC': ?>
+    <?php echo $this->__('Name on the Card: %s', $this->htmlEscape($_info->getCcOwner())) ?><br/>
+    <?php echo $this->__('Credit Card Type: %s', $this->htmlEscape($this->getCcTypeName())) ?><br/>
+    <?php echo $this->__('Credit Card Number: xxxx-%s', $this->htmlEscape($_info->getCcLast4())) ?><br/>
+    <?php echo $this->__('Expiration Date: %s/%s', $this->htmlEscape($this->getCcExpMonth()), $this->htmlEscape($_info->getCcExpYear())) ?>
+    <?php break; ?>
+<?php case 'DD': ?>
+    <?php echo $this->__('Account Holder: %s', $this->htmlEscape($_info->getCcOwner())) ?><br/>
+    <?php echo $this->__('Bank Code: %s', $this->htmlEscape($method[1])) ?><br/>
+    <?php echo $this->__('Account Number: %s', $this->htmlEscape($_info->getCcLast4())) ?><br/>
+    <?php break; ?>
+<?php default: ?>
+    <?php echo $this->__('Moneybookers Quick Checkout Enterprise') ?><br/>
+<?php } ?>
+<?php endif; ?>

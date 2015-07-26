@@ -1,0 +1,105 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
+    <div class="discount">
+        <h2><strong><?php echo $this->__('Discount Codes') ?></strong></h2>
+        <div class="discount-form">
+           <br />
+            <input type="hidden" name="remove" id="remove-coupone" value="0" />
+            <div class="input-box">
+                <input class="input-text" id="coupon_code" name="coupon_code" value="<?php echo $this->escapeHtml($this->getCouponCode()) ?>" />
+				<div id="processupdatecoupon" style="display: none;"><div id="loadmaskupdatecoupon"><p class="loaderupdatecoupon"><img alt="Loading..." src="http://127.1.0.1/g2aclone/skin/frontend/sm_creative/default/sm/cartpro/images/ajax-loader-tr.gif"><br>Please wait...</p></div></div>
+					<div style="clear:both">
+                        <p class="coupan_btn" style="z-index:1000"  id="couponajax">Apply coupon</p>
+                        
+                <?php if(strlen($this->getCouponCode())): ?>
+                
+                    &nbsp;   <p class="coupan_btn_remove" style="z-index:1000" id="couponremove">Remove coupon</p>  
+                <?php endif;?>
+                </div>
+            </div>
+            <p class="message"></p>
+                
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+jQuery.noConflict();
+	jQuery("#couponajax").click(function(){
+		    jQuery('.message').html('');   
+            coupon = jQuery('#coupon_code').val();
+			jQuery("#processupdatecoupon").css("display","block");
+			jQuery("#loadmaskupdatecoupon .loaderupdatecoupon").css("display","block");
+            jQuery.ajax({
+                type: "POST",
+                dataType: "json",
+                data: { coupon_code : coupon },
+                url: "<?php echo $this->getUrl('cartupdate/index/couponupdate');?>",
+                success: function (data) {
+				  jQuery('.cart').html(''); 
+					jQuery('.cart').html(data['big_cart']);
+					jQuery('.totals').html(data['totals']); 
+					jQuery('.message').html();   
+					jQuery('.message').html(data['message']);  
+					jQuery("#processupdatecoupon").css("display","none");  
+					jQuery("#loadmaskupdatecoupon .loaderupdatecoupon").css("display","none");  
+                },
+                error: function(data){
+                    alert("Failure");
+                }
+            });
+			});	
+	
+	jQuery("#couponremove").click(function(){
+		    jQuery('.message').html('');   
+			jQuery("#processupdatecoupon").css("display","block");
+			jQuery("#loadmaskupdatecoupon .loaderupdatecoupon").css("display","block");
+            jQuery.ajax({
+                type: "POST",
+                dataType: "json",
+                data: { remove : 1 },
+                url: "<?php echo $this->getUrl('cartupdate/index/couponupdate');?>",
+                success: function (data) {
+				  jQuery('.cart').html(''); 
+					jQuery('.cart').html(data['big_cart']);
+					jQuery('.totals').html(data['totals']); 
+				    jQuery('.message').html();   
+					jQuery('.message').html(data['message']);  
+					jQuery("#processupdatecoupon").css("display","none");  
+					jQuery("#loadmaskupdatecoupon .loaderupdatecoupon").css("display","none");  
+                },
+                error: function(data){
+                    alert("Failure");
+                }
+            });
+			});	
+</script>
+
+
+
+

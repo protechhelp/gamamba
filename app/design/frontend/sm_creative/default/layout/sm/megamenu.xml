@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <megamenu_index_index>
+        <reference name="content">
+			<block type="megamenu/list" name="megamenu.list.theme"></block>
+        </reference>
+    </megamenu_index_index>
+</layout> 

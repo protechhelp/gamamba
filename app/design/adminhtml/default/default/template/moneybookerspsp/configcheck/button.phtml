@@ -1,0 +1,75 @@
+<link href='//fonts.googleapis.com/css?family=Crafty+Girls' rel='stylesheet' type='text/css'>
+<style>
+.skrillinfomessage:before {
+    content: 'V ';
+    font-family: 'Crafty Girls', cursive;
+    font-weight: bold;
+}
+
+.skrillinfomessage {
+    color: #437C17;    
+    background-color: #C3FDB8;
+    border: 1px solid #437C17;
+    width: 400px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 5px;
+    margin-bottom: 10px;
+            
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -o-border-radius:5px;
+    border-radius:5px;
+}
+
+.skrillerrormessage:before {
+    content: 'X ';
+    font-family: 'Crafty Girls', cursive;
+    font-weight: bold;
+}
+
+.skrillerrormessage {
+    color: #D63301;    
+    background-color: #FFCCBA;
+    border: 1px solid #D63301;
+    width: 400px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 5px;
+    margin-bottom: 10px;
+            
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    -o-border-radius:5px;
+    border-radius:5px;
+}
+
+
+</style>
+<script type="text/javascript">
+    //<![CDATA[
+    function check() {
+        new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+            method:     'get',
+            onSuccess: function(transport){
+		var resultMessage = document.getElementById('checkconfigresult');
+		var response = transport.responseText;
+		var responseObj = JSON && JSON.parse(response) || eval('(' + response + ')');
+		
+		while (resultMessage.childNodes.length >= 1) {
+	    	    resultMessage.removeChild(resultMessage.firstChild);
+		}
+		resultMessage.appendChild(resultMessage.ownerDocument.createTextNode(responseObj.message));
+		resultMessage.style.display ='block';
+		
+		if (!responseObj.errno)
+		    resultMessage.className = 'skrillinfomessage';
+		else
+		    resultMessage.className = 'skrillerrormessage';
+    	    }
+        });
+    }
+    //]]>
+</script>
+<div id="checkconfigresult" style="display:none;"></div>
+<?php echo $this->getButtonHtml() ?>

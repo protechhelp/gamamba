@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>	
+		<reference name="head">
+			<action method="addJs" ifconfig="cartpro_cfg/general/enable"><script>varien/product.js</script></action>
+			<action method="addJs" ifconfig="cartpro_cfg/general/enable"><script>calendar/calendar.js</script></action>
+			<action method="addJs" ifconfig="cartpro_cfg/general/enable"><script>calendar/calendar-setup.js</script></action>
+			<action method="addItem" ifconfig="cartpro_cfg/general/enable"><type>skin_js</type><name>js/bundle.js</name></action>
+			<block type="core/template"  name="cartpro.head" as="cartpro.head">
+				<action ifconfig="cartpro_cfg/general/enable" method="setTemplate"><template>sm/cartpro/top.phtml</template></action>
+			</block>
+			<action method="addItem" ifconfig="cartpro_cfg/general/enable"><type>skin_js</type><name>sm/cartpro/js/js.js</name></action>
+			<action method="addItem" ifconfig="cartpro_cfg/general/enable"><type>skin_js</type><name>sm/cartpro/js/effects.js</name></action>
+			
+		</reference>
+		<reference name="before_body_end">
+			<block type="core/template" name="jsfooter">
+				<action ifconfig="cartpro_cfg/general/enable" method="setTemplate"><template>sm/cartpro/jsfooter.phtml</template></action>
+			</block>
+		</reference>
+		
+		<remove name="cart_sidebar"/>
+ 
+		<reference name="right">
+			<block type="cartpro/cart_cartpro" name="cart_sidebar_clone" template="sm/cartpro/checkout/cart/sidebar.phtml" before="-">
+				<action method="setData"><name>template_item_renderer</name><value>sm/cartpro/checkout/cart/sidebar/default.phtml</value></action>
+				<action method="setData"><name>product_image_width</name><value>50</value></action>
+				<action method="setData"><name>product_image_height</name><value>50</value></action>	
+				<action method="createSessionDataByName"><session_name>sidebar</session_name></action>							
+			</block>	
+		</reference>
+		
+		<reference name="header">
+			<block type="cartpro/cart_cartpro" name="mini-cartpro" as="mini-cartpro" template="sm/cartpro/checkout/cart/mini-cartpro.phtml">
+				<action method="setData"><name>template_item_renderer</name><value>sm/cartpro/checkout/cart/mini-cartpro/default.phtml</value></action>
+				<action method="createSessionDataByName"><session_name>minicart</session_name></action>
+			</block>	
+		</reference>	
+    </default>
+    
+    <customer_account translate="label">
+    	<remove name="cart_sidebar"/>
+    </customer_account>  
+      
+    <cartpro_index_index>
+		<update handle="checkout_cart"/>
+		<reference name="root">
+		    <action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+        <reference name="content">
+			<block type="cartpro/cart_cartpro" name="mini-cartpro" before="-"/>
+        </reference>
+    </cartpro_index_index>
+    <checkout_onepage_index>
+    	<reference name="content">
+    	</reference>	
+    </checkout_onepage_index>	
+</layout> 

@@ -1,0 +1,75 @@
+Action,アクション
+Add Sitemap,サイトマップ追加
+Additional Links,追加リンク
+Blog Frequency,Blog頻度
+Blog Priority,Blog優先度
+Catalog,カタログ
+Categories/Products Sort Order,カテゴリー/商品並び順
+Category Frequency,カテゴリー頻度
+Category Priority,カテゴリー優先度
+Edit Sitemap,サイトマップ編集
+Error Email Recipient,メール受信者エラー
+Error Email Sender,メール送信者エラー
+Error Email Template,メールテンプレートエラー
+Exclude from XML Sitemap,XMLサイトマップから除外
+"example: ""sitemaps/"" or ""/"" for base path (path must be writeable)","例：「sitemaps/」または「/」をベースパスとして使用できます（パスは書き込み可能である必要があります）。"
+example: sitemap.xml,例： sitemap.xml
+Extended Sitemap,拡張サイトマップ
+Extended Sitemap generate Warnings,拡張サイトマップ生成警告
+Extended Sitemap Section,拡張サイトマップセクション
+"File ""%s"" cannot be saved. Please, make sure the directory ""%s"" is writeable by web server.","ファイル「%s」が保存できません。ディレクトリ「%s」がWEBサーバ側から書き込み可能かどうか確認して下さい。"
+Filename,ファイル名
+Filter CMS Pages,CMSページをフィルタ
+"For stores with 50,000+ links<br/><a href=""http://en.wikipedia.org/wiki/Sitemap_index"" target=""blank"">What is Sitemap Index?</a>","５万リンク以上あるストアへ。<br/><a href=""http://en.wikipedia.org/wiki/Sitemap_index"" target=""blank"">サイトマップインデックスって何？</a>"
+Frequency,頻度
+Generate,生成
+Generate Google Sitemap,Googleサイトマップ生成
+Google Sitemap (Extended),Googleサイトマップ（拡張）
+ID,ID
+Last Time Generated,最終生成日
+Link for Google,Googleへリンク
+"Comma-delimited list of a link and link label to be appended to Site Map<br /><b>Example:</b><br />customer/account/,Customer Account<br />wishlist/,Wishlist","リンクとリンクラベルのコンマ区切りリストがサイトマップへ追加されます。<br /><b>例：</b><br />customer/account/,お客様アカウント<br />wishlist/,欲しい物リスト"
+Max 10240,最大10240
+Max 50000,最大50000
+Max Links per Sitemap,サイトマップあたりの最大リンク数
+Name,名前
+New Sitemap,新規サイトマップ
+Page Frequency,ページ頻度
+Page Priority,ページ優先度
+Pages,ページ
+Path,パス
+"Please create the specified folder ""%s"" before saving the sitemap.","サイトマップを保存する前に専用フォルダ「%s」を作成して下さい。"
+Please define correct path,正しいパスを指定して下さい
+"Please make sure that ""%s"" is writable by web-server.","Webサーバにて「%s」が書き込み可能かどうか確認して下さい。"
+--Please Select--,--選択して下さい--
+"Please use only letters (a-z or A-Z), numbers (0-9) or underscore (_) in the filename. No spaces or other characters are allowed.","半角英字（a-z または A-Z）、半角数字（0-9）または半角アンダースコア（_）をファイル名に使用してください。スペースや他の文字は使用できません。"
+Position,位置
+Priority must be between 0 and 1,優先度は0または1の間で無ければなりません
+Product Frequency,商品頻度
+Product Priority,商品優先度
+Products for Anchored Categories,アンカー済カテゴリーへ商品
+Save & Generate,保存して生成
+Settings,設定
+Show Categories,カテゴリーを表示
+Show CMS Pages,CMSページを表示
+Show Footer and Additional Links,フッターと追加リンクを表示
+Show Products,商品を表示
+Show products for anchored categories<br/><b>Not recommended if you do not have specific need!</b> May produce a lot of link duplicates to product pages,アンカー済カテゴリーへ商品を表示します。<br/><b>特段の必要が無い限り使用は推奨されません！</b> 商品ページへの多数の二重リンクを作成する可能性があります。
+Show Stores,ストアを表示
+Site Map,サイトマップ
+Sitemap,サイトマップ
+"Sitemap ""%s"" has been successfully generated","サイトマップ「%s」が正常に生成されました"
+Sitemap Information,サイトマップ情報
+Sitemap Split Size (KB),サイトマップ分割情報（KB）
+Sitemap was successfully deleted,サイトマップは正常に削除されました
+Start Time,開始時間
+Store View,ストアビュー
+Stores,ストア
+This sitemap no longer exists,このサイトマップは既に存在しません
+Unable to find a sitemap to delete,削除するサイトマップが見つかりません
+Unable to find a sitemap to generate,生成するサイトマップが見つかりません
+Unable to generate a sitemap,サイトマップを生成することが出来ません
+Unable to save Cron expression,Cron表現を保存することが出来ません
+Use categories path for product URLs,商品URLにカテゴリーパスを使用
+Use Sitemap Index,サイトマップインデックスを使用
+Valid values range from 0.0 to 1.0,有効な値の範囲は0.0〜1.0です

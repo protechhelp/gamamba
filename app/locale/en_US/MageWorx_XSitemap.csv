@@ -1,0 +1,75 @@
+Action,Action
+Add Sitemap,Add Sitemap
+Additional Links,Additional Links
+Blog Frequency,Blog Frequency
+Blog Priority,Blog Priority
+Catalog,Catalog
+Categories/Products Sort Order,Categories/Products Sort Order
+Category Frequency,Category Frequency
+Category Priority,Category Priority
+Edit Sitemap,Edit Sitemap
+Error Email Recipient,Error Email Recipient
+Error Email Sender,Error Email Sender
+Error Email Template,Error Email Template
+Exclude from XML Sitemap,Exclude from XML Sitemap
+"example: ""sitemaps/"" or ""/"" for base path (path must be writeable)","example: ""sitemaps/"" or ""/"" for base path (path must be writeable)"
+example: sitemap.xml,example: sitemap.xml
+Extended Sitemap,Extended Sitemap
+Extended Sitemap generate Warnings,Extended Sitemap generate Warnings
+Extended Sitemap Section,Extended Sitemap Section
+"File ""%s"" cannot be saved. Please, make sure the directory ""%s"" is writeable by web server.","File ""%s"" cannot be saved. Please, make sure the directory ""%s"" is writeable by web server."
+Filename,Filename
+Filter CMS Pages,Filter CMS Pages
+"For stores with 50,000+ links<br/><a href=""http://en.wikipedia.org/wiki/Sitemap_index"" target=""blank"">What is Sitemap Index?</a>","For stores with 50,000+ links<br/><a href=""http://en.wikipedia.org/wiki/Sitemap_index"" target=""blank"">What is Sitemap Index?</a>"
+Frequency,Frequency
+Generate,Generate
+Generate Google Sitemap,Generate Google Sitemap
+Google Sitemap (Extended),Google Sitemap (Extended)
+ID,ID
+Last Time Generated,Last Time Generated
+Link for Google,Link for Google
+"Comma-delimited list of a link and link label to be appended to Site Map<br /><b>Example:</b><br />customer/account/,Customer Account<br />wishlist/,Wishlist","Comma-delimited list of a link and link label to be appended to Site Map<br /><b>Example:</b><br />customer/account/,Customer Account<br />wishlist/,Wishlist"
+Max 10240,Max 10240
+Max 50000,Max 50000
+Max Links per Sitemap,Max Links per Sitemap
+Name,Name
+New Sitemap,New Sitemap
+Page Frequency,Page Frequency
+Page Priority,Page Priority
+Pages,Pages
+Path,Path
+"Please create the specified folder ""%s"" before saving the sitemap.","Please create the specified folder ""%s"" before saving the sitemap."
+Please define correct path,Please define correct path
+"Please make sure that ""%s"" is writable by web-server.","Please make sure that ""%s"" is writable by web-server."
+--Please Select--,--Please Select--
+"Please use only letters (a-z or A-Z), numbers (0-9) or underscore (_) in the filename. No spaces or other characters are allowed.","Please use only letters (a-z or A-Z), numbers (0-9) or underscore (_) in the filename. No spaces or other characters are allowed."
+Position,Position
+Priority must be between 0 and 1,Priority must be between 0 and 1
+Product Frequency,Product Frequency
+Product Priority,Product Priority
+Products for Anchored Categories,Products for Anchored Categories
+Save & Generate,Save & Generate
+Settings,Settings
+Show Categories,Show Categories
+Show CMS Pages,Show CMS Pages
+Show Footer and Additional Links,Show Footer and Additional Links
+Show Products,Show Products
+Show products for anchored categories<br/><b>Not recommended if you do not have specific need!</b> May produce a lot of link duplicates to product pages,Show products for anchored categories<br/><b>Not recommended if you do not have specific need!</b> May produce a lot of link duplicates to product pages
+Show Stores,Show Stores
+Site Map,Site Map
+Sitemap,Sitemap
+"Sitemap ""%s"" has been successfully generated","Sitemap ""%s"" has been successfully generated"
+Sitemap Information,Sitemap Information
+Sitemap Split Size (KB),Sitemap Split Size (KB)
+Sitemap was successfully deleted,Sitemap was successfully deleted
+Start Time,Start Time
+Store View,Store View
+Stores,Stores
+This sitemap no longer exists,This sitemap no longer exists
+Unable to find a sitemap to delete,Unable to find a sitemap to delete
+Unable to find a sitemap to generate,Unable to find a sitemap to generate
+Unable to generate a sitemap,Unable to generate a sitemap
+Unable to save Cron expression,Unable to save Cron expression
+Use categories path for product URLs,Use categories path for product URLs
+Use Sitemap Index,Use Sitemap Index
+Valid values range from 0.0 to 1.0,Valid values range from 0.0 to 1.0

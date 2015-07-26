@@ -1,0 +1,81 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Listing Tabs - Version 2.0.0
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+$category_image_config = array(
+	'width' => (int)$this->_getConfig('imgcfgcat_width', 50),
+	'height' => $this->_getConfig('imgcfgcat_height', 50),
+	'constrainOnly' => (bool)$this->_getConfig('imgcfgcat_constrainOnly'),
+	'keepAspectRatio' => (bool)$this->_getConfig('imgcfgcat_keepAspectRatio'),
+	'keepFrame' => (bool)$this->_getConfig('imgcfgcat_keepFrame'),
+	'keepTransparency' => (bool)$this->_getConfig('imgcfgcat_keepTransparency'),
+	'background' => (string)$this->_getConfig('imgcfgcat_background'),
+	'function' => (int)$this->_getConfig('imgcfgcat_function', 0)
+);
+$cms_id = Mage::getSingleton('cms/page')->getIdentifier();
+// var_dump($this->_getConfig());
+// die('123123123');
+?>
+<div class="ltabs-tabs-wrap">
+	<span class='ltabs-tab-selected'></span>
+	<span class='ltabs-tab-arrow'>&#9660</span>
+	<ul class="ltabs-tabs cf">
+		<?php
+		foreach ($list as $tab) {
+			if ($this->_getConfig('filter_type') == "categories") {
+				?>
+				<li class="ltabs-tab <?php echo isset($tab->sel) ? '  tab-sel tab-loaded' : ''; ?> <?php echo ($tab->id == ('*')) ? ' tab-all' : ''; ?>"
+				    data-category-id="<?php echo $tab->id; ?>"
+				    data-active-content=".items-category-<?php echo ($tab->id == "*") ? 'all' : $tab->id; ?>">
+					<?php if ($this->_getConfig('icon_display', 1)) {
+						if ($tab->id != "*") {
+							$cat_img = $helper->getCatImage($tab, $this->_getConfig(), 'imgcfgcat');
+							if ($cat_img) {
+								?>
+								<div class="ltabs-tab-img">
+									<img
+										src="<?php echo $helper->_resizeImage($cat_img, $category_image_config, 'category'); ?>"
+										title="<?php echo $tab->title; ?>" alt="<?php echo $tab->title; ?>"
+										/>
+								</div>
+							<?php
+							}
+						} else {
+							$cat_img = $this->getSkinUrl('sm/listingtabs/images/icon-catall.png');
+							?>
+							<div class="ltabs-tab-img">
+								<img class="cat-all" src="<?php echo $cat_img; ?>"
+								     title="<?php echo $tab->title; ?>" alt="<?php echo $tab->title; ?>"
+								     style="width: 32px; height:74px;"/>
+							</div>
+						<?php
+						}
+						?>
+
+					<?php } ?>
+
+					<span
+						class="ltabs-tab-label"><?php echo $helper->truncate($tab->title, $this->_getConfig('cat_title_maxlength')); ?>
+					</span>
+				</li>
+			<?php
+			} else {
+				?>
+				<li class="ltabs-tab <?php echo isset($tab->sel) ? '  tab-sel tab-loaded' : ''; ?> <?php echo ($tab->id == ('*')) ? ' tab-all' : ''; ?>"
+				    data-category-id="<?php echo $tab->id; ?>"
+				    data-active-content=".items-category-<?php echo $tab->id; ?>" data-cmspage-id="<?php echo $cms_id; ?>">
+					<span
+						class="ltabs-tab-label">
+						<?php $title = $this->getLabel($tab->title); ?>
+						<?php echo $helper->truncate($title, $this->_getConfig('cat_title_maxlength')); ?>
+					</span>
+				</li>
+			<?php
+			}
+		} ?>
+	</ul>
+</div>

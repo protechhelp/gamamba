@@ -1,0 +1,112 @@
+
+/*.sm_quickview_handler {
+	 background: url(../images/bg_quickview.png) no-repeat left center;
+	width: 120px;
+	height: 32px;
+	float: left;
+	text-indent: -999em; 
+	background: none repeat scroll 0 0 #3399CC;
+    border: 0 none;
+    color: #FFFFFF;
+    display: inline-block;
+    font-family: "Raleway","Helvetica Neue",Verdana,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 19px;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+	text-decoration:none;
+	margin:0;
+}*/
+
+/*.sm_quickview_handler:hover,
+.sm_quickview_handler:focus
+{
+	background: none repeat scroll 0 0 #2E8AB8
+    border: 0 none;
+    color: #FFFFFF;
+	text-decoration:none;	
+	cursor:pointer;
+}*/
+
+.sm_quickview_handler:focus{
+	outline:none outline;
+}
+
+.fancybox-lock .zoomContainer{
+	-webkit-transform:none!important;
+}
+
+.fancybox-lock .zoomContainer .zoomLens,
+.fancybox-lock .zoomContainer .zoomWindow {
+	z-index:8021!important;
+}
+
+.quickview-main .product-image-thumbs li:first-child{
+	margin-left:0;
+}
+
+
+.quickview-main .product-collateral{
+	display:none;
+}
+
+.products-list li.item .f-fix .sm_quickview_handler{
+	float:left;
+}
+
+/*----------------------------quick view custom for theme----------------------------------------*/
+/*.catalog-product-view .fancybox-wrap .fancybox-close:before,
+.catalog-product-view .fancybox-wrap .fancybox-close {
+	display:none;
+}*/
+	
+.fancybox-wrap .fancybox-outer, 
+.fancybox-wrap .fancybox-inner{
+	background-color:#fff;
+}
+.fancybox-wrap .fancybox-skin{
+	background-color:#fff;
+	padding:0px !important;
+}
+.quickview-main .yt-product-detail .yt-detail-left{
+}
+.quickview-main .yt-product-detail .more-views .jCarouselLite > ul > li{	
+}
+/*.fancybox-wrap .fancybox-title-float-wrap .child,*/
+/*.quickview-main .fancybox-title,*/
+.quickview-main .category-image,
+.quickview-main .yt-product-detail .addthis_toolbox,
+.quickview-main .yt-product-detail .popup-btn.hidden-phone > a,
+.quickview-main .yt-product-detail .tab-product-detail{
+	display:none;
+}
+.quickview-main .yt-product-detail .more-views.slide-gallery{
+	text-align:justify;
+}
+
+.sm_quickview_handler{
+	position:absolute;
+	top:42%;
+	left:30%;
+	opacity: 0; filter:alpha(opacity = 0);
+	/*visibility: hidden;*/
+	height: 32px;
+	line-height: 30px;
+	border: 1px solid #ddd;
+	padding: 0 14px;
+	background-color: #fff;
+	font-size: 116.6%;
+}
+
+.item .item-inner:hover .sm_quickview_handler{
+	visibility:visible;
+	opacity: 1; 
+	filter:alpha(opacity = 100);
+}
+.sm_quickview_handler:hover{
+	color: #fff;
+}

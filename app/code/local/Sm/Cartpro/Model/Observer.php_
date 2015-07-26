@@ -1,0 +1,352 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_AdminNotification
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+
+/**
+ * AdminNotification observer
+ *
+ * @category   Mage
+ * @package    Mage_AdminNotification
+ * @author      Magento Core Team <core@magentocommerce.com>
+ */
+class Sm_Cartpro_Model_Observer
+{
+    /**
+     * Predispath admin action controller
+     *
+     * @param Varien_Event_Observer $observer
+     */
+    //public function preDispatch(Varien_Event_Observer $observer)
+  //  {
+		
+		// $params=Mage::app()->getFrontController()->getRequest()->getParams();
+		// echo"<pre>";var_dump($params);die();
+   // }
+
+    protected function _initProduct()
+    {
+        $productId = (int) Mage::app()->getFrontController()->getRequest()->getParam('product');
+        if ($productId) {
+            $product = Mage::getModel('catalog/product')
+                ->setStoreId(Mage::app()->getStore()->getId())
+                ->load($productId);
+            if ($product->getId()) {
+                return $product;
+            }
+        }
+        return false;
+    }   
+    protected function _getSession()
+    {
+        return Mage::getSingleton('checkout/session');
+    }
+    // protected function _getWishlist()
+    // {
+        // try {
+            // $wishlist = Mage::getModel('wishlist/wishlist')
+                // ->loadByCustomer(Mage::getSingleton('customer/session')->getCustomer(), true);
+            // Mage::register('wishlist', $wishlist);
+        // } catch (Mage_Core_Exception $e) {
+            // Mage::getSingleton('wishlist/session')->addError($e->getMessage());
+        // } catch (Exception $e) {
+            // Mage::getSingleton('wishlist/session')->addException($e,
+                // Mage::helper('wishlist')->__('Cannot create wishlist.')
+            // );
+            // return false;
+        // }
+        // return $wishlist;
+    // }	
+	public function getNameProduct($observer){
+		//Mage::helper('cartpro')->_nameitem=$observer->getProduct()->getName(); //lay name product va` set _NameItem
+		Mage::getSingleton('checkout/session')->setNameitem($observer->getProduct()->getName());
+		//echo "nameitem:".Mage::helper('cartpro')->_nameitem;die();
+		return;
+	}
+	public function Wishtocheckout(){
+	//echo"susu";die();
+			if(Mage::getSingleton('checkout/session')->getIsajax()=='1'){
+				//echo Mage::helper('cartpro')->_ISWISHLIST;die();
+				//echo "nameitem:".Mage::helper('cartpro')->_nameitem;die();
+				// Mage::getSingleton('checkout/session')->setIsajax('0'); //reset
+			    // $cart = Mage::helper('cartpro')->renderMiniCart();
+				// $text = Mage::helper('cartpro')->renderCartTitle();
+				// Mage::helper('cartpro')->sendResponse($cart, $text);
+				//var_dump(Mage::app()->getFrontController()->getRequest()->getParams());die();
+				//var_dump(Mage::getSingleton('checkout/session')->getIsajax());die();
+				if (Mage::getSingleton('checkout/session')->getIspage()!='1')
+					// (!Mage::app()->getFrontController()->getRequest()->getParam('in_cart')) &&
+					// (!Mage::app()->getFrontController()->getRequest()->getParam('is_checkout')) &&
+					// (Mage::app()->getFrontController()->getRequest()->getParam('awacp'))
+					// )
+				{
+					//Mage::helper('cartpro')->_NAMEITEM=$product->getName();
+					//var_dump($product->getName());die();
+					
+					$cart = Mage::helper('cartpro')->renderMiniCart();
+					$text = Mage::helper('cartpro')->renderCartTitle();
+					Mage::helper('cartpro')->sendResponse($cart, $text);
+				}
+				else
+				{	//Mage::helper('cartpro')->_NAMEITEM=$product->getName();
+					Mage::getSingleton('checkout/session')->setIspage("0");
+					$cart = Mage::helper('cartpro')->renderBigCart();
+					$text = Mage::helper('cartpro')->renderCartTitle();
+					Mage::helper('cartpro')->sendResponse($cart, $text);
+				}
+				
+			}	
+	}
+	public function addToCartWishList(){
+		//$params=Mage::app()->getFrontController()->getRequest()->getParams();
+		//echo"<pre>";var_dump($params);die();
+        // $wishlist   = $this->_getWishlist();
+		// //echo"<pre>";var_dump($this->_redirect('*/*'));die();
+        // if (!$wishlist) {
+            // return $this->_redirect('*/*');
+        // }
+		//$itemId     = (int)$this->getRequest()->getParam('item');
+		//$item       = Mage::getModel('wishlist/item')->load($itemId);
+		if(Mage::getStoreConfig('cartpro_cfg/general/enable') AND Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=""){ //request danh cho ajax
+			//if ($product->getTypeId() == 'grouped' AND Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=null AND !isset($ajax['related_product'])) {
+			// if(Mage::getSingleton('checkout/session')->getIsajax()=='1'){
+				// //echo"break";die();
+				// Mage::getSingleton('checkout/session')->setIsajax('0');
+			    // $cart = Mage::helper('cartpro')->renderMiniCart();
+				// $text = Mage::helper('cartpro')->renderCartTitle();
+				// Mage::helper('cartpro')->sendResponse($cart, $text);
+				// echo"what?";die();
+			// }
+			//elseif(Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=null){
+				//$wishlist = Mage::helper('cartpro')->renderWishList();
+				//$text = Mage::helper('cartpro')->renderCartTitle();
+				//Mage::helper('cartpro')->sendResponse($wishlist, $text);
+				
+				//Mage::helper('cartpro')->_ISWISHLIST='1';
+				
+				Mage::getSingleton('checkout/session')->setIsfirst("1");
+				if(Mage::app()->getFrontController()->getRequest()->getParam('isWishlist')){
+					Mage::getSingleton('checkout/session')->setIswishlist("1");
+				}
+				else{
+					Mage::getSingleton('checkout/session')->setIswishlist("2");
+				}
+				Mage::getSingleton('checkout/session')->setIsajax("1");//cho phep khi chay den controller product/view voi san pham group co the check duoc la dang ajax
+				return;		
+		}
+	}	
+	public function addWishlist(){
+		if(Mage::getStoreConfig('cartpro_cfg/general/enable') AND Mage::app()->getFrontController()->getRequest()->getParam('isWishlist')!=""){
+				//var_dump(Mage::app()->getFrontController()->getRequest()->getParams());die();
+				//echo "iscart"Mage::app()->getFrontController()->getRequest()->getParam('isCart');die();
+				$product=$this->_initProduct();
+				Mage::getSingleton('customer/session')->getData('messages')->clear();
+				if(Mage::app()->getFrontController()->getRequest()->getParam('isWishlist')=='0'){
+					$wishlist = Mage::helper('cartpro')->renderMiniWish();		
+				}
+				else{
+					$wishlist= Mage::helper('cartpro')->renderWishlist();
+				}
+				$text = Mage::helper('cartpro')->renderWishlistTitle();
+				//Mage::getSingleton('checkout/session')->setAddwhat("1");	//1 == add wishlist, sap toi 2 se la add compare
+				Mage::helper('cartpro/Sendhtml')->setAddwhat("1");
+				Mage::helper('cartpro/Sendhtml')->_NAMEITEM=$product->getName();
+				Mage::helper('cartpro/Sendhtml')->sendResponse($wishlist, $text);
+				//Mage::helper('cartpro')->_NAMEITEM=$product->getName();
+				//Mage::helper('cartpro')->sendResponse($miniwish, $text);				
+		}
+	}
+	public function addProductCompare(){
+		if(Mage::getStoreConfig('cartpro_cfg/general/enable') AND Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=""){
+				$product=$this->_initProduct();
+				Mage::getSingleton('catalog/session')->getData('messages')->clear();
+				$productcompare = Mage::helper('cartpro')->renderProductCompare();
+				$text = "";
+				Mage::helper('cartpro/Sendhtml')->setAddwhat("2");
+				Mage::helper('cartpro/Sendhtml')->_NAMEITEM=$product->getName();
+				Mage::helper('cartpro/Sendhtml')->sendResponse($productcompare, $text);
+		}
+	}
+	
+	public function addToCart($observer)
+	{//echo"die2";die();
+		//$params=Mage::app()->getFrontController()->getRequest()->getParams();
+		//echo"<pre>";var_dump($params);die();
+		if(Mage::getStoreConfig('cartpro_cfg/general/enable') AND Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=""){
+			$product=$this->_initProduct();
+			//$this->_getSession->getData('messages')->clear();
+			//Mage::getSingleton('core/session')->getData('messages')->clear();
+			//var_dump(Mage::getSingleton('checkout/session')->getData('messages'));die();
+			//var_dump(Mage::getSingleton('checkout/session')->getMessages());
+			$message=Mage::getSingleton('checkout/session')->getMessages();
+			$hasnotice=false;
+			if($message->getItems('notice')) { 
+				$hasnotice=true;
+			  //foreach($message->getItems('notice') as $x){
+				// echo $x->getCode();
+				
+			  //}
+			}
+			// else
+				// echo"bebe";
+			//foreach($message as $x){
+			//	var_dump($x->getData());
+			//}
+			
+			Mage::getSingleton('checkout/session')->getData('messages')->clear();//die();
+			//var_dump($product->getTypeId());die();
+			$ajax=Mage::app()->getFrontController()->getRequest()->getParams();//
+			//echo"die2";die();
+			if ($product->getTypeId() == 'grouped' AND Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=null AND !isset($ajax['related_product'])) {
+					Mage::getSingleton('checkout/session')->setIsajax("1");//cho phep khi chay den controller product/view voi san pham group co the check duoc la dang ajax
+					return;
+					//echo"sdfsdf";die();
+					//$url = $this->_getSession()->getRedirectUrl(true);
+					//echo "sdfsdf".$url;die();
+					//echo 'false'; die();
+					//$cart = Mage::helper('cartpro')->renderGrouped();
+					//Mage::helper('cartpro')->sendResponse($cart);
+					//exit;
+			}//var_dump($product->getHasOptions());die();
+			//var_dump($product->getTypeInstance(true)->hasRequiredOptions($product));die();
+		//	echo"die4";die();
+			//if($product->getHasOptions() AND !$product->getTypeInstance(true)->hasRequiredOptions($product)){// echo $product->hasOptions();die();
+			if($product->getHasOptions() AND $hasnotice){$hasnotice=false;
+				Mage::getSingleton('checkout/session')->setIsajax("1");
+				Mage::getSingleton('checkout/session')->setIspage(Mage::app()->getFrontController()->getRequest()->getParam('isCart'));
+				return;
+			} 
+			
+			if (!Mage::app()->getFrontController()->getRequest()->getParam('isCart'))
+				// (!Mage::app()->getFrontController()->getRequest()->getParam('in_cart')) &&
+				// (!Mage::app()->getFrontController()->getRequest()->getParam('is_checkout')) &&
+				// (Mage::app()->getFrontController()->getRequest()->getParam('awacp'))
+				// )
+			{//var_dump(Mage::helper('cartpro')->_NAMEITEM);die();
+				Mage::helper('cartpro')->_NAMEITEM=$product->getName();
+				//var_dump($product->getName());die();
+				$cart = Mage::helper('cartpro')->renderMiniCart();
+				//$cart = Mage::helper('cartpro')->renderTopLink();
+				$text = Mage::helper('cartpro')->renderCartTitle();
+				Mage::helper('cartpro')->sendResponse($cart, $text);
+			}
+			else
+			{	Mage::helper('cartpro')->_NAMEITEM=$product->getName();
+				//var_dump(Mage::helper('cartpro')->_NAMEITEM);die();
+				$cart = Mage::helper('cartpro')->renderBigCart();
+				$text = Mage::helper('cartpro')->renderCartTitle();
+				Mage::helper('cartpro')->sendResponse($cart, $text);
+			}
+		}	
+	}
+	// public function preDispatch(Varien_Event_Observer $observer){
+		
+		// //echo"what";die();
+		// //$params=Mage::app()->getFrontController()->getRequest()->getParams();
+		// //var_dump($params);die();
+		// //echo Mage::app()->getFrontController()->getRequest()->getPathInfo();die();
+		// //$find="checkout/cart/delete";
+		// //$urlinfo=Mage::app()->getFrontController()->getRequest()->getPathInfo();
+		// if(strstr(Mage::app()->getFrontController()->getRequest()->getPathInfo(),"checkout/cart/delete")){
+		// //echo"<pre>";var_dump($urlinfo);die();	
+			// $this->removeProduct();
+		// }
+	// }
+   public function addOptions($observer)
+   {
+	   if(Mage::getStoreConfig('cartpro_cfg/general/enable')){
+			$ajax=Mage::app()->getFrontController()->getRequest()->getParams();//
+			//var_dump($ajax);die();
+			$isajax=Mage::getSingleton('checkout/session')->getIsajax();
+			if(!isset($isajax)){
+				Mage::getSingleton('checkout/session')->setIsajax('0');
+				$isajax=0;
+			}
+			if (!isset($ajax['isCart']) AND $isajax=='0') return;
+			//echo"adsa";die();
+			Mage::getSingleton('checkout/session')->setIsajax('0');
+			//$product=$this->_initProduct();
+			//var_dump($product->getTypeId());die();
+			// $product = Mage::registry('current_product');
+			// if ($product->getTypeId() == 'grouped'){
+				// $cart = Mage::helper('cartpro')->renderGrouped();
+			// }
+			
+			$cart = Mage::helper('cartpro')->renderOptions();
+			Mage::helper('cartpro')->sendResponse($cart,"");
+		}
+	}
+	public function removeProduct() {
+		if(Mage::getStoreConfig('cartpro_cfg/general/enable') AND Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=""){
+			//$id =  Mage::app()->getFrontController()->getRequest()->getParam('id');
+			//echo $id;exit();
+			//Mage::getSingleton('checkout/cart')->removeItem($id)->save();
+			Mage::getSingleton('checkout/session')->getData('messages')->clear();
+			if(!Mage::app()->getFrontController()->getRequest()->getParam('isCart')){
+				$cart = Mage::helper('cartpro')->renderMiniCart();
+			}else{
+				
+				$cart = Mage::helper('cartpro')->renderBigCart();
+			}
+			$text = Mage::helper('cartpro')->renderCartTitle();
+			Mage::helper('cartpro')->sendResponse($cart, $text);
+			exit();
+		}
+	}
+	public function removeWish(){
+		if(Mage::getStoreConfig('cartpro_cfg/general/enable') AND Mage::app()->getFrontController()->getRequest()->getParam('isWishlist')!=""){
+			Mage::getSingleton('customer/session')->getData('messages')->clear();
+			Mage::helper('cartpro/Sendhtml')->setAddwhat("1");
+			if(!Mage::app()->getFrontController()->getRequest()->getParam('isWishlist')){
+				$wish=Mage::helper('cartpro')->renderMiniWish();
+			}else{
+				$wish=Mage::helper('cartpro')->renderWishlist();
+			}
+			$text=Mage::helper('cartpro')->renderWishlistTitle();
+			Mage::helper('cartpro/Sendhtml')->sendResponse($wish, $text);
+			exit();			
+		}
+	}
+	public function removeProductCompare(){
+		if(Mage::getStoreConfig('cartpro_cfg/general/enable') AND Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=""){
+				Mage::getSingleton('catalog/session')->getData('messages')->clear();
+				$productcompare = Mage::helper('cartpro')->renderProductCompare();
+				$text = "";
+				Mage::helper('cartpro/Sendhtml')->setAddwhat("2");
+				Mage::helper('cartpro/Sendhtml')->sendResponse($productcompare, $text);
+				exit();			
+		}		
+	}
+	public function clearProductCompare(){
+		if(Mage::getStoreConfig('cartpro_cfg/general/enable') AND Mage::app()->getFrontController()->getRequest()->getParam('isCart')!=""){
+				Mage::getSingleton('catalog/session')->getData('messages')->clear();
+				$productcompare = Mage::helper('cartpro')->renderProductCompare();
+				$text = "";
+				Mage::helper('cartpro/Sendhtml')->setAddwhat("2");
+				Mage::helper('cartpro/Sendhtml')->sendResponse($productcompare, $text);
+				exit();			
+		}		
+	}
+}

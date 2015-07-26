@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User Software Agreement (EULA).
+ * It is also available through the world-wide-web at this URL:
+ * http://www.harapartners.com/license
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to eula@harapartners.com so we can send you a copy immediately.
+ * 
+ -->
+ <config>
+    <tabs>
+        <waconnector translate="label" module="waconnector">
+            <label>WebsiteAlive</label>
+            <sort_order>100</sort_order>
+        </waconnector>
+    </tabs>
+    <sections>
+        <waconnector translate="label" module="waconnector">
+            <class>separator-top</class>
+            <label>WebsiteAlive Connector Settings</label>
+            <tab>waconnector</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<signup translate="label" module="waconnector">
+                    <label>Sign Up</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<comment><![CDATA[Please use this link to <a target="_blank" style="color: #F79622;" href="https://www.websitealive.com/live-chat-pricing/">Sign Up</a> for our live chat solution.]]></comment>
+                </signup>
+                <general translate="label" module="waconnector">
+                    <label>Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+                    <fields>
+						<is_enabled translate="label">
+                            <label>Is Enabled</label>
+							<frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_enabled>
+						<username translate="label">
+                            <label>Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<validate>required-entry</validate>
+                        </username>
+						<password translate="label">
+                            <label>Password</label>
+                            <frontend_type>obscure</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<validate>required-entry</validate>
+                        </password>
+						<user_login_wizard translate="button_label">
+                            <label></label>
+                            <button_label>Login</button_label>
+                            <frontend_model>waconnector/adminhtml_system_config_login</frontend_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </user_login_wizard>
+						<website_id translate="label">
+                            <label>Website</label>
+							<frontend_type>select</frontend_type>
+                            <source_model>waconnector/source_website</source_model>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<validate>required-entry</validate>
+                        </website_id>
+                    </fields>
+                </general>
+				<help translate="label" module="waconnector">
+                    <label>Need Help?</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>300</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					<expanded>1</expanded>
+					<comment><![CDATA[Need help? Review our <a target="_blank" style="color: #F79622;" href="https://www.websitealive.com/live-chat-implementation/">Support Knowledgebase</a>.<br/>
+					Or <a target="_blank" style="color: #F79622;" href="https://www.websitealive.com/howtovideos/">watch our helpful videos and read our guides</a>.<br/>
+					Learn about the <a target="_blank" style="color: #F79622;" href="http://go.websitealive.com/downloads/pdf/AliveChat_Administrator_How_To.pdf">Administrator Console</a> or the <a target="_blank" style="color: #F79622;" href="http://go.websitealive.com/downloads/pdf/AliveChat_Operator_How_To.pdf">Operator Console</a><br/>]]>
+					</comment>
+                </help>
+            </groups>
+        </waconnector>
+    </sections>
+</config>

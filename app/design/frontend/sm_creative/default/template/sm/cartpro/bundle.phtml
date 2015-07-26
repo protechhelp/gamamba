@@ -1,0 +1,10 @@
+<?php $_product = $this->getProduct() ?>
+
+<?php if($_product->isSaleable()): ?>
+<script type="text/javascript">
+        //<![CDATA[
+        bundle = new Product.Bundle(<?php echo $this->getJsonConfig() ?>);
+        
+        //]]>
+    </script>
+ <?php endif; ?>

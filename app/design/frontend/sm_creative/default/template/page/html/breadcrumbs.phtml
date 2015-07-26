@@ -1,0 +1,61 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php  
+global $var_yttheme;  
+$rich_snippet    = Mage::getStoreConfig('creative_cfg/rich_snippets_setting/use_rich_snippet');
+$set_breadcrumbs = Mage::getStoreConfig('creative_cfg/rich_snippets_setting/set_breadcrumbs');
+?>
+<?php if(!$this->getRequest()->isAjax()){?>
+    <?php if(($crumbs && is_array($crumbs)) || $var_yttheme->isHomepage()): ?>
+    <div id="yt_pathway" class="clearfix">
+        <div class="pathway-inner container">
+            <ul class="breadcrumbs">
+                <div class="breadcrumbs-content">
+                    <?php if($var_yttheme->isHomepage()) :?><li class="breadcrumbs-home" <?php if ( $rich_snippet == 1 && $set_breadcrumbs ){?>itemscope itemtype="http://data-vocabulary.org/Breadcrumb"<?php }?>><?php echo "Home"; ?></li><?php endif; ?>
+                    <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+                    <li class="<?php echo $_crumbName.(($_crumbInfo['last'])?' last':''); ?>" <?php if ( $rich_snippet == 1 && $set_breadcrumbs ){?>itemscope itemtype="http://data-vocabulary.org/Breadcrumb"<?php }?>>
+                    <?php if($_crumbInfo['link']): ?>
+                        <a <?php if ( $rich_snippet == 1 && $set_breadcrumbs ){?>itemprop="url"<?php }?> href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>" class="has-link">
+                        <span <?php if ( $rich_snippet == 1 && $set_breadcrumbs ){?>itemprop="title"<?php }?>><?php echo $this->escapeHtml($_crumbInfo['label']) ?></span>
+                        </a>
+
+                    <?php elseif($_crumbInfo['last']): ?>
+                        <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
+                    <?php else: ?>
+                        <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
+                    <?php endif; ?>
+                    <?php if(!$_crumbInfo['last']): ?>
+                        <!--<span class="separator">&nbsp</span>-->
+                    <?php endif; ?>
+                    </li>
+                    <?php endforeach; ?>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <?php endif; ?>
+<?php }?>

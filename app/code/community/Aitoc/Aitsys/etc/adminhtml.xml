@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- @copyright  Copyright (c) 2009 AITOC, Inc. -->
+<config>
+	<menu>
+		<system>
+			<children>
+				<aitsys translate="title" module="aitsys"> 
+					<title>Manage Aitoc Modules</title>
+					<sort_order>1</sort_order>           
+					<action>aitsys</action>
+				</aitsys> 
+			</children>
+		</system>
+	</menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <aitsys translate="title" module="aitsys">
+                                <title>Manage Aitoc Modules</title>
+                                <sort_order>0</sort_order>
+                            </aitsys>
+                            <config>
+                                <children>
+                                    <aitsys translate="title" module="aitsys">
+                                        <title>AITOC Store Specific Settings</title>
+                                    </aitsys>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

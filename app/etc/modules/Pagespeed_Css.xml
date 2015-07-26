@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @package Pagespeed_Js
+ * @copyright Copyright (c) 2015 mediarox UG (haftungsbeschraenkt) (http://www.mediarox.de)
+ * @author Steven Fritzsche <sfritzsche@mediarox.de>
+ * @author Thomas Uhlig <tuhlig@mediarox.de>
+ */
+-->
+<config>
+    <modules>
+        <Pagespeed_Css>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Pagespeed_Css>
+    </modules>
+</config>

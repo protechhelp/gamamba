@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/*
+* ModifyMage Solutions (http://ModifyMage.com)
+* Serial Codes - Serial Numbers, Product Codes, PINs, and More
+*
+* NOTICE OF LICENSE
+* This source code is owned by ModifyMage Solutions and distributed for use under the
+* provisions, terms, and conditions of our Commercial Software License Agreement which
+* is bundled with this package in the file LICENSE.txt. This license is also available
+* through the world-wide-web at this URL: http://www.modifymage.com/software-license
+* If you do not have a copy of this license and are unable to obtain it through the
+* world-wide-web, please email us at license@modifymage.com so we may send you a copy.
+*
+* @category		Mmsmods
+* @package		Mmsmods_Serialcodes
+* @author		David Upson
+* @copyright	Copyright 2013 by ModifyMage Solutions
+* @license		http://www.modifymage.com/software-license
+*/
+-->
+<layout>
+    <adminhtml_sales_order_view>
+        <reference name="order_items">
+            <action method='setTemplate'><template>serialcodes/order/view/items.phtml</template></action>
+            <block type="adminhtml/sales_order_view_items" name="serialcodes_order_items_table" template="sales/order/view/items.phtml">
+				<action method="addItemRender"><type>default</type><block>adminhtml/sales_order_view_items_renderer_default</block><template>sales/order/view/items/renderer/default.phtml</template></action>
+				<action method="addItemRender"><type>downloadable</type><block>adminhtml/sales_order_view_items_renderer_default</block><template>downloadable/sales/order/view/items/renderer/downloadable.phtml</template></action>
+				<action method="addColumnRender"><column>downloadable</column><block>downloadable/adminhtml_sales_items_column_downloadable_name</block><template>downloadable/sales/items/column/downloadable/name.phtml</template></action>
+				<action method="addColumnRender"><column>qty</column><block>adminhtml/sales_items_column_qty</block><template>sales/items/column/qty.phtml</template></action>
+				<action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name</block><template>sales/items/column/name.phtml</template></action>
+				<action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name_grouped</block><template>sales/items/column/name.phtml</template><type>grouped</type></action>
+				<block type="core/text_list" name="order_item_extra_info">
+					<block type="giftmessage/adminhtml_sales_order_view_giftoptions" name="gift_options_link" template="giftmessage/sales/order/view/giftoptions.phtml">
+						<block type="giftmessage/adminhtml_sales_order_view_items" name="gift_options_item_data" template="giftmessage/sales/order/view/items.phtml" />
+					</block>
+				</block>
+			</block>
+            <block type="adminhtml/sales_order_view_items" name="serialcodes_info" template="serialcodes/order/view/serialcodes.phtml"></block>
+        </reference>
+    </adminhtml_sales_order_view>
+</layout>

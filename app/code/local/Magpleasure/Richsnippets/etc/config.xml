@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Magpleasure Ltd.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the EULA
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://www.magpleasure.com/LICENSE.txt
+*
+* @category   Magpleasure
+* @package    Magpleasure_Richsnippets
+* @copyright  Copyright (c) 2014-2015 Magpleasure Ltd. (http://www.magpleasure.com)
+* @license    http://www.magpleasure.com/LICENSE.txt
+*/
+-->
+<config>
+    <modules>
+        <Magpleasure_Richsnippets>
+            <version>1.2.1</version>
+        </Magpleasure_Richsnippets>
+    </modules>
+    <frontend>
+        <routers>
+            <richsnippets>
+                <use>standard</use>
+                <args>
+                    <module>Magpleasure_Richsnippets</module>
+                    <frontName>richsnippets</frontName>
+                </args>
+            </richsnippets>
+        </routers>
+        <layout>
+            <updates>
+                <richsnippets>
+                    <file>richsnippets.xml</file>
+                </richsnippets>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magpleasure_Richsnippets>
+                    <files>
+                        <default>Magpleasure_Richsnippets.csv</default>
+                    </files>
+                </Magpleasure_Richsnippets>
+            </modules>
+        </translate>
+        <events>
+            <controller_action_predispatch_catalog_product_view>
+                <observers>
+                    <mp_richsnippets_product_view_predispatch>
+                        <type>singleton</type>
+                        <class>richsnippets/observer</class>
+                        <method>productPageBeforeLoad</method>
+                    </mp_richsnippets_product_view_predispatch>
+                </observers>
+            </controller_action_predispatch_catalog_product_view>
+        </events>
+    </frontend>
+    <global>
+        <models>
+            <richsnippets>
+                <class>Magpleasure_Richsnippets_Model</class>
+            </richsnippets>
+        </models>
+        <helpers>
+            <richsnippets>
+                <class>Magpleasure_Richsnippets_Helper</class>
+            </richsnippets>
+        </helpers>
+        <blocks>
+            <richsnippets>
+                <class>Magpleasure_Richsnippets_Block</class>
+            </richsnippets>
+            <catalog>
+                <rewrite></rewrite>
+                <richrewrite>
+                    <product_view>Magpleasure_Richsnippets_Block_Catalog_Product_View</product_view>
+                </richrewrite>
+            </catalog>
+            <page>
+                <rewrite></rewrite>
+                <richrewrite>
+                    <html_breadcrumbs>Magpleasure_Richsnippets_Block_Page_Html_Breadcrumbs</html_breadcrumbs>
+                </richrewrite>
+            </page>
+        </blocks>
+        <resources>
+            <richsnippets_setup>
+                <setup>
+                    <module>Magpleasure_Ajaxreviews</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </richsnippets_setup>
+            <richsnippets_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </richsnippets_write>
+            <richsnippets_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </richsnippets_read>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <richsnippets_admin>
+                <use>admin</use>
+                <args>
+                    <module>Magpleasure_Richsnippets</module>
+                    <frontName>richsnippets_admin</frontName>
+                </args>
+            </richsnippets_admin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <richsnippets>
+                                            <title>Magpleasure - Rich Snippets</title>
+                                        </richsnippets>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <richsnippets>
+                    <file>richsnippets.xml</file>
+                </richsnippets>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Magpleasure_Richsnippets>
+                    <files>
+                        <default>Magpleasure_Richsnippets.csv</default>
+                    </files>
+                </Magpleasure_Richsnippets>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <richsnippets>
+            <general>
+                <enabled>1</enabled>
+                <breadcrumbs>1</breadcrumbs>
+            </general>
+        </richsnippets>
+    </default>
+</config> 

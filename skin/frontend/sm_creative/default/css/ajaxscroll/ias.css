@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+.ias_loader, .ias_trigger, .ias-trigger {
+	text-align:center;
+	margin: 30px 0 40px;
+	clear:both;
+	
+	   
+
+}
+
+.ias_trigger a, .ias-trigger a{
+	background: rgba(73,75,80,1);
+background: -moz-linear-gradient(top, rgba(73,75,80,1) 0%, rgba(32,32,33,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(73,75,80,1)), color-stop(100%, rgba(32,32,33,1)));
+background: -webkit-linear-gradient(top, rgba(73,75,80,1) 0%, rgba(32,32,33,1) 100%);
+background: -o-linear-gradient(top, rgba(73,75,80,1) 0%, rgba(32,32,33,1) 100%);
+background: -ms-linear-gradient(top, rgba(73,75,80,1) 0%, rgba(32,32,33,1) 100%);
+background: linear-gradient(to bottom, rgba(73,75,80,1) 0%, rgba(32,32,33,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#494b50', endColorstr='#202021', GradientType=0 );
+  
+    border-radius: 10px;
+	overflow:hidden;
+	width:100% !important;
+  
+    color: #fff !important;
+    text-decoration: none;
+	padding:15px 43%;
+	border:1px solid #555;
+	box-shadow:0px 0px 5px #000;
+	font-size:130%;
+	font-weight:bold;
+	
+}
+.ias-noneleft {
+    clear: both;
+}
+
+
+
+.ias_trigger a:link,
+.ias_trigger a:visited,
+.ias-trigger a:link,
+.ias-trigger a:visited {
+   color: #fff; 	
+}
+
+.ias_trigger a:hover,
+.ias-trigger a:hover,
+.ias_trigger a:active,
+.ias-trigger a:active{
+color: #fff;
+}
+.yt-products-container .row { text-align: center; }

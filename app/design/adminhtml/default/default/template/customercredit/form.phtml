@@ -1,0 +1,54 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Admin form to checkout giftcard
+ */
+ $_code="customercredit";
+          
+?>
+<?php if($this->isAssignCredit()): ?>
+<div class="entry-edit box-right" id="admin_customercredit_coupon">
+    <div class="entry-edit-head">
+        <h4 class="icon-head"><?php echo $this->__('Customer Credit') ?></h4>
+    </div>
+     <fieldset class="np">
+         <div class="content">
+             <?php if(!$this->isCreditProduct()){ ?>
+         	<dl id="<?php echo $_code ?>_container">
+            	<p><?php echo Mage::helper('customercredit')->__('Current credit balance: '); ?><b>$</b><b id="customercredit_balance"><?php echo $this->getCustomerCredit(); ?></b></p>
+           		<input type="text" name="customer_credit" id="<?php echo $_code ?>_input">
+           		<button type="button" class="scalable" onclick="applyCreditForm('<?php echo $this->getUrl('customercredit/adminhtml_checkout/customercreditPost') ?>','<?php echo $_code ?>_input');"><span><?php echo $this->__('Use credit') ?></span></button>
+       		</dl>
+            <?php } else {?>
+                <p><?php echo Mage::helper('customercredit')->__('Can not using credit because in order have "Credit Product" ' ); ?> </p>
+            <?php } ?>
+        </div>
+    </fieldset>
+</div>
+<div style="clear:both"></div>
+<?php endif; ?>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <megamenu_adminhtml_menugroup_index>
+        <reference name="content">
+            <block type="megamenu/adminhtml_menugroup" name="menu.group" />
+        </reference>
+    </megamenu_adminhtml_menugroup_index>
+    <megamenu_adminhtml_menuitems_index>
+        <reference name="content">
+            <block type="megamenu/adminhtml_menuitems" name="menu.items" />
+        </reference>
+    </megamenu_adminhtml_menuitems_index>	
+	<megamenu_adminhtml_menugroup_edit>
+	   <update handle="editor"/>
+	</megamenu_adminhtml_menugroup_edit> 	
+	<megamenu_adminhtml_menugroup_new>
+	   <update handle="editor"/>
+	</megamenu_adminhtml_menugroup_new> 
+	<megamenu_adminhtml_menuitems_edit>
+	   <update handle="editor"/>
+	</megamenu_adminhtml_menuitems_edit> 	
+	<megamenu_adminhtml_menuitems_new>
+	   <update handle="editor"/>
+	</megamenu_adminhtml_menuitems_new> 	
+</layout>

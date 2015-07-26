@@ -1,0 +1,247 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+
+<?php
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/output');
+global $var_yttheme;
+if ($_product->getImage() != 'no_selection' && $_product->getImage()){
+	$now = date("Y-m-d H:m:s");
+	$newsFrom= $_product->getNewsFromDate();
+	$newsTo=  $_product->getNewsToDate();
+	$specialprice = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialPrice();
+	$price = Mage::getModel('catalog/product')->load($_product->getId())->getPrice();
+	$special_from_date = $_product->getSpecialFromDate();
+	$special_to_date = $_product->getSpecialToDate();
+?>
+<div class="yt-detail-image zoom-wrapper-detail">
+	<div class="product-image product-image-zoom">
+		<div class="product-image-zoom">
+			<?php $_img = '<img id="image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($this->getImageLabel()).'" title="'.$this->htmlEscape($this->getImageLabel()).'" />';?>
+			<a id="yt_cloudzoom" class="cloud-zoom" rel="zoomWidth:300, zoomHeight:300, adjustX: 20, adjustY: -3" title="<?php echo $this->htmlEscape($this->getImageLabel()); ?>" href="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>">
+				<?php
+				echo $_helper->productAttribute($_product, $_img, 'image');
+				if ( $now>=$newsFrom && $now<=$newsTo ){ ?>
+					<span class="new-product have-ico"><?php echo $this->__('New'); ?></span>
+				<?php }
+				if ( $specialprice ){ ?>
+					<span class="sale-product have-ico"><?php echo $this->__('Sale'); ?></span>
+				<?php } ?>
+			</a>
+			<div class="popup-btn  hidden-phone product-image-gallery">
+				<a id="yt_popup" class="fancybox-button" data-fancybox-group="button" href="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>">
+					Zoom
+				</a>
+				<?php foreach ($this->getGalleryImages() as $_image){ ?>	
+					<a style="display:none;" class="fancybox-button fancybox-image-hidden " data-fancybox-group="button" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile())?>">
+					</a>
+				<?php }?>			
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php  } else {
+	$_img = '<img src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->htmlEscape($_product->getImageLabel()).'" />';
+?>
+<a href="#" class=""> 
+<?php
+	echo $_helper->productAttribute($_product, $_img, 'image');
+	if ( $now>=$newsFrom && $now<=$newsTo ){ ?>
+        <span class="new-product have-ico"><?php echo $this->__('New'); ?></span>
+    <?php }
+    if ( $specialprice ){ ?>
+        <span class="sale-product have-ico"><?php echo $this->__('Sale'); ?></span>
+    <?php } ?>
+</a>
+<?php } ?>
+<?php if( count($this->getGalleryImages()) > 1 ){?>
+<div class="more-views slide-gallery">
+	<div class="jCarouselLite">
+		<ul>
+			<?php foreach ($this->getGalleryImages() as $_image): 
+				if($_image->getFile() == $_product->getImage()):?>
+			<li style="width: 110px; height: 156px;">
+				<a onclick="$$('.cloud-zoom-gallery').each(function(e,i){e.removeClassName('actived');});this.addClassName('actived')"
+					class="cloud-zoom-gallery actived"rel="useZoom: 'yt_cloudzoom', smallImage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>'"
+					href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>"
+					title="<?php echo $this->htmlEscape($_image->getLabel()) ?>"> 
+					<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>"
+						alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"
+						title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+				</a>
+			</li>
+			<?php 
+			endif;
+			endforeach; 
+			?>
+			<?php foreach ($this->getGalleryImages() as $_image):
+			if($_image->getFile() != $_product->getImage()):	?>
+			<li style="width: 110px; height: 156px;">
+				<a onclick="$$('.cloud-zoom-gallery').each(function(e,i){e.removeClassName('actived');});this.addClassName('actived')"
+					class="cloud-zoom-gallery" rel="useZoom: 'yt_cloudzoom', smallImage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>'"
+					href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>"
+					title="<?php echo $this->htmlEscape($_image->getLabel()) ?>"> 
+					<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>"
+						alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"
+						title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+				</a>
+			</li>
+			<?php 
+			endif;
+			endforeach; 
+			?>
+		</ul>
+	</div>
+	<?php if( count($this->getGalleryImages()) >= 3 ){?>
+	<span class="next"></span>
+	<span class="prev"></span> 
+	<?php }?>
+</div>
+<?php }?>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()){ ?>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		function init_slide(){			
+			device = jQuery.fn.detectDevice(); 
+			number_visible = 3 ;
+			if(  device =="tablet" || device =="normal" || device =="stablet" ){
+				number_visible = 2 ;
+			}
+			if( device =="mobile"){
+				number_visible = 2 ;
+			}
+			jQuery(".jCarouselLite").jCarouselLite({
+				btnNext: ".more-views .next",
+				btnPrev: ".more-views .prev",
+				visible: number_visible,
+				start: 0,
+				circular: true,
+				speed: 300
+			}); 				
+		}
+		init_slide(); 
+		
+		jQuery('.jCarouselLite ul li a').each(function(){
+			if(jQuery(this).hasClass('actived')){
+				jQuery(this).parent().addClass('selected');	
+			}				
+		});
+					
+		jQuery('.jCarouselLite ul li a').click(function(){
+			$this = jQuery(this);
+			jQuery('.jCarouselLite ul li a').parent().removeClass('selected');
+			if($this.hasClass('actived')){				
+				$this.parent().addClass('selected');
+			}
+		});		
+		
+		function init(){
+			jQuery('.cloud-zoom, .cloud-zoom-gallery').CloudZoom();				
+			jQuery('.fancybox-image-hidden').each(function(){
+				attr = jQuery(this).attr('href');
+				href_current = jQuery('a#yt_popup').attr('href');
+				if( attr == href_current ){
+					jQuery(this).removeClass("fancybox-button");
+				}
+			});
+			
+			jQuery('a.cloud-zoom-gallery').bind('click', function(){
+				jQuery('a#yt_popup').attr('href', jQuery(this).attr('href'));
+				jQuery('.fancybox-image-hidden').addClass("fancybox-button");
+				jQuery('.fancybox-image-hidden').each(function(){
+					attr = jQuery(this).attr('href');
+					href_current = jQuery('a#yt_popup').attr('href');
+					if( attr == href_current ){
+						jQuery(this).removeClass("fancybox-button");
+					}
+				});
+			});			
+
+			jQuery(".fancybox-button").fancybox({
+				padding: 0,
+				prevEffect		: 'none',
+				nextEffect		: 'none',
+				closeBtn		: true,
+				closeClick : true,
+				nextClick  : true,
+				mouseWheel : false,	
+				helpers		: {
+					title	: true,
+					buttons	: {}
+				},
+				afterLoad : function() {
+					this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+				}				
+			});
+			
+		}
+		
+		e = jQuery(".yt-detail-image"),ehtml=e.html(),id='',init();jQuery(window).resize(function(){if (id) clearTimeout(id);id = setTimeout(function(){e.children().empty().remove();e.html(ehtml);init();}, 300);
+		});				
+	});
+</script>
+
+
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		$('.product-options .configurable-swatch-list .swatch-label').has('img').click(function(){
+			setTimeout(function(){
+				var href = $('.product-image-gallery .visible').attr('src');
+				//alert(href);
+				$('#yt_popup').attr('href',href);
+				$('#yt_cloudzoom').attr('href',href);
+				$('#yt_cloudzoom img').attr('src',href);
+				$('.cloud-zoom, .cloud-zoom-gallery').CloudZoom();	
+			}, 500);
+
+		});	
+		
+		$('.product-options .configurable-swatch-list .swatch-label').has('img').click(function(){
+			//alert('aaaaa');
+			setTimeout(function(){
+				var n_img = $('.item-inner a.product-image img.hidden').length;
+				var n_imdefault = $('.item-inner a.product-image img.hidden').next('img').length;
+				if(n_img == 1 && n_imdefault == 0){
+					$('.item-inner a.product-image img.hidden').removeClass('hidden');
+				}
+				
+			}, 500);
+		});	
+
+	});
+</script>
+
+<?php } ?>
+
+<?php echo $this->getChildHtml('after'); ?>

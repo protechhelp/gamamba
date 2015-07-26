@@ -1,0 +1,49 @@
+<?php $posts = $this->getPosts(); ?>
+<?php $blog_id = 'from_blog_'.uniqid();?>
+<div id="messages_product_view">
+    <?php Mage::app()->getLayout()->getMessagesBlock()->setMessages(Mage::getSingleton('customer/session')->getMessages(true)); ?>
+    <?php echo Mage::app()->getLayout()->getMessagesBlock()->getGroupedHtml(); ?>
+</div>
+<div class="block from-blog">
+	<div class="block-title">
+		<strong> 
+			<span><?php echo $this->__('From The Blog');?></span> 
+		</strong>
+	</div>
+	<div class="from-blog-content owl-carousel">
+		<?php $i=0; foreach ($posts as $post): $i++;?>
+			<?php if ( $i < 7 ){?>
+			<div class="postWrapper">
+				<?php 
+				$content = $post->getPostContent();
+				$content = Mage::helper('cms')->getBlockTemplateProcessor()->filter($content);
+				preg_match_all("/<img .*?(?=src)src=\"([^\"]+)\"/si", $content, $m);
+				$img = $m[1][0];
+				?>
+				<?php if( $img != "" || $img != null ){?>
+				<div class="postImage">
+					<img src="<?php echo $img;?>" alt="<?php echo $post->getTitle(); ?>"/>
+					<span class="bg-image"></span>
+					<a class="fa fa-link" href="<?php echo $post->getAddress(); ?>" title="<?php echo $post->getTitle(); ?>"></a>
+				</div>
+				<?php }?>
+				<div class="postInfo">
+					<div class="postTitle">
+						<h2><a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+					</div>		
+					<div class="postDetails">
+						<span><?php echo $post->getCreatedTime(); ?></span>
+					</div>
+					<div class="postContent"><?php echo substr($post->getPostContent(),0, 180); ?></div>
+				</div>
+			</div>
+			<?php }?>			
+		<?php endforeach; ?>		
+	</div>	
+	
+	<div class="bottom-blog">
+		<a class="go2blog" title="<?php echo $this->__('Go to Blog Listing')?>" href="<?php echo $this->getUrl('blog')?>"><?php echo $this->__('Go to Blog Listing')?></a>
+	</div>
+</div>
+
+

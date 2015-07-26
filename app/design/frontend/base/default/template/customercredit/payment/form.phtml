@@ -1,0 +1,104 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Payment form template
+ */
+?>
+<style>
+    #checkout-payment-method-load{
+        float:left;
+    }
+</style>
+<?php $_code = 'customercredit' ?>
+<?php if (Mage::helper('customercredit')->getGeneralConfig('enable')): ?>
+    <dl id="<?php echo $_code ?>_container">
+        <?php if ($this->hasCustomerCreditItem()): ?>
+            <dt class="<?php echo $_code ?>">
+            <ul>
+                <li class="message">
+                    <ul class="notice-msg">
+                        <li><?php echo $this->__('Customer credit can not be used because your cart has at least one credit product') ?></li>
+                    </ul>
+                </li>
+            </ul>
+            </dt>
+        <?php else: ?>
+            <?php if (Mage::helper('customer')->isLoggedIn() && Mage::helper('customercredit/account')->customerGroupCheck()): ?>
+                <dt class="<?php echo $_code ?>">
+                <input type="checkbox" name="payment[<?php echo $_code ?>]" id="<?php echo $_code . "check" ?>" onclick="changeUseCustomercredit(this, '<?php echo $this->getUrl('customercredit/index/checkCredit') ?>');" <?php if ($this->getUseCustomerCredit()): ?> checked="checked"<?php endif ?> />
+                <label for="<?php echo $_code ?>" style="font-weight: bold; color: #666;display:inline;float:none"><?php echo $this->__('Use Customer Credit to check out  (') . $this->getCustomerCreditLabel() . $this->__(" available )"); ?></label>
+                <form action="" method="post" onsubmit="return false;" id="customercredit-payment-form">
+                    <div id="cc_checkout"  <?php if (!$this->getUseCustomerCredit()): ?> style="display: none"<?php endif ?>>
+                        <div style="line-height: 15px;margin-top: 5px;margin-left: 10px">
+                            <span style="float:left; green"><strong style="margin-left: 7px;"> <?php echo $this->__('You\'re using:') ?></strong></span>
+                            <span id="checkout-cc-input"><strong><?php echo $this->getCurrentCreditAmountLabel(); ?></strong></span>
+                            <div style="float: left;" class="checkout_cc_input_alert">
+                                <input type="text" id="checkout_cc_inputtext" onchange="validateCheckOutCC(<?php echo $this->getCustomerCredit() ?>);" class="input-text validate-number validate-zero-or-greater required-entry" value="<?php echo $this->getCurrentCreditAmount(); ?>" style="display: none;margin: -2px 0px 0px 5px;"/>
+                                <div class="validation-advice" id="advice-validate-number-checkout_cc_smaller" style="display: none"><?php echo $this->__('Please enter a number smaller than %s.', $this->getCustomerCreditLabel()); ?></div>
+                            </div>
+                            <img id="customercredit_cc_success_img" style="display: none;padding-left: 5px; float: left;" src="<?php echo $this->getSkinUrl('images/customercredit/i_msg-success.gif') ?>"/>
+                            <p id="customercredit_cc_show_loading" style="display:none;float: left;width: 100%;margin: 10px 0;text-align: left;">
+                                <img src="<?php echo $this->getSkinUrl('images/customercredit/opc-ajax-loader.gif') ?>"/>
+                                <?php echo $this->__('Loading...') ?>
+                            </p>
+                            <?php
+                            $moduleOnestepActive = Mage::getConfig()->getModuleConfig('Magestore_Onestepcheckout')->is('active', 'true');
+                            if ($moduleOnestepActive && Mage::getStoreConfig('onestepcheckout/general/active') == '1') {
+                                ?>
+                                <button type="submit" class="button" id="checkout-cc-button" style="display: none !important; margin-top: 3%;float: right;margin-right: 5%;" onclick="updateCustomerCredit('<?php echo $this->getUpdateUrl(); ?>',<?php echo $this->getCustomerCredit() ?>);">
+                                    <span><span>Update Value</span></span>
+                                </button>
+                            <?php } else { ?>
+                                <p style="float:left;width:100%"><button type="submit" class="button" id="checkout-cc-button" style="display: none !important; margin-left: 10px;margin-top:1%;float:left" onclick="updateCustomerCredit('<?php echo $this->getUpdateUrl(); ?>',<?php echo $this->getCustomerCredit() ?>);">
+                                    <span><span>Update Value</span></span>
+                                </button></p>
+                            <?php } ?>
+                            <span id="checkout-cc-img"><img style="cursor: pointer;height: 15px;width: 15px;margin-left: 3px;" onclick="showEditText(this);"src="<?php echo $this->getSkinUrl('images/customercredit/btn_edit.gif'); ?>"></span>
+
+                        </div>
+                </form>
+            <?php elseif (Mage::helper('customer')->isLoggedIn() && !Mage::helper('customercredit/account')->customerGroupCheck()): ?>
+
+            <?php else: ?>
+                <div>
+                    <div class="checkout-cart-credit-amount">
+                        <p>
+                            <?php echo $this->__('Please ') . "<a href=\"" . $this->getUrl('customer/account/login') . "\">" . $this->__('login') . "</a>" . $this->__(' to use customer credit.'); ?>
+                        </p>
+                    </div>
+                </div>
+            <?php endif ?>
+            <script type="text/javascript">
+                    var ccPaymentForm = new VarienForm('customercredit-payment-form', true);
+
+            </script>
+            </dt>
+        <?php endif ?>
+    </dl>
+<?php endif ?>
+

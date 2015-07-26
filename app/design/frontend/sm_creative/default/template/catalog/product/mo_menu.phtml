@@ -1,0 +1,42 @@
+<div class="mobile_menu_main">
+    	<ul>
+        	<li><a href="<?php echo $this->getUrl('') ?>">Home</a></li>      
+            <li>            
+                <ul>           
+                <?php $_helper = Mage::helper('catalog/category') ?>
+                <?php $_categories = $_helper->getStoreCategories() ?>
+                <?php $currentCategory = Mage::registry('current_category') ?>
+                <?php if (count($_categories) > 0): ?>
+                        <?php foreach($_categories as $_category): ?>
+                            <li><a href="<?php echo $_helper->getCategoryUrl($_category) ?>"><?php echo $_category->getName() ?></a></li>
+                            
+                            <?php if (!in_array($_category->getId(), array(10))) : ?>
+                            <?php endif; ?>
+                                <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+                                <?php $_subcategories = $_category->getChildrenCategories() ?>
+                                <?php if (count($_subcategories) > 0): ?>
+                                		<ul>
+                                        <?php $ulcount = 1; $ulmain = 1; foreach($_subcategories as $_subcategory): ?>
+                                           <?php
+                                            $categoryid = $_subcategory->getId() ;
+                                            $category = new Mage_Catalog_Model_Category();
+                                            $category->load($categoryid);
+                                            $collection = $category->getProductCollection();
+                                            $collection->addAttributeToSelect('*');
+                                            $home_pro_co = count($category->getProductCollection());
+                                            ?>
+                                            <li><a href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>"><?php echo $_subcategory->getName() ?></a> </li>
+                                        <?php endforeach; ?>
+                                        </ul>
+                                        <script type="text/javascript">decorateGeneric($$('.menu_card_inside1'), ['odd','even','first','last'])</script>
+                                <?php endif; ?>
+                        <?php endforeach; ?>
+                <?php endif; ?>
+                </ul>
+            </li>
+            <li><a href="<?php echo $this->getUrl('blog') ?>">Blog</a></li>
+            <li><a href="<?php echo $this->getUrl('about-us') ?>">About Us</a></li>
+			<li><a href="<?php echo $this->getUrl('contacts') ?>">Contact Us</a></li>
+			<li><a href="<?php echo $this->getUrl('customercredit') ?>">Store Credit</a></li> 
+        </ul>
+    </div>

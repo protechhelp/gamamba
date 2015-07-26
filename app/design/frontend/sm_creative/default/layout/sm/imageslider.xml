@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="1.0">
+	<default>
+		<reference name="head">
+		</reference>
+	</default>
+	<imageslider_index_index>
+		<reference name="content">
+			<block type="imageslider/list" name="imageslider.list.default" template="sm/imageslider/default.phtml">
+			</block>
+		</reference>
+	</imageslider_index_index>
+</layout>   
+	

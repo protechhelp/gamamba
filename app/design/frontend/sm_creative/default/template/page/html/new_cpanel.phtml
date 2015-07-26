@@ -1,0 +1,72 @@
+<?php
+/*------------------------------------------------------------------------
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+
+global $var_yttheme;  
+// Include cpanel
+if( $var_yttheme->getParam('showCpanel') ) { ?>
+<div id="cpanel_wrapper">
+	<div class="cpanel-head">
+		<span>Theme setting</span>
+		<div class="action cpanel-reset">
+			<a class="btn btn-info reset" href="#" onclick="javascript: onCPResetDefault(TMPL_COOKIE);">Reset</a>
+		</div>		
+	</div>
+
+	<div class="accordion" id="ytcpanel_accordion">
+		<!--Theme-->
+        <div class="accordion-group cpanel-theme-color">
+            <div id="yt_cpanelaccordionfirst" class="accordion-heading">
+                <a class="accordion-toggle"  data-parent="#ytcpanel_accordion" href="#ytitem_1">
+					Theme Color
+				</a>
+            </div>
+        	<div id="ytitem_1" class="accordion-theme">
+                <div class="accordion-inner clearfix">
+					<div class="color-theme">
+						<a href="<?php echo $this->getUrl('?___store=french&amp;___from_store=default')?>" title="Yellow" class="theme-color yellow<?php echo ($var_yttheme->getParam('theme_color')=='yellow')?' active':'';?>">Yellow</a>
+						<a href="<?php echo $this->getUrl('?___store=german&amp;___from_store=default')?>" title="Blue" class="theme-color blue<?php echo ($var_yttheme->getParam('theme_color')=='blue')?' active':'';?>">Blue</a>
+						<a href="<?php echo $this->getUrl('?___store=argentina&amp;___from_store=default')?>" title="Red" class="theme-color red<?php echo ($var_yttheme->getParam('theme_color')=='red')?' active':'';?>">Red</a>
+						<a href="<?php echo $this->getUrl('?___store=default&amp;___from_store=french')?>" title="Orange" class="theme-color orange<?php echo ($var_yttheme->getParam('theme_color')=='orange')?' active':'';?>">Orange</a>
+					</div>
+				</div>
+			</div>
+        </div>
+	
+		<!-- Menu -->
+		<!--div class="accordion-group cpanel-menu">
+			<div class="accordion-heading">
+				<a class="accordion-toggle" data-parent="#ytcpanel_accordion" href="#ytitem_6">
+				Menu style </a>
+			</div>
+			<div id="ytitem_6" class="accordion-menu">
+				<div class="accordion-inner clearfix">
+					<div class="cp-item footer-background-color">
+						<div class="inner">
+							<select onchange="javascript: onCPApply();" name="ytcpanel_menustyle" class="cp_select">
+								<option value="mega" <?php //echo ($var_yttheme->getParam('menustyle')=='mega')?' selected="selected"':'';?>>Mega</option>
+								<option value="css" <?php //echo ($var_yttheme->getParam('menustyle')=='css')?' selected="selected"':'';?>>Css</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div-->
+	</div>
+	<div id="cpanel_btn" class="normal">
+		<i class="fa fa-hand-o-left"></i>
+	</div>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+		$('.theme-color').click(function(){
+			$($(this).parent().find('.active')).removeClass('active'); $(this).addClass('active');
+		});
+	});
+    </script>
+<?php } ?>

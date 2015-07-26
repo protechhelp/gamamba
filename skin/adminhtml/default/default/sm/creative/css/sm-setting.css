@@ -1,0 +1,17 @@
+/*css admin sm-setting*/
+#row_creative_cfg_general_body_background_image input[type="radio"]{
+	display: none;
+}
+#row_creative_cfg_general_body_background_image img{
+	width: 50px; 
+	height: 35px;
+	border: 1px solid transparent;
+}
+#row_creative_cfg_general_body_background_image .inline img:hover{
+	cursor: pointer;
+	border: 1px solid #909090;
+}
+#row_creative_cfg_general_body_background_image .inline.active img,
+#row_creative_cfg_general_body_background_image .inline  img.active{
+	border: 1px solid #909090;
+}

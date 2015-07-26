@@ -1,0 +1,74 @@
+/*
+ Cloud Zoom CSS. (c)2012 Star Plugins.
+ This CSS can be altered to change the look and size of the lens.
+*/
+
+.cloudzoom-lens {
+	border: none;
+	width: 100px !important;
+	height: 100px !important;
+	cursor: crosshair;
+}
+
+/* CSS for zoom window (not used for 'inside' position). */
+.cloudzoom-zoom {
+	border: 1px solid #888;
+}
+
+.cloud-zoom-gallery .border {
+	border-width: 1px;
+	border-style: solid;
+	border-right: none;
+}
+
+.border-right {
+	border-right-width: 1px;
+	border-right-style: solid;
+}
+
+/* CSS for captions */
+.cloudzoom-caption {
+	display: none; /* CSS captions should be hidden initially */
+	text-align: left;
+	background-color: #000;
+	color: #fff;
+	font-weight: bold;
+	padding: 10px;
+	font-family: sans-serif;
+	font-size: 11px;
+}
+
+/* cloud-zoom */
+/* This is the moving lens square underneath the mouse pointer. */
+.cloud-zoom-lens {
+	margin: 0;
+	cursor: move;	
+}
+
+/* This is for the title text. */
+.cloud-zoom-title {
+	display: none;
+	font-family: Arial, Helvetica, sans-serif;
+	position: absolute !important;
+	background-color: #000;
+	color: #fff;
+	padding: 5px;
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	font-size: 10px;
+	top: 0px;
+}
+
+/* This is the zoom window. */
+.cloud-zoom-big {
+	overflow: hidden;
+}
+
+/* This is the loading message. */
+.cloud-zoom-loading {
+	color: white;
+	background: #222;
+	padding: 3px;
+	border: 1px solid #000;
+}

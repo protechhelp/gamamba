@@ -1,0 +1,270 @@
+.box-customercredit-share .box-head h2
+{
+    background: url("../../images/customercredit/cup-gold.png") no-repeat scroll 0 0 transparent;
+    padding-top: 0px;
+    padding-left: 25px;
+}
+
+.customercredit-product-info{
+    padding-bottom:2%
+}
+
+.box-customercredit-history .box-head h2
+{
+    background: url("../../images/customercredit/i_type_list.gif") no-repeat scroll 0 0 transparent;
+    padding-top: 0px;
+    padding-left: 25px;
+    float: left;
+	line-height:21px;
+	margin-bottom:10px;
+	font-size:16px;
+}
+.box-customercredit-sumary .box-head h2
+{
+    background: url("../../images/customercredit/point.png") no-repeat scroll 0 0 transparent;
+    padding-top: 0px;
+    padding-left: 25px;
+	line-height:21px;
+	font-size:17px;
+	padding-bottom:15px;
+}
+
+#redeem_credit_text{ color:#ff6600 !important;}
+.box-customercredit-sumary
+{
+    min-height: 55px;
+    margin-bottom:2%;
+}
+
+.data-table-div{
+    float:left;
+    width:100%;
+}
+
+.box-customercredit-history .pager{ clear:both; padding:6px 0px; margin:10px 0px; width:100%; overflow:hidden; border-bottom:1px solid #333; border-top:1px solid #333;}
+.box-customercredit-history .pager .amount{ float:left; width:40%; text-align:left;}
+.box-customercredit-history .pager .limiter{ float:right; width:40%; text-align:right;}
+
+.box-customercredit-history{ float:none !important; margin:auto !important;}
+
+
+.box-customercredit-buy .box-head h2
+{
+    background: url("../../images/customercredit/earn_point.gif") no-repeat scroll 0 0 transparent;
+    padding-top: 0px;
+    padding-left: 25px;
+}
+.box-customercredit-redeem .box-head h2
+{
+    background: url("../../images/customercredit/i_block-currency.gif") no-repeat scroll 0 0 transparent;
+    padding-top: 0px;
+    padding-left: 25px;
+	line-height:21px;
+	font-size:16px;
+}
+
+.customercredit-product-info .customercredit-amount-desc, .customercredit-product-info #recipient_ship_desc {
+    font-size: 0.9em;
+    font-style: italic;
+    color: #080;
+    margin-top: -5px;
+}
+
+/* Search Grid Style */
+.data-table .customercredit-grid-title th{
+    background-image: none;
+    border-bottom: 1px solid #C2D3E0;
+}
+
+.data-table .customercredit-grid-search th{
+    vertical-align: top;
+}
+.data-table .customercredit-grid-search .customercredit-grid-search-item{
+    padding-bottom: 2px;
+}
+.data-table .customercredit-grid-search .customercredit-grid-search-item .search-text{
+    width: 97%;
+}
+
+.data-table .customercredit-grid-search .customercredit-grid-search-item .range-container{
+    float: left;
+    padding-bottom: 2px;
+}
+.data-table .customercredit-grid-search .customercredit-grid-search-item .data-range{
+    min-width: 121px;
+    min-height: 18px;
+    margin-bottom: 3px;
+}
+.data-table .customercredit-grid-search .customercredit-grid-search-item .data-range .label{
+    display: block;
+    width: 36px;
+    float: left;
+}
+.data-table .customercredit-grid-search .customercredit-grid-search-item .data-range img{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+.data-table .customercredit-grid-search .customercredit-grid-search-item .data-range input.range-text{
+    float: right;
+    width: 50px;
+    padding: 1px;
+}
+
+.data-table .customercredit-grid-search .customercredit-grid-search-item select{
+    width: 100%;
+}
+
+.data-table .customercredit-grid-search .customercredit-grid-search-item .range-container .from-price,
+.data-table .customercredit-grid-search .customercredit-grid-search-item .range-container .to-price{
+    min-width: 100px;
+}
+
+.customercredit-search-button {
+    padding-bottom: 5px;
+    text-align: right;
+    float:right;
+}
+
+#redeem_credit_text{
+    float: left;
+}
+/* End Search */
+.customer-account-giftcard .balance{
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted black;
+}
+.customer-account-giftcard #giftvoucher_grid .gift-voucher-sent-friend{
+    background-color: #F6B26B;
+}
+.customer-account-giftcard .account-balance{
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted black;
+}
+
+/*---------------------------------redeem style----------------------------*/
+.box-customercredit-redeem{
+    float: left;
+}
+
+.redeem-credit{
+    float: left;
+    margin-top: 10px;
+    min-width: 651px;
+}
+.redeem-input-box{
+    float: left;
+    margin-bottom: 15px;
+}
+.input-verify-code{
+    margin-left: 10px;
+    float: left;
+}
+.input-verify-code input{
+    width: 477px;
+}
+.redeem-form{
+    float: left;
+}.redeem-form button{
+    float: left;
+    margin-left: 10px;
+}
+.redeem-form strong{
+    float: left;
+}
+
+/*---------------------------------------------share credit style*-----------------------------------------------------*/
+
+.customercredit_send_to_friend{
+    float: left;
+    width: 666px;
+}
+
+.customercredit_send_form{
+    float: left;
+}
+.box-customercredit-share{
+    float: left;
+}
+.customer-name .name-firstname{
+    width: 344px;
+}
+.customer-name .name-lastname{
+    width: 309px;
+}
+#customercredit_show_loading2{
+
+    margin-top: 10px;
+}
+#customercredit_email_input{
+    width: 300px;
+}
+#customercredit_show_success2{
+    margin-top: 10px; color: #008000;
+}
+#advice-your-email2{
+    /*display: none;*/
+}
+#customercredit_show_alert2{
+}
+#customercredit_show_alert2 p{
+    color: red;margin: 8px 0px 0px 2px;
+}
+#customercredit_show_alert2 input{float: left;margin-top: 2px;}
+#customercredit_show_alert2 label{ float: none !important;font-size: 12px;font-style: italic; font-weight:normal !important; color: #080;margin-left: 5px;}
+.customercredit_value_input{width: 316px !important;}
+.customercredit_message{float: left;}
+#customercredit_message_textarea{width: 659px;min-height: 123px;}
+#customercredit_show_loading_p{margin-top: 10px;}
+#customer_credit_code{width: 477px;}
+#customercredit_show_success{margin-top: 10px; color: #008000;}
+#check_send_email{float: left;margin-top: 3px;}
+.box-customercredit-share{width: 666px;}
+
+/*--------------------------checkout/cart-----------------------------------------------------*/
+.checkout-cart-credit-amount p{
+    margin: 0 !important;
+}
+.customercredit{
+    min-width: 92%;
+    margin-bottom: 10px;
+}
+.checkout_cc_input_alert .validation-advice{
+    max-width: 120px;
+}
+/*#customercredit_container{float: left;}*/
+#checkout-cc-input{margin-left: 7px;}
+#customercredit_show_alert label{float: none !important;font-size: 12px;font-style: italic;font-weight:normal !important; color: #080;margin-left: 5px;}
+
+@media only screen and (max-width:479px){
+    .box-customercredit-sumary .title-buttons .button {
+        margin-top:3%;
+        width: 100%;
+        position: static;
+        margin-bottom: 15px;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    .redeem-box-input{
+        width:100%;
+    }
+
+    .input-verify-code{
+        margin-left: 10px;
+        float: left;
+        width: 65.5%
+    }
+
+    .redeem-credit .redeem-input-box .button-set .button {
+        margin:3% 0px 0px 0px;
+        width: 100%;
+        position: static;
+    }
+
+    .redeem-credit .redeem-input-box .button-set {
+        width: 100%;
+    }
+}

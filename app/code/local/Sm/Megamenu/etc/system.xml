@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <sm>
+            <label>Magentech.com</label>
+            <sort_order>205</sort_order>
+        </sm>
+    </tabs>    
+    <sections>
+    	<megamenu_cfg translate="label" module="megamenu">
+    		<label>SM Megamenu</label>            
+            <tab>sm</tab>
+			<frontend_type>text</frontend_type>
+            <sort_order>250</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+            	<!-- start general group -->
+            	<general translate="label">
+            		<label>General settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<isenabled translate="label" module="core">
+							<label>Enabled</label>
+							<sort_order>10</sort_order>
+							<frontend_type>select</frontend_type>
+                        	<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</isenabled>
+	                	<title translate="label">
+	                		<label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</title>
+                    </fields>
+	            </general>
+	            <!-- end general group -->
+				
+				<!-- start module setting group -->
+            	<module_setting translate="label">
+            		<label>Module settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>15</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <group_id translate="label">
+                            <label>Menu Group Id: </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>19</sort_order>
+                            <validate>validate-greater-than-zero  required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </group_id>						
+	                	<theme translate="label">
+	                		<label>Select template</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>megamenu/system_config_source_listTheme</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</theme>
+                        <start_level translate="label">
+                            <label>Start Level</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>24</sort_order>
+                            <validate>validate-greater-than-zero  required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </start_level>
+                        <end_level translate="label">
+                            <label>End Level</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <validate>validate-greater-than-zero  required-entry</validate>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </end_level>						
+                    </fields>
+	            </module_setting>
+	            <!-- end module setting group -->
+				
+	            <advanced translate="label">
+	            	<label>Advanced settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>45</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<include_jquery translate="label">
+                    		<label>Include jQuery</label>
+		            		<frontend_type>select</frontend_type>
+		            		<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>10</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                    	</include_jquery>                  	
+					</fields>
+	            </advanced>
+            </groups>
+    	</megamenu_cfg>
+    </sections>
+</config>

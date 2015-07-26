@@ -1,0 +1,107 @@
+diff -aurBb /home/httpd/htdocs/users2/rastorguev/mrc14/var/ait_patch_orig/compare93912639958144b570ba628cc0 /home/httpd/htdocs/users2/rastorguev/mrc14/var/ait_patch_modif/compare93912639958144b570ba628cc0
+--- S:/kabanov/mg1700/app/design/frontend/base/default/template/checkout/onepage/progress.phtml	Fri Apr 20 17:49:20 2012
++++ S:/kabanov/mg1700/app/design/frontend/base/default/template/checkout/onepage/progress - копия.phtml	Fri May 11 15:35:07 2012
+@@ -1,4 +1,8 @@
+-<?php
++<?php /* !!!ATTENTION!!! PLEASE DO NOT MODIFY THE FILE! 
++Copy it preserving its path from the var/ait_path folder to the
++app folder. i.e. in var/ait_path folder the file is located in folder 1, 
++then in the app folder you also need to make folder 1 and put the file in it.
++*/ ?><?php
+ /**
+  * Magento
+  *
+@@ -38,7 +42,14 @@
+                 <a href="#billing" onclick="checkout.gotoSection('billing'); return false;"><?php echo $this->__('Change') ?></a>
+             </dt>
+             <dd class="complete">
++
++
++<?php /* START AITOC COMMENTING      
+                 <address><?php echo $this->getBilling()->format('html') ?></address>
++
++
++FINISH AITOC COMMENTING */ ?>
++                <address><?php echo $this->getProcessAddressHtml($this->getBilling()->format('html')) ?></address>
+             </dd>
+         <?php else: ?>
+             <dt>
+@@ -47,6 +58,9 @@
+         <?php endif; ?>
+         <?php endif; ?>
+ 
++        
++        
++        <?php if ($this->checkStepActive('shipping')): ?>
+         <?php if ($this->getCheckout()->getStepData('shipping', 'is_show')): ?>
+         <?php if ($this->isStepComplete('shipping')): ?>
+             <dt class="complete">
+@@ -54,7 +68,14 @@
+                 <a href="#payment" onclick="checkout.gotoSection('shipping');return false;"><?php echo $this->__('Change') ?></a>
+             </dt>
+             <dd class="complete">
++            
++            
++            <?php /* START AITOC COMMENTING
+                 <address><?php echo $this->getShipping()->format('html') ?></address>
++                
++                
++                FINISH AITOC COMMENTING */ ?>
++                <address><?php echo $this->getProcessAddressHtml($this->getShipping()->format('html')) ?></address>
+             </dd>
+         <?php else: ?>
+             <dt>
+@@ -63,11 +84,24 @@
+         <?php endif; ?>
+         <?php endif; ?>
+ 
++        <?php endif; ?>
++
++        <?php if ($this->checkStepActive('shipping_method')): ?>
++
+         <?php if ($this->getCheckout()->getStepData('shipping_method', 'is_show')): ?>
+         <?php if ($this->isStepComplete('shipping_method')): ?>
+             <dt class="complete">
++
++            
++            
++        <?php if ($this->checkStepActive('shipping_method')): ?>
+                 <?php echo $this->__('Shipping Method') ?> <span class="separator">|</span>
+                 <a href="#shipping_method" onclick="checkout.gotoSection('shipping_method'); return false;"><?php echo $this->__('Change') ?></a>
++                
++                
++       <?php else: ?>
++            <?php echo $this->__('Shipping Method') ?>
++        <?php endif; ?>
+             </dt>
+             <dd class="complete">
+                 <?php if ($this->getShippingMethod()): ?>
+@@ -94,12 +128,20 @@
+             </dt>
+         <?php endif; ?>
+         <?php endif; ?>
++        <?php endif; ?>
+ 
++        <?php if ($this->checkStepActive('payment')): ?>
+         <?php if ($this->getCheckout()->getStepData('payment', 'is_show')): ?>
+         <?php if ($this->isStepComplete('payment')): ?>
+             <dt class="complete">
++            
++            <?php if ($this->checkStepActive('payment')): ?>
+                 <?php echo $this->__('Payment Method') ?> <span class="separator">|</span>
+                 <a href="#payment" onclick="checkout.gotoSection('payment'); return false;"><?php echo $this->__('Change') ?></a>
++                
++                <?php else: ?>
++            <?php echo $this->__('Payment Method') ?>
++        <?php endif; ?>
+             </dt>
+             <dd class="complete">
+                 <?php echo $this->getPaymentHtml() ?>
+@@ -108,6 +150,7 @@
+             <dt>
+                 <?php echo $this->__('Payment Method') ?>
+             </dt>
++        <?php endif; ?>
+         <?php endif; ?>
+         <?php endif; ?>
+         </dl>

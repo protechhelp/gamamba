@@ -1,0 +1,27 @@
+body {
+	behavior: url("ie/csshover3.htc");
+}
+.sm_megamenu_menu li, .sm_megamenu_menu li:hover, .sm_megamenu_menu li.nodrop:hover {
+	padding:1px;
+}
+.sm_megamenu_menu li .drop {
+	background:url("drop2ie_dark.png") no-repeat 122px 11px;
+}
+.sm_megamenu_menu li:hover .drop {
+	background:url("drop2ie_dark.png") no-repeat 121px 10px;
+}
+.sm_megamenu_menu .levels a.parent, .sm_megamenu_menu .levels a.parent:hover {
+	background: url("drop2ie_dark.png") right center no-repeat;
+}
+.sm_megamenu_menu li:hover .dropdown_1column, 
+.sm_megamenu_menu li:hover .dropdown_2columns, 
+.sm_megamenu_menu li:hover .dropdown_3columns,
+.sm_megamenu_menu li:hover .dropdown_4columns,
+.sm_megamenu_menu li:hover .dropdown_5columns {
+	left:138px;
+	top:0px;
+}
+.sm_megamenu_menu li:hover .dropdown_fullwidth {
+	left:138px;
+	top:0px;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+
+    <checkout_onepage_index>
+    	<reference name="checkout.progress">
+    		<action method="setTemplate"><template>aitcommonfiles/design--frontend--base--default--template--checkout--onepage--progress.phtml</template></action>
+    	</reference>
+    	<reference name="checkout.onepage.billing">
+    		<action method="setTemplate"><template>aitcommonfiles/design--frontend--base--default--template--checkout--onepage--billing.phtml</template></action>
+    	</reference>
+    	<reference name="checkout.onepage.shipping">
+    		<action method="setTemplate"><template>aitcommonfiles/design--frontend--base--default--template--checkout--onepage--shipping.phtml</template></action>
+    	</reference>
+    </checkout_onepage_index>
+    
+    <checkout_onepage_progress>
+    	<reference name="root">
+    		<action method="setTemplate"><template>aitcommonfiles/design--frontend--base--default--template--checkout--onepage--progress.phtml</template></action>
+    	</reference>
+    </checkout_onepage_progress>    
+	<paypal_express_review>
+		<reference name="paypal.express.review">
+		    <action method="setTemplate"><template>aitcommonfiles/design--frontend--base--default--template--paypal--express--review.phtml</template></action>
+    	</reference>
+		<reference name="express.review.billing">
+		    <action method="setTemplate"><template>aitcommonfiles/design--frontend--base--default--template--paypal--express--review--address.phtml</template></action>
+    	</reference>
+		<reference name="express.review.shipping">
+		    <action method="setTemplate"><template>aitcommonfiles/design--frontend--base--default--template--paypal--express--review--address.phtml</template></action>
+    	</reference>		
+	</paypal_express_review>
+    
+</layout> 
+<!--
+/**
+ * Configurable Checkout
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitconfcheckout
+ * @version      2.1.27
+ * @license:     2qI6oAD8hvvkjMutXwa7Vp1gcsMrnxn0DqZRLmfWz9
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

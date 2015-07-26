@@ -1,0 +1,65 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Mega Menu - Version 1.1
+ # Copyright (c) 2013 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+
+	$item = $this->getCurrentItem();
+	$config = $this->getConfigObject();
+	$prefix = Sm_Megamenu_Model_System_Config_Source_Html::PREFIX;
+	if($item->getDepth() == $config['start_level']){
+		// $divClassName = ($this->isDrop($item))?'dropdown_'.$item->getColsNb().'columns':'';
+		$divClassName = $prefix.'dropdown_'.$item->getColsNb().'columns';
+		if($this->isAlignRight($item)){
+			$divClassName .= $prefix.'align_right';
+		}
+	}
+	else{
+		$divClassName = $prefix.'col_'.$item->getColsNb();
+	}
+	// $divClassName =($this->isDrop($item))?'dropdown_'.$item->getColsNb().'columns':'col_'.$item->getColsNb();	//dropdown_4column or col_4
+	$firstClassName =($this->isFirstCol($item) OR $isFirstColumn)?$prefix.'firstcolumn':'';
+	$aClassName = ($this->isDrop($item))?$prefix.'drop':$prefix.'nodrop';
+?>
+	<div class="<?php echo $divClassName?> <?php echo $firstClassName?>">
+<?php	
+	$link = ($this->hasLinkType($item))?$this->getLinkOfType($item):'#';
+	$title = '<span class="'.$prefix.'title_lv'.$item->getDepth().'">'.$item->getTitle().'</span>';
+	$icon_title = ($this->hasIcon($item))?'<span style="background: url('.$this->filterImage($item).') no-repeat scroll 0% 0%  transparent;" class="'.$prefix.'icon">'.$title.'</span>':$title;		
+			
+	if($this->isDrop($item) OR $this->hasLinkType($item)){
+		$headTitle = '<a class="'.$aClassName.'" href="'.$link.'" '.Mage::helper('megamenu/utils')->getTargetAttr($item->getTarget()).' >'.$icon_title.'</a>';
+	}
+	else{
+		$headTitle = $icon_title;
+	}
+ ?>	
+<?php	if($item->getShowTitle()==Sm_Megamenu_Model_System_Config_Source_Status::STATUS_ENABLED){	?>
+		<div class="'.$prefix.'title"><?php echo $headTitle ?></div>
+<?php	}	?>
+<?php	if(!$this->isLeaf($item)){	
+			if($item->getDepth()+1 <= $config['end_level']){
+				$childItems = Mage::helper('megamenu')->getChildsDirectlyByItem($item);
+				$cols_total = $item->getColsNb();
+				$cols_sub = intval($cols_total);
+				foreach($childItems as $childItem){
+					$cols_sub = $cols_sub - intval($childItem->getColsNb());
+					$isFirst = '';
+					if($cols_sub <= 0){			// if cols_sub 
+						$isFirst = 'isFirstColumn';
+						$cols_sub = $cols_total;
+					}	?>
+<?php				echo $this->getItemHtml($childItem, $isFirst)	?>
+<?php			}?>
+				</div>
+<?php		}	
+		}
+		else{
+			if(!$this->hasLinkType($item)){	?>
+				<div class="'.$prefix.'content"><?php echo $this->getContentType($item) ?></div>
+<?php		}	?>
+			</div>
+<?php	}	?>

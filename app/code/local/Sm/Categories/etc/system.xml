@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<sm>
+			<label>MagenTech.Com</label>
+			<sort_order>205</sort_order>
+		</sm>
+	</tabs>
+	<sections>
+		<categories_cfg translate="label" module="categories">
+			<label>SM Categories</label>
+			<tab>sm</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>150</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<!-- Begin General Settings Group -->
+				<general translate="label" module="categories">
+					<expanded>1</expanded>
+					<label>General Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enable/Disable</label>
+							<sort_order>1</sort_order>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</active>
+						<categories_title_text translate="label">
+							<label>Title of Module</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</categories_title_text>
+						<product_links_target translate="label">
+							<label>Link Target</label>
+							<frontend_type>select</frontend_type>
+							<source_model>categories/system_config_source_LinkTargets</source_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_links_target>
+						<deviceclass_sfx translat="label">
+							<label>Device Class Suffix</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Device Class Suffix. 6 is maximum column</comment>
+						</deviceclass_sfx>
+						<theme>
+							<label>Theme</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>categories/system_config_source_Theme</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</theme>
+						<accmouseenter>
+							<label>Tab events (For theme4)</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>categories/system_config_source_AccMouse</source_model>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</accmouseenter>
+					</fields>
+				</general>
+				<!-- End General Settings Group -->
+
+				<!-- Begin Source Options Settings Group -->
+				<source_options translate="label">
+					<label>Source Options</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<product_category translate="label">
+							<label>Select Category</label>
+							<frontend_type>multiselect</frontend_type>
+							<source_model>categories/system_config_source_ListCategory</source_model>
+							<comment>Please select one or more categories.</comment>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_category>
+						<depth translate="label">
+							<label>Category Depth</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>The number of child category levels to return.</comment>
+						</depth>
+						<count_cats translate="label">
+							<label>Count</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>The number of categories to display. The default value of 0 will display all
+								categories.
+							</comment>
+						</count_cats>
+					</fields>
+				</source_options>
+				<!-- End Source Options Group -->
+
+				<!-- Begin Categories Options Group -->
+				<category_options translate="label">
+					<label>Categories Options</label>
+					<frontend>text</frontend>
+					<sort_order>3</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<cat_title_display translate="label">
+							<label>Categories Title Display</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</cat_title_display>
+						<cat_title_maxcharacs translate="label">
+							<label>Title Max Chars</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Max Chars of Category Title. 0 to unlimit length!</comment>
+						</cat_title_maxcharacs>
+						<cat_sub_title_display translate="label">
+							<label>Display Title Sub Categories</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</cat_sub_title_display>
+						<cat_sub_title_maxcharacs translate="label">
+							<label>Title Max Chars Sub Categories</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Max Chars of Category Title. 0 to unlimit length!.</comment>
+						</cat_sub_title_maxcharacs>
+						<cat_all_product translate="label">
+							<label>Show Total Products</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</cat_all_product>
+						<category_order_by>
+							<label>Categories Order By</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>categories/system_config_source_CatOrder</source_model>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</category_order_by>
+						<category_order_dir translate="label">
+							<label>Categories Ordering Direction</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>categories/system_config_source_OrderDirection</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</category_order_dir>
+					</fields>
+				</category_options>
+				<!-- End Categories Options Group -->
+
+				<!-- End Image Options Group -->
+				<image_options translate="label">
+					<label>Image Options</label>
+					<frontend>text</frontend>
+					<sort_order>4</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+					<category_image_heading1 translate="label">
+						<label>Get Image from Category Image</label>
+						<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+						<sort_order>1</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</category_image_heading1>
+					<imgcfgcat_from_category_image translate="label">
+						<label>Category Image</label>
+						<frontend_type>radios</frontend_type>
+						<source_model>adminhtml/system_config_source_yesno</source_model>
+						<sort_order>2</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</imgcfgcat_from_category_image>
+					<category_image_heading2 translate="label">
+						<label>Get Image from Category Image Thumbnail Image</label>
+						<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+						<sort_order>3</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</category_image_heading2>
+					<imgcfgcat_from_category_thumbnail translate="label">
+						<label>Category Image Thumbnail</label>
+						<frontend_type>radios</frontend_type>
+						<source_model>adminhtml/system_config_source_yesno</source_model>
+						<sort_order>4</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</imgcfgcat_from_category_thumbnail>
+					<category_image_heading3 translate="label">
+						<label>Get Image from Category Description</label>
+						<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+						<sort_order>5</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</category_image_heading3>
+					<imgcfgcat_from_category_description translate="label">
+						<label>Category Description</label>
+						<frontend_type>radios</frontend_type>
+						<source_model>adminhtml/system_config_source_yesno</source_model>
+						<sort_order>6</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</imgcfgcat_from_category_description>
+					<imgcfgcat_order translate="label">
+						<label>Order to Get</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>7</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</imgcfgcat_order>
+					<imgcfgcat_function translate="label">
+						<label>Resize</label>
+						<frontend_type>radios</frontend_type>
+						<source_model>adminhtml/system_config_source_yesno</source_model>
+						<sort_order>8</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</imgcfgcat_function>
+					<imgcfgcat_width translate="label">
+						<label>Image Width</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>9</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</imgcfgcat_width>
+					<imgcfgcat_height translate="label">
+						<label>Image Height</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>10</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</imgcfgcat_height>
+					<imgcfgcat_constrainOnly translate="label">
+						<label>Constrain Only</label>
+						<frontend_type>radios</frontend_type>
+						<source_model>categories/system_config_source_TrueFalse</source_model>
+						<sort_order>11</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>If the "constrainOnly" parameter is set to true, in this case the images which are
+							smaller than specified value will be not enlarged by Magento. Only border of such images
+							will increase.
+						</comment>
+					</imgcfgcat_constrainOnly>
+					<imgcfgcat_keepAspectRatio translate="label">
+						<label>Keep Aspect Ratio</label>
+						<frontend_type>radios</frontend_type>
+						<source_model>categories/system_config_source_TrueFalse</source_model>
+						<sort_order>12</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>If the "keepAspectRatio" parameter is set to true, in this case the proportions of
+							the image will not be modified.
+						</comment>
+					</imgcfgcat_keepAspectRatio>
+					<imgcfgcat_keepFrame translate="label">
+						<label>Keep Frame</label>
+						<frontend_type>radios</frontend_type>
+						<source_model>categories/system_config_source_TrueFalse</source_model>
+						<sort_order>13</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>The "keepFrame" parameter guarantees that the image will be not cropped. When
+							"keepAspectRatio" is false the "keepFrame" will not work.
+						</comment>
+					</imgcfgcat_keepFrame>
+					<imgcfgcat_keepTransparency translate="label">
+						<label>Keep Transparency</label>
+						<frontend_type>radios</frontend_type>
+						<source_model>categories/system_config_source_TrueFalse</source_model>
+						<sort_order>14</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>The "keepTransparency" parameter keep the transparent background of the images.
+						</comment>
+					</imgcfgcat_keepTransparency>
+					<imgcfgcat_background translate="label">
+						<label>Background Color</label>
+						<frontend_type>text</frontend_type>
+						<validate>color</validate>
+						<sort_order>15</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>Please Click the text box to select color</comment>
+					</imgcfgcat_background>
+					<imgcfgcat_placeholder>
+						<label>Placeholder</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>16</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</imgcfgcat_placeholder>
+					</fields>
+				</image_options>
+				<!-- End Image Options Group -->
+
+				<!-- Begin Advanced Options Group -->
+				<advanced translate="label">
+					<label>Advanced Options</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>6</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<include_jquery translate="label">
+							<label>Include jQuery</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</include_jquery>
+						<pretext translate="label">
+							<label>Pre-text</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</pretext>
+						<posttext translate="label">
+							<label>Post-text</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</posttext>
+					</fields>
+				</advanced>
+				<!-- End Effect Options Group -->
+
+				<product_information translate="label">
+					<label>Product Information</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>7</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<author translate="label">
+							<label><![CDATA[<p>Author: <a target="_blank" title="Magen Tech" href="http://www.magentech.com">Magen Tech</a></p>
+											<p>Version: 2.0.0</p>
+											<p>Userguide: <a target="_blank" title="Usergide" href="http://www.magentech.com/extensions/extension-user-guides">Userguide</a></p>
+											<p>Support: <a target="_blank" href="http://www.magentech.com/forum">Forum</a></p>
+								]]>
+							</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+						</author>
+					</fields>
+				</product_information>
+			</groups>
+		</categories_cfg>
+	</sections>
+</config>

@@ -1,0 +1,201 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+global $var_yttheme;?>
+
+	<?php /*?><div class="footer-service">
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('block-service')->toHtml(); ?>
+	</div><?php */?>
+	
+	<!-- <div class="footer-top">  
+        <div class="container">
+            <div class="row">
+            	
+				<?php /*?><div class="footer-info col-lg-3 col-md-3 col-sm-12 col-xs-12">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('block-footer-info')->toHtml(); ?>
+				</div>
+                <?php if($this->getChildHtml('spotlight')) { ?>
+                    <div class="spotlight-wrap col-lg-9 col-md-9 col-sm-12 col-xs-12 row">
+                        <?php echo $this->getChildHtml('spotlight'); ?>
+                    </div>
+                <?php } ?><?php */?>
+                
+            </div>
+        </div>
+    </div>-->
+    
+    
+    <div class="footer-bottom">
+
+    	<div class="footer-newsletter container">
+        	<br />
+			<div class="row">
+				<div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                    <?php // echo $this->getChildHtml('newsletter'); 
+echo $this->getLayout()->createBlock('core/template')->setTemplate('ajaxnewsletter/index.phtml')->toHtml();
+?>
+				</div>
+				<div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+					<?php echo $this->getChildHtml('social'); ?>
+				</div>			
+			</div>
+            <br />
+            <hr color="#444" />
+		</div> 
+        <div class="container our_partnes">
+        	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('partners')->toHtml(); ?>
+        </div>
+        <br />
+        <br />
+        <div class="container">
+            <div class="row"> 
+            	<div class="want_khow col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_bottom_left')->toHtml(); ?>
+                </div>
+				<div class="want_other details col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('footer_bottom_middle')->toHtml(); ?>
+                </div>
+                <div class="copy_im_right col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <ul class="footer_tab tabs" id="tabs">
+                        <li><a href="#" name="tab1">PAYMENT</a></li>
+                        <li><a href="#" name="tab2">OTHER PAYMENTS</a></li>
+                    </ul>
+                    <div class="tab_content_main" id="content">
+                        <div id="tab1" class="category_pro_collection">
+                       		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('block-payment')->toHtml(); ?>
+                        </div>
+                        <div id="tab2" class="category_pro_collection other_pay">
+                            	<a href="#" class="web_money">&nbsp;</a>
+                                <a href="#" class="skrill">&nbsp;</a>
+                                <a href="#" class="bit_coin">&nbsp;</a>
+                                <a href="#" class="paypal">&nbsp;</a>
+                        </div>
+                        
+                    </div>
+                    
+                    
+                	<div class="footer_copy_right"><?php echo $this->getCopyright() ?></div>
+                </div>
+                     	
+            	<?php /*?><div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 copyright">
+        			<?php if( $var_yttheme->getParam('custom_copyright') == 1 ){
+        				echo $var_yttheme->getParam('copyright');
+        			}else{?>                	
+                    <?php echo $this->getCopyright() ?> Designed by <a title="Visit MagenTech.Com!" href="http://www.magentech.com/"><b>MagenTech.Com</b></a>
+        			<?php }?>
+            	</div>
+            	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            		
+            	</div><?php */?>
+                
+            </div>
+        </div>
+        
+        <br />
+        <br />
+
+    </div>
+    
+<?php
+//include (dirname(__FILE__).'/new_cpanel.phtml');
+if ( $var_yttheme->getParam('showontop') == 1 ){
+    include (dirname(__FILE__).'/backtotop.phtml');
+}
+?>
+
+<script type="text/javascript">
+$t=jQuery.noConflict();
+$t(document).ready(function() {
+	$t("#content").find("[id^='tab']").hide(); // Hide all content
+	$t("#tabs li:first").attr("id","current"); // Activate the first tab
+	$t("#content #tab1").fadeIn(); // Show first tab's content
+	
+	$t('#tabs a').click(function(e) {
+		e.preventDefault();
+		if ($t(this).closest("li").attr("id") == "current"){ //detection for current tab
+		return;       
+		}
+		else{             
+		$t("#content").find("[id^='tab']").hide(); // Hide all content
+		$t("#tabs li").attr("id",""); //Reset id's
+		$t(this).parent().attr("id","current"); // Activate this
+		$t('#' + $t(this).attr('name')).fadeIn(); // Show content for the current tab
+		}
+	});
+	
+	
+	$t('.chat_box_main_top').mouseover(function(){
+      $t('.chat_box_main_top').addClass('chat_box_main_top_chat');
+    });
+    $t('.chat_box_main_top').mouseout(function(){
+		$t('.chat_box_main_top').removeClass('chat_box_main_top_chat');
+    });
+});
+
+
+setInterval(function(){
+    var $sample = $t(".customer_credit_main_top");
+    var $sample2 = $t(".customer_credit_main_bottom");
+	
+    if($sample.is(":hover")) {
+		
+       $sample2.show();
+    }
+    else {
+       
+        if($sample2.is(":hover")) {
+			
+           $sample2.show();
+        }
+        else {
+           
+           $sample2.hide();
+        }
+		
+    }  
+}, 200);
+
+
+</script>
+
+
+<style>
+.chat_box_main_top{ position:fixed; bottom:-19px; right:0px; z-index:9999;-webkit-transition:bottom 1s, -webkit-transform 2s;
+    transition:bottom 1s, transform 2s;}
+.chat_box_main_top_chat{ bottom:0px !important; right:0px !important;
+-webkit-transition:bottom 1s, -webkit-transform 2s;
+    transition:bottom 1s, transform 2s;
+
+}
+</style>
+<div class="chat_box_main_top">
+	<a target="_self" href="<?php echo $this->getUrl('helpdesk') ?>"><img src="<?php echo $this->getSkinUrl('images/chat.png') ?>" alt="Admin Support" /></a>
+</div>
+
+
+
+       
+			

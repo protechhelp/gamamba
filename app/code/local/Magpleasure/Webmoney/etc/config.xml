@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magpleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Webmoney
+ * @copyright  Copyright (c) 2010-2014 Magpleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+ -->
+<config>
+    <modules>
+        <Magpleasure_Webmoney>
+            <version>1.0.1</version>
+        </Magpleasure_Webmoney>
+    </modules>
+    <global>
+        <models>
+            <webmoney>
+                <class>Magpleasure_Webmoney_Model</class>
+            </webmoney>
+        </models>
+        <blocks>
+            <webmoney>
+                <class>Magpleasure_Webmoney_Block</class>
+            </webmoney>
+        </blocks>
+        <helpers>
+            <webmoney>
+                <class>Magpleasure_Webmoney_Helper</class>
+            </webmoney>
+        </helpers>
+        <resources>
+            <webmoney_setup>
+                <setup>
+                    <module>Magpleasure_Webmoney</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </webmoney_setup>
+            <webmoney_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </webmoney_write>
+            <webmoney_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </webmoney_read>
+        </resources>
+        <sales>
+            <order>
+                <statuses>
+                    <pending_webmoney translate="label">
+                        <label>Pending Webmoney</label>
+                    </pending_webmoney>
+                </statuses>
+                <states>
+                    <pending_payment>
+                        <statuses>
+                            <pending_webmoney default="1"/>
+                        </statuses>
+                    </pending_payment>
+                </states>
+            </order>
+        </sales>
+    </global>
+    <frontend>
+        <secure_url>
+            <webmoney_redirect>/webmoney/redirect/</webmoney_redirect>
+            <webmoney_result>/webmoney/result/</webmoney_result>
+            <webmoney_success>/webmoney/success/</webmoney_success>
+            <webmoney_failure>/webmoney/failure/</webmoney_failure>
+        </secure_url>
+        <routers>
+            <webmoney>
+                <use>standard</use>
+                <args>
+                    <module>Magpleasure_Webmoney</module>
+                    <frontName>webmoney</frontName>
+                </args>
+            </webmoney>
+        </routers>
+        <translate>
+            <modules>
+                <Magpleasure_Webmoney>
+                    <files>
+                        <default>Magpleasure_Webmoney.csv</default>
+                    </files>
+                </Magpleasure_Webmoney>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Magpleasure_Webmoney>
+                    <files>
+                        <default>Magpleasure_Webmoney.csv</default>
+                    </files>
+                </Magpleasure_Webmoney>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <payment>
+            <webmoney>
+                <payment_action>Sale</payment_action>
+                <active>0</active>
+                <title>Webmoney</title>
+                <model>webmoney/checkout</model>
+                <order_status>pending_webmoney</order_status>
+                <sort_order>10</sort_order>
+            </webmoney>
+        </payment>
+    </default>
+</config>

@@ -1,0 +1,50 @@
+<?php
+/**
+ * Configurable Checkout
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitconfcheckout
+ * @version      2.1.27
+ * @license:     2qI6oAD8hvvkjMutXwa7Vp1gcsMrnxn0DqZRLmfWz9
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+/* @var $this Aitoc_Aitsys_Block_Edit */
+$_helper = Mage::helper('aitsys');
+?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td><h3><?php echo $_helper->__($this->getTitle(), $this->getVersion()) ?></h3></td>
+            <td class="form-buttons"><?php echo $this->getSaveButtonHtml() ?></td>
+         </tr>
+    </table>
+</div>
+<div class="entry-edit">
+
+    <div class="notifications">
+        <?php echo $this->getChildHtml('aitsys.news')?>
+    </div>
+    <?php echo $this->getInstallText()?>
+    <table class="aitsys-list">
+      <tr>
+        <td class="list">
+          <div class="form">
+            <form action="<?php echo $this->getSaveUrl() ?>" method="post" id="config_edit_form" enctype="multipart/form-data">
+                <?php echo $this->getBlockHtml('formkey')?>
+                <?php echo $this->getChildHtml('form')?>
+            </form>
+          </div>
+          [ <a href="<?php echo $this->getUrl('*/rewriter'); ?>"><?php echo $_helper->__('Manage Class Rewrites'); ?></a> ]
+          [ <a href="<?php echo $this->getUrl('*/patch'); ?>"><?php echo $_helper->__('View Customized Templates'); ?></a> ]
+          [ <a href="<?php echo $this->getUrl('*/*/permissions', array('mode' => $this->getPermLink())); ?>"><?php echo $_helper->__($this->getPermLinkTitle()); ?></a> ]
+          <?php if ($this->tool()->platform()->hasDebugingAllowed()){ ?>
+              [ <a href="<?php echo $this->getUrl('*/debug/index')?>"><?php echo $_helper->__('Debug')?></a> ]
+          <?php } ?>
+        </td>
+      </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var configForm = new varienForm('config_edit_form');
+</script>

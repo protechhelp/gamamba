@@ -1,0 +1,248 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Deal - Version 1.0.0
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/?>
+
+<script type="text/javascript">
+//<![CDATA[
+data = new Date(2013,10,26,12,00,00);
+var listdeal = [];
+function CountDown(date,id){
+	dateNow = new Date();
+	amount = date.getTime() - dateNow.getTime();
+	delete dateNow;
+	if(amount < 0){
+		document.getElementById(id).innerHTML="Now!";
+	} else{
+		days=0;hours=0;mins=0;secs=0;out="";
+		amount = Math.floor(amount/1000);
+		days=Math.floor(amount/86400);
+		amount=amount%86400;
+		hours=Math.floor(amount/3600);
+		amount=amount%3600;
+		mins=Math.floor(amount/60);
+		amount=amount%60;
+		secs=Math.floor(amount);
+		if(days != 0){out += "<div class='time-item time-day'>" + "<div class='num-time'>" + days + "</div>" +" <div class='name-time'>"+((days==1)?"Day":"Days") + "</div>"+"</div> ";}
+		if(hours != 0){out += "<div class='time-item time-hour'>" + "<div class='num-time'>" + hours + "</div>" +" <div class='name-time'>"+((hours==1)?"Hour":"Hours") + "</div>"+"</div> ";}
+		out += "<div class='time-item time-min'>" + "<div class='num-time'>" + mins + "</div>" +" <div class='name-time'>"+((mins==1)?"Min":"Mins") + "</div>"+"</div> ";
+		out += "<div class='time-item time-sec'>" + "<div class='num-time'>" + secs + "</div>" +" <div class='name-time'>"+((secs==1)?"Sec":"Secs") + "</div>"+"</div> ";
+		out = out.substr(0,out.length-2);
+		document.getElementById(id).innerHTML=out;
+		setTimeout(function(){CountDown(date,id)}, 1000);
+	}
+}
+//]]>
+</script>
+
+<?php 
+$list = $this->_getProducts();
+$helper = Mage::helper('deal/data');
+if (!empty($list)) {
+	$uniqued = 'sm_deal_' . time() . rand();
+
+	$class_respl = 'deal-resp01-' . $this->_getConfig('nb_column1', 6) . ' deal-resp02-' . $this->_getConfig('nb_column2', 4) . ' deal-resp03-' . $this->_getConfig('nb_column3', 2) . ' deal-resp04-' . $this->_getConfig('nb_column4', 1); ?>
+
+<?php if ( $this->_getConfig('pretext') != null ) { ?>
+	<div class="deal-pretext">
+		<?php echo $this->_getConfig('pretext'); ?>
+	</div>
+<?php } ?>
+
+<div id="<?php echo $uniqued; ?>" class="sm-deal block">
+	<?php if( $this->_getConfig('deal_title_text') ){ ?>
+		<div class="block-title">
+			<strong>
+				<span><?php echo $this->_getConfig('deal_title_text','Deal Title'); ?></span>
+			</strong>
+		</div>
+	<?php } ?>
+	<div class="products-grid deal-items <?php echo $class_respl; ?> ">
+		<?php  
+		$j = 0;
+		$_limit = (int)$this->_getConfig('product_limitation', 5);		
+		$limit_product = $_limit;
+		if ( $_limit <= 0 ){
+			$_limit = count($list);
+		}
+		$count = 0;
+		$nb_rows = 2;
+		foreach ($list as $_product) {
+		
+		$now = date("Y-m-d");
+		$newsFrom= substr($_product->getData('news_from_date'),0,10);
+		$newsTo=  substr($_product->getData('news_to_date'),0,10);
+		$specialprice = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialPrice();
+		$price = Mage::getModel('catalog/product')->load($_product->getId())->getPrice();	
+			
+		// Get the Special Price
+		$specialprice = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialPrice(); 
+		// Get the Special Price FROM date
+		$specialPriceFromDate = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialFromDate();
+		// Get the Special Price TO date
+		$specialPriceToDate = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialToDate();
+		// Get Current date
+		$today =  time();
+		$dayDate  = Mage::app()->getLocale()->date()->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);	
+		
+		if ($specialprice && $specialPriceFromDate && $specialPriceToDate){
+			if( $today >= strtotime( $specialPriceFromDate) && $today <= strtotime($specialPriceToDate) 
+			|| $today >= strtotime( $specialPriceFromDate) && is_null($specialPriceToDate) ){ 
+			$j++;
+			if( $j <= $_limit ){ $count++;
+			?>		
+			<?php if ($count % $nb_rows == 1 || $nb_rows == 1) { ?>
+			<div class="item">
+			<?php } ?>
+				<div class="deal-item">
+					<div class="deal-item-inner">
+						<?php if ( $_product->_image && $this->_getConfig('product_image_display') ) { ?>
+						<div class="deal-image">
+							<a href="<?php echo $_product->link ?>" title="<?php echo $_product->title; ?>" <?php echo $helper->parseTarget($this->_getConfig('product_links_target'));?>>
+								<?php if($_product->getThumbnail() != $_product->getSmallImage()) { ?> 
+									<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(270); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+									<img class="thumnail-image image-hover" src="<?php echo $_product->_image; ?>" title="<?php echo $_product->title; ?>" alt="<?php echo $_product->title; ?>" >
+								<?php } else { ?>
+									<img src="<?php echo $_product->_image; ?>" title="<?php echo $_product->title; ?>" alt="<?php echo $_product->title; ?>" >
+								<?php } ?>
+							</a>															
+							<?php if ( $now>=$newsFrom && $now<=$newsTo ){ ?>
+								<span class="new-product"><?php echo $this->__('New'); ?></span>
+							<?php }
+							if ( $specialprice ){ ?>
+								<span class="sale-product">
+									<span class="sale-t"><?php echo $this->__('Save'); ?></span>
+									<span class="price-save">
+										<?php 
+										$current = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+										$saleof= abs($specialprice-($_product->getPrice()));					
+										?>
+										
+										<span class="cur-sale">
+											<?php echo $current;?>
+										</span>
+										<?php echo $saleof;?>
+									</span>							
+								</span>
+							<?php } ?>	
+						
+							<?php if ((int)$this->_getConfig('product_addcart_display', 1)) : ?>
+								<?php if ($_product->isSaleable()): ?>
+									<div class="product-addcart">
+										<button type="button" title="<?php echo $this->__('Add to Cart') ?>"
+												class="btn-cart"
+												onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+											<span><span><?php echo $this->__('Add to Cart') ?></span></span>
+										</button>
+									</div>
+								<?php else: ?>
+									<p class="availability out-of-stock">
+										<span>
+											<?php echo $this->__('Out of stock') ?>
+										</span>
+									</p>
+								<?php endif;
+							endif; ?>						
+						</div>
+						<?php } ?>
+						
+						<div class="deal-content">
+							<?php if( (int)$this->_getConfig('product_title_display',1) ) { ?>
+								<div class="product-name">
+									<a href="<?php echo $_product->link;?>" title="<?php echo $_product->title; ?>"
+										<?php echo $helper->parseTarget($this->_getConfig('product_links_target'));?>
+										>
+										<?php echo $helper->truncate($_product->title,$this->_getConfig('product_title_maxlength'));?>
+									</a>
+								</div>
+							<?php } ?>
+
+							<?php if ( (int)$this->_getConfig('product_reviews_count', 1) ) { ?>
+								<?php echo $this->getReviewsSummaryHtml($_product, 'short', true); ?>
+							<?php } ?>
+							
+							<?php if ( (int)$this->_getConfig('product_description_display', 1) ) { ?>
+								<div class="deal-description">
+									<?php echo $_product->_description; ?>
+								</div>
+							<?php } ?>
+
+							<?php if ($this->_getConfig('item_date_display') == 1) { ?>
+								<div class="deal-date">
+									<?php  echo  $_product->created_at; ?>
+								</div>
+							<?php } ?>
+
+							<?php if ((int)$this->_getConfig('product_price_display', 1)) { ?>
+								<?php echo $this->getPriceHtml($_product, true); ?>
+							<?php } ?>
+
+							<?php if ((int)$this->_getConfig('product_addwishlist_display', 1) || (int)$this->_getConfig('product_addcompare_display', 1)) :?>
+								<ul class="add-to-links">
+									<?php if ($this->helper('wishlist')->isAllow() && (int)$this->_getConfig('product_addwishlist_display', 1)) : ?>
+										<li>
+											<a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>"
+											   class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a>
+										</li>
+									<?php endif; ?>
+									<?php if ($_compareUrl = $this->getAddToCompareUrl($_product) && (int)$this->_getConfig('product_addcompare_display', 1)): ?>
+										<li>
+											<span class="separator">|</span>
+											<a
+												href="<?php echo $_compareUrl ?>"
+												class="link-compare"><?php echo $this->__('Add to Compare') ?>
+											</a>
+										</li>
+									<?php endif; ?>
+								</ul>
+							<?php endif; ?>
+							<?php if ($this->_getConfig('product_readmore_display') == 1) { ?>
+								<div class="deal-detail">
+									<a href="<?php echo $_product->link ?>"
+									   title="<?php echo $_product->title; ?>"
+										<?php echo $helper->parseTarget($this->_getConfig('product_links_target'));?>
+										>
+										<?php echo $this->_getConfig('product_readmore_text','Details'); ?>
+									</a>
+								</div>
+							<?php } ?>
+							<div class="count-down-wrap">
+								<div id="product_time_<?php echo $j;?>"></div>	
+							</div>						
+							<script type="text/javascript">
+							//<![CDATA[
+								listdeal.push('product_time_<?php echo $j."&&||&&".date("Y/m/d", strtotime($specialPriceToDate));?>') ;
+							//]]>
+							</script>						
+						</div> 	
+					</div>
+				</div>
+			<?php if ($count % $nb_rows == 0 || $count == $limit_product) { ?>
+			</div>
+			<?php } ?>
+			<?php }}}} ?>
+	</div>
+</div>
+<?php if ($this->_getConfig('posttext') != null) { ?>
+	<div class="deal-posttext"><?php echo $this->_getConfig('posttext'); ?></div>
+<?php } ?>
+
+<script type="text/javascript">
+//<![CDATA[
+window.onload=function(){
+	if(listdeal.length > 0){
+		for(i=0;i<listdeal.length;i++)
+		{
+			var arr = listdeal[i].split("&&||&&"); 
+			var data = new Date(arr[1]);
+			CountDown(data, arr[0]);
+		}	
+	}
+};
+//]]>
+</script>	
+<?php } else { echo $this->__('Has no content to show!'); }; ?>

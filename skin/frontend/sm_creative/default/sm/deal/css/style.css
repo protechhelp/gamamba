@@ -1,0 +1,247 @@
+.deal_title_text {
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.sm-deal {
+	margin-top: 30px;
+	margin-left: -30px;
+	overflow: hidden;
+}
+
+.sm-deal .deal-items {
+	margin: 0;
+	padding: 0;	
+	width: 100%;
+	overflow: hidden;
+}
+
+.sm-deal .deal-items .deal-item {
+	float: left;
+	overflow: hidden;
+	padding-left: 30px;
+	margin-bottom:30px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;	
+}
+
+.sm-deal .deal-items .deal-item .deal-item-inner {
+	padding: 10px;
+	overflow: hidden;
+	border: 1px solid #ccc;
+}
+
+.sm-deal .deal-items .deal-item .deal-image {
+	max-width: 100%;
+	margin: 0;
+	padding-bottom: 10px;
+}
+
+.sm-deal .deal-items .deal-item .deal-image img {
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.sm-deal .deal-items .deal-item .deal-detail {
+	text-align: right;
+}
+
+.sm-deal .deal-title {
+	margin-bottom: 10px;
+}
+
+.sm-deal .deal-description {
+	margin-bottom: 5px;
+	line-height: 18px;
+	word-wrap: break-word;
+}
+
+.sm-deal .deal-review {
+	margin-bottom: 5px;
+}
+
+.sm-deal .deal-review .ratings {
+	margin: 0;
+}
+
+.sm-deal .deal-review .rating-box {
+	margin-right: 5px;
+}
+
+.sm-deal .deal-review .rating-links {
+	padding-top: 1px;
+}
+
+.sm-deal .deal-btn-addtocart {
+	margin-bottom: 10px;
+}
+
+.sm-deal .add-to-links {
+	margin: 0;
+}
+
+.sm-deal .deal-items .deal-image:hover {
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+}
+
+/*CSS Responsive*/
+@media all and (max-width: 767px) {
+	.sm-deal .deal-resp04-6 .deal-item {
+		width: 16.666%;
+	}
+
+	.sm-deal .deal-resp04-5 .deal-item {
+		width: 20%;
+	}
+
+	.sm-deal .deal-resp04-4 .deal-item {
+		width: 25%;
+	}
+
+	.sm-deal .deal-resp04-3 .deal-item {
+		width: 33.333%;
+	}
+
+	.sm-deal .deal-resp04-2 .deal-item {
+		width: 50%;
+	}
+
+	.sm-deal .deal-resp04-1 .deal-item {
+		width: 100%;
+	}
+
+	.sm-deal .deal-resp04-1 .clr1,
+	.sm-deal .deal-resp04-2 .clr2,
+	.sm-deal .deal-resp04-3 .clr3,
+	.sm-deal .deal-resp04-4 .clr4,
+	.sm-deal .deal-resp04-5 .clr5,
+	.sm-deal .deal-resp04-6 .clr6 {
+		clear: both;
+	}
+}
+
+@media all and (min-width: 768px) and (max-width: 991px) {
+	.sm-deal .deal-resp03-6 .deal-item {
+		width: 16.666%;
+	}
+
+	.sm-deal .deal-resp03-5 .deal-item {
+		width: 20%;
+	}
+
+	.sm-deal .deal-resp03-4 .deal-item {
+		width: 25%;
+	}
+
+	.sm-deal .deal-resp03-3 .deal-item {
+		width: 33.333%;
+	}
+
+	.sm-deal .deal-resp03-2 .deal-item {
+		width: 50%;
+	}
+
+	.sm-deal .deal-resp03-1 .deal-item {
+		width: 100%;
+	}
+
+	.sm-deal .deal-resp03-1 .clr1 {
+		clear: both;
+	}
+
+	.sm-deal .deal-resp03-2 .clr2 {
+		clear: both;
+	}
+
+	.sm-deal .deal-resp03-3 .clr3 {
+		clear: both;
+	}
+
+	.sm-deal .deal-resp03-4 .clr4 {
+		clear: both;
+	}
+
+	.sm-deal .deal-resp03-5 .clr5 {
+		clear: both;
+	}
+
+	.sm-deal .deal-resp03-6 .clr6 {
+		clear: both;
+	}
+}
+
+@media all and (min-width: 992px) and (max-width: 1199px) {
+	.sm-deal .deal-resp02-6 .deal-item {
+		width: 16.666%;
+	}
+
+	.sm-deal .deal-resp02-5 .deal-item {
+		width: 20%;
+	}
+
+	.sm-deal .deal-resp02-4 .deal-item {
+		width: 25%;
+	}
+
+	.sm-deal .deal-resp02-3 .deal-item {
+		width: 33.333%;
+	}
+
+	.sm-deal .deal-resp02-2 .deal-item {
+		width: 50%;
+	}
+
+	.sm-deal .deal-resp02-1 .deal-item {
+		width: 100%;
+	}
+
+	.sm-deal .deal-resp02-1 .clr1,
+	.sm-deal .deal-resp02-2 .clr2,
+	.sm-deal .deal-resp02-3 .clr3,
+	.sm-deal .deal-resp02-4 .clr4,
+	.sm-deal .deal-resp02-5 .clr5,
+	.sm-deal .deal-resp02-6 .clr6 {
+		clear: both;
+	}
+}
+
+@media all and (min-width: 1200px) {
+	.sm-deal .deal-resp01-6 .deal-item {
+		width: 16.666%;
+	}
+
+	.sm-deal .deal-resp01-5 .deal-item {
+		width: 20%;
+	}
+
+	.sm-deal .deal-resp01-4 .deal-item {
+		width: 25%;
+	}
+
+	.sm-deal .deal-resp01-3 .deal-item {
+		width: 33.333%;
+	}
+
+	.sm-deal .deal-resp01-2 .deal-item {
+		width: 50%;
+	}
+
+	.sm-deal .deal-resp01-1 .deal-item {
+		width: 100%;
+	}
+
+	.sm-deal .deal-resp01-1 .clr1,
+	.sm-deal .deal-resp01-2 .clr2,
+	.sm-deal .deal-resp01-3 .clr3,
+	.sm-deal .deal-resp01-4 .clr4,
+	.sm-deal .deal-resp01-5 .clr5,
+	.sm-deal .deal-resp01-6 .clr6 {
+		clear: both;
+	}
+}
+

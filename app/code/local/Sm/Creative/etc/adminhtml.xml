@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<creative_cfg translate="title" module="creative">
+											<title>SM Creative Section</title>
+											<sort_order>150</sort_order>
+										</creative_cfg>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<menu>
+			<creative translate="title" module="creative">
+				<title>SM Creative Setting</title>
+				<sort_order>100</sort_order>
+				<depends>
+					<module>Sm_Creative</module>
+				</depends>
+				<children>
+					<creative translate="title" module="creative">
+						<title>SM Creative Setting</title>
+						<action>adminhtml/system_config/edit/section/creative_cfg</action>
+						<sort_order>0</sort_order>
+					</creative>										
+					<basicproducts translate="title" module="creative">
+						<title>SM Basic Products</title>
+						<action>adminhtml/system_config/edit/section/basicproducts_cfg</action>
+						<sort_order>1</sort_order>
+					</basicproducts>					
+					<cartpro translate="title" module="creative">
+						<title>SM Cart Pro</title>
+						<action>adminhtml/system_config/edit/section/cartpro_cfg</action>
+						<sort_order>2</sort_order>
+					</cartpro>					
+					<megamenu translate="title">
+						<title>SM Mega Menu</title>
+						<sort_order>3</sort_order>
+						<children>
+							<menugroup translate="title" module="creative">
+								<title>Menu Manager</title>
+								<action>megamenu/adminhtml_menugroup/</action>
+								<sort_order>1</sort_order>
+							</menugroup>	
+							<menuitems translate="title" module="creative">
+								<title>Menu Items Manager</title>
+								<action>megamenu/adminhtml_menuitems/</action>
+								<sort_order>2</sort_order>
+							</menuitems>
+							<configurtion translate="title" module="creative">
+								<title>Configuration</title>
+								<action>adminhtml/system_config/edit/section/megamenu_cfg</action>
+								<sort_order>3</sort_order>
+							</configurtion>
+						</children>
+					</megamenu>		
+					
+					<deal_cfg translate="title" module="creative">
+						<title>SM Deal</title>
+						<action>adminhtml/system_config/edit/section/deal_cfg</action>
+						<sort_order>4</sort_order>
+					</deal_cfg>	
+					
+					<listingtabs_cfg translate="label" module="creative">
+						<title>SM Listing Tabs</title>
+						<action>adminhtml/system_config/edit/section/listingtabs_cfg</action>
+						<sort_order>6</sort_order>
+					</listingtabs_cfg>
+					<categories translate="label" module="creative">
+						<title>SM Image Slider</title>
+						<action>adminhtml/system_config/edit/section/imageslider_cfg</action>
+						<sort_order>7</sort_order>
+					</categories>
+					<quickview translate="title" module="creative">
+						<title>SM Quickview</title>
+						<action>adminhtml/system_config/edit/section/quickview</action>
+						<sort_order>8</sort_order>
+					</quickview>
+					
+					<sm_shopby translate="title" module="creative">
+						<title>SM Shop By</title>
+						<action>adminhtml/system_config/edit/section/sm_shopby</action>
+						<sort_order>9</sort_order>
+					</sm_shopby>				
+				</children>
+			</creative>
+		</menu>		
+	</config>

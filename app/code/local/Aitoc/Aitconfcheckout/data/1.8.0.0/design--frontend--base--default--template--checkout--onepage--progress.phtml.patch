@@ -1,0 +1,32 @@
+diff -aurBb //dev2/sources/scraschuk/conf4/app/design/frontend/base/default/template/checkout/onepage/progress.phtml //dev2/sources/scraschuk/mg1800com/app/design/frontend/base/default/template/checkout/onepage/progress.phtml
+--- //dev2/sources/scraschuk/conf4/app/design/frontend/base/default/template/checkout/onepage/progress.phtml	Thu Oct 10 13:01:46 2013
++++ //dev2/sources/scraschuk/mg1800com/app/design/frontend/base/default/template/checkout/onepage/progress.phtml	Thu Sep 26 11:33:12 2013
+@@ -36,28 +36,22 @@
+             </div>
+             <?php endif; ?>
+ 
++            <?php if (Mage::helper('aitconfcheckout')->getShippingEnabled()) : ?>
+             <?php if ($this->getCheckout()->getStepData('shipping', 'is_show')): ?>
+             <div id="shipping-progress-opcheckout">
+                 <?php echo $this->getChildHtml('shipping.progress') ?>
+             </div>
+             <?php endif; ?>
++            <?php endif; ?>
+ 
++            <?php if (Mage::helper('aitconfcheckout')->getShippingMethodEnabled()) : ?>
+             <?php if ($this->getCheckout()->getStepData('shipping_method', 'is_show')): ?>
+             <div id="shipping_method-progress-opcheckout">
+                 <?php echo $this->getChildHtml('shippingmethod.progress') ?>
+             </div>
+             <?php endif; ?>
++            <?php endif; ?>
+ 
++            <?php if (Mage::helper('aitconfcheckout')->getPaymentEnabled()) : ?>
+             <?php if ($this->getCheckout()->getStepData('payment', 'is_show')): ?>
+             <div id="payment-progress-opcheckout">
+                 <?php echo $this->getChildHtml('payment.progress') ?>
+             </div>
+             <?php endif; ?>
++            <?php endif; ?>
+         </dl>
+     </div>

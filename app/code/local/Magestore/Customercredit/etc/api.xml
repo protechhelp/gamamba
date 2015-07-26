@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+
+<config>
+    <api>
+        <resources>
+            <customercredit translate="title" module="customercredit">
+                <model>customercredit/api</model>
+                <title>Customer credit</title>
+                <acl>customercredit</acl>
+                <method>
+                    <getcreditbalance translate="title" module="customercredit">
+                        <title>Get Credit Balance</title>
+                        <method>getCreditBalance</method>
+                        <acl>customercredit/getcreditbalance</acl>
+                    </getcreditbalance>
+                    <updatecredit translate="title" module="customercredit">
+                        <title>Update Credit Balance</title>
+                        <method>updateCredit</method>
+                        <acl>customercredit/updatecredit</acl>
+                    </updatecredit>
+                    <redeemcredit translate="title" module="customercredit">
+                        <title>Redeem Credit</title>
+                        <method>redeemCredit</method>
+                        <acl>customercredit/redeemcredit</acl>
+                    </redeemcredit>
+                    <faults module="customercredit">
+                        <data_invalid> 
+                            <code>100</code >
+                            <message>Invalid customer credit data. Details in error message.</message>
+                        </data_invalid>
+                        <filters_invalid>
+                            <code>101</code >
+                            <message>Invalid filters specified. Details in error message.</message>
+                        </filters_invalid>
+                        <not_exists>
+                            <code>102</code >
+                            <message>Customer Credit doesn't exist.</message>
+                        </not_exists>
+                        <not_deleted>
+                            <code>103</code>
+                            <message>Customer Credit was not deleted. Details in error message.</message>
+                        </not_deleted>
+                    </faults>
+                </method>
+            </customercredit>
+        </resources>
+        <acl>
+            <resources>
+                <customercredit translate="title" module="customercredit">
+                    <title>Customer credit</title>
+                    <getcreditbalance translate="title" module="customercredit">
+                        <title>Get Credit Balance</title>
+                    </getcreditbalance>
+                    <updatecredit translate="title" module="customercredit">
+                        <title>Update Credit</title>
+                    </updatecredit>
+                    <redeemcredit translate="title" module="customercredit">
+                        <title>Redeem Credit</title>
+                    </redeemcredit>
+                </customercredit>
+            </resources>
+        </acl>
+    </api>
+</config>

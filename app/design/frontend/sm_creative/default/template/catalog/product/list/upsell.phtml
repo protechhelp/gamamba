@@ -1,0 +1,191 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+global $var_yttheme;
+$limit = (int)$var_yttheme->getParam('upsell_number');
+global $show_rich_snippet;
+$show_rich_snippet = 0;
+?>
+<?php if(count($this->getItemCollection()->getItems())): ?>
+<div class="block box-collateral box-up-sell">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Up-sell Products') ?></span></strong>
+    </div>
+	<div class="block-content">
+		<div class="products-grid" id="upsell-product-table">
+		<?php $this->resetItemsIterator() ?>
+		<?php for($_i=0;$_i<$limit;$_i++): ?>
+				<?php if($_link=$this->getIterableItem()): 
+					$now = date("Y-m-d");
+					$newsFrom = substr($_link->getData('news_from_date'), 0, 10);
+					$newsTo = substr($_link->getData('news_to_date'), 0, 10);
+					$specialprice = $_link->getData('special_price');
+				?>
+				<div class="item item-wrapper">
+					<div class="item-inner">
+						<div class="product-image">
+							<a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_link->getName()) ?>">
+								<?php if($_link->getThumbnail() != $_link->getSmallImage()) { ?> 
+									<img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(261,371) ?>" alt="<?php echo $this->escapeHtml($_link->getName()) ?>" />
+									<img class="thumnail-image image-hover" src="<?php echo $this->helper('catalog/image')->init($_link, 'thumbnail')->resize(261,371) ?>" alt="<?php echo $this->escapeHtml($_link->getName()) ?>" />
+								<?php } else { ?>
+									<img src="<?php echo $this->helper('catalog/image')->init($_link, 'small_image')->resize(261,371) ?>" alt="<?php echo $this->escapeHtml($_link->getName()) ?>" />
+								<?php } ?>
+							</a>
+							<?php if ($newsFrom !="" && $now>=$newsFrom && ($now<=$newsTo || $newsTo=="")){?>
+								<div class="new-item">
+									<span><?php echo $this->__('New!'); ?></span>
+								</div>
+							<?php }?>
+							
+							<?php if ( $specialprice ){ ?>
+								<div class="sale-item">
+									<span><?php echo $this->__('Sale'); ?></span>
+								</div>
+							<?php }?>	
+						</div>	
+                        
+                        <div class="product_info_price">
+                        	<div class="product_info_price_inside">
+                            	<?php echo $this->getPriceHtml($_link, true, '-upsell') ?>
+                            </div>
+                        </div>
+						<div class="product-info">
+                        <div class="product-info-inner">
+                                <div class="product_other_things">
+                                	<ul>
+                                    	<li>
+                                        	<?php $community = $_link->getCommunity(); ?>
+											<?php if($community == "1"){ ?>                      
+                                       		<img src="<?php echo $this->getSkinUrl('images/att/1.jpg') ?>" alt="community" />
+                                    		<?php } ?>
+                                        </li>
+                                        <li>
+                                        	<?php $steam = $_link->getSteam(); ?>
+											<?php if($steam == "1"){ ?>                      
+                                       		<img src="<?php echo $this->getSkinUrl('images/att/2.gif') ?>" alt="Steam" />
+                                    		<?php } ?>
+                                        </li>
+                                        <li>
+                                        	<?php $cdkey = $_link->getCdkey(); ?>
+											<?php if($cdkey == "1"){ ?>                      
+                                       		<img src="<?php echo $this->getSkinUrl('images/att/3.gif') ?>" alt="Cd-key" />
+                                    		<?php } ?>
+                                        </li>
+                                        <li>
+                                        	<?php $battlenet = $_link->getBattlenet(); ?>
+											<?php if($battlenet == "1"){ ?>                      
+                                       		<img src="<?php echo $this->getSkinUrl('images/att/4.gif') ?>" alt="Battlenet" />
+                                    		<?php } ?>
+                                        </li>
+                                        <li>
+                                        	<?php $timecard = $_link->getTimecard(); ?>
+											<?php if($timecard == "1"){ ?>                      
+                                       		<img src="<?php echo $this->getSkinUrl('images/att/5.jpg') ?>" alt="Time-Card" />
+                                    		<?php } ?>
+                                        </li>
+                                    </ul>
+                                     
+                                </div>
+							<div class="product-name">
+								<a href="<?php echo $_link->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_link->getName()) ?>">
+									<?php echo $this->escapeHtml($_link->getName()) ?>
+								</a>
+							</div>		
+							<?php //echo $this->getReviewsSummaryHtml($_link, "short", true) ?>
+							<?php echo $this->getPriceHtml($_link, true, '-upsell') ?>	
+							
+							<div class="product-addto-wrap">
+								<div class="product-addto-wrap-inner">
+									<?php if ( $this->helper('wishlist')->isAllow() ) : ?>
+										<a class="link-wishlist" href="<?php echo $this->helper('wishlist')->getAddUrl($_link) ?>" title="<?php echo $this->__('Add to Wishlist') ?>">
+											<?php echo $this->__('Add to Wishlist') ?>
+										</a>
+									<?php endif; ?>
+									
+									<div class="product-addcart">
+										<?php if($_link->isSaleable()): ?>
+											<a class="btn-cart" title="<?php echo $this->__('Add to cart') ?>" href="javascript:void(0);" onclick="setLocation('<?php echo $this->getAddToCartUrl($_link) ?>')">
+												<?php echo $this->__('Add to Cart') ?>
+											</a>
+										<?php else: ?>
+										<p class="availability out-of-stock">
+											<span><?php echo $this->__('Out of stock') ?> </span>
+										</p>
+										<?php endif; ?>								
+									</div>
+									
+									<?php if( $_compareUrl=$this->getAddToCompareUrl($_link) ): ?>
+										<a class="link-compare" href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare'); ?>">
+											<?php echo $this->__('Add to Compare') ?>
+										</a>
+									<?php endif;?>
+
+								</div>
+							</div>	
+                            </div>					
+						</div>
+					</div>    
+				</div>
+				<?php endif; ?>
+		<?php endfor; ?>
+		</div>
+	</div>
+    <script type="text/javascript">decorateTable('upsell-product-table')</script>
+	<script type="text/javascript">
+	//<![CDATA[
+		jQuery(document).ready(function($) {
+			$('#upsell-product-table').owlCarousel({
+				pagination: false,
+				center: false,
+				nav: false,
+				loop: true,
+				margin: 10,
+				navText: [ '', '' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					480:{
+						items:2
+					},
+					768:{
+						items:3
+					},
+					992:{
+						items:4
+					},
+					1200:{
+						items:4
+					}
+				}
+			});	  
+		});				
+	//]]>
+	</script> 		
+</div>
+<?php endif ?>

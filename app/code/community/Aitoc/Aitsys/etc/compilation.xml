@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!-- @copyright  Copyright (c) 2009 AITOC, Inc. -->
+<config>
+    <includes>
+        <default>
+			<Aitoc_Aitsys_Abstract_Block/>
+			<Aitoc_Aitsys_Abstract_Helper/>
+			<Aitoc_Aitsys_Abstract_Model_Interface/>
+			<Aitoc_Aitsys_Abstract_Model/>
+			<Aitoc_Aitsys_Abstract_Mysql4_Collection/>
+			<Aitoc_Aitsys_Abstract_Mysql4/>
+			<Aitoc_Aitsys_Abstract_Pure/>
+			<Aitoc_Aitsys_Abstract_Resource_Eav_Setup/>
+			<Aitoc_Aitsys_Abstract_Resource_Setup/>
+			<Aitoc_Aitsys_Abstract_Service/>
+			<Aitoc_Aitsys_Abstract_Version/>
+			<Aitoc_Aitsys_Helper_Data/>
+			<Aitoc_Aitsys_Helper_License/>
+			<Aitoc_Aitsys_Helper_Rewriter/>
+			<Aitoc_Aitsys_Model_Core_Filesystem/>
+			<Aitoc_Aitsys_Model_Core_Cache/>
+			<Aitoc_Aitsys_Model_Core_Database/>
+			<Aitoc_Aitsys_Model_Service_Exception/>
+			<Aitoc_Aitsys_Model_Service/>
+			<Aitoc_Aitsys_Model_Module_Abstract/>
+			<Aitoc_Aitsys_Model_Module_Install/>
+			<Aitoc_Aitsys_Model_Module/>
+			<Aitoc_Aitsys_Model_Module_Status/>
+			<Aitoc_Aitsys_Model_Mysql4_Module_Status_Collection/>
+			<Aitoc_Aitsys_Model_Mysql4_Module_Status/>
+			<Aitoc_Aitsys_Model_Mysql4_Setup/>
+			<Aitoc_Aitsys_Model_Observer/>
+			<Aitoc_Aitsys_Model_Platform/>
+			<Aitoc_Aitsys_Model_Rewriter_Abstract/>
+			<Aitoc_Aitsys_Model_Rewriter_Autoload/>
+			<Aitoc_Aitsys_Model_Rewriter_Class/>
+			<Aitoc_Aitsys_Model_Rewriter_Config/>
+			<Aitoc_Aitsys_Model_Rewriter_Conflict/>
+			<Aitoc_Aitsys_Model_Rewriter_Inheritance/>
+			<Aitoc_Aitsys_Model_Rewriter_MageConfig/>
+			<Aitoc_Aitsys_Model_Rewriter_Merge/>
+			<Aitoc_Aitsys_Model_Rewriter_Observer/>
+			<Aitoc_Aitsys_Model_Rewriter/>
+            <Varien_Crypt/>
+            <Varien_Crypt_Abstract/>
+            <Varien_Crypt_Mcrypt/>
+        </default>
+    </includes>
+    <!-- Classes to remove from compilation after batch copy -->
+    <exclude_files/>
+    <!-- Classes to remove from compilation before merge into scope files -->
+    <exclude_classes>
+        <default>
+            <Varien_Db_Select/>
+        </default>
+        <checkout>
+            <Varien_Crypt/>
+            <Varien_Crypt_Abstract/>
+            <Varien_Crypt_Mcrypt/>
+        </checkout>
+    </exclude_classes>
+    <remove_scope/>
+    <rename_scope/>
+    <!-- Classes to replace with abstract rewrites after batch copy -->
+    <replace/>
+    <modules_rules>
+        <Aitoc_Aitcheckout>
+            <rename_scope>
+                <checkout>aitcheckout</checkout>
+            </rename_scope>
+        </Aitoc_Aitcheckout>
+    </modules_rules>
+</config>

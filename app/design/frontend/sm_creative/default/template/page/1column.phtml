@@ -1,0 +1,161 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+
+global $var_yttheme;
+?>
+<!DOCTYPE html>
+<html xml:lang="<?php echo $this->getLang() ?>" lang="<?php echo $this->getLang() ?>">
+<head>
+<meta name="format-detection" content="telephone=no">
+	<?php echo $this->getChildHtml('head') ?>
+</head>
+
+<?php
+    if(!$this->getRequest()->isAjax()){
+        if( $var_yttheme->getParam('usebgimage') == 1 && $var_yttheme->getParam('usecustomizeimage') == 0 ){
+            $bg_image = $var_yttheme->getParam('bgimage');
+        }else{
+            $bg_image = '';
+        }
+    }
+?>
+
+<body id="bd" class="<?php if(!$this->getRequest()->isAjax()){?><?php echo $var_yttheme->template ?> <?php echo $bg_image;?> <?php if( $var_yttheme->getParam('layoutstyle') == '2' ){echo "layout-boxed";}?> <?php }?><?php echo $this->getBodyClass();?>">
+<?php echo $this->getChildHtml('after_body_start') ?>
+    <div id="yt_wrapper">
+    
+        <!-- BEGIN: Header -->
+		<div id="yt_header" class="yt-header wrap">        	
+		     <?php echo $this->getChildHtml('header') ?>
+		</div>
+		<!-- END: Header -->
+		<?php if($this->getChildHtml('breadcrumbs')){ ?>          
+			<?php echo $this->getChildHtml('breadcrumbs') ?>
+		<?php } ?>	
+		<?php if( $this->getChildHtml('image-slider') ){?>
+			<div class="slider-container">
+				<div class="container">
+					<?php echo $this->getChildHtml('image-slider');?>
+				</div>
+			</div>
+		<?php }?>		
+		<!-- BEGIN: content -->        
+        <div id="yt_content" class="yt-content wrap">
+        	<div id="yt_main" class="yt-main col-main">
+        		<div class="yt-main-inner yt-content-inner">
+	        		<div class="container">
+						<?php echo $this->getChildHtml('global_messages') ?>                           
+						<?php echo $this->getChildHtml('content'); ?>
+						<?php if( $this->getChildHtml('bannerhome') ){?>
+							<?php echo $this->getChildHtml('bannerhome');?>
+						<?php }?>
+						
+						<div class="row">
+                        
+							<?php /*?><div class="col-lg-3 col-md-3">
+								<?php if( Mage::getSingleton('cms/page')->getIdentifier() == 'home'  && 
+								Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms' ) { ?>
+								<div class="yt_menu_left hidden-sm hidden-xs">
+									<div class="btn_categories">
+										<span>
+											<?php echo $this->__("All Categories"); ?>
+										</span>
+									</div>
+									<div class="yt-menu-content">
+										<?php echo $this->getChildHtml('topMenu');?>
+									</div>
+								</div> 
+								<?php } ?>
+								
+								<?php if( $this->getChildHtml('testimonials') ){?>
+										<?php echo $this->getChildHtml('testimonials');?>
+								<?php }?>
+								
+								<?php if( $this->getChildHtml('tagsleft') ){?>
+									<?php echo $this->getChildHtml('tagsleft');?>
+								<?php }?>
+							</div><?php */?>
+							
+							
+							<?php if( $this->getChildHtml('tablisting') ){?>
+								<div class="col-lg-12 col-md-12">
+									<?php echo $this->getChildHtml('tablisting');?>
+								</div>
+							<?php }?>
+							
+						</div>
+						
+	        		</div>
+					<?php if( $this->getChildHtml('deal') ){?>
+						<div class="deal-wrap">
+							<div class="container">
+								<?php echo $this->getChildHtml('deal');?>
+							</div>
+						</div>	
+					<?php }?>	
+					<?php if( $this->getChildHtml('basicproductsbest') ){?>
+					<div class="home-info-wrap">
+						<div class="container">
+							<div class="row">
+								<div class="home-info-right col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<?php echo $this->getChildHtml('basicproductsbest');?>
+								</div>	
+							</div>
+						</div>
+					</div>
+					<?php }?>	
+					<?php if( $this->getChildHtml('homeblog') ){ ?>
+					<div class="blog-wrap">
+						<div class="container">
+							<?php echo $this->getChildHtml('homeblog') ?>
+						</div>
+					</div>
+					<?php }?>
+					<?php if( $this->getChildHtml('homebrand') ){ ?>
+					<div class="brand-wrap">
+						<div class="container">
+							<?php echo $this->getChildHtml('homebrand') ?>
+						</div>
+					</div>
+					<?php }?>					
+        		</div>
+        	</div>
+         </div>      
+        <!-- END: content -->
+        
+        <!-- BEGIN: footer -->
+        <div id="yt_footer" class="yt-footer">
+        	<?php echo $this->getChildHtml('footer') ?>
+        </div>
+        <!-- END: footer -->        
+
+		<?php echo $this->getChildHtml('before_body_end') ?>
+        <?php echo $this->getAbsoluteFooter() ?>
+    </div>
+    <?php echo $this->getLayout()->createBlock('core/template')->setTemplate('catalog/product/mo_menu.phtml')->toHtml(); ?>
+</body>
+</html>

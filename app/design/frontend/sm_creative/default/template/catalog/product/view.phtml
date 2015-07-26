@@ -1,0 +1,490 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+ 
+global $var_yttheme;
+global $show_rich_snippet;
+$show_rich_snippet = 1;
+$rich_snippet = Mage::getStoreConfig('creative_cfg/rich_snippets_setting/use_rich_snippet');
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+	jQuery(document).ready(function(){
+		jQuery('.yt-tab-navi li').click(function (e){
+			e.preventDefault()
+			jQuery(this).children().tab('show')
+		})
+		jQuery('.yt-tab-navi li:first').addClass('active');
+		jQuery('.yt-tab-content .tab-pane').first().addClass('in active');
+	});  
+</script>
+
+<div id="messages_product_view"> <?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="yt-product-detail" <?php if ( $rich_snippet == 1 ) {?>itemscope itemtype="http://schema.org/Product"<?php }?>>
+	<div class="yt-product-detail-inner">
+		<div class="product-essential">
+			<div class="row">
+            	<div class="product_name_view col-lg-12 col-md-12 col-sm-12 col-xs-12" <?php if ( $rich_snippet == 1 ) {?>itemprop="name"<?php }?>>
+                	<?php echo $_helper->productAttribute($_product, $this->htmlEscape($_product->getName()), 'name') ?>
+                </div> 
+                <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form" <?php if($_product->getOptions()): ?> enctype="multipart/form-data" <?php endif; ?>>	
+					<?php echo $this->getBlockHtml('formkey') ?>
+					<div class="no-display">
+					<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+					<input type="hidden" name="related_product" id="related-products-field" value="" />
+				</div>  
+               	<div class="product_view_main col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="yt-detail-left col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                        <div class="product-img-box">
+                            <?php echo $this->getChildHtml('media') ?>
+                            <br />
+                            
+                        </div>
+                    </div>
+                    <div class="yt-detail-right <?php echo "col-lg-7 col-md-7 col-sm-6 col-xs-12"; ?> ">			
+						<?php 
+							$product_id = $_product->getId();
+							$product=Mage::getModel('catalog/product')->load($product_id);
+							$productType=$product->getTypeID();
+						?>
+                        <table class="data-table">
+                            <tr class="language_ava">
+                            <?php $multiSelectArray = $this->getProduct()->getAttributeText('languageavailable'); ?>
+                               <?php if ($multiSelectArray): ?>
+                                <?php if (count($multiSelectArray)==1): ?>
+                                   <?php else: ?>
+                                    <td>Language available :</td>
+                                    <td>
+                                        <ul class="view_langu">
+                                            <?php foreach($multiSelectArray as $multiSelectItem){ ?>
+                                                <li class="<?php echo $multiSelectItem; ?>"><img src="<?php echo $this->getSkinUrl('images/language/'.$multiSelectItem.'.jpg') ?>" alt="<?php echo $multiSelectItem; ?>" height="25" width="35" /></li>
+                                            <?php } ?>
+                                        </ul>
+                                    </td>
+                                <?php endif ?>
+                            <?php endif ?>
+                            </tr>
+                             <tr class="language_ava">
+                            <?php $region = $_product->getRegion(); ?>
+                            <?php if($region != ""){ ?>
+                                <td>Region :</td>
+                                <td><?php echo $region; ?></td>
+                            <?php }?>
+                            </tr>
+
+                            <tr class="language_ava">
+                            <?php $multiSelectArray = $this->getProduct()->getAttributeText('platform'); ?>
+                               <?php if ($multiSelectArray): ?>
+                                <?php if (count($multiSelectArray)==1): ?>
+                                   <?php else: ?>
+                                    <td>Platforms:</td>
+                                    <td>
+                                        <ul class="view_langu">
+                                            <?php foreach($multiSelectArray as $multiSelectItem){ ?>
+                                                <?php if($multiSelectItem == "All Platforms"){ ?>
+                                                    <li class="<?php echo $multiSelectItem; ?>"><?php echo $multiSelectItem; ?></li>
+                                                <?php  break; }else{?>
+                                                    <li class="<?php echo $multiSelectItem; ?>"><img src="<?php echo $this->getSkinUrl('images/platform/'.$multiSelectItem.'.png') ?>" alt="<?php echo $multiSelectItem; ?>" /></li>	
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </ul>
+                                    </td>
+                                <?php endif ?>
+                            <?php endif ?>
+                            </tr>
+						</table>
+                       
+                                
+                         <div class="product_view_description">
+							<?php if ($_product->getShortDescription()):?>
+                                <h1>Quick Overview</h1>		
+                                <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+                            <?php endif;?>
+                        </div>
+                        <br />
+                        
+                        <?php if( $var_yttheme != null && $var_yttheme->getParam('use_addthis') == 1) { ?>
+                                    <div id="addthis_wrap">
+                                    <!-- AddThis Button BEGIN -->
+                                    <div class="addthis_toolbox addthis_default_style ">
+                                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                                    <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html" style="width:95px; height:20px; float:left;"></iframe>						                              
+                                    <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+                                    <a class="addthis_counter addthis_pill_style"></a>						
+                                    </div>
+                                    <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
+                                   <?php //if($_product->getTypeId() === 'bundle'){ } else{?>
+                                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-529be2200cc72db5"></script>
+                                    <?php //} ?>
+                                    <!-- AddThis Button END -->	
+                                    </div>
+                                <?php } ?>
+                                
+						<?php //echo $this->getReviewsSummaryHtml($_product, false, true)?>
+						<?php echo $this->getChildHtml('alert_urls') ?>            
+						<?php 
+                        	global $rp_price_flag;
+                            $rp_price_flag = 0;
+                            echo $this->getChildHtml('product_type_data');
+                            $rp_price_flag = 1;
+						?>
+                        <?php echo $this->getTierPriceHtml() ?>
+                        <?php echo $this->getChildHtml('extrahint') ?>     
+                        
+                         <div class="<?php echo $productType ?>-product">
+						<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+							<?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+						<?php endif;?>	
+					</div>
+                	<?php if (!$this->hasOptions()):?>
+						<div class="add-to-box">
+							<?php if($_product->isSaleable()): ?>
+								<?php echo $this->getChildHtml('addtocart') ?>
+							<?php endif; ?>
+							<?php echo $this->getChildHtml('addto') ?>
+						</div>
+						<?php echo $this->getChildHtml('extra_buttons') ?>
+						<?php elseif (!$_product->isSaleable()): ?>
+							<div class="add-to-box">
+								<?php echo $this->getChildHtml('addto') ?>
+							</div>
+						<?php endif; ?>                                                
+						<?php echo $this->getChildHtml('other');?>
+                        
+						<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+						<?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+						<?php endif;?>
+                        
+                    
+                      
+                    </div>
+                </div>	
+                </form>
+				</div>
+                
+				<div id="yt_tab_products col-lg-12 col-md-12 col-sm-12 col-xs-12" class="tab-product-detail">
+						<ul class="yt-tab-navi">
+                            <li class="">
+                                <a href="#gallery_and_video"><?php echo $this->__('Gallery And Videos') ?></a>
+                            </li>
+                            <li>
+                                <a href="#yt_product_details"><?php echo $this->__('Product Details') ?></a>
+                            </li>
+                           <?php /*?> <li>
+                                <a href="#yt_earn_with_us"><?php echo $this->__('Earn With Us'); ?></a>
+                            </li><?php */?>
+                        </ul>
+                        <div class="yt-tab-content tab-content">
+                        	<div id="gallery_and_video" class="tab-pane fade">
+								<?php if ($_product->getGallaryvideo()){?>
+									<?php echo $_product->getGallaryvideo(); ?>
+                                <?php }else{ ?>
+                                    <?php echo $this->__('There is no Gallery or Videos'); ?>
+                            	<?php }; ?>
+                            </div>
+                            
+                            <div id="yt_product_details" class="tab-pane fade">
+                                <div class="product_details_main"> 
+                                   <div class="product_view_description">
+										<?php if ($_product->getDescription()):?>
+                                            <h1><img src="<?php echo $this->getSkinUrl('images/pro_desc.png'); ?>" alt="Product Description" />Product Description</h1>		
+											<?php echo $_helper->productAttribute($_product, $_product->getDescription(), 'Description'); ?>
+										<?php endif;?>
+                                   </div>
+                                   <div class="product_view_description"> 
+										<?php if($_product->getKeyfeature()): ?>
+                                            <h1><img src="<?php echo $this->getSkinUrl('images/keyy.png'); ?>" alt="Product Description" />Key Feature</h1>
+                                            <div class="key_feature_main_content"><?php echo $_product->getKeyfeature(); ?></div>
+										<?php endif;?>
+                                    </div>
+                                    <div class="requirements_tab">
+                                    	<h2>Minimal requirements</h3>
+                                    	<h3>Recommended requirements</h3>
+                                        <div class="minimal_requirements"> 
+                                            <table class="data-table">
+                                            	<?php if ($_product->getSystemrequirementsm()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/system.png'); ?>" alt="System Requirements" />System Requirements:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getSystemrequirementsm() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	 <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/system.png'); ?>" alt="System Requirements" />System Requirements:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?> 
+                                                <?php if ($_product->getProcessorm()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/proc.png'); ?>" alt="Processor" />Processor:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getProcessorm() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/proc.png'); ?>" alt="Processor" />Processor:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                                <?php if ($_product->getMemorym()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/memory.png'); ?>" alt="Memory" />Memory:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getMemorym() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/memory.png'); ?>" alt="Memory" />Memory:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                                 <?php if ($_product->getGraphicsm()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/gpu.png'); ?>" alt="Graphics" />Graphics:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getGraphicsm() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/gpu.png'); ?>" alt="Graphics" />Graphics:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                                <?php if ($_product->getHddm()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/hdd.png'); ?>" alt="HDD" />HDD:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getHddm() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/hdd.png'); ?>" alt="HDD" />HDD:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                                <?php if ($_product->getPlatformm()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/platfrom-icon.png'); ?>" alt="Platform" />Platform:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getPlatformm() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/platfrom-icon.png'); ?>" alt="Platform" />Platform:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </table>
+                                        </div>
+                                        <div class="recommended_requirements">
+                                            <table class="data-table">
+                                            	<?php if ($_product->getSystemrequirementsr()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/system.png'); ?>" alt="System Requirements" />System Requirements:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getSystemrequirementsr() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	 <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/system.png'); ?>" alt="System Requirements" />System Requirements:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?> 
+                                                <?php if ($_product->getProcessorr()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/proc.png'); ?>" alt="Processor" />Processor:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getProcessorr() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/proc.png'); ?>" alt="Processor" />Processor:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                                <?php if ($_product->getMemoryr()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/memory.png'); ?>" alt="Memory" />Memory:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getMemoryr() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/memory.png'); ?>" alt="Memory" />Memory:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                                 <?php if ($_product->getGraphicsr()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/gpu.png'); ?>" alt="Graphics" />Graphics:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getGraphicsr() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/gpu.png'); ?>" alt="Graphics" />Graphics:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                                <?php if ($_product->getHddr()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/hdd.png'); ?>" alt="HDD" />HDD:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getHddr() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/hdd.png'); ?>" alt="HDD" />HDD:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                                <?php if ($_product->getPlatformr()){?>
+                                                    <tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/platfrom-icon.png'); ?>" alt="Platform" />Platform:</td>
+                                                        <td class="min_req_de"><?php echo $_product->getPlatformr() ?></td>
+                                                    </tr>
+                                                <?php } else{ ?>
+                                                	<tr>
+                                                        <td class="min_req_te"><img src="<?php echo $this->getSkinUrl('images/platfrom-icon.png'); ?>" alt="Platform" />Platform:</td>
+                                                        <td class="min_req_de">&nbsp; - - - &nbsp;</td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </table>
+                                        </div>
+                                        <script type="text/javascript">
+										var $req = jQuery.noConflict();
+										
+										$req(".requirements_tab h2").addClass("curr");
+										$req(".recommended_requirements").slideUp("slow");
+										
+										$req(document).ready(function(){
+											$req(".requirements_tab h2").click(function(){
+												
+												$req(".requirements_tab h3").removeClass("curr");
+												$req(".requirements_tab h2").addClass("curr");
+												
+												$req(".recommended_requirements").slideUp("slow");
+												$req(".minimal_requirements").slideDown("slow");
+											});
+											$req(".requirements_tab h3").click(function(){
+												$req(".requirements_tab h3").addClass("curr");
+												$req(".requirements_tab h2").removeClass("curr");
+												
+												$req(".minimal_requirements").slideUp("slow");
+												$req(".recommended_requirements").slideDown("slow");
+											});
+										});
+                                        </script>  
+                                    </div>
+                                    <div class="product_view_description"> 
+										<?php if($_product->getAgecontentrating()): ?>
+                                            <h1>Age or Content Rating</h1>
+                                            <div class="key_feature_main_content"><?php echo $_product->getAgecontentrating(); ?></div>
+										<?php endif;?>
+                                    </div>
+                                    <div class="product_view_description">   
+										<?php if($_product->getOtherdetails()){ ?>
+                                            <h1>Other</h1>
+                                            <div class="other_content"><?php echo $_product->getOtherdetails(); ?></div>
+										<?php }?>
+                                    </div>	
+                                </div>
+							</div>                   						
+                            <?php /*?><div id="yt_earn_with_us" class="tab-pane fade earn_with_us">
+                            	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('earnwithus')->toHtml(); ?>
+                            </div><?php */?>
+						</div>
+					</div>
+				
+
+               	<!--Related products-->
+				<?php if ($var_yttheme != null && $var_yttheme->getParam('show_related') == 1 && $this->getChildHtml('related_products') || $var_yttheme != null && $var_yttheme->getParam('show_upsell') == 1 && $this->getChildHtml('upsell_products') ){ ?>
+				<div class="related-upsell-wrap">
+               	 <?php if($var_yttheme != null && $var_yttheme->getParam('show_related') == 1 && $this->getChildHtml('related_products') ){ ?>       
+                	<?php echo $this->getChildHtml('related_products'); ?>       
+				<?php } ?>
+				<!--Upsell products-->				
+				<?php if( $var_yttheme != null && $var_yttheme->getParam('show_upsell') == 1 && $this->getChildHtml('upsell_products')){
+					echo $this->getChildHtml('upsell_products'); 
+				}?>
+				</div>
+				<?php }?>
+			
+			<script type="text/javascript">
+			//<![CDATA[
+				var productAddToCartForm = new VarienForm('product_addtocart_form');
+				productAddToCartForm.submit = function(button, url) {
+					if (this.validator.validate()) {
+						var form = this.form;
+						var oldUrl = form.action;
+
+						if (url) {
+						   form.action = url;
+						}
+						var e = null;
+						try {
+							this.form.submit();
+						} catch (e) {
+						}
+						this.form.action = oldUrl;
+						if (e) {
+							throw e;
+						}
+
+						if (button && button != 'undefined') {
+							button.disabled = true;
+						}
+					}
+				}.bind(productAddToCartForm);
+
+				productAddToCartForm.submitLight = function(button, url){
+					if(this.validator) {
+						var nv = Validation.methods;
+						delete Validation.methods['required-entry'];
+						delete Validation.methods['validate-one-required'];
+						delete Validation.methods['validate-one-required-by-name'];
+						// Remove custom datetime validators
+						for (var methodName in Validation.methods) {
+							if (methodName.match(/^validate-datetime-.*/i)) {
+								delete Validation.methods[methodName];
+							}
+						}
+
+						if (this.validator.validate()) {
+							if (url) {
+								this.form.action = url;
+							}
+							this.form.submit();
+						}
+						Object.extend(Validation.methods, nv);
+					}
+				}.bind(productAddToCartForm);
+			//]]>
+			</script>
+            
+		</div>
+	</div>
+    <div class="product-collateral">
+        <?php echo $this->getChildHtml('product_additional_data') ?>
+    </div>
+</div>

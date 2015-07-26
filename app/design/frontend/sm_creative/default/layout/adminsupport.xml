@@ -1,0 +1,14 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">   
+  <helpdesk_index_index> 
+    <reference name="head">   
+    </reference>      
+	<reference name="root">   
+      <action method="setTemplate"><template>page/1column.phtml</template></action>   
+    </reference>   
+    <reference name="content">   
+      <block type="aw_hdu3/contacts_fields" name="helpdesk_index" template="adminsupport/adminsupport.phtml"/>   
+    </reference>   
+  </helpdesk_index_index>   
+</layout>   
+	

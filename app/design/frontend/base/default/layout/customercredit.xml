@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <!-- update layout for all frontend page -->
+
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magestore/customercredit.js</name>
+                <params/>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/magestore/customercredit.css</stylesheet>
+            </action>
+        </reference>
+
+    </default>
+
+    <customer_account>
+        <reference name="customer_account_navigation" >
+            <action method="addLink" translate="label" module="customercredit" ifconfig='customercredit/general/enable'>
+                <name>email</name>
+                <path>customercredit/</path>
+                <label helper="customercredit/getCustomercreditLabel"/>
+            </action>
+        </reference>
+    </customer_account>
+
+    <customercredit_default>
+        <update handle="page_two_columns_left" />
+        <reference name="left">
+            <block type="customercredit/account_navigation" before="-" name="customercredit_navigator" template="customercredit/navigation.phtml">
+                <action method="setNavigationTitle">
+                    <title helper="customercredit/account/getNavigationLabel" />
+                </action>
+                <action method="addLink" translate="label" module="customercredit">
+                    <name>dashboard</name>
+                    <path>customer/account</path>
+                    <label helper="customercredit/account/getDashboardLabel" />
+                    <disabled helper="customercredit/account/accountNotLogin" />
+                    <order>6</order>
+                </action>
+                <action method="addLink" translate="label" module="customercredit">
+                    <name>mycredit</name>
+                    <path>customercredit/</path>
+                    <label helper="customercredit/getCustomercreditLabel"/>
+                    <disabled helper="customercredit/account/accountNotLogin" />
+                    <order>10</order>
+                </action>
+                <action method="addLink" translate="label" module="customercredit">
+                    <name>sharecredit</name>
+                    <path>customercredit/index/share</path>
+                    <label>Send Credit</label>
+                    <disabled helper="customercredit/account/accountNotLogin" />
+                    <order>30</order>
+                </action>
+                <action method="addLink" translate="label" module="customercredit">
+                    <name>redeem</name>
+                    <path>customercredit/index/redeem</path>
+                    <label>Redeem Credit</label>
+                    <disabled helper="customercredit/account/accountNotLogin" />
+                    <order>40</order>
+                </action>
+            </block>
+        </reference>
+    </customercredit_default>
+
+    <customercredit_index_index>
+        <update handle="customercredit_default" />
+        <reference name="content">
+            <block type="customercredit/customercredit" name="customercredit" template="customercredit/customercredit.phtml">
+                <block type="customercredit/sumary" name="customercredit_summary" template="customercredit/sumary.phtml"/>
+                <block type="customercredit/history" name="customercredit_history" template="customercredit/history.phtml">
+                    <block type="page/html_pager" name="customercredit_history_page"/>
+                </block>̧
+            </block>
+        </reference>
+    </customercredit_index_index>
+
+    <customercredit_index_list>
+        <reference name="content">
+            <block type="customercredit/customercreditlist" name="customercredit" template="customercredit/customercreditlist.phtml">
+                <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                    <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="setToolbarBlockName">
+                    <name>product_list_toolbar</name>
+                </action>
+            </block>
+            <reference name="customercredit">
+                <action method="addPriceBlockType">
+                    <type>customercredit</type>
+                    <block>customercredit/product_price</block>
+                    <template>customercredit/product/price.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </customercredit_index_list>
+
+    <catalog_product_view>
+        <reference name="product.info">
+            <action method="addPriceBlockType">
+                <type>customercredit</type>
+                <block>customercredit/product_price</block>
+                <template>customercredit/product/price_view.phtml</template>
+            </action>
+        </reference>
+    </catalog_product_view>
+
+    <customercredit_index_share>
+        <update handle="customercredit_default" />
+        <reference name="content">
+            <block type="customercredit/sharecredit" name="customercredit_sharecredit" template="customercredit/sharecredit.phtml">
+                <block type="customercredit/sharecredit_withverify" name="customercredit.sharecredit.withverify"/>
+                <block type="customercredit/sharecredit_creditcode" name="customercredit.creditcode" template="customercredit/share/creditcode.phtml"/>
+            </block>
+        </reference>
+    </customercredit_index_share>
+    <customercredit_index_validatecustomer>
+        <update handle="customercredit_default" />
+        <reference name="content">
+            <block type="customercredit/sharecredit_validatecustomer" name="customercredit_sharecredit_validate" template="customercredit/share/validatecustomer.phtml">
+                <block type="customercredit/sharecredit_creditcode" name="customercredit.creditcode" template="customercredit/share/creditcode.phtml"/>
+            </block>
+        </reference>
+    </customercredit_index_validatecustomer>
+    <customercredit_index_verifysender>
+        <update handle="customercredit_default" />
+        <reference name="content">
+            <block type="customercredit/sharecredit_validatecustomer" name="customercredit_sharecredit_validate" template="customercredit/share/validatecustomer.phtml">
+                <block type="customercredit/sharecredit_creditcode" name="customercredit.creditcode" template="customercredit/share/creditcode.phtml"/>
+            </block>
+        </reference>
+    </customercredit_index_verifysender>
+    <customercredit_index_redeem>
+        <update handle="customercredit_default" />
+        <reference name="content">
+            <block type="customercredit/redeemcredit" name="customercredit.redeemcredit" template="customercredit/redeemcredit.phtml"/>
+        </reference>
+    </customercredit_index_redeem>
+
+    <checkout_cart_index>
+        <reference name="checkout.cart.coupon">
+            <block type="customercredit/cart_customercredit" name="customercredit.customercredit" template="customercredit/cart/customercredit.phtml" />
+        </reference>
+    </checkout_cart_index>
+    <custmercredit_checkout_setamountpost>
+        <block type="checkout/onepage_payment_methods" name="root" output="toHtml" template="checkout/onepage/payment/methods.phtml">
+            <action method="setMethodFormTemplate">
+                <method>purchaseorder</method>
+                <template>payment/form/purchaseorder.phtml</template>
+            </action>
+        </block>
+    </custmercredit_checkout_setamountpost>
+    <!-- Gift Customer credit Type -->
+    <PRODUCT_TYPE_customercredit translate="label" module="customercredit">
+        <label>Catalog Product View (Customercredit)</label>
+        <reference name="product.info">
+            <block type="customercredit/product_view" name="product.info.customercredit" as="product_type_data" template="customercredit/product/view.phtml" />
+        </reference>
+       
+    </PRODUCT_TYPE_customercredit>
+
+    <!--Sale-Order-->
+    <sales_order_view>
+        <reference name="order_items">
+        </reference>
+        <reference name="order_totals">
+            <block type="customercredit/order_totals" name="customercredit.order.totals" />
+        </reference>
+    </sales_order_view>
+
+    <sales_order_print>
+        <reference name="sales.order.print">
+        </reference>
+        <reference name="order_totals">
+            <block type="customercredit/order_totals" name="customercredit.order.totals" />
+        </reference>
+    </sales_order_print>
+
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="customercredit/order_totals" name="customercredit.order.totals" />
+        </reference>
+    </sales_email_order_items>
+
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="customercredit/order_invoice_totals" name="customercredit.order.invoice.totals" />
+        </reference>
+    </sales_order_invoice>
+
+    <sales_order_printinvoice>
+        <reference name="invoice_totals">
+            <block type="customercredit/order_invoice_totals" name="customercredit.order.invoice.totals" />
+        </reference>
+    </sales_order_printinvoice>
+
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="customercredit/order_invoice_totals" name="customercredit.order.invoice.totals" />
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="customercredit/order_creditmemo_totals" name="customercredit.order.creditmemo.totals" />
+        </reference>
+    </sales_order_creditmemo>
+
+    <sales_order_printcreditmemo>
+        <reference name="creditmemo_totals">
+            <block type="customercredit/order_creditmemo_totals" name="customercredit.creditmemo.order.totals" />
+        </reference>
+    </sales_order_printcreditmemo>
+
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="customercredit/order_creditmemo_totals" name="customercredit.creditmemo.order.totals" />
+        </reference>
+    </sales_email_order_creditmemo_items>
+</layout>

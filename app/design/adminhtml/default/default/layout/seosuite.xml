@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * MageWorx
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageWorx EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageworx.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.mageworx.com/ for more information
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SeoSuite
+ * @copyright  Copyright (c) 2012 MageWorx (http://www.mageworx.com/)
+ * @license    http://www.mageworx.com/LICENSE-1.0.html
+ */
+
+/**
+ * SEO Suite extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SeoSuite
+ * @author     MageWorx Dev Team
+ */
+-->
+<layout>    
+    <mageworx_seosuite_report_product_index>               
+        <reference name="content">
+            <block type="mageworx/seosuite_report_product" name="seosuite.report.product" template="seosuite/report/product.phtml">
+            	<block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                                    <action method="setUseConfirm"><params>0</params></action>
+									<action method="hasDefaultOption"><params>0</params></action>
+                                </block>
+            </block>
+            </reference>
+    </mageworx_seosuite_report_product_index>
+    <mageworx_seosuite_report_product_grid>
+        <update handle="formkey"/>
+        <block type="mageworx/seosuite_report_product_grid" name="seosuite.report.product.grid" output="toHtml"></block>
+    </mageworx_seosuite_report_product_grid>
+    <mageworx_seosuite_report_product_generate>
+        <remove name="root"/>
+        <block type="adminhtml/page" name="convert_root" output="toHtml" template="page.phtml">
+            <block type="adminhtml/page_head" name="convert_root_head" as="head" template="page/head.phtml">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/tools.js</script></action>
+            </block>
+            <block type="adminhtml/template" name="generate" template="seosuite/report/generate.phtml" output="toHtml"/>
+        </block>
+    </mageworx_seosuite_report_product_generate>    
+    <mageworx_seosuite_report_product_duplicateview>
+        <reference name="content">
+            <block type="mageworx/seosuite_report_product_duplicate_view" name="seosuite.report.product.duplicate.view" template="seosuite/report/product/duplicate-view.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>            
+            </block>
+        </reference>
+    </mageworx_seosuite_report_product_duplicateview>
+    <mageworx_seosuite_report_product_duplicateviewgrid>
+        <update handle="formkey"/>
+        <block type="mageworx/seosuite_report_product_duplicate_view_grid" name="seosuite.report.product.duplicate.view.grid" output="toHtml"></block>
+    </mageworx_seosuite_report_product_duplicateviewgrid>
+    
+    
+    
+    <mageworx_seosuite_report_category_index>               
+        <reference name="content">
+            <block type="mageworx/seosuite_report_category" name="seosuite.report.category" template="seosuite/report/category.phtml">
+                <!-- <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                                    <action method="setUseConfirm"><params>0</params></action>
+                                </block> -->            
+            </block>
+        </reference>
+    </mageworx_seosuite_report_category_index>
+    <mageworx_seosuite_report_category_grid>
+        <update handle="formkey"/>
+        <block type="mageworx/seosuite_report_category_grid" name="seosuite.report.category.grid" output="toHtml"></block>
+    </mageworx_seosuite_report_category_grid>
+    <mageworx_seosuite_report_category_generate>
+        <remove name="root"/>
+        <block type="adminhtml/page" name="convert_root" output="toHtml" template="page.phtml">
+            <block type="adminhtml/page_head" name="convert_root_head" as="head" template="page/head.phtml">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/tools.js</script></action>
+            </block>
+            <block type="adminhtml/template" name="generate" template="seosuite/report/generate.phtml" output="toHtml"/>
+        </block>
+    </mageworx_seosuite_report_category_generate>
+    <mageworx_seosuite_report_category_duplicateview>
+        <reference name="content">
+            <block type="mageworx/seosuite_report_category_duplicate_view" name="seosuite.report.category.duplicate.view" template="seosuite/report/category/duplicate-view.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>            
+            </block>
+        </reference>
+    </mageworx_seosuite_report_category_duplicateview>
+    <mageworx_seosuite_report_category_duplicateviewgrid>
+        <update handle="formkey"/>
+        <block type="mageworx/seosuite_report_category_duplicate_view_grid" name="seosuite.report.category.duplicate.view.grid" output="toHtml"></block>
+    </mageworx_seosuite_report_category_duplicateviewgrid>    
+    
+    
+    
+    <mageworx_seosuite_report_cms_index>               
+        <reference name="content">
+            <block type="mageworx/seosuite_report_cms" name="seosuite.report.cms" template="seosuite/report/cms.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                      <action method="setUseConfirm"><params>0</params></action>
+					  <action method="hasDefaultOption"><params>0</params></action>
+                </block>            
+            </block>
+        </reference>
+    </mageworx_seosuite_report_cms_index>
+    <mageworx_seosuite_report_cms_grid>
+        <update handle="formkey"/>
+        <block type="mageworx/seosuite_report_cms_grid" name="seosuite.report.cms.grid" output="toHtml"></block>
+    </mageworx_seosuite_report_cms_grid>
+    <mageworx_seosuite_report_cms_generate>
+        <remove name="root"/>
+        <block type="adminhtml/page" name="convert_root" output="toHtml" template="page.phtml">
+            <block type="adminhtml/page_head" name="convert_root_head" as="head" template="page/head.phtml">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/tools.js</script></action>
+            </block>
+            <block type="adminhtml/template" name="generate" template="seosuite/report/generate.phtml" output="toHtml"/>
+        </block>
+    </mageworx_seosuite_report_cms_generate>
+    <mageworx_seosuite_report_cms_duplicateview>
+        <reference name="content">
+            <block type="mageworx/seosuite_report_cms_duplicate_view" name="seosuite.report.cms.duplicate.view" template="seosuite/report/cms/duplicate-view.phtml">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>            
+            </block>
+        </reference>
+    </mageworx_seosuite_report_cms_duplicateview>
+    <mageworx_seosuite_report_cms_duplicateviewgrid>
+        <update handle="formkey"/>
+        <block type="mageworx/seosuite_report_cms_duplicate_view_grid" name="seosuite.report.cms.duplicate.view.grid" output="toHtml"></block>
+    </mageworx_seosuite_report_cms_duplicateviewgrid>
+    
+    
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="mageworx_seo/seosuite/enabled"><script>mageworx/seosuite.js</script></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="seosuite/wrapper" name="seosuite_wrapper" template="seosuite/wrapper.phtml" ifconfig="mageworx_seo/seosuite/enabled" />
+        </reference>        
+    </adminhtml_catalog_product_edit>
+    
+    <adminhtml_catalog_category_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="mageworx_seo/seosuite/enabled"><script>mageworx/seosuite.js</script></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="seosuite/wrapper" name="seosuite_wrapper" template="seosuite/wrapper.phtml" ifconfig="mageworx_seo/seosuite/enabled" />
+        </reference>        
+    </adminhtml_catalog_category_edit>
+    
+    <adminhtml_cms_page_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="mageworx_seo/seosuite/enabled"><script>mageworx/seosuite.js</script></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="seosuite/wrapper" name="seosuite_wrapper" template="seosuite/wrapper.phtml" ifconfig="mageworx_seo/seosuite/enabled" />
+        </reference>        
+    </adminhtml_cms_page_edit>
+    
+    <mageworx_seosuite_applyurl>
+        <remove name="root"/>
+        <block type="adminhtml/page" name="convert_root" output="toHtml" template="page.phtml">
+            <block type="adminhtml/page_head" name="convert_root_head" as="head" template="page/head.phtml">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/tools.js</script></action>
+            </block>
+            <block type="adminhtml/template" name="applyurl" template="seosuite/applyurl.phtml" output="toHtml"/>
+        </block>
+    </mageworx_seosuite_applyurl>
+    
+    <mageworx_seosuite_applyname>
+        <remove name="root"/>
+        <block type="adminhtml/page" name="convert_root" output="toHtml" template="page.phtml">
+            <block type="adminhtml/page_head" name="convert_root_head" as="head" template="page/head.phtml">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/tools.js</script></action>
+            </block>
+            <block type="adminhtml/template" name="applyname" template="seosuite/applyname.phtml" output="toHtml"/>
+        </block>
+    </mageworx_seosuite_applyname>
+    
+    <mageworx_seosuite_template_apply>
+        <remove name="root"/>
+        <block type="adminhtml/page" name="convert_root" output="toHtml" template="page.phtml">
+            <block type="adminhtml/page_head" name="convert_root_head" as="head" template="page/head.phtml">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/adminhtml/tools.js</script></action>
+            </block>
+            <block type="adminhtml/template" name="apply" template="seosuite/apply.phtml" output="toHtml"/>
+        </block>
+    </mageworx_seosuite_template_apply>
+    
+
+    <mageworx_seosuite_template_index>
+        <reference name="content">
+             <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                <action method="setUseConfirm"><params>0</params></action>
+            </block>    
+            <block type="mageworx/seosuite_template_grid" name="seo.template.grid"/>
+        </reference>
+    </mageworx_seosuite_template_index>
+    
+    <mageworx_seosuite_template_grid>
+         <block type="core/text_list" name="root" output="toHtml">
+            <block type="mageworx/seosuite_template_grid" name="seo.template.grid"/>
+        </block>
+    </mageworx_seosuite_template_grid>
+    <mageworx_seosuite_template_edit>
+         <reference name="left">
+            <block type="adminhtml/store_switcher" name="store_switcher" template="store/switcher.phtml" />
+         </reference>
+        <reference name="content">
+            <block type="mageworx/seosuite_template_edit" name="seo.template.edit">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+    </mageworx_seosuite_template_edit>
+    <adminhtml_cms_page_revision_edit>
+        <reference name="head">
+            <action method="addJs" ifconfig="mageworx_seo/seosuite/enabled"><script>mageworx/seosuite.js</script></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="seosuite/wrapper" name="seosuite_wrapper" template="seosuite/wrapper.phtml" ifconfig="mageworx_seo/seosuite/enabled" />
+        </reference>        
+    </adminhtml_cms_page_revision_edit>
+</layout>

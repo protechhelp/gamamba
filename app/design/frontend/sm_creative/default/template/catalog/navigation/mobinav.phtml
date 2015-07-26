@@ -1,0 +1,197 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+<?php 
+global $var_yttheme;
+if ( $var_yttheme->isHomepage() === FALSE ) {
+	$homecls='class="nav-home"';
+} else {
+	$homecls='class="nav-home active"';
+}
+if($var_yttheme->getParam("responsivemenu")=='2'){ ?>
+    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<i class="fa fa-bars"></i>
+    </button>
+    <div id="yt_resmenu_collapse" style="height: 0;" class="nav-collapse collapse">
+	    <ul class="nav-menu clearfix">
+	    <li <?php echo $homecls;?>>
+	        <a <?php echo $homecls;?> href="<?php echo $this->getUrl('') ?>" title="Home"><span>Home</span></a>
+	    </li>
+	    <?php foreach ($this->getStoreCategories() as $_category): ?>
+	        <?php echo $this->drawItem($_category) ?>
+	    <?php endforeach ?>
+	    </ul>
+	    <script type="text/javascript">
+			jQuery(document).ready(function($){
+				$('#yt_resmenu_collapse .nav-menu > li.parent').each(function(){
+					$(this).find('> ul').wrap('<div class="res-wrapnav">');
+					$(this).append('<span class="menuress-toggle"></span>');
+				});
+			});
+			jQuery(window).load(function(){
+				jQuery('#yt_resmenu_collapse .parent .menuress-toggle').css('height', jQuery('#yt_resmenu_collapse .parent > a').outerHeight());
+
+				jQuery('#yt_resmenu_collapse .parent > .res-wrapnav').each(function(){
+					if(jQuery(this).parent().hasClass('open')){
+						jQuery(this).css('height', jQuery(this).children('ul').height());
+					}
+				});
+				jQuery('#yt_resmenu_collapse .parent .menuress-toggle').click(function(){
+					if(jQuery(this).parent().hasClass('open')){
+						jQuery(this).parent().removeClass('open');
+						jQuery(this).parent().children('.res-wrapnav').css('height', '0px');
+					}else{
+						jQuery(this).parent().addClass('open');
+						jQuery(this).parent().children('.res-wrapnav').css('height', jQuery(this).parent().children('.res-wrapnav').children('ul').height());
+					}
+				});
+			});
+		</script>
+	</div>
+<?php
+}elseif($var_yttheme->getParam("responsivemenu")=='3'){ ?>
+	<button type="button" class="btn btn-navbar"><i class="fa fa-bars"></i>
+    </button>
+    <div id="yt_resmenu_sidebar">
+	    <ul class="nav-menu clearfix">
+	    <li <?php echo $homecls;?>>
+	        <a <?php echo $homecls;?> href="<?php echo $this->getUrl('') ?>" title="Home"><span>Home</span></a>
+	    </li>
+	    <?php foreach ($this->getStoreCategories() as $_category): ?>
+	        <?php echo $this->drawItem($_category) ?>
+	    <?php endforeach ?>
+	    </ul>
+	    <script type="text/javascript">
+	        jQuery(document).ready(function($){
+	            $('body#bd').append('<div class="yt_ressidebar_screennav"><nav id="yt_screennav"><ul class="siderbar-menu"></ul></nav></div>');
+	            $('#yt_screennav ul.siderbar-menu').html($('#yt_resmenu_sidebar ul.nav-menu').html());
+
+	                $('#yt-responsivemenu .btn.btn-navbar').click(function(){
+	                    if($('body#bd').hasClass('onpen-sidebar')){
+	                        $('body#bd').removeClass('onpen-sidebar');
+	                    }else{
+	                        $('body#bd').addClass('onpen-sidebar');
+	                    }
+	                });
+	        });
+	    </script>
+	</div>
+<?php
+}else{
+	$options = array();
+	$category_collection = Mage::getModel('catalog/category')->getCollection();
+	$category_collection->addAttributeToSelect('*');
+	foreach ($this->getStoreCategories() as $_category){
+		$catIds[] = $_category->getId();
+	}
+	$regexp  = "[0-9/]+(".implode("|", $catIds)."){1}[0-9/]?";
+	if (Mage::helper('catalog/category_flat')->isEnabled()) { 			
+		$category_collection->addPathsFilter();
+	}else{
+		$category_collection->addPathFilter($regexp);
+	}
+	foreach($category_collection as $category){
+		$c = new stdClass();
+		$c->label = $category->getName();
+		$c->value = $category->getId();
+		$c->level = $category->getLevel();
+		$c->parentid = $category->getParentId();
+		$c->url_path = $category->getUrlPath();
+		$c->is_active = false;
+		if ($this->getCurrentCategory()) {
+			if($c->value == array_pop($this->getCurrentCategory()->getPathIds())){
+				$c->is_active = true;
+			}
+		}			
+		$cats[$c->value] = $c;
+	}
+
+	foreach($cats as $id => $c){
+		if (isset($cats[$c->parentid])){
+			if (!isset($cats[$c->parentid]->child)){
+				$cats[$c->parentid]->child = array();
+			}
+			$cats[$c->parentid]->child[] =& $cats[$id];
+		}
+	}
+	foreach($cats as $id => $c){
+		if (!isset($cats[$c->parentid])){
+			$stack = array($cats[$id]);
+			while( count($stack)>0 ){
+				$opt = array_pop($stack);
+				$option = array(
+					'label' => ($opt->level>2 ? str_repeat('- - ', $opt->level-2) : '') . $opt->label,
+					'value' => $opt->value,
+					'url_path' 	=> $opt->url_path,
+					'is_active' => $opt->is_active,
+				);
+				array_push($options, $option);
+				if (isset($opt->child) && count($opt->child)){
+					foreach(array_reverse($opt->child) as $child){
+						array_push($stack, $child);
+					}
+				}
+			}
+		}
+	}
+	unset($cats);
+?>
+<?php 
+	if ($var_yttheme->isHomepage()===FALSE) {
+		$homecls='';
+	} else {
+		$homecls='selected="selected"';
+	}
+?> 
+<script type="text/javascript">
+	function MobileRedirectUrl(){
+		window.location.href = document.getElementById("yt_resmenu_selectbox").value;
+	}
+</script>
+<div class="menu-selectbox">
+<button class="btn btn-navbar">
+	<i class="fa fa-bars"></i>
+</button>
+<select id="yt_resmenu_selectbox" onchange="MobileRedirectUrl(this);">
+	<option value="<?php echo $this->getUrl(); ?>" <?php echo $homecls ?> ><?php echo $this->__('Home') ?></option>
+	<?php foreach ($options as $item): 
+	if($item['url_path'] != '/root-catalog' && $item['value'] != '1'){
+	?>
+		<option <?php echo ($item['is_active'])?"selected='selected'":"" ?> value="<?php echo ($item['url_path'])?$this->getBaseUrl().$item['url_path']: $item['value'] ?>"><?php echo $item['label'] ?></option>
+	<?php 
+	} endforeach ?>
+</select>
+</div>
+<?php
+}
+?>

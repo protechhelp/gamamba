@@ -1,0 +1,110 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Image Slider - Version 1.0.0
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+
+$list = $this->_getProducts();
+if(!empty($list)){
+	$import_str = "";
+	$jsHelper = Mage::helper('core/js');
+		// jquery has not added yet
+	/* if (!defined('MAGENTECH_JQUERY')  && (int)$this->_getConfig('include_jquery')){
+		// if module allowed jquery.
+		$import_str .= $jsHelper->includeSkinScript('sm/imageslider/js/jquery-1.9.1.min.js');
+		$import_str .= $jsHelper->includeSkinScript('sm/imageslider/js/jquery-noconflict.js');
+		define('MAGENTECH_JQUERY',1);
+	}
+	if (!defined('MAGENTECH_JQUERY_SLIDER')) {
+		$import_str .= $jsHelper->includeSkinScript('sm/imageslider/js/owl.carousel.js');
+		define('MAGENTECH_JQUERY_SLIDER',1);
+	} */
+	echo $import_str;
+
+	$tag_id = 'sm_imageslider_'.rand().time();
+	$helper = Mage::helper('imageslider/data');
+
+?>
+	<div id="<?php echo $tag_id;?>" class="sm_imageslider_wrap">
+		<?php if($this->_getConfig('pretext') != '') { ?>
+			<div class="pre-text"><?php echo $this->_getConfig('pretext'); ?></div>
+		<?php } ?>
+		<?php if ( $this->_getConfig('slider_title_text') ){?>
+			<div class="title-imageslider">
+				<?php echo $this->_getConfig('slider_title_text');?>
+			</div>
+		<?php }?>
+		
+		<div class="sm_imageslider">
+		<?php foreach($list as $_product){?>
+			<div class="item">				
+				<a href="<?php echo $_product->link;?>" title="<?php echo $_product->title; ?>" <?php echo $helper->parseTarget($this->_getConfig('product_links_target'));?> >
+					<img src="<?php echo $_product->_image ;?>" alt="<?php echo $_product->title; ?>" />
+				</a>
+				<span class="bg-image"></span>
+			</div>
+		<?php }?>
+		</div>	
+		
+		<?php if( $this->_getConfig('posttext') != '' ) {  ?>
+			<div class="post-text"><?php echo $this->_getConfig('posttext'); ?></div>
+		<?php } ?>						 
+    </div>	
+	
+<?php 	
+$stop = (int)$this->_getConfig('stop',1) ? 'true' : 'false';
+$play = (int)$this->_getConfig('play',1) ? 'true' : 'false';
+$step = (int)$this->_getConfig('scroll',1);
+$step = $step <= 0 ? 1: $step;
+$speed =(int)$this->_getConfig('duration');
+$interval = (int)$this->_getConfig('delay');
+$start = (int) $this->_getConfig('start');
+$start = ( $start <= 0 || $start > count($list) ) ? 0 : $start - 1;
+$device1 = $this->_getConfig('nb_column1', 4);
+$device2 = $this->_getConfig('nb_column2', 3);
+$device3 = $this->_getConfig('nb_column3', 2);
+$device4 = $this->_getConfig('nb_column4', 1);
+?>	
+	<script type="text/javascript">
+	//<![CDATA[
+		jQuery(document).ready(function($) {
+			var owlslider = $(".sm_imageslider");
+			$(".slider-container .container").addClass("slider_main");
+			owlslider.owlCarousel({
+				center: false,
+				nav: false,
+				loop: true,
+				margin: 0,
+				navText: [ '', '' ],
+				slideBy: <?php echo $step;?>,
+				autoplay: <?php echo $play;?>,
+				autoplayTimeout: <?php echo $interval;?>,
+				autoplayHoverPause: <?php echo $stop;?>,
+				autoplaySpeed: <?php echo $speed;?>,
+				startPosition: <?php echo $start;?>,
+				responsive:{
+					0:{
+						items:<?php echo $device4;?>
+					},
+					480:{
+						items:<?php echo $device3;?>
+					},
+					768:{
+						items:<?php echo $device2;?>
+					},
+					1200:{
+						items:<?php echo $device1;?>
+					}
+				}
+			});	 
+
+		});				
+	//]]>
+	</script>
+		
+
+<?php } else { echo $this->__('Has no item to show!');}?>
+ 

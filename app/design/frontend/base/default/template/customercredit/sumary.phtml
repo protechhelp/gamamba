@@ -1,0 +1,43 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="box-account box-info box-customercredit-sumary">
+    <div class="box-head">
+        <h2><?php echo $this->__('Your Balance') ?></h2>
+    </div>
+    <?php echo $this->getPagerHtml() ?>
+    <div class="page-title title-buttons">
+        <p style="float: left">
+            <strong>
+                <?php echo $this->__('Your credit balance is: ')?><strong class="customerreward-money"style="color: #3182be"><?php echo $this->getBalanceLabel() ?></strong>
+                <a href="<?php echo $this->getUrl('customercredit/index/redeem')?>"><?php echo $this->__('(Redeem creditcode)')?></a>
+            </strong>
+        </p>
+        <button type="button" style="float: right"class="form-button button right" onclick="setLocation('<?php echo $this->getUrl('customercredit/index/list') ?>')">
+                <span><span><?php echo $this->__('Buy store credit') ?></span></span>
+        </button>
+    </div>
+</div>

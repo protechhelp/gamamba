@@ -1,0 +1,184 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM QuickView - Version 2.0.0
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+	if(!(int)Mage::getStoreConfig('quickview/general/active')) return;
+	echo $this->getCssJsHtml();
+	$_package_name = Mage::getSingleton('core/design_package')->getPackageName();
+	$_template_name = Mage::getSingleton('core/design_package')->getTheme('template');
+	$_condition_default =  ($_package_name == 'base' || ($_package_name == 'default' && ($_template_name == 'default' || $_template_name == 'iphone' || $_template_name == 'blank' || $_template_name == 'modern'))) ? 'true' : 'false';
+	$_condition_rwd = ($_package_name == 'rwd' && $_template_name == 'default') ? 'true' : 'false';
+	
+	$_cls = explode(',', Mage::getStoreConfig('quickview/general/item_class'));
+	if(empty($_cls)) return;
+	$cls = array();
+	for($i = 0 ; $i < count($_cls) ; $i++) {
+		$cls[] = trim($_cls[$i]);
+	}
+	$cls_str = implode(', ', $cls);
+ ?>
+ 
+<script type="text/javascript">
+	//<![CDATA[
+	jQuery(document).ready(function ($) {
+		var _check_tem_def = <?php  echo $_condition_default ?>,
+			_ceck_tem_rwd  = <?php  echo $_condition_rwd ?> ;
+	   function _SmQuickView(){	
+			var	pathbase = 'quickview/index/view',
+				_item_cls = $('<?php echo $cls_str ;?>'),
+				//_base_url = '<?php echo str_replace("index.php/","",$this->getUrl()) ?>',
+				_base_url = '<?php echo $this->getUrl(); ?>',
+				pathbase = 'quickview/index/view';
+			var baseUrl = _base_url + pathbase;
+			if(_item_cls.length > 0){
+				_item_cls.each(function(index, el) {
+					var $this = $(this)
+					if($this.find("a.sm_quickview_handler").length <= 0){
+						if( $this.find('a').length > 0 ){
+							var _href =	$($this.find('a')[0]);				
+							var	producturlpath = _href.attr('href').replace(_base_url,"");
+								producturlpath = ( producturlpath.indexOf('index.php') >= 0 ) ? producturlpath.replace('index.php/','') : producturlpath;
+							var	reloadurl = baseUrl+ ("/path/"+producturlpath).replace(/\/\//g,"/"),
+								_quickviewbutton = "<a  class='sm_quickview_handler' title='Quick View' href='"+reloadurl+"'><?php echo Mage::getStoreConfig('quickview/general/label_button') ;?></a>";
+							$(el).append(_quickviewbutton);	
+						}
+					}
+				});
+			}
+		}
+		var _object  = '';
+		$('.sm_quickview_handler').fancybox({
+			title: null,
+			 width				: '<?php echo Mage::getStoreConfig('quickview/general/popup_width');?>',
+			 height				: '<?php echo Mage::getStoreConfig('quickview/general/popup_height');?>',
+			 autoSize			:  <?php echo Mage::getStoreConfig('quickview/general/auto_size'); ?>,
+			 scrolling          : 'auto',
+			 type				: 'ajax',
+			 openEffect		    : '<?php echo Mage::getStoreConfig('quickview/general/open_effect') ;?>',
+			 closeEffect		: '<?php echo Mage::getStoreConfig('quickview/general/close_effect'); ?>',
+			 helpers		    :{
+					<?php if((int)Mage::getStoreConfig('quickview/general/display_overlay')) { ?>
+					overlay : {
+						showEarly : true
+					}
+					<?php } else { ?>
+					overlay: null
+					<?php } ?>
+			 },
+			 afterLoad : function () {
+				if($('#product_addtocart_form').length > 0){
+					var _qty = $('#product_addtocart_form').find('#qty');
+					_qty.attr('id','qty_primary');
+					if(typeof productAddToCartForm != 'undefined' ) {
+						_object = productAddToCartForm ;
+					}
+					$('#product_addtocart_form').attr('id','product_addtocart_form_qv_clone');
+				}
+			 },
+			 beforeShow : function(){
+				
+				var $this = this.element, _parent = $('.quickview-main');
+					if(_parent.length > 0 ){
+						var _price_box =  _parent.find('.price-box');
+						if(_price_box.length > 0){
+							var idprice = $('[id]', _price_box ),
+								value_idprice =  idprice.attr('id'),
+								_cls = idprice.attr('class');
+								
+							if(idprice.length > 0){
+								idprice.addClass('price-box-qv');
+								if($('.'+_cls).length > 0) {
+									$('.'+_cls).each(function(i, el){
+										if(!$(el).hasClass('price-box-qv')) {
+											if($(el).attr('id') == value_idprice){
+												$(el).attr('data-idprice',value_idprice);
+												$(el).attr('id',value_idprice+'_qv_clone');
+											}
+										}
+										
+									});	
+								}
+								
+							}
+						}
+					}
+					if(typeof product_zoom){
+						product_zoom = 'undefined';
+					}
+			 },
+			 afterShow	: function(){
+				if( _check_tem_def){
+					product_zoom_ = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
+				} 
+				if(_ceck_tem_rwd){ 
+					ProductMediaManager.initZoom();
+					ProductMediaManager.wireThumbnails();
+				} 
+				
+				if(typeof initcajax != 'undefined' && $.isFunction(initcajax)){
+					initcajax();
+				}
+				
+				if(typeof updateProductCompareLinks != 'undefined' && $.isFunction(updateProductCompareLinks)){
+					updateProductCompareLinks();
+				}else{
+					$("a.link-compare").on ("click",function(e){
+							e.preventDefault();
+							urlcompare = $(this).attr("href");
+							urlcompare = urlcompare.replace("catalog/product_compare/add","quickview/index/compare");
+							window.location =  urlcompare;
+							return false;
+					  });
+				} 
+
+				if(typeof updateWishlistLinks != 'undefined' && $.isFunction(updateWishlistLinks)) {
+	
+					if(enable_ajax_wishlist){
+					 updateRemoveWishLinks();
+					 if(islogin=="1"){
+						 updateWishlistLinks(); 
+					 }
+					 updateWishlistAddCartLinks();
+					}
+				}	
+			},
+			beforeClose : function () {
+				if( _check_tem_def){
+					product_zoom_ = 'undefined';
+				}
+				if(_ceck_tem_rwd){
+					ProductMediaManager.destroyZoom();
+				}
+				
+			},
+			afterClose : function(){
+				
+				$('.price-box').each(function(){
+					var $this = $(this), _id_price = $('[id]', $this).attr('data-idprice') ;
+						if(_id_price != '') {
+							$('[id]', $this).removeAttr('data-idprice');
+							$('[id]', $this).attr('id',_id_price);
+						}
+				});
+				
+				if($('#product_addtocart_form_qv_clone').length > 0){
+					$('#product_addtocart_form').remove();
+					$('#product_addtocart_form_qv_clone').attr('id','product_addtocart_form');
+					var _qty = $('#product_addtocart_form').find('#qty_primary');
+					_qty.attr('id','qty');
+					 if($('#product_addtocart_form').length > 0){
+						productAddToCartForm = new VarienForm('product_addtocart_form');
+					}
+				}
+					
+			}
+		});
+		
+		setInterval(function(){ _SmQuickView(); } ,1000);
+	});
+	//]]>
+</script>

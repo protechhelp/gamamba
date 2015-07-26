@@ -1,0 +1,109 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Listing Tabs - Version 2.0.0
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+$helper = Mage::helper('listingtabs/data');
+$list = $this->_getList();
+
+if (!empty($list)) {
+
+	$import_str = "";
+	$jsHelper = Mage::helper('core/js');
+	// jquery has not added yet
+	if (!defined('MAGENTECH_JQUERY') && (int)$this->_getConfig('include_jquery')) {
+		// if module allowed jquery.
+		$import_str .= $jsHelper->includeSkinScript('sm/listingtabs/js/jquery-1.8.2.min.js');
+		$import_str .= $jsHelper->includeSkinScript('sm/listingtabs/js/jquery-noconflict.js');
+		define('MAGENTECH_JQUERY', 1);
+	}
+	echo $import_str;
+
+
+	$module_id = $this->_moduleID();
+	$tag_id = 'sm_listing_tabs_' . rand() . time();
+	$class_ltabs = 'ltabs00-' . $this->_getConfig('nbi_column1', 4) . ' ltabs01-' . $this->_getConfig('nbi_column1', 3) . ' ltabs02-' . $this->_getConfig('nbi_column2', 3) . ' ltabs03-' . $this->_getConfig('nbi-column3', 2) . ' ltabs04-' . $this->_getConfig('nbi-column4', 1)
+	?>
+	<!--[if lt IE 9]>
+	<div id="<?php echo $tag_id; ?>" class="sj-listing-tabs msie lt-ie9 first-load"><![endif]-->
+	<!--[if IE 9]>
+	<div id="<?php echo $tag_id; ?>" class="sj-listing-tabs msie first-load"><![endif]-->
+	<!--[if gt IE 9]><!-->
+	<div id="<?php echo $tag_id; ?>" class="sj-listing-tabs first-load"><!--<![endif]-->
+		<?php if ($this->_getConfig('listingtabs_title_text')) { ?>
+			<div class="tab-listing-title">
+				<?php echo $this->_getConfig('listingtabs_title_text', 'Tab Listing'); ?>
+			</div>
+		<?php } ?>
+		
+		<div class="ltabs-wrap ">
+			<div class="ltabs-tabs-container" data-delay="<?php echo $this->_getConfig('delay', 300); ?>"
+			     data-duration="<?php echo $this->_getConfig('duration', 600); ?>"
+			     data-effect="<?php echo $this->_getConfig('effect'); ?>"
+			     data-ajaxurl="<?php echo Mage::getBaseUrl() . 'listingtabs/index/ajax'; ?>"
+			     data-modid="<?php echo $tag_id; ?>">
+				<!--Begin Tabs-->
+				<?php include('default_tabs.phtml'); ?>
+			</div>
+			<!-- End Tabs-->
+			<?php $pretext = $this->_getConfig('pretext');
+				if (!empty($pretext)) { ?>
+				<div class="pre-text"><?php echo $this->_getConfig('pretext'); ?></div>
+			<?php } ?>
+			<div class="ltabs-items-container"><!--Begin Items-->
+				<?php foreach ($list as $items) {
+					$child_items = isset($items->child) ? $items->child : '';
+					$cls_device = $class_ltabs;
+					$cls_animate = $this->_getConfig('effect');
+					$cls = (isset($items->sel) && $items->sel == "sel") ? ' ltabs-items-selected ltabs-items-loaded' : '';
+					$cls .= ($items->id == "*") ? ' items-category-all' : ' items-category-' . $items->id;
+					?>
+					<div class="ltabs-items <?php echo $cls; ?>">
+						<div class="ltabs-items-inner <?php echo $cls_device . ' ';
+						echo $cls_animate; ?>">
+							<?php if (!empty($child_items)) {
+								include('default_items.php');
+							} else {
+								?>
+								<div class="ltabs-loading"></div>
+							<?php } ?>
+						</div>
+						<?php $classloaded = ($this->_getConfig('source_limit', 2) >= $items->count || $this->_getConfig('source_limit', 2) == 0) ? 'loaded' : ''; ?>
+						<div class="ltabs-loadmore"
+						     data-active-content=".items-category-<?php echo ($items->id == "*") ? 'all' : $items->id; ?>"
+						     data-categoryid="<?php echo $items->id; ?>"
+						     data-rl_start="<?php echo $this->_getConfig('product_limitation', 2) ?>"
+						     data-rl_total="<?php echo $items->count ?>"
+						     data-rl_allready="<?php echo $this->__('All ready'); ?>"
+						     data-ajaxurl="<?php echo Mage::getBaseUrl() . 'listingtabs/index/ajax'; ?>"
+						     data-modid="<?php echo $module_id; ?>"
+						     data-rl_load="<?php echo $this->_getConfig('source_limit', 2) ?>">
+							<div class="ltabs-loadmore-btn <?php echo $classloaded ?>"
+							     data-label=" <?php echo ($classloaded) ? $this->__('All ready') : $this->__('Show more products'); ?>">
+								<span class="left_right"></span>
+								<span class="ltabs-image-loading"></span>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+			<!--End Items-->
+		</div>
+		<?php
+		$posttext = $this->_getConfig('posttext');
+		if (!empty($posttext)) {
+			?>
+			<div class="post-text"><?php echo $this->_getConfig('posttext'); ?></div>
+		<?php } ?>
+	</div>
+	<?php include('default_js.phtml'); ?>
+<?php
+} else {
+	echo 'Has no item to show!';
+} ?>
+
+
+

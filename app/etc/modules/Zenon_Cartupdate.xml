@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Zenon_Cartupdate>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Zenon_Cartupdate>
+  </modules>
+</config>

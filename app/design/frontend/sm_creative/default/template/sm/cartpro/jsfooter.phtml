@@ -1,0 +1,24 @@
+<script type="text/javascript">
+//<![CDATA[
+	window.removeItem=function(args){ //for version mage1501 and later
+		if (enable_ajax_compare && (args.search('catalog/product_compare/remove') != -1) ){
+				opener.deletePCompare=1;
+				if(setfocus){				// for win parent  , detect by var setfocus
+					
+					opener.isCompare=1;
+					opener.deletePCompare=1;
+
+					opener.focus();
+					opener.ajaxUpdate(args,'url');
+					exit;
+				}
+				else
+					ajaxUpdate(args,'url');		//for win-popup
+		}
+        else
+        {
+            window.location.href = args;
+        }	
+	};
+//]]>
+</script>

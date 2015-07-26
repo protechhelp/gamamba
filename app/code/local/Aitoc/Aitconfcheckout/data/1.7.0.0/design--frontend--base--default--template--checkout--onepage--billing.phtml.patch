@@ -1,0 +1,212 @@
+diff -aurBb /home/httpd/htdocs/users2/rastorguev/mrc14/var/ait_patch_orig/compare93912639958144b570ba628cc0 /home/httpd/htdocs/users2/rastorguev/mrc14/var/ait_patch_modif/compare93912639958144b570ba628cc0
+--- Z:/htdocs_p5m/xez337813test17/app/design/frontend/base/default/template/checkout/onepage/billing.phtml	Fri Apr 20 17:49:20 2012
++++ D:/work/svn/XEZ-337813/1/ait_patch_modif/billing.phtml	Fri May 25 20:04:23 2012
+@@ -39,6 +39,9 @@
+         <fieldset>
+             <input type="hidden" name="billing[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="billing:address_id" />
+             <ul>
++                        
++            <?php /* START AITOC COMMENTING
++                            
+                 <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())->setForceUseCustomerRequiredAttributes(!$this->isCustomerLoggedIn())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
+                 <li class="fields">
+                     <div class="field">
+@@ -128,7 +131,137 @@
+                             <input type="text" name="billing[fax]" value="<?php echo $this->escapeHtml($this->getAddress()->getFax()) ?>" title="<?php echo $this->__('Fax') ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>" id="billing:fax" />
+                         </div>
+                     </div>
++                                </li>
++                
++                FINISH AITOC COMMENTING */ ?>                
++                
++<!--                 START AITOC CONFIGURABLE CHECKOUT CODE        -->
++
++                <li class="fields"><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress())->setFieldIdFormat('billing:%s')->setFieldNameFormat('billing[%s]')->toHtml() ?></li>
++                <li class="fields">
++                
++<?php if ($this->checkFieldShow('company')) :        // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                    <div class="field">
++                        <label for="billing:company"><?php echo $this->__('Company') ?></label>
++                        <div class="input-box">
++                            <input type="text" id="billing:company" name="billing[company]" value="<?php echo $this->htmlEscape($this->getAddress()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>" class="input-text" />
++                        </div>
++                    </div>
++<?php endif                                     // AITOC CONFIGURABLE CHECKOUT CODE ?>
++
++        <?php if(!$this->isCustomerLoggedIn()): ?>
++                    <div class="field">
++                        <label for="billing:email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
++                        <div class="input-box">
++                            <input type="text" name="billing[email]" id="billing:email" value="<?php echo $this->htmlEscape($this->getAddress()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email required-entry" />
++                        </div>
++                    </div>
++        <?php endif ?>
++                </li>
++                
++<?php if ($this->checkFieldShow('address')) :        // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                
++                <li class="wide">
++                    <label for="billing:street1" class="required"><em>*</em><?php echo $this->__('Address') ?></label>
++                    <div class="input-box">
++                        <input type="text" title="<?php echo $this->__('Street Address') ?>" name="billing[street][]" id="billing:street1" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet(1)) ?>" class="input-text required-entry" />
++                    </div>
+                 </li>
++        <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
++                <li class="wide">
++                    <div class="input-box">
++                        <input type="text" title="<?php echo $this->__('Street Address '.$_i) ?>" name="billing[street][]" id="billing:street<?php echo $_i?>" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet($_i)) ?>" class="input-text" />
++                    </div>
++                </li>
++        <?php endfor ?>
++        
++<?php endif                                     // AITOC CONFIGURABLE CHECKOUT CODE ?>
++        
++                <li class="fields">
++                
++<?php if ($this->checkFieldShow('city')) :        // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                
++                    <div class="field">
++                        <label for="billing:city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
++                        <div class="input-box">
++                            <input type="text" title="<?php echo $this->__('City') ?>" name="billing[city]" value="<?php echo $this->htmlEscape($this->getAddress()->getCity()) ?>" class="input-text required-entry" id="billing:city" />
++                        </div>
++                    </div>
++<?php endif                                     // AITOC CONFIGURABLE CHECKOUT CODE ?>
++
++<?php if ($this->checkFieldShow('region')) :        // AITOC CONFIGURABLE CHECKOUT CODE ?>
++
++                    <div class="field">
++                        <label for="billing:region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
++                        <div class="input-box">
++                            <select id="billing:region_id" name="billing[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
++                                <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
++                            </select>
++                            <script type="text/javascript">
++                            //<![CDATA[
++                                $('billing:region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
++                            //]]>
++                            </script>
++                            <input type="text" id="billing:region" name="billing[region]" value="<?php echo $this->htmlEscape($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
++                        </div>
++                    </div>
++<?php else :                                    // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                <span style="display: none;"><select id="billing:region_id" name="billing[region_id]" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none">
++                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
++                </select>
++                <input type="text" id="billing:region" name="billing[region]" value="" class="input-text" style="display:none" /> <script type="text/javascript">   function checkShippReqAttrib() { var bHashRequered = '<?php echo $this->checkStepHasRequired(); ?>';       if (!bHashRequered) return true;       if ($('billing:use_for_shipping_yes')) $('billing:use_for_shipping_yes').checked = false;       if ($('billing:use_for_shipping_no')) $('billing:use_for_shipping_no').checked = true;       if ($('billing:same_as_billing')) $('shipping:same_as_billing').checked = false;   } </script></span>
++<?php endif                                     // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                </li>
++                
++                <li class="fields">
++<?php if ($this->checkFieldShow('postcode')) :        // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                
++                    <div class="field">
++                        <label for="billing:postcode" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
++                        <div class="input-box">
++                            <input type="text" title="<?php echo $this->__('Zip/Postal Code') ?>" name="billing[postcode]" id="billing:postcode" value="<?php echo $this->htmlEscape($this->getAddress()->getPostcode()) ?>" class="input-text validate-zip-international required-entry" />
++                        </div>
++                    </div>
++<?php endif                                     // AITOC CONFIGURABLE CHECKOUT CODE ?>
++
++<?php if ($this->checkFieldShow('country')) :        // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                    <div class="field">
++                        <label for="billing:country_id" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
++                        <div class="input-box">
++                            <?php echo $this->getCountryHtmlSelect('billing') ?>
++                        </div>
++                    </div>
++<?php else: ?>
++
++<input type="hidden" name="billing[country_id]" id="billing:country_id" value="<?php echo $this->getDefaultCountryId() ?>" />
++
++<?php endif                                     // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                    
++                </li>
++                <li lang="fields">
++<?php if ($this->checkFieldShow('telephone')) :        // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                
++                    <div class="field">
++                        <label for="billing:telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
++                        <div class="input-box">
++                            <input type="text" name="billing[telephone]" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="input-text required-entry" id="billing:telephone" />
++                        </div>
++                    </div>
++<?php endif                                     // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                    
++<?php if ($this->checkFieldShow('fax')) :        // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                    <div class="field">
++                        <label for="billing:fax"><?php echo $this->__('Fax') ?></label>
++                        <div class="input-box">
++                           <input type="text" name="billing[fax]" value="<?php echo $this->htmlEscape($this->getAddress()->getFax()) ?>" title="<?php echo $this->__('Fax') ?>" class="input-text" id="billing:fax" />
++                        </div>
++                    </div>
++<?php endif                                     // AITOC CONFIGURABLE CHECKOUT CODE ?>
++                </li>
++
++<!--                 FINISH AITOC CONFIGURABLE CHECKOUT CODE        -->
++
++   
+                 <?php if(!$this->isCustomerLoggedIn()): ?>
+ 
+         <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+@@ -172,7 +305,10 @@
+                 <?php endif; ?>
+                 <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
+                     <li class="control">
++                    <?php /* START AITOC COMMENTING                     
+                         <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" onchange="if(window.shipping) shipping.setSameAsBilling(false);"<?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
++
++                    FINISH AITOC COMMENTING */ ?>
+                     </li>
+                 <?php else:?>
+                     <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
+@@ -184,12 +320,14 @@
+     <?php /* Extensions placeholder */ ?>
+     <?php echo $this->getChildHtml('checkout.onepage.billing.extra')?>
+     <?php if ($this->canShip()): ?>
++    <?php if ($this->checkStepActive('shipping') AND $this->checkSkipShippingAllowed()): ?>        
+         <li class="control">
+             <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1"<?php if ($this->isUseBillingAddressForShipping()) {?> checked="checked"<?php }?> title="<?php echo  $this->__('Ship to this address') ?>" onclick="$('shipping:same_as_billing').checked = true;" class="radio" /><label for="billing:use_for_shipping_yes"><?php echo  $this->__('Ship to this address') ?></label></li>
+         <li class="control">
+             <input type="radio" name="billing[use_for_shipping]" id="billing:use_for_shipping_no" value="0"<?php if (!$this->isUseBillingAddressForShipping()) {?> checked="checked"<?php }?> title="<?php echo $this->__('Ship to different address') ?>" onclick="$('shipping:same_as_billing').checked = false;" class="radio" /><label for="billing:use_for_shipping_no"><?php echo $this->__('Ship to different address') ?></label>
+         </li>
+     <?php endif; ?>
++    <?php endif; ?>
+     </ul>
+     <?php if (!$this->canShip()): ?>
+         <input type="hidden" name="billing[use_for_shipping]" value="1" />
+@@ -203,6 +341,34 @@
+     </div>
+ </fieldset>
+ </form>
++
++<?php if (!$this->checkStepActive('payment')): ?>    
++    
++    
++        <div id="checkout-step-payment" class="box-no-padding a-item" style="display:none;"></div> 
++        
++        <div style="display:none;">   
++            <form action="" id="co-payment-form">
++                <input id="p_method_checkmo" value="checkmo" type="radio" name="payment[method]" title="Check / Money order" class="radio"  checked="checked" />
++            </form>
++        </div>
++        <div class="default-box" id="checkout-payment-method-load" style="display:none;"></div>
++
++        <div id="payment-buttons-container">
++            <span id="payment-please-wait" style="display:none;" class="opc-please-wait">
++                <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" class="v-middle" alt="" /> &nbsp; <?php echo $this->__('Loading next step...') ?> &nbsp;
++            </span>    
++        </div>
++        
++        <div class="default-box" id="checkout-payment-load" style="display:none;"></div>
++        
++<script type="text/javascript">
++var payment = new Payment('co-payment-form', '<?php echo $this->getUrl('checkout/onepage/savePayment') ?>');
++</script>        
++        
++<?php endif; ?>
++
++
+ <script type="text/javascript">
+ //<![CDATA[
+     var billing = new Billing('co-billing-form', '<?php echo $this->getUrl('checkout/onepage/getAddress') ?>address/', '<?php echo $this->getUrl('checkout/onepage/saveBilling') ?>');

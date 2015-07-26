@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<!--
+/*
+* ModifyMage Solutions (http://ModifyMage.com)
+* Serial Codes - Serial Numbers, Product Codes, PINs, and More
+*
+* NOTICE OF LICENSE
+* This source code is owned by ModifyMage Solutions and distributed for use under the
+* provisions, terms, and conditions of our Commercial Software License Agreement which
+* is bundled with this package in the file LICENSE.txt. This license is also available
+* through the world-wide-web at this URL: http://www.modifymage.com/software-license
+* If you do not have a copy of this license and are unable to obtain it through the
+* world-wide-web, please email us at license@modifymage.com so we may send you a copy.
+*
+* @category		Mmsmods
+* @package		Mmsmods_Serialcodes
+* @author		David Upson
+* @copyright	Copyright 2013 by ModifyMage Solutions
+* @license		http://www.modifymage.com/software-license
+*/
+-->
+<config>
+    <modules>
+        <Mmsmods_Serialcodes>
+            <version>1.4.3</version>
+        </Mmsmods_Serialcodes>
+    </modules>
+    <admin>
+        <routers>
+            <serialcodes>
+                <use>admin</use>
+                <args>
+                    <module>Mmsmods_Serialcodes</module>
+                    <frontName>serialcodes</frontName>
+                </args>
+            </serialcodes>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <serialcodes>
+                    <file>serialcodes.xml</file>
+                </serialcodes>
+            </updates>
+        </layout>
+        <menu>
+            <catalog>
+				<children>
+					<serialcodes module="serialcodes" translate="title">
+						<title>Manage Serial Codes</title>
+						<sort_order>15</sort_order>               
+						<action>serialcodes/adminhtml_serialcodes</action>
+					</serialcodes>
+				</children>
+			</catalog>
+            <sales>
+				<children>
+					<serialcodes_items module="serialcodes_items" translate="title">
+						<title>Serial Code Order Items</title>
+						<sort_order>15</sort_order>               
+						<action>serialcodes/adminhtml_serialcodes_items</action>
+					</serialcodes_items>
+				</children>
+			</sales>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+						<catalog>
+							<children>
+								<serialcodes translate="title">
+									<title>Manage Serial Codes</title>
+									<sort_order>200</sort_order>
+								</serialcodes>
+							</children>
+							<children>
+								<serialcodes_attributes translate="title">
+									<title>Serial Code Product Attributes</title>
+									<sort_order>201</sort_order>
+								</serialcodes_attributes>
+							</children>
+						</catalog>
+					</children>
+					<children>
+						<sales>
+							<children>
+								<serialcodes_items translate="title">
+									<title>Serial Code Order Items</title>
+									<sort_order>200</sort_order>
+									<children>
+										<serialcodes_items_edit translate="title">
+											<title>Serial Code Order Edit</title>
+											<sort_order>200</sort_order>
+										</serialcodes_items_edit>
+									</children>
+								</serialcodes_items>
+							</children>
+						</sales>
+					</children>
+                </admin>
+            </resources>   
+        </acl>
+		<events>
+			<catalog_product_new_action>
+				<observers>
+					<serialcodeproducts>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>disableSerialCodeAttributes</method>
+					</serialcodeproducts>
+				</observers>
+			</catalog_product_new_action>
+			<catalog_product_edit_action>
+				<observers>
+					<serialcodeproducts>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>disableSerialCodeAttributes</method>
+					</serialcodeproducts>
+				</observers>
+			</catalog_product_edit_action>
+			<core_block_abstract_prepare_layout_after>
+				<observers>
+					<serialcodeproducts>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>addProductFieldDependence</method>
+					</serialcodeproducts>
+					<serialcodemessage>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>addInstructionsMessage</method>
+					</serialcodemessage>
+				</observers>
+			</core_block_abstract_prepare_layout_after>
+			<catalog_product_save_after>
+				<observers>
+					<serialcodeproducts>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>updateProductInventory</method>
+					</serialcodeproducts>
+				</observers>
+			</catalog_product_save_after>
+		</events>
+		<translate>
+		   <modules>
+				<Mmsmods_Serialcodes>
+					<files>
+						<default>Mmsmods_Serialcodes.csv</default>
+					</files>
+				</Mmsmods_Serialcodes>
+		   </modules>
+		</translate>
+    </adminhtml>
+	<frontend>
+        <layout>
+            <updates>
+                <serialcodes>
+                    <file>serialcodes.xml</file>
+                </serialcodes>
+            </updates>
+        </layout>
+		<translate>
+		   <modules>
+				<Mmsmods_Serialcodes>
+					<files>
+						<default>Mmsmods_Serialcodes.csv</default>
+					</files>
+				</Mmsmods_Serialcodes>
+		   </modules>
+		</translate>
+	</frontend>
+    <global>
+        <models>
+            <serialcodes>
+                <class>Mmsmods_Serialcodes_Model</class>
+                <resourceModel>serialcodes_mysql4</resourceModel>
+            </serialcodes>
+            <serialcodes_mysql4>
+                <class>Mmsmods_Serialcodes_Model_Mysql4</class>
+                <entities>
+                    <serialcodes>
+                        <table>serialcodes</table>
+                    </serialcodes>
+                </entities>
+            </serialcodes_mysql4>
+			<catalog_resource_eav_mysql4>
+			  <entities>
+				<product_entity_varchar>
+				  <table>catalog_product_entity_varchar</table>
+				</product_entity_varchar>
+			  </entities>
+			</catalog_resource_eav_mysql4>
+        </models>
+        <resources>
+            <serialcodes_setup>
+                <setup>
+                    <module>Mmsmods_Serialcodes</module>
+					<class>Mmsmods_Serialcodes_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </serialcodes_setup>
+            <serialcodes_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </serialcodes_write>
+            <serialcodes_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </serialcodes_read>
+        </resources>
+        <blocks>
+            <serialcodes>
+                <class>Mmsmods_Serialcodes_Block</class>
+            </serialcodes>
+			<sales>
+				<rewrite>
+					<order_items>Mmsmods_Serialcodes_Block_Sales_Order_Items</order_items>
+				</rewrite>
+			</sales>
+			<bundle>
+				<rewrite>
+					<sales_order_items_renderer>Mmsmods_Serialcodes_Block_Bundle_Sales_Order_Items_Renderer</sales_order_items_renderer>
+				</rewrite>
+			</bundle>
+        </blocks>
+        <helpers>
+            <serialcodes>
+                <class>Mmsmods_Serialcodes_Helper</class>
+            </serialcodes>
+            <serialcodes_items>
+                <class>Mmsmods_Serialcodes_Helper</class>
+            </serialcodes_items>
+        </helpers>
+		<events>
+			<sales_order_place_after>
+				<observers>
+					<serialcodes>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>addPendingCodesToOrder</method>
+					</serialcodes>
+				</observers>
+			</sales_order_place_after>
+			<sales_order_invoice_save_after>
+				<observers>
+					<serialcodes>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>addInvoiceCodesToOrder</method>
+					</serialcodes>
+				</observers>
+			</sales_order_invoice_save_after>
+			<checkout_onepage_controller_success_action>
+				<observers>
+					<serialcodes>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>addCheckoutCodesToOrder</method>
+					</serialcodes>
+				</observers>
+			</checkout_onepage_controller_success_action>
+			<sales_order_save_after>
+				<observers>
+					<serialcodes>
+						<type>singleton</type>
+						<class>Mmsmods_Serialcodes_Model_Observer</class>
+						<method>updateInventory</method>
+					</serialcodes>
+				</observers>
+			</sales_order_save_after>
+		</events>
+		<template>
+			<email>
+				<serialcodes_delivery module="serialcodes" translate="label">
+					<label>Serial Codes Delivery</label>
+					<file>serialcodes_delivery.html</file>
+					<type>html</type>
+				</serialcodes_delivery>
+				<serialcodes_warning module="serialcodes" translate="label">
+					<label>Serial Codes Low Warning</label>
+					<file>serialcodes_warning.html</file>
+					<type>html</type>
+				</serialcodes_warning>
+			</email>
+		</template>
+	</global>
+</config>

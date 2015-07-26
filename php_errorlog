@@ -1,0 +1,19 @@
+[21-Feb-2015 09:43:50 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1005 Can't create table 'nltheme4_g2a.#sql-6722_bf41df' (errno: 121)' in /home/nltheme4/public_html/g2aclone/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/nltheme4/public_html/g2aclone/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/nltheme4/public_html/g2aclone/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/nltheme4/public_html/g2aclone/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/nltheme4/public_html/g2aclone/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/nltheme4/public_html/g2aclone/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('ALTER TABLE `ca...', Array)
+#5 /home/nltheme4/public_html/g2aclone/lib/Varien/Db/Adapter/Pdo/Mysql.php(428): Zend_Db_Adapter_Pdo_Abstract->query('ALTER TABLE `ca...', Array)
+#6 /home/nltheme4/public_html/g2a in /home/nltheme4/public_html/g2aclone/lib/Zend/Db/Statement/Pdo.php on line 228
+[24-Feb-2015 13:33:59 UTC] PHP Fatal error:  Call to a member function addJs() on a non-object in /home/nltheme4/public_html/g2aclone/app/code/local/Apptha/Sociallogin/Block/Sociallogin.php on line 43
+[24-Feb-2015 13:34:02 UTC] PHP Fatal error:  Call to a member function addJs() on a non-object in /home/nltheme4/public_html/g2aclone/app/code/local/Apptha/Sociallogin/Block/Sociallogin.php on line 43
+[24-Feb-2015 13:36:30 UTC] PHP Fatal error:  Call to a member function addJs() on a non-object in /home/nltheme4/public_html/g2aclone/app/code/local/Apptha/Sociallogin/Block/Sociallogin.php on line 43
+[24-Feb-2015 13:46:48 UTC] PHP Fatal error:  Call to a member function addJs() on a non-object in /home/nltheme4/public_html/g2aclone/app/code/local/Apptha/Sociallogin/Block/Sociallogin.php on line 43
+[24-Feb-2015 13:56:02 UTC] PHP Fatal error:  Call to a member function addJs() on a non-object in /home/nltheme4/public_html/g2aclone/app/code/local/Apptha/Sociallogin/Block/Sociallogin.php on line 43
+[24-Feb-2015 14:06:15 UTC] PHP Fatal error:  Call to a member function addJs() on a non-object in /home/nltheme4/public_html/g2aclone/app/code/local/Apptha/Sociallogin/Block/Sociallogin.php on line 43
+[24-Feb-2015 14:10:44 UTC] PHP Fatal error:  Call to a member function addJs() on a non-object in /home/nltheme4/public_html/g2aclone/app/code/local/Apptha/Sociallogin/Block/Sociallogin.php on line 43
+[02-Mar-2015 13:31:10 UTC] PHP Fatal error:  Call to a member function isHomepage() on a non-object in /home/nltheme4/public_html/g2aclone/app/design/frontend/sm_creative/default/template/page/html/breadcrumbs.phtml on line 37
+[02-Mar-2015 13:32:20 UTC] PHP Fatal error:  Call to a member function isHomepage() on a non-object in /home/nltheme4/public_html/g2aclone/app/design/frontend/sm_creative/default/template/page/html/breadcrumbs.phtml on line 37
+[03-Apr-2015 10:44:41 UTC] PHP Fatal error:  Call to a member function getGrandTotal() on a non-object in /home/nltheme4/public_html/g2aclone/app/code/local/Magestore/Customercredit/Helper/Payment.php on line 8

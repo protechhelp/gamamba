@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <HM_DeveloperToolbar>
+            <version>1.0.0</version>
+        </HM_DeveloperToolbar>
+    </modules>
+	<!--<global>	
+        <blocks>
+            <developertoolbar>
+                <class>Hm_DeveloperToolbar_Block</class>
+            </developertoolbar>
+			<core>            
+				<rewrite>  
+					<template>Hm_DeveloperToolbar_Block_Core_Template</template> 
+				</rewrite>  
+			</core>  
+        </blocks>
+	</global>-->		
+    <frontend>
+        <routers>
+            <developertoolbar>
+                <use>standard</use>
+                <args>
+                    <module>HM_DeveloperToolbar</module>
+                    <frontName>developertoolbar</frontName>
+                </args>
+            </developertoolbar>
+        </routers>       
+        <layout>
+            <updates>
+                <developertoolbar>
+                    <file>developertoolbar.xml</file>
+                </developertoolbar>
+            </updates>
+        </layout>
+    </frontend>  
+	
+	<default>
+		<dev>
+			<developertoolbar>
+				<enabled>1</enabled>
+				<ip_remote>127.0.0.1</ip_remote>
+			</developertoolbar>
+		</dev>
+	</default>
+</config>

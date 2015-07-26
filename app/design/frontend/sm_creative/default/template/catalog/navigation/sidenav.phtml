@@ -1,0 +1,100 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php 
+/**
+ * Top menu for store
+ *
+ * @see Mage_Catalog_Block_Navigation
+ */
+?>
+<?php 
+if(!defined('ACCORDION')){
+	define('ACCORDION', 1);
+?>
+	<?php /*<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery-ui.js') ?>"></script>*/ ?>
+	<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.accordion.js') ?>"></script>
+<?php
+}
+?>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$('#yt_sidenav li.level0 > a').addClass ('subhead');
+		$('#yt_sidenav li.level0 > a').after ('<a href="#" title="" class="toggle">&nbsp;</a>');	//header 
+		
+		////////////////////
+		//$('#yt_sidenav li ul li').has('ul').append( '<span class="more-item-nav">open</span>' );
+
+			var speed=200;
+			$('#yt_sidenav li ul li').has('ul').append( '<span class="touch-item">open</span>' );
+			
+			$('.touch-item').click(function(){
+				$(this).prev().slideToggle(speed);
+				$(this).toggleClass('change');
+				$(this).prev().prev().toggleClass('parentNote');
+			});
+		// second simple accordion with special markup
+		$('#yt_sidenav').accordion({
+			active: '.active',
+			header: '.toggle',		// same header above
+			navigation: true,
+			event: 'click',
+			fillSpace: false,
+			autoheight: false,
+			alwaysOpen: false, 
+			animated: 'easeslide',
+			collapsible: false
+		});	
+
+		//check if headerId is set, if so activate that id
+		if ($("#yt_sidenav .level2 .current").parents('.parent').length) {
+			var header_element = $("#yt_sidenav .level2 .current").parents('.parent').children('a.toggle');
+			$('#yt_sidenav').accordion('activate', header_element);
+		}			
+
+	
+	});
+</script>
+<div class="block block-right-nav block-yt-layered-nav">
+  <div class="block-layered-nav-inner">
+    <div class="block-title">
+		<strong>
+			<span><?php echo $this->__('Categories') ?></span>
+		</strong>
+    </div>
+    <div class="block-content clearfix">
+        <ul id="yt_sidenav" class="dropdow-nav">
+        <?php foreach ($this->getStoreCategories() as $_category): ?>
+            <?php echo $this->drawItem($_category) ?>
+        <?php endforeach ?>
+        </ul>
+        <script type="text/javascript">
+       	 	decorateList('yt_sidenav')
+		</script>
+    </div>
+    <?php echo $this->getChildHtml('topLeftLinks') ?>
+  </div>
+</div>

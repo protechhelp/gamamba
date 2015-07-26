@@ -1,0 +1,44 @@
+Company,Société
+"Email Address","Adresse email"
+Address,Adresse
+"Street Address","Adresse de la rue"
+"Street Address ","Adresse de la rue"
+City,Ville
+State/Province,Etat/Province
+"Please select region, state or province","Sélectionnez la région, l'état ou la province"
+"Zip/Postal Code","Zip/Code postal"
+Country,Pays
+Telephone,Téléphone
+Fax,Faxe
+"Save in address book","Sauvegarder dans la boîte d'adresse"
+"Ship to this address","Livrer à cette adresse"
+"Ship to different address","Livrer à une autre adresse"
+"Loading next step...","Télécharger l'étape suivante..."
+"Select State/Province...","Séléctionner l'état/la province"
+"Billing Address","Adresse de facture"
+Change,Changer
+"Shipping Address","Adresse de cargaison"
+"Shipping Method","Mode de livraison"
+"Payment Method","Mode de paiement"
+"Aitoc Configurable Checkout Section","Section de la mise au point configurable d'Aitoc"
+"Aitoc Configurable Checkout","Mise au point configurable d'Aitoc"
+"Billing Information","Données de facturation"
+"Show Name Fields","Montrer les champs du nom"
+"Show Company Field","Montrer le champ de la société"
+"Show Address Fields","Montrer les champs de l'adresse"
+"Show City Field","Montrer le champ de la ville"
+"Show Region Field","Montrer le champ de la région"
+"Show Country Field","Montrer le champ du pays"
+"Show Zip/Postal Code Field","Montrer le champ du Zip/code postal"
+"Show Phone Field","Montrer le champ du téléphone"
+"Show Fax Field","Montrer le champ du faxe"
+"Shipping Information","Information sur le cargaison"
+"Enabled Section","Section activée"
+"Fill Shipping Information with Billing information if disabled.","Complétez l'Information sur la livraison avec des informations de facturation en cas de handicap"
+"step will be disabled if you have only flat rate or free shipping method active (should be enabled for all countries)","L'étape sera désactivée si vous n'avez qu'un taux forfaitaire ou un mode de la livraison gratuit activé (doit être activé pour tous les pays)"
+"Payment Information","Information sur le paiement"
+"step will be disabled only when ""Check/Money order"" is the only active payment method","étape ne sera désactivé que lorsque ""Chèque/argent"" est le seul moyen de paiement actifs"
+"Invalid data","Données non valides"
+"Customer Address is not valid.","L'adresse du client est invalide."
+"There is already a customer registered using this email address. Please login using this email address or enter a different email address to register your account.","Il ya déjà un client enregistré, qui utilise cette adresse e-mail. S'il vous plaît, connecte? en utilisant cette adresse e-mail ou entrer une autre adresse e-mail pour enregistrer votre compte."
+"Invalid data.","Données non valides."

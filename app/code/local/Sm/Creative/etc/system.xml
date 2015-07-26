@@ -1,0 +1,760 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<sm translate="label" module="creative">
+            <label>MagenTech.com</label>
+            <sort_order>206</sort_order>
+        </sm>
+	</tabs>
+	<sections>
+		<creative_cfg  translate="label" module="creative">                    
+		<label>SM Creative Setting</label>
+		<tab>sm</tab>
+		<frontend_type>text</frontend_type>
+		<sort_order>150</sort_order>
+		<show_in_default>1</show_in_default>
+		<show_in_website>1</show_in_website>
+		<show_in_store>1</show_in_store>            
+			<groups>
+				<general translate="label"> 
+				<expanded>1</expanded>
+				<label>General Settings</label>
+				<frontend_type>text</frontend_type>
+				<sort_order>1</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+					<fields>	
+					<!-- Begin Layout-->
+						<layout_heading translate="label">
+							<label>Layout</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</layout_heading>								
+						<layout_styles translate="label">
+							<label>Layout Style</label>
+							<frontend_type>select</frontend_type>
+							<source_model>creative/system_config_source_listLayoutStyles</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</layout_styles>						  
+						<color translate="label">
+							<label>Color Style</label>
+							<frontend_type>select</frontend_type>
+							<source_model>creative/system_config_source_listColor</source_model>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Support 4 Color Styles.You can define other styles by changing parameters</comment>
+						</color>
+					<!-- End Layout-->					
+						
+					<!-- Begin Body-->
+						<body_heading translate="label">
+							<label>Entire Page</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</body_heading>							
+						<body_font_family translate="label">
+							<label>Main Font</label>
+							<frontend_type>select</frontend_type>
+							<source_model>creative/system_config_source_listBodyFont</source_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</body_font_family>						
+						<body_font_size translate="label">
+							<label>Font Size</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>6</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</body_font_size>
+						<google_font translate="label">
+							<label>Google Font</label>
+							<frontend_type>select</frontend_type>
+							<source_model>creative/system_config_source_listGoogleFont</source_model>
+							<sort_order>7</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</google_font>	
+						<google_font_targets translate="label">
+							<label>Google Font Elements</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Tags will be applied with Google font with separate "," ( Ex: "h1, .classname" )</comment>
+						</google_font_targets>										
+																							
+						<body_link_color translate="label">
+							<label>Link Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate> 
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Please Click the text box to select color</comment>
+						</body_link_color>	
+						<body_link_hover_color translate="label">
+							<label>Hover Link Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate> 
+							<sort_order>11</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Please Click the text box to select color</comment>
+						</body_link_hover_color>						
+						<body_text_color translate="label">
+							<label>Text Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate> 
+							<sort_order>12</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Please Click the text box to select color</comment>
+						</body_text_color>	
+						<body_title_color translate="label">
+							<label>Title Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate> 
+							<sort_order>13</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Please Click the text box to select color</comment>
+						</body_title_color>
+						<title_color_targets translate="label">
+							<label>Title Color Elements</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>14</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Tags will be applied with Title Color with separate "," ( Ex: "h1, .classname" )</comment>
+						</title_color_targets>
+						<body_background_color translate="label">
+							<label>Background Color</label>
+							<frontend_type>text</frontend_type>
+							<validate>color</validate> 
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Please Click the text box to select color</comment>
+						</body_background_color>
+						<use_background_image translate="label">
+							<label>Use Background Image</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>16</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</use_background_image>						
+						<body_background_image translate="label">
+							<label>Background Image Pattern</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>creative/system_config_source_listBgImage</source_model>
+							<sort_order>17</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><use_background_image>1</use_background_image></depends>
+							<comment>Active when using Background Image </comment>
+						</body_background_image>
+						<use_customize_image translate="label">
+							<label>Use Customize Background Image</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>18</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><use_background_image>1</use_background_image></depends>
+						</use_customize_image>
+						<background_customize_image translate="label">
+							<label>Customize Background Image</label>
+							<frontend_type>image</frontend_type>
+							<backend_model>adminhtml/system_config_backend_image</backend_model>
+							<upload_dir config="system/filesystem/media" scope_info="1">pattern</upload_dir>
+							<base_url type="media" scope_info="1">pattern</base_url>
+							<sort_order>19</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><use_customize_image>1</use_customize_image></depends>
+							<depends><use_background_image>1</use_background_image></depends>
+						</background_customize_image>
+						<background_repeat translate="label">
+							<label>Background Repeat</label>
+							<frontend_type>select</frontend_type>
+							<source_model>creative/system_config_source_listBgRepeat</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><use_background_image>1</use_background_image></depends>
+						</background_repeat>
+						<background_position translate="label">
+							<label>Background Position</label>
+							<frontend_type>select</frontend_type>
+							<source_model>creative/system_config_source_listBgPosition</source_model>
+							<sort_order>21</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><use_background_image>1</use_background_image></depends>
+						</background_position>	
+						<device_responsive translate="label">
+							<label>Enable Device Responsive</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>22</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</device_responsive>						
+					<!-- End Body-->
+					
+					<!-- Begin Menu-->
+						<menu_style_heading translate="label">
+							<label>Menu</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</menu_style_heading>		
+						<menu_ontop translate="label">
+							<label>Menu on Top</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>32</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</menu_ontop>
+						<responsive_menu translate="label">
+							<label>Mobile Menu Type</label>
+							<frontend_type>select</frontend_type>
+							<source_model>creative/system_config_source_listResMenuStyles</source_model>
+							<sort_order>33</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</responsive_menu>
+					<!-- End Menu-->																	
+					</fields>					   
+				</general>
+				
+				<detail_creative translate="label">
+	            	<label>Product Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<show_imagezoom translate="label">
+							<label>Enable Product Image Zoom</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>34</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_imagezoom>
+						<zoom_mode translate="label">
+							<label>Zoom Mode</label>
+							<frontend_type>select</frontend_type>
+							<source_model>creative/system_config_source_listZoomImage</source_model>
+							<sort_order>26</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_imagezoom>1</show_imagezoom></depends>
+						</zoom_mode>
+						<use_addthis translate="label">
+							<label>Use Addthis</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>35</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</use_addthis>	
+						<show_related translate="label">
+							<label>Enable Related Product</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>37</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_related>	
+						<related_number translate="label">
+		            		<label>Related Product Limitation</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>38</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_related>1</show_related></depends>
+						</related_number>						
+						<show_upsell translate="label">
+							<label>Enable Up-Sell Product</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>39</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_upsell>
+						<upsell_number translate="label">
+		            		<label>Up-Sell Product Limitation</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>40</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_upsell>1</show_upsell></depends>
+						</upsell_number>
+						<show_customtab translate="label">
+							<label>Add Custom Tab</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>41</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_customtab>												
+	            		<customtab_name translate="label">
+		            		<label>Custom Tab Name</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>42</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_customtab>1</show_customtab></depends>
+						</customtab_name>
+						<customtab_content translate="label">
+		            		<label>Custom Tab Content</label>
+		            		<frontend_type>editor</frontend_type>
+							<frontend_model>creative/adminhtml_system_config_editor</frontend_model>
+		            		<sort_order>43</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_customtab>1</show_customtab></depends>
+						</customtab_content>
+					</fields>
+	            </detail_creative>
+				
+				<!-- Start Rich Snippets-->
+				<rich_snippets_setting translate="label">
+	            	<label>Rich Snippets Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>   
+						<use_rich_snippet translate="label">
+							<label>Use Rich Snippets</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</use_rich_snippet> 
+						<set_breadcrumbs translate="label">
+							<label>Set Breadcrumbs</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><use_rich_snippet>1</use_rich_snippet></depends>
+						</set_breadcrumbs>						
+						<google_plus_href translate="label">
+		            		<label>Google Plus Href</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>3</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><use_rich_snippet>1</use_rich_snippet></depends>
+						</google_plus_href>												
+					</fields>
+	            </rich_snippets_setting>				
+
+				<social_creative translate="label">
+	            	<label>Socials Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<facebook_heading translate="label">
+							<label>Facebook</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</facebook_heading>
+                    	<show_facebook translate="label">
+							<label>Show Facebook</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>51</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_facebook>
+						<facebook_name translate="label">
+		            		<label>Facebook Name</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>52</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_facebook>1</show_facebook></depends>
+						</facebook_name>
+						<facebook_url translate="label">
+		            		<label>Facebook Url</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>53</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_facebook>1</show_facebook></depends>
+						</facebook_url>
+						<twitter_heading translate="label">
+							<label>Twitter</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</twitter_heading>
+						<show_twitter translate="label">
+							<label>Show Twitter</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>55</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_twitter>
+						<twitter_name translate="label">
+		            		<label>Twitter Name</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>56</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_twitter>1</show_twitter></depends>
+						</twitter_name>
+						<twitter_url translate="label">
+		            		<label>Twitter Url</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>57</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_twitter>1</show_twitter></depends>
+						</twitter_url>
+						<google_heading translate="label">
+							<label>Google+</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>58</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</google_heading>
+						<show_google translate="label">
+							<label>Show Google+</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>59</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_google>
+						<google_name translate="label">
+		            		<label>Google+ Name</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>60</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_google>1</show_google></depends>
+						</google_name>
+						<google_url translate="label">
+		            		<label>Google+ Url</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>61</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_google>1</show_google></depends>
+						</google_url>
+						<linkedin_heading translate="label">
+							<label>Linkedin</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>62</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</linkedin_heading>
+						<show_linkedin translate="label">
+							<label>Show Linkedin</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>63</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_linkedin>
+						<linkedin_name translate="label">
+		            		<label>Linkedin Name</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>64</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_linkedin>1</show_linkedin></depends>
+						</linkedin_name>
+						<linkedin_url translate="label">
+		            		<label>Linkedin Url</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>65</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_linkedin>1</show_linkedin></depends>
+						</linkedin_url>	
+						<flickr_heading translate="label">
+							<label>Flickr</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>66</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</flickr_heading>
+						<show_flickr translate="label">
+							<label>Show Flickr</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>67</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_flickr>
+						<flickr_name translate="label">
+		            		<label>Flickr Name</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>68</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_flickr>1</show_flickr></depends>
+						</flickr_name>
+						<flickr_url translate="label">
+		            		<label>Flickr Url</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>69</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_flickr>1</show_flickr></depends>
+						</flickr_url>							
+						<pinterest_heading translate="label">
+							<label>Pinterest</label>
+							<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</pinterest_heading>
+						<show_pinterest translate="label">
+							<label>Show Pinterest</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>71</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_pinterest>
+						<pinterest_name translate="label">
+		            		<label>Pinterest Name</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>72</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_pinterest>1</show_pinterest></depends>
+						</pinterest_name>
+						<pinterest_url translate="label">
+		            		<label>Pinterest Url</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>73</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><show_pinterest>1</show_pinterest></depends>
+						</pinterest_url>						
+					</fields>
+	            </social_creative>					
+			   
+				<advanced translate="label">
+	            	<label>Advanced Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<!-- <show_popup translate="label">
+							<label>Show Location Popup</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>79</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Show/Hide Location popup on the frontend</comment>
+						</show_popup> -->
+                    	<show_cpanel translate="label">
+							<label>Show Cpanel</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Show/Hide cPanel on the frontend</comment>
+						</show_cpanel>						
+						<show_ontop translate="label">
+							<label>Show Go to Top</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>81</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>							
+						</show_ontop>
+						<show_addtocart translate="label">
+							<label>Use Add to Cart</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>82</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_addtocart>						
+						<show_wishlist translate="label">
+							<label>Use Add to Wishlist</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>83</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_wishlist>
+						<show_compare translate="label">
+							<label>Use Add to Compare</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>84</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</show_compare>
+	            		<custom_copyright translate="label">
+							<label>Enable Custom Copyright</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>86</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</custom_copyright>						
+	            		<copyright translate="label">
+		            		<label>Copyright</label>
+		            		<frontend_type>textarea</frontend_type>
+		            		<sort_order>87</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><custom_copyright>1</custom_copyright></depends>
+						</copyright>
+	            		<custom_css translate="label">
+		            		<label>Custom Css</label>
+		            		<frontend_type>textarea</frontend_type>
+		            		<sort_order>88</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</custom_css>
+						<custom_js translate="label">
+		            		<label>Custom Javascript</label>
+		            		<frontend_type>textarea</frontend_type>
+		            		<sort_order>89</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</custom_js>
+						<less_compile translate="label">
+							<label>Less Compile</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>90</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</less_compile>						
+					</fields>
+	            </advanced>			   
+			   
+			    <product_information translate="label">
+					<label>Product Information</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>6</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<comment>
+					<![CDATA[
+						<p>Author   : <a target="_blank" title="Magen Tech" href="http://www.magentech.com">Magen Tech</a></p>
+						<p>Version  : 1.0.0</p>
+						<p>Userguide: <a target="_blank" title="User guide" href="http://www.magentech.com/documentation/sm-creative/">User guide</a></p>
+						<p>Support  : <a target="_blank" href="http://www.magentech.com/forum">http://www.magentech.com/forum</a></p>
+					]]>
+					</comment>							
+				</product_information>
+			</groups>
+		</creative_cfg>
+	</sections>
+</config>

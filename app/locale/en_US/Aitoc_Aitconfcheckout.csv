@@ -1,0 +1,44 @@
+﻿Company,Company
+"Email Address","Email Address"
+Address,Address
+"Street Address","Street Address"
+"Street Address ","Street Address "
+City,City
+State/Province,State/Province
+"Please select region, state or province","Please select region, state or province"
+"Zip/Postal Code","Zip/Postal Code"
+Country,Country
+Telephone,Telephone
+Fax,Fax
+"Save in address book","Save in address book"
+"Ship to this address","Ship to this address"
+"Ship to different address","Ship to different address"
+"Loading next step...","Loading next step..."
+"Select State/Province...","Select State/Province..."
+"Billing Address","Billing Address"
+Change,Change
+"Shipping Address","Shipping Address"
+"Shipping Method","Shipping Method"
+"Payment Method","Payment Method"
+"Aitoc Configurable Checkout Section","Aitoc Configurable Checkout Section"
+"Aitoc Configurable Checkout","Aitoc Configurable Checkout"
+"Billing Information","Billing Information"
+"Show Name Fields","Show Name Fields"
+"Show Company Field","Show Company Field"
+"Show Address Fields","Show Address Fields"
+"Show City Field","Show City Field"
+"Show Region Field","Show Region Field"
+"Show Country Field","Show Country Field"
+"Show Zip/Postal Code Field","Show Zip/Postal Code Field"
+"Show Phone Field","Show Phone Field"
+"Show Fax Field","Show Fax Field"
+"Shipping Information","Shipping Information"
+"Enabled Section","Enabled Section"
+"Fill Shipping Information with Billing information if disabled.","Fill Shipping Information with Billing information if disabled."
+"step will be disabled if you have only flat rate or free shipping method active (should be enabled for all countries)","step will be disabled if you have only flat rate or free shipping method active (should be enabled for all countries)"
+"Payment Information","Payment Information"
+"step will be disabled only when ""Check/Money order"" is the only active payment method","step will be disabled only when ""Check/Money order"" is the only active payment method"
+"Invalid data","Invalid data"
+"Customer Address is not valid.","Customer Address is not valid."
+"There is already a customer registered using this email address. Please login using this email address or enter a different email address to register your account.","There is already a customer registered using this email address. Please login using this email address or enter a different email address to register your account."
+"Invalid data.","Invalid data."

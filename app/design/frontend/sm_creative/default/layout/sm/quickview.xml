@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+		<reference name="head">
+			<!-- <action method="addJs"><script>varien/product.js</script></action>
+            <action method="addJs"><script>varien/configurable.js</script></action>
+			<action method="addJs"><script>calendar/calendar.js</script></action>
+			<action method="addJs"><script>calendar/calendar-setup.js</script></action>
+			<action method="addItem"><type>skin_js</type><name>js/bundle.js</name></action> -->
+			<action method="addItem" ifconfig="sales/msrp/enabled"><type>skin_js</type><name>js/msrp.js</name></action> 
+			<!-- <action method="addItem"><type>skin_js</type><name helper="quickview/data/getInlucdeElevateZoom"/>
+			</action> -->
+		</reference>
+		<reference name="before_body_end">
+			<block type="page/html_head" name="extra_js" as="extraJs" after="-" template="sm/quickview/page/html/footer/quickview.phtml">
+				<action method="addItem"><type>skin_js</type><name helper="quickview/data/getInlucdeJQquery"/></action>
+				<action method="addItem"><type>skin_js</type><name helper="quickview/data/getInlucdeNoconflict"/></action>
+			</block>
+		</reference>
+    </default>
+	
+	<quickview_index_view>
+		<update handle="catalog_product_view"/> 
+	</quickview_index_view>
+	
+	<quickview_index_view_FINAL>
+		<reference name="root">
+            <action method="setTemplate"><template>sm/quickview/product.phtml</template></action>
+			<action method="setIsHandle"><applied>1</applied></action>
+        </reference>	
+        <reference name="content">
+			<remove name="mini-cartpro"/>
+			<remove name="product.info.upsell"/>
+			<remove name="product.info.additional"/>
+			<remove name="product.description"/>
+			<remove name="product.attributes"/>
+			<remove name="product.review.form"/>
+			<remove name="catalog.product.related"/>
+        </reference>
+	</quickview_index_view_FINAL>	
+	
+</layout> 

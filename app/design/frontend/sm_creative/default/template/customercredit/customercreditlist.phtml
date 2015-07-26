@@ -1,0 +1,198 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+$_productCollection = $this->getLoadedProductCollection();
+$_helper = $this->helper('catalog/output');
+$style_product = Mage::getBlockSingleton('customercredit/product_view');
+$creditAmount = $this->getCreditAmount();
+?>
+<style type="text/css">
+    .view-mode a{
+        display: none;
+    }
+</style>
+<div class="page-title category-title crule-title">
+    <h1><?php echo $this->__('Store Credit'); ?></h1>
+</div>
+<?php if (!$_productCollection->count()): ?>
+    <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+    <div class="category-products">
+        <?php echo $this->getToolbarHtml() ?>
+        <?php $_collectionSize = $_productCollection->count(); ?>
+        <?php $_columnCount = $this->getColumnCount(); ?>
+        <?php
+        $i = 0;
+        foreach ($_productCollection as $_product):
+            ?>
+            <?php if ($i++ % $_columnCount == 0): ?>
+                <div class="products-grid">
+                	<div class="row">
+                <?php endif ?>
+					<div class="item item-wrapper col-lg-3 col-md-3 col-sm-6 col-xs-12"> 
+                    	<div class="item-inner"> 
+                        	<div class="product-image">               
+                        <a id="product_<?php echo $_product->getId() ?>" href="<?php echo $_product->getProductUrl() ?>"
+                           title="<?php //echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true)           ?>" class="product-image gift-image">
+                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(270,384); ?>"
+                                 width="270" height="384" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"
+                                 />
+    
+                        </a>
+                        <?php if ($newsFrom !="" && $now>=$newsFrom && ($now<=$newsTo || $newsTo=="")){?>
+								<div class="new-item">
+									<span><?php echo $this->__('New!'); ?></span>
+								</div>
+							<?php }?>
+							
+							<?php if ( $specialprice ){ ?>
+								<div class="sale-item">
+									<span><?php echo $this->__('Sale'); ?></span>
+								</div>
+							<?php }?>
+                        </div>
+                        	<div class="product_info_price">
+                        	<div class="product_info_price_inside">
+                        <?php echo $this->getPriceHtml($_product, true) ?>
+                        </div>
+                        </div>
+                        	<div class="product-info">
+                                <div class="product-info-inner">
+                                    <div class="product_other_things">
+                                            <ul>
+                                                <li>
+                                                    <?php $community = $_product->getCommunity(); ?>
+                                                    <?php if($community == "1"){ ?>
+                                                    <img src="<?php echo $this->getSkinUrl('images/att/1.jpg') ?>" alt="community" />
+                                                    <?php } ?>
+                                                </li>
+                                                <li>
+                                                    <?php $steam = $_product->getSteam(); ?>
+                                                    <?php if($steam == "1"){ ?>
+                                                    <img src="<?php echo $this->getSkinUrl('images/att/2.gif') ?>" alt="Steam" />
+                                                    <?php } ?>
+                                                </li>
+                                                <li>
+                                                    <?php $cdkey = $_product->getCdkey(); ?>
+                                                    <?php if($cdkey == "1"){ ?>
+                                                    <img src="<?php echo $this->getSkinUrl('images/att/3.gif') ?>" alt="Cd-key" />
+                                                    <?php } ?>
+                                                </li>
+                                                <li>
+                                                    <?php $battlenet = $_product->getBattlenet(); ?>
+                                                    <?php if($battlenet == "1"){ ?>
+                                                    <img src="<?php echo $this->getSkinUrl('images/att/4.gif') ?>" alt="Battlenet" />
+                                                    <?php } ?>
+                                                </li>
+                                                <li>
+                                                    <?php $timecard = $_product->getTimecard(); ?>
+                                                    <?php if($timecard == "1"){ ?>
+                                                    <img src="<?php echo $this->getSkinUrl('images/att/5.jpg') ?>" alt="Time-Card" />
+                                                    <?php } ?>
+                                                </li>
+                                            </ul>
+        
+                                        </div>
+                                    <div class="product-name">
+                                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>">
+                                            <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                                        </a>
+                                    </div>
+                                     <?php if ($_product->getRatingSummary()): ?>
+                                     <div class="product-review">
+										<?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                                     </div>
+                                    <?php endif; ?>
+                                    <?php $creditAmount = Mage::helper('customercredit')->getCreditAmount($_product->getCreditValue()); ?>
+                                    <div class="price-box">
+                                        <span class="price-label"><?php echo Mage::helper('customercredit')->__('Credit Value') ?></span>
+                                        <span class="price" >
+                                            <?php if ($creditAmount['type'] == 'static'): ?>
+                                                <?php echo Mage::helper('core')->currency($creditAmount['value'], true, false); ?>
+                                            <?php elseif ($creditAmount['type'] == 'dropdown'): ?>
+                                                <?php echo Mage::helper('core')->currency(min($creditAmount['options']), true, false) . ' - ' . Mage::helper('core')->currency(max($creditAmount['options']), true, false) ?>
+                                            <?php elseif ($creditAmount['type'] == 'range'): ?>
+                                                <?php echo Mage::helper('core')->currency($creditAmount['from'], true, false) . ' - ' . Mage::helper('core')->currency($creditAmount['to'], true, false) ?>
+                                            <?php elseif ($creditAmount['type'] == 'any'): ?>
+                                                <?php echo $_product->getCreditValue() ?>
+                                            <?php endif ?>
+                                        </span>
+                                    </div>
+                                    <div class="product-addto-wrap-inner">
+                                    <?php if ( $this->helper('wishlist')->isAllow() ) : ?>
+                                        <a class="link-wishlist" href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" title="<?php echo $this->__('Add to Wishlist') ?>">
+                                            <?php echo $this->__('Add to Wishlist') ?>
+                                        </a>
+                                    <?php endif; ?>
+                                    
+                                    <div class="product-addcart">
+                                        <?php if($_product->isSaleable()): ?>
+                                        
+                                            <a class="btn-cart" title="<?php echo $this->__('Add to cart') ?>" href="<?php echo $_product->getProductUrl() ?>" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')">
+                                                <?php echo $this->__('Add to Cart') ?>
+                                            </a>
+                                    
+                                        <?php else: ?>
+                                        <p class="availability out-of-stock">
+                                            <span><?php echo $this->__('Out of stock') ?> </span>
+                                        </p>
+                                        <?php endif; ?>								
+                                    </div>
+                                    
+                                    <?php if( $_compareUrl=$this->getAddToCompareUrl($_product) ): ?>
+                                        <a class="link-compare" href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare'); ?>">
+                                            <?php echo $this->__('Add to Compare') ?>
+                                        </a>
+                                    <?php endif;?>
+    
+                                </div>
+                                    
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                                        
+                                        
+                                        
+                       
+                        
+                        
+                        
+                        
+                        </div>
+                	</div>
+                <?php if ($i % $_columnCount == 0 || $i == $_collectionSize): ?>
+                </div>
+                </div>
+            <?php endif; ?>
+        <?php endforeach ?>
+        <div class="toolbar-bottom">
+            <?php echo $this->getToolbarHtml() ?>
+        </div>
+    </div>
+<?php endif; ?>

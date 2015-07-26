@@ -1,0 +1,76 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Shop By - Version 1.0
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/?>
+
+<?php if ($this->canShowBlock()): ?>
+    <?php if (!$this->getRequest()->isAjax()): ?>
+    <div id="layered-navigation">
+    <?php endif; ?>
+        <div class="block block-layered-nav">
+            <?php $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();?>
+            <?php $_appliedFilters = array();?>
+            <?php foreach ($appliedFilters as $item):?>
+                <?php $_appliedFilters[$item->getName()]=array('label'=>$item->getLabel(),'remove'=>$item->getRemoveUrl());?>
+            <?php endforeach;?>
+                <?php if ($this->canShowOptions()): ?>
+                    <!--<p class="block-subtitle"><?php echo $this->__('Shopping Options') ?></p>-->
+                    <div id="narrow-by-list">
+                        <?php $_filters = $this->getFilters() ?>
+                        <?php $i = 0; foreach ($_filters as $_filter): ?>
+                            <?php if ($_filter->getItemsCount()): ?>
+                            <div class="main_attri_block col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            	<?php $i++; ?>
+                                <div class="<?php echo $this->__($_filter->getName()) ?> att<?php echo $i ?> layer_nav_top">
+                                    <strong><?php echo $this->__($_filter->getName()) ?></strong>
+                                    <?php if(isset($_appliedFilters[$_filter->getName()])):?>
+                                        <span class="applied-filters">
+                                            <span class="value"><?php echo $_appliedFilters[$_filter->getName()]['label']?></span>
+                                            <a class="btn-remove icon-remove" title="Remove This Item" href="<?php echo $_appliedFilters[$_filter->getName()]['remove']?>"></a>
+                                        </span>
+                                    <?php endif;?>
+                                </div>
+                                <div class="<?php echo $this->__($_filter->getName()) ?> att<?php echo $i ?><?php echo $i ?> layer_nav_bottom"><?php echo $_filter->getHtml() ?></div>
+                            </div>
+							<?php endif; ?>
+                            <script type="text/javascript">
+                            	var $h = jQuery.noConflict();
+								$h(".att<?php echo $i ?><?php echo $i ?>").slideUp();
+
+								$h(document).ready(function(){
+								  $h(".att<?php echo $i; ?>").click(function(){
+									  	$h(".layer_nav_bottom").slideUp("slow");
+										$h(".att<?php echo $i ?><?php echo $i ?>").slideToggle("slow");
+										});
+									});
+
+								$h(document).ready(function(){
+								  $h(".att<?php echo $i ?><?php echo $i ?>").click(function(){
+										$h(".att<?php echo $i ?><?php echo $i ?>").slideUp("slow");
+										});
+									});
+
+									$h(document).ready(function () {
+										$h(document).on('mouseleave', '.att<?php echo $i ?><?php echo $i ?>', function () {
+										   $h(".att<?php echo $i ?><?php echo $i ?>").slideUp();
+										});
+									});
+                            </script>
+                        <?php endforeach; ?>
+                    </div>
+                    <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+                <?php endif; ?>
+
+                <?php /*if ($this->getLayer()->getState()->getFilters()): ?>
+                    <div class="actions"><a class="button" href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
+                <?php endif;*/ ?>
+
+        </div>
+    <?php if (!$this->getRequest()->isAjax()): ?>
+    </div>
+    <?php endif; ?>
+<?php endif; ?>

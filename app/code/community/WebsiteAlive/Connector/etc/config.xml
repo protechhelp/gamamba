@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<!--
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End User Software Agreement (EULA).
+ * It is also available through the world-wide-web at this URL:
+ * http://www.harapartners.com/license
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to eula@harapartners.com so we can send you a copy immediately.
+ * 
+ -->
+<config>
+    <modules>
+        <WebsiteAlive_Connector>
+            <version>1.0.0</version>
+        </WebsiteAlive_Connector>
+    </modules>	
+    <global>
+		<blocks>
+			<waconnector>
+				<class>WebsiteAlive_Connector_Block</class>
+			</waconnector>
+		</blocks>
+		<helpers>
+			<waconnector>
+				<class>WebsiteAlive_Connector_Helper</class>
+			</waconnector>
+		</helpers>
+		<models>
+			<waconnector>
+				<class>WebsiteAlive_Connector_Model</class>
+			</waconnector>
+			<paypal>
+				<rewrite>
+					<!-- /* Compatibility for Staging server SSL verification */ -->
+					<config>WebsiteAlive_Connector_Model_Rewrite_Paypal_Config</config>
+					<api_nvp>WebsiteAlive_Connector_Model_Rewrite_Paypal_Api_Nvp</api_nvp>
+				</rewrite>
+			</paypal>
+		</models>
+    </global>
+	<frontend>
+		<events>
+			<controller_action_layout_render_before>
+				<observers>
+                    <waconnector_controller_action_layout_render_before>
+                        <class>waconnector/observer</class>
+                        <method>addBlockBeforeRenderLayout</method>
+                    </waconnector_controller_action_layout_render_before>
+                </observers>
+			</controller_action_layout_render_before>
+        </events>
+    </frontend>
+	<admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <waconnector before="Mage_Adminhtml">WebsiteAlive_Connector_Adminhtml</waconnector>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+	<adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <waconnector translate="title" module="waconnector">
+                                            <title>Website Alive</title>
+                                        </waconnector>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+	<default>
+		<waconnector>
+			<general>
+				<is_enabled>1</is_enabled>
+			</general>
+		</waconnector>
+        <paypal>
+			<!-- /* Compatibility for Staging server SSL verification */ -->
+            <wpp>
+				<button_source_ec>Hara_SI_MagentoCE_PPA</button_source_ec>
+				<button_source_dp>Hara_SI_MagentoCE_PPA</button_source_dp>
+            </wpp>
+        </paypal>
+	</default>
+</config>

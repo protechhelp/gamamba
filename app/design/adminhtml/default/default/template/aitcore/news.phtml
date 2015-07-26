@@ -1,0 +1,28 @@
+<?php
+/**
+ * Configurable Checkout
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitconfcheckout
+ * @version      2.1.27
+ * @license:     2qI6oAD8hvvkjMutXwa7Vp1gcsMrnxn0DqZRLmfWz9
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+/* @var $this Aitoc_Aitsys_Block_Notification */
+?>
+<div class="fieldset">
+  <div class="news">
+      <?php foreach ($this->getNews() as $item) { ?>
+          <dl class="item">
+            <dt>
+                <?php if (isset($item['title']) && $item['title']) { ?>
+                    <h2><?php echo $item['title']?></h2>
+                <?php } ?>
+            </dt>
+            <dd>
+              <?php echo $item['content']?>
+            </dd>
+          </dl>
+      <?php } ?>
+  </div>
+</div>

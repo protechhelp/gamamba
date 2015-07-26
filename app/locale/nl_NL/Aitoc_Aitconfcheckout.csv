@@ -1,0 +1,44 @@
+﻿Company,Bedrijf
+"Email Address","E-mail adres"
+Address,Adres
+"Street Address","Straat en huisnummer"
+"Street Address ","Straat en huisnummer "
+City,Stad
+State/Province,Provincie/Staat
+"Please select region, state or province","Selecteer alstublieft uw regio, staat of provincie"
+"Zip/Postal Code",Postcode
+Country,Land
+Telephone,Telefoon
+Fax,Fax
+"Save in address book","Opslaan in het adresboek"
+"Ship to this address","Naar dit adres verzenden"
+"Ship to different address","Naar een andere adres verzenden"
+"Loading next step...","Volgende stap aan het laden..."
+"Select State/Province...","Selecteer Staat/Provincie..."
+"Billing Address","Facturering Adres"
+Change,Wijzigen
+"Shipping Address","Verzendadres"
+"Shipping Method","Verzendmethode"
+"Payment Method","Betaalmethode"
+"Aitoc Configurable Checkout Section","Aitoc Configureerbare Afrekenen Sectie"
+"Aitoc Configurable Checkout","Aitoc Configureerbare Afrekenen"
+"Billing Information","Facturerings Informatie"
+"Show Name Fields","Toon Naam Velden"
+"Show Company Field","Toon Bedrijf Veld"
+"Show Address Fields","Toon Adres Velden"
+"Show City Field","Toon Stad Veld"
+"Show Region Field","Toon Regio Veld"
+"Show Country Field","Toon Land Veld"
+"Show Zip/Postal Code Field","Toon Postcode Veld"
+"Show Phone Field","Toon Telefoon Veld"
+"Show Fax Field","Toon Fax Veld"
+"Shipping Information","Verzend Informatie"
+"Enabled Section","Rubriek Inschakelen"
+"Fill Shipping Information with Billing information if disabled.","Vul in de verzending informatie met factuurgegevens als het uitgeschakeld is."
+"step will be disabled if you have only flat rate or free shipping method active (should be enabled for all countries)","stap zal worden uitgeschakeld als u slechts forfaitair bedrag of gratis verzending methode gebruikt (dient te worden ingeschakeld voor alle landen)"
+"Payment Information","Betaling Informatie"
+"step will be disabled only when ""Check/Money order"" is the only active payment method","stap zal pas worden uitgeschakeld wanneer ""Cheque/Geld bestelling"" is de enige actieve betalingsmethode"
+"Invalid data","Ongeldige Gegevens"
+"Customer Address is not valid.","Adres van de klant is niet geldig."
+"There is already a customer registered using this email address. Please login using this email address or enter a different email address to register your account.","Er is reeds een klant geregistreerd met behulp van dit email adres. Log alstublieft in met behulp van dit email adres of voer een ander email adres in om uw account te registreren."
+"Invalid data.","Gegevens Ongeldig."

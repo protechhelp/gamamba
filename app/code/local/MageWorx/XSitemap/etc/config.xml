@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageWorx EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageworx.com/LICENSE-1.0.html
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@mageworx.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.mageworx.com/ for more information
+ * or send an email to sales@mageworx.com
+ *
+ * @category   MageWorx
+ * @package    MageWorx_XSitemap
+ * @copyright  Copyright (c) 2012 MageWorx (http://www.mageworx.com/)
+ * @license    http://www.mageworx.com/LICENSE-1.0.html
+ */
+
+/**
+ * Extended Sitemap extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_XSitemap
+ * @author     MageWorx Dev Team <dev@mageworx.com>
+ */
+-->
+<config>
+    <modules>
+        <MageWorx_XSitemap>
+            <version>3.1.6</version>
+        </MageWorx_XSitemap>
+    </modules>
+    <frontend>
+        <translate>
+            <modules>
+                <MageWorx_XSitemap>
+                    <files>
+                        <default>MageWorx_XSitemap.csv</default>
+                    </files>
+                </MageWorx_XSitemap>
+            </modules>
+        </translate>
+        <routers>
+            <xsitemap>
+                <use>standard</use>
+                <args>
+                    <module>MageWorx_XSitemap</module>
+                    <frontName>sitemap</frontName>
+                </args>
+            </xsitemap>
+        </routers>
+        <layout>
+            <updates>
+                <xsitemap>
+                    <file>xsitemap.xml</file>
+                </xsitemap>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <models>
+            <xsitemap>
+                <class>MageWorx_XSitemap_Model</class>
+                <resourceModel>xsitemap_mysql4</resourceModel>
+            </xsitemap>
+            <xsitemap_mysql4>
+                <class>MageWorx_XSitemap_Model_Mysql4</class>
+                <entities>
+                    <sitemap>
+                        <table>sitemap</table>
+                    </sitemap>
+                </entities>
+            </xsitemap_mysql4>
+            <catalog_resource_eav_mysql4>
+                <rewrite>
+                    <product_attribute_backend_media>MageWorx_XSitemap_Model_Catalog_Resource_Eav_Mysql4_Product_Attribute_Backend_Media</product_attribute_backend_media>
+                </rewrite>
+            </catalog_resource_eav_mysql4>
+        </models>
+        <resources>
+            <xsitemap_setup>
+                <setup>
+                    <module>MageWorx_XSitemap</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </xsitemap_setup>
+            <xsitemap_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </xsitemap_write>
+            <xsitemap_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </xsitemap_read>
+        </resources>
+        <blocks>
+            <xsitemap>
+                <class>MageWorx_XSitemap_Block</class>
+            </xsitemap>
+            <page>
+                <rewrite>
+                    <template_links>MageWorx_XSitemap_Block_Page_Template_Links</template_links>
+                </rewrite>
+            </page>
+            <adminhtml>
+                <rewrite>
+                    <cms_page_edit_tab_meta>MageWorx_Adminhtml_Block_Xsitemap_Cms_Page_Edit_Tab_Meta</cms_page_edit_tab_meta>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <xsitemap>
+                <class>MageWorx_XSitemap_Helper</class>
+            </xsitemap>
+        </helpers>
+        <template>
+            <email>
+                <xsitemap_generate_error_email_template translate="label" module="xsitemap">
+                    <label>Extended Sitemap generate Warnings</label>
+                    <file>xsitemap_generate_warning.html</file>
+                    <type>text</type>
+                </xsitemap_generate_error_email_template>
+            </email>
+        </template>
+    </global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <xsitemap>
+                    <file>xsitemap.xml</file>
+                </xsitemap>
+            </updates>
+        </layout>
+        <menu>
+            <catalog>
+                <children>
+                    <xsitemap translate="title" module="xsitemap">
+                        <title>Google Sitemap (Extended)</title>
+                        <sort_order>180</sort_order>
+                        <children>
+                            <generate translate="title">
+                                <title>Generate</title>
+                                <sort_order>1</sort_order>
+                                <action>mageworx/xsitemap/</action>
+                            </generate>
+                            <settings translate="title">
+                                <title>Settings</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/system_config/edit/section/mageworx_seo/</action>
+                            </settings>
+                        </children>
+                    </xsitemap>
+                </children>
+            </catalog>
+        </menu>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <catalog>
+                            <children>
+                                <xsitemap translate="title" module="sitemap">
+                                    <title>Google Sitemap (Extended)</title>
+                                    <children>
+                                        <generate translate="title">
+                                            <title>Generate</title>
+                                        </generate>
+                                        <settings translate="title">
+                                            <title>Settings</title>
+                                        </settings>
+                                    </children>
+                                </xsitemap>
+                            </children>
+                        </catalog>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <mageworx_seo translate="title" module="xsitemap">
+                                            <title>MageWorx &gt; SEO Suite Ultimate</title>
+                                            <sort_order>100</sort_order>
+                                            <children>
+                                                <xsitemap>
+                                                    <title>Extended Sitemap</title>
+                                                    <sort_order>100</sort_order>
+                                                </xsitemap>
+                                                <google_sitemap>
+                                                    <title>Google Sitemap (Extended)</title>
+                                                    <sort_order>200</sort_order>
+                                                </google_sitemap>
+                                            </children>
+                                        </mageworx_seo>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <translate>
+            <modules>
+                <MageWorx_XSitemap>
+                    <files>
+                        <default>MageWorx_XSitemap.csv</default>
+                    </files>
+                </MageWorx_XSitemap>
+            </modules>
+        </translate>
+    </adminhtml>
+    <default>
+        <mageworx_seo>
+            <xsitemap>
+                <show_stores>1</show_stores>
+                <show_categories>1</show_categories>
+                <show_products>1</show_products>
+                <category_anchor>0</category_anchor>
+                <sort_order>position</sort_order>
+                <show_pages>1</show_pages>
+                <filter_pages>no-route,enable-cookies</filter_pages>
+                <show_links>1</show_links>
+            </xsitemap>
+            <google_sitemap>
+                <enabled>0</enabled>
+                <error_email><![CDATA[]]></error_email>
+                <error_email_template>xsitemap_generate_error_email_template</error_email_template>
+                <error_email_identity>general</error_email_identity>
+                <page_priority>0.25</page_priority>
+                <page_changefreq>daily</page_changefreq>
+                <category_priority>0.5</category_priority>
+                <category_changefreq>daily</category_changefreq>
+                <product_priority>1</product_priority>
+                <product_changefreq>daily</product_changefreq>
+                <product_images>0</product_images>
+                <product_tags>1</product_tags>
+                <product_tags_priority>0.5</product_tags_priority>
+                <product_tags_changefreq>daily</product_tags_changefreq>
+                <link_changefreq>daily</link_changefreq>
+                <link_priority>0.1</link_priority>
+                <blog_changefreq>daily</blog_changefreq>
+                <blog_priority>0.1</blog_priority>
+                <use_index>0</use_index>
+                <split_size>10240</split_size>
+                <xml_limit>500</xml_limit>
+                <max_links>50000</max_links>
+            </google_sitemap>
+        </mageworx_seo>
+    </default>
+    <crontab>
+        <jobs>
+            <xsitemap_generate>
+                <schedule><cron_expr>0 0 * * *</cron_expr></schedule>
+                <run><model>xsitemap/observer::scheduledGenerateSitemaps</model></run>
+            </xsitemap_generate>
+        </jobs>
+    </crontab>
+</config>

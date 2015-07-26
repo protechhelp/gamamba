@@ -1,0 +1,53 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head"><h4><?php echo $this->__('Customer Credit Statistics') ?></h4></div>
+    <fieldset class="np" style="margin-bottom: 0px !important;">
+		<div class="grid np">
+            <table cellspacing="0" style="border:0;" id="topSearchGrid_table">
+                <colgroup><col>
+                    <col width="100">
+                    <col width="200">
+                </colgroup><thead>
+                <tbody>
+                    <tr  class="even pointer">
+                        <td class=" "><?php echo $this->__('Total credit in system:') ?></td>
+                        <td class=" a-right last"><?php echo $this->getTotalCredit()?></td>
+                    </tr>
+                    <tr  class="pointer">
+                        <td class=" "><?php echo $this->__('Total credit spend:') ?></td>
+                        <td class=" a-right last"><?php echo $this->getCreditUsed()?></td>
+                    </tr>
+                    <tr  class="even pointer">
+                        <td class=" "><?php echo $this->__('No. of Customers with credit:') ?></td>
+                        <td class=" a-right last" style="width: 50%;"><?php echo $this->getCustomerWithCredit().'('.$this->percentCredit().'% of all customers)'?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</div>

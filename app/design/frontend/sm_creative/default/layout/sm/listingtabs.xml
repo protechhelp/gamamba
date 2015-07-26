@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout version="1.0">
+	<default>
+		<reference name="head">
+			<!-- <action method="addItem"  >
+				<type>skin_css</type>
+				<name>sm/listingtabs/css/animate.css</name>
+			</action>
+			<action method="addItem">
+				<type>skin_css</type>
+				<name>sm/listingtabs/css/sm-listing-tabs.css</name>
+			</action> -->
+		</reference>
+	</default>
+	<listingtabs_index_index>
+		<reference name="content">
+			<block type="listingtabs/list" name="listingtabs.list.default" template="sm/listingtabs/default.phtml">
+			</block>
+		</reference>
+	</listingtabs_index_index>
+	<listingtabs_index_ajax>
+		<block type="listingtabs/list" name="listingtabs_ajax" as="listingtabs_ajax" template="sm/listingtabs/default_items.php" output="toHtml" />
+	</listingtabs_index_ajax>
+</layout>

@@ -1,0 +1,280 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Shoping cart sidebar
+ *
+ * @see Mage_Checkout_Block_Cart_Sidebar
+ */
+?>
+<?php
+	$config = $this->getData();
+	list($mini_cartpro_display, $mini_cartpro_effect_selector, $mini_cartpro_effect_toggle, $mini_cartpro_effect_duration) = array($config['mini_cartpro_display'],$config['mini_cartpro_effect_selector'],$config['mini_cartpro_effect_toggle'],$config['mini_cartpro_effect_duration'] ) ;
+?>
+<?php if ($mini_cartpro_display && $this->getIsNeedToDisplaySideBar()):?>
+<?php $_items = $this->getRecentItems() ?>
+<?php $uq = uniqid('_uq'); ?>
+<li>
+<script type="text/javascript">
+	 //<![CDATA[
+	 
+	 	mincart = new CartForm('minicart-form<?php echo $uq ?>', '', '<?php echo $this->getUrl('checkout/cart/updatePost') ?>');
+
+	 	minicartpro = '.mini-cartpro.block<?php echo $uq; ?>';
+	 	
+	 	if (typeof isShow == 'undefined') isShow = false;
+	 	if (typeof isEffect == 'undefined') isEffect = false;
+	 	if (typeof overEffect == 'undefined') overEffect = [];
+	 	if (typeof outEffect == 'undefined') outEffect = [];
+	 //]]>
+</script>
+<div class="block mini-cartpro sm-cartpro block<?php echo $uq; ?>">
+    <?php $_cartQty = $this->getSummaryCount() ?>
+    <div class="block-title">
+    	<?php if(count($_items)){ ?>
+        <?php /*<strong><span><?php echo $this->__('My Cart') ?></span></strong>*/?>
+        	<a href="javascript:void(0)" class="btn-toggle">toggle content</a>
+		    <script type="text/javascript">
+		 	//<![CDATA[
+		 	<?php /*
+				Event.observe($$('.col-main .mini-cartpro .btn-toggle')[0], 'mouseenter', function(event) {
+					isEffect = new Effect.Morph($$('.mini-cartpro .block-content')[0], { style: { height: '356px'}, 
+													//beforeStart: function(){ $$('.mini-cartpro .block-content')[0].setStyle({height:''}); console.log('beforeStart'); },
+													//beforeSetup: function(){ console.log('beforeSetup'); },
+													//afterSetup: function(){ console.log('afterSetup'); },
+													//beforeUpdate: function(){ console.log('beforeUpdate'); },
+													//afterUpdate: function(){ console.log('afterUpdate'); },
+													//afterFinish: function(){ console.log('afterFinish'); },
+													duration:<?php echo $mini_cartpro_effect_duration?>
+												}
+												); 
+					//$$('.mini-cartpro .block-content')[0].setStyle({height:''});
+					isShow=!isShow;
+				});				
+				Event.observe($$('.col-main .mini-cartpro .btn-toggle')[0], 'mouseout', function(event) {
+					isEffect = new Effect.Morph($$('.mini-cartpro .block-content')[0], { style: { height: '0px'}, 
+													//beforeStart: function(){ $$('.mini-cartpro .block-content')[0].setStyle({height:''}); console.log('mouseout beforeStart'); },
+													//beforeSetup: function(){ console.log('mouseout beforeSetup'); },
+													//afterSetup: function(){ console.log('mouseout afterSetup'); },
+													//beforeUpdate: function(){ console.log('mouseout beforeUpdate'); },
+													//afterUpdate: function(){ console.log('mouseout afterUpdate'); },
+													//afterFinish: function(){ console.log('mouseout afterFinish'); },
+													duration:<?php echo $mini_cartpro_effect_duration?>
+												}
+						); 
+					//$$('.mini-cartpro .block-content')[0].setStyle({height:''});
+					isShow=!isShow;
+				});		 	*/ ?>
+				<?php if($mini_cartpro_effect_selector =='hover'){ ?>
+				
+				$$('.mini-cartpro.block<?php echo $uq; ?> .btn-toggle').invoke('observe', 'mouseover', function(event){
+					
+					if(outEffect.length) { outEffect.each(function(el){ el.cancel();)}	}
+					
+					$$('.mini-cartpro.block<?php echo $uq; ?> .block-content').each(function(el){
+						if(el.getHeight() !=''){
+							el.setStyle({height:''});
+						}
+					});				
+					Effect.multiple(
+									$$('.mini-cartpro.block<?php echo $uq; ?> .block-content'),
+									function(el){ 
+											overEffect.push( 
+													Effect.toggle(
+														el, 
+														'<?php echo $mini_cartpro_effect_toggle ?>', 
+														{
+															duration:<?php echo $mini_cartpro_effect_duration?>,
+															//beforeStart: function(){overEffect.effects ; },	
+															//afterFinish: function(){ }
+														}
+													)
+										 	);
+									}
+								);
+					isShow=!isShow;
+					$$('.mini-cartpro.block<?php echo $uq; ?> .block-content').each(function(el){	el.removeClassName('show');		});							
+
+				});
+
+				$$('.mini-cartpro.block<?php echo $uq; ?> .btn-toggle').invoke('observe', 'mouseleave', function(event){
+					
+					if(overEffect.length) { overEffect.each(function(el){ el.cancel();)}	}
+					
+					$$('.mini-cartpro.block<?php echo $uq; ?> .block-content').each(function(el){
+						(el.getHeight() !='')?el.setStyle({height:''}):'';
+					});	
+					
+					Effect.multiple(
+							$$('.mini-cartpro.block<?php echo $uq; ?> .block-content'),
+							function(el){ 
+									outEffect.push( 
+											Effect.toggle(
+												el, 
+												'<?php echo $mini_cartpro_effect_toggle ?>', 
+												{
+													duration:<?php echo $mini_cartpro_effect_duration?>,
+													//beforeStart: function(){overEffect.effects ; },	
+													//afterFinish: function(){ }
+												}
+											)
+								 	);
+							}
+						);					
+
+					isShow=!isShow;
+					
+					$$('.mini-cartpro.block<?php echo $uq; ?> .block-content').each(function(el){	el.addClassName('show');	});
+						
+				});
+
+				<?php }else{ ?>	
+				
+				$$('.mini-cartpro.block<?php echo $uq; ?> .btn-toggle').invoke('observe', 'click', function(event){
+					
+					Effect.multiple(
+							$$('.mini-cartpro.block<?php echo $uq; ?> .block-content'),
+							function(el){ 
+											el.identify(); // <======== The new bit, assign an id if there isn't already one
+											Effect.toggle(
+												el, 
+												'<?php echo $mini_cartpro_effect_toggle ?>', 
+												{
+													duration:<?php echo $mini_cartpro_effect_duration?>,
+													//beforeStart: function(){overEffect.effects ; },	
+													//afterFinish: function(){ }
+												}
+											);
+								 	
+							}
+					);	
+										
+					isShow=!isShow;
+					
+					(isShow)?$$('.mini-cartpro.block<?php echo $uq; ?> .block-content').each(function(el){	el.addClassName('show');	})
+							:$$('.mini-cartpro.block<?php echo $uq; ?> .block-content').each(function(el){	el.removeClassName('show');	});
+
+				});					
+				
+				<?php } ?>			
+		 	//]]>
+		    </script>
+		    <?php if ($_cartQty>0){ ?>
+		        <div class="summary">
+		            <?php if ($_cartQty==1): ?>
+		                <span class="amount"><?php echo $this->__('My Cart <a href="%s">1</a> item.', $this->getUrl('checkout/cart')) ?></span>
+		            <?php else: ?>
+		                <span class="amount"><?php echo $this->__('My Cart <a href="%s">%s</a> items.', $this->getUrl('checkout/cart'), $_cartQty) ?></span>
+		            <?php endif ?>
+		            <span class="subtotal">
+		                <?php if ($this->canApplyMsrp()): ?>
+		                    <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+		                <?php else: ?>
+		                    <span class="label"><?php echo $this->__('Total:'); //$this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+		                    <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+		                        <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+		                    <?php endif; ?>
+		                <?php endif; ?>
+		            </span>
+		        </div>
+		    <?php } ?>  
+	    <?php }else { ?>
+	           <div class="summary">
+	           		<span class="amount"><?php echo $this->__('My Cart') ?></span>
+	           </div>
+	    <?php } ?>  
+	     <span class="i-cart"></span>    
+    </div>
+    <?php if ($_cartQty>0){ ?>
+    <div class="block-content">
+		<div class="block-inner">
+		
+		    <?php if(count($_items)){ ?>
+		        <?php /*<p class="block-subtitle"><?php echo $this->__('Recently added item(s)') ?></p>*/?>
+		        <?php 
+				/**
+				 * update checkout/cart/sidebar/default.phtml to sm/cartpro/checkout/cart/sidebar/default.phtml
+				 * benefit this allow easy edit default template
+				 *
+				 * @see Mage_Checkout_Block_Cart_Sidebar
+				 */
+		        ?>
+		        <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post" id="minicart-form<?php echo $uq ?>">
+                <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+			        <ol id="cart-sidebar" class="mini-products-list">
+			        <?php foreach($_items as $_item): ?>
+			            <?php echo $this->getItemHtml($_item) ?>
+			        <?php endforeach; ?>
+			        </ol>
+		        </form>
+	
+		        <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+		    <?php } ?>
+		    
+		    <?php /*
+		    <?php else{ ?>
+		        <p class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+		    <?php } ?>*/?>
+	    	<div class="bottom-action actions">
+	    		<?php //if($_cartQty && $this->isPossibleOnepageCheckout()){ ?>
+	    			<button type="button" title="<?php echo $this->__('Goto Cart') ?>" class="button btn-gocart" onclick="setLocation('<?php echo Mage::getUrl('checkout/cart/') ?>')"><span><span><?php echo $this->__('go to cart') ?></span></span></button>
+	    			<button type="button" title="<?php echo $this->__('Checkout') ?>" class="button btn-gocheckout" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+			    <?php  //} ?>
+			    
+			    <?php //if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+			    	<?php /*<span class="more-desc"><?php echo $this->__('Products')  ?></span>
+			        <?php echo $this->getChildHtml('extra_actions') ?>
+			        <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>*/?>
+			        <button type="button" name="update_cart_action" value="update_qty" onclick="mincart.save();"title="<?php echo $this->__('Update'); ?>" class="button btn-update"><span><span><?php echo $this->__('Update'); ?></span></span></button>
+			    <?php //endif ?>	
+			    		    
+			    <?php if ($_cartQty>0){ ?>
+			        <div class="summary">
+			            <span class="subtotal">
+			                <?php if ($this->canApplyMsrp()): ?>
+			                    <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+			                <?php else: ?>
+			                    <span class="label"><?php echo $this->__('Total:'); //$this->__('Cart Subtotal:') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+			                    <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+			                        <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+			                    <?php endif; ?>
+			                <?php endif; ?>
+			            </span>
+			        </div>
+			    <?php } ?>      	
+	    	</div>
+    	</div>
+    </div>
+	<script type="text/javascript">
+		if(!isShow)
+			$$('.mini-cartpro.block<?php echo $uq; ?> .block-content').invoke('setStyle', { display:"none", overflow: "visible"});
+		 	<?php /*$$(".mini-cartpro.block<?php echo $uq; ?> .block-content")[0].setStyle({ display:"none", overflow: "visible"});*/?> 		 			 
+	</script>    
+    <?php } ?>
+</div>
+
+<?php endif;?>
+</li>

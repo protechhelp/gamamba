@@ -1,0 +1,60 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div class="block block-progress opc-block-progress">
+    <div class="title-header  block-title">
+        <strong><span title="<?php echo $this->__('Payment review') ?>"><?php echo $this->__('Payment review') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <dl>
+            <div id="billing-progress-opcheckout">
+                <?php $cart = Mage::getModel('checkout/cart')->getQuote();?>
+                <?php foreach ($cart->getAllItems() as $item):?>
+                    <div class="summary" style="border-bottom: 1px solid rgb(255, 255, 255); padding-bottom: 9px; margin-top: 5px;">
+                        <div class="summary_d" style="float: left; margin-right: 10px;">
+                            <a class="summary_a" href="<?php echo $item->getProduct()->getProductUrl()?>">
+                                <img alt="" src="<?php echo $this->helper('catalog/image')->init($item->getProduct(), 'small_image')->resize(52,74); ?>">
+                            </a>
+                        </div>
+                        <div class="summary_r" style="float: left; width: 200px">
+                            <h4 class="summary_h4">
+                                <a href="<?php echo $item->getProduct()->getProductUrl()?>" style="font-size: 18px;"><?php echo $productName = $item->getProduct()->getName();?></a>
+                            </h4>
+                            <span class="summary_price"><span class="price" style="font-size: 13px;"><?php echo $this->helper('checkout')->formatPrice($item->getProduct()->getPrice());?></span></span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                <?php endforeach;?>
+                <div class="total_prince jq-paypalexpress-totals" style="margin-top: 10px;">
+                    <span>Grand Total</span>
+                    <span class="price"><?php echo $this->helper('checkout')->formatPrice($cart->getGrandTotal()); ?> </span>
+                </div>
+            </div>
+        </dl>
+    </div>
+</div>
+

@@ -1,0 +1,190 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Mega Menu - Version 1.1
+ # Copyright (c) 2013 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/
+
+if($config['effect']==Sm_Megamenu_Model_System_Config_Source_ListEffect::ANIMATION OR $config['effect']==Sm_Megamenu_Model_System_Config_Source_ListEffect::TOGGLE):?>
+	<?php echo $this->getScriptTags();?>
+	<script type="text/javascript">
+	<?php if($config['theme']==Sm_Megamenu_Model_System_Config_Source_ListTheme::HORIZONTAL): 		?>
+	// <![CDATA[ 
+	$jsmart.fn.getOffsetRight=function(){	//this is object that need get offset right	
+		offset_right = $jsmart(this).offset().left + $jsmart(this).outerWidth();	
+		return offset_right;
+	}
+	$jsmart.fn.getOffsetLeft=function(){	//this is object that need get offset right	
+		offset_right = $jsmart(this).offset().left;	
+		return offset_right;
+	}	
+	$jsmart.fn.setOffsetElement = function(){	
+	//this is div child of LI.sm_megamenu_lv1 object that need "set offset left for div has align:left" and "set offset right for div has align:right"
+			
+			offset_right_class_sm_megamenu_menu =  $jsmart('#<?php echo $uq?>').getOffsetRight();
+			offset_left_class_sm_megamenu_menu = $jsmart('#<?php echo $uq?>').getOffsetLeft();	
+			
+			if(!$jsmart(this).hasClass('sm_megamenu_align_right')){
+				px_exceed_right_side_menu = $jsmart(this).offsetParent().offset().left+ $jsmart(this).outerWidth() - offset_right_class_sm_megamenu_menu;
+				if(px_exceed_right_side_menu>0){
+					$jsmart(this).css({'left':-px_exceed_right_side_menu});
+				}
+				else{
+					//$jsmart(this).css({'left':'0'});
+				}
+			}
+			else { 
+				px_exceed_left_side_menu = $jsmart(this).offsetParent().getOffsetRight() - $jsmart(this).outerWidth() - offset_left_class_sm_megamenu_menu ;
+				if(px_exceed_left_side_menu>0){				
+					$jsmart(this).css({'left':'auto', 'right':'0px'});
+				}
+				else{
+					$jsmart(this).css({'left':'auto', 'right':px_exceed_left_side_menu});
+				}						
+			}	
+	}
+	
+		<?php if($config['effect']==Sm_Megamenu_Model_System_Config_Source_ListEffect::ANIMATION):?>
+			$jsmart(function() {	//init
+				effect_duration = <?php echo $config['effect_duration']; ?>;
+				if( effect_duration <= 0 ){
+					effect_duration = <?php echo Sm_Megamenu_Helper_Default::EFFECT_DURATION ?>;
+				}
+				$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').children('div').each(function(i,e){
+					$jsmart(e).setOffsetElement();		
+				});	
+				if( $jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').parent().hasClass('sm-megamenu-hover') ){
+					$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').children('div').css({'display': 'block'});
+				$height_slide = $jsmart('#<?php echo $uq?> li.sm_megamenu_lv1 .slider-height').children('.sm_megamenu_content').height();
+				$height_slide = $height_slide/2;
+					$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').children('div').css({'display': 'none'});
+				}
+				$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').hover(function(e){	
+					$jsmart(this).children('div').stop(true,true).delay(200).slideDown(effect_duration);	
+					$jsmart('.container-slider.menu-slider .vpo-wrap .vp').css({'height': '345px'});
+				},function(e){	
+					$jsmart(this).children('div').stop(true,true).delay(0).slideUp(effect_duration);	
+				});
+			});
+		<?php endif?>	
+		<?php if($config['effect']==Sm_Megamenu_Model_System_Config_Source_ListEffect::TOGGLE):?>
+			$jsmart(function() {
+				$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').children('div').each(function(i,e){
+					$jsmart(e).setOffsetElement();
+					ul_sm_megamenu_menu_height = $jsmart(this).offsetParent().outerHeight();
+					$jsmart(this).css({'top':ul_sm_megamenu_menu_height});
+				});	
+				$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').children('div').css({'display':'none'});			
+				if ( $jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').hasClass('open') ){
+					$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').removeClass('open');
+				}
+				$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').children('.sm_megamenu_head').click(
+					function(e){	
+						if(!$jsmart(this).next().length || $jsmart(this).next().is(':hidden')===true){
+							$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').children('div').hide();
+							$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').children('.sm_megamenu_head').removeClass('sm_megamenu_actived');
+						}						
+						$jsmart(this).toggleClass("sm_megamenu_actived");
+						$jsmart(this).next().toggle();	
+					}
+				);
+			});		
+		<?php endif?>	
+	<?php elseif($config['theme']==Sm_Megamenu_Model_System_Config_Source_ListTheme::VERTICAL):	?>
+		<?php if($config['effect']==Sm_Megamenu_Model_System_Config_Source_ListEffect::ANIMATION):?>
+			$jsmart(function() {
+				effect_duration = <?php echo $config['effect_duration']; ?>;
+				if(effect_duration <= 0){
+					effect_duration = <?php echo Sm_Megamenu_Helper_Default::EFFECT_DURATION ?>;
+				}		
+				if( $jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').parent().hasClass('sm-megamenu-hover') ){				
+					$jsmart('#<?php echo $uq?> li.sm_megamenu_lv1').hover(
+						function(e) {
+							wd = $jsmart(window).width();
+							if( wd > 800){
+								w = getWbc($jsmart(this).children('div'));
+							}else{
+								w = getWbctb($jsmart(this).children('div'));
+							}
+							if(w){
+								$jsmart(this).children('div').css({opacity:'1',width:'0px'});
+								$jsmart(this).children('div').stop(true,true).animate({
+									width: w, 
+									opacity:'1'
+								}, effect_duration );
+							}
+						},
+						function(e) {
+							$jsmart(this).children('div').stop(true,true).animate({
+								width: '0px',
+								opacity:'0'
+							}, 300);
+						});
+					}
+			});	
+
+			function getWbc(e){	//get width by class class_width, return number px
+				json_class_width = {
+						'sm_megamenu_dropdown_1column': '125',
+						'sm_megamenu_dropdown_2columns': '250',
+						'sm_megamenu_dropdown_3columns': '375',
+						'sm_megamenu_dropdown_4columns': '500',
+						'sm_megamenu_dropdown_5columns': '625',
+						'sm_megamenu_dropdown_6columns': '750',
+						'sm_megamenu_dropdown_fullwidth': '750'
+					};
+				for(var key in json_class_width){
+					if ( json_class_width.hasOwnProperty ( key ) ){
+						// alert( key ‘=>’ json_class_width [ key ] );
+						if(e.hasClass(key)){
+							return json_class_width[ key ];
+						}
+					}
+				}
+				return false;	
+			}
+			function getWbctb(e){	//get width by class class_width, return number px
+				json_class_width = {
+						'sm_megamenu_dropdown_1column': '125',
+						'sm_megamenu_dropdown_2columns': '250',
+						'sm_megamenu_dropdown_3columns': '375',
+						'sm_megamenu_dropdown_4columns': '500',
+						'sm_megamenu_dropdown_5columns': '510',
+						'sm_megamenu_dropdown_6columns': '510',
+						'sm_megamenu_dropdown_fullwidth': '510'
+					};
+				for(var key in json_class_width){
+					if ( json_class_width.hasOwnProperty ( key ) ){
+						// alert( key ‘=>’ json_class_width [ key ] );
+						if(e.hasClass(key)){
+							return json_class_width[ key ];
+						}
+					}
+				}
+				return false;	
+			}
+		<?php endif?>	
+		<?php if($config['effect']==Sm_Megamenu_Model_System_Config_Source_ListEffect::TOGGLE):?>
+			$jsmart(function() {
+				$jsmart('#<?php echo $uq?>.sm_megamenu_wrapper_vertical_menu li.sm_megamenu_lv1').children('div').each(function(i,e){
+					$jsmart(this).css({'top':0});
+				});			
+				$jsmart('#<?php echo $uq?>.sm_megamenu_wrapper_vertical_menu li.sm_megamenu_lv1').children('div').css({'left':'190px', 'display':'none'});
+				$jsmart('#<?php echo $uq?>.sm_megamenu_wrapper_vertical_menu li.sm_megamenu_lv1').children('.sm_megamenu_head').click(
+					function(e){	
+						if(!$jsmart(this).next().length || $jsmart(this).next().is(':hidden')===true){
+							$jsmart('.sm_megamenu_wrapper_vertical_menu #<?php echo $uq?> li.sm_megamenu_lv1').children('div').hide();
+							$jsmart('.sm_megamenu_wrapper_vertical_menu #<?php echo $uq?> li.sm_megamenu_lv1').children('.sm_megamenu_head').removeClass('sm_megamenu_actived');
+						}						
+						$jsmart(this).toggleClass("sm_megamenu_actived");
+						$jsmart(this).next().toggle();	
+					}
+				);
+			});				
+		<?php endif?>		
+	<?php endif	?>
+	// ]]> 
+	</script>
+<?php endif ?>

@@ -1,0 +1,85 @@
+"<b>Template variables</b><br />[<i>attribute</i>] &mdash; e.g. [name], [price], [manufacturer], [color] &mdash; will be replaced with the respective product attribute value or removed if  value is not available<br />[<i>attribute1|attribute2|...</i>] &mdash; e.g. [manufacturer|brand] &mdash; if the first attribute value is not available for the product the second will be used and so on untill it finds a value<br />[<i>prefix</i> {<i>attribute</i>} <i>suffix</i>] or<br />[<i>prefix</i> {<i>attribute1|attribute2|...</i>} <i>suffix</i>] &mdash; e.g. [({color} color)] &mdash; if an attribute value is available it will be prepended with prefix and appended with suffix, either prefix or suffix can be used alone<br />Additional variables available for Product Meta Title only: [category], [categories]<br /><b>Examples</b><br /><u>Product URL Key</u><br />[name] [by {manufacturer|brand}] [{color} color] [for {price}] will be transformed into<br />htc-touch-diamond-by-htc-black-color-for-517-50<br /><u>Product Meta Title</u><br />[name] [by {manufacturer|brand}] [({color} color)] [for {price}] [in {categories}] will be transformed into<br />HTC Touch Diamond by HTC (Black color) for � 517.50 in Cell Phones - Electronics","<b>Template variables</b><br />[<i>attribute</i>] &mdash; e.g. [name], [price], [manufacturer], [color] &mdash; will be replaced with the respective product attribute value or removed if  value is not available<br />[<i>attribute1|attribute2|...</i>] &mdash; e.g. [manufacturer|brand] &mdash; if the first attribute value is not available for the product the second will be used and so on untill it finds a value<br />[<i>prefix</i> {<i>attribute</i>} <i>suffix</i>] or<br />[<i>prefix</i> {<i>attribute1|attribute2|...</i>} <i>suffix</i>] &mdash; e.g. [({color} color)] &mdash; if an attribute value is available it will be prepended with prefix and appended with suffix, either prefix or suffix can be used alone<br />Additional variables available for Product Meta Title only: [category], [categories]<br /><b>Examples</b><br /><u>Product URL Key</u><br />[name] [by {manufacturer|brand}] [{color} color] [for {price}] will be transformed into<br />htc-touch-diamond-by-htc-black-color-for-517-50<br /><u>Product Meta Title</u><br />[name] [by {manufacturer|brand}] [({color} color)] [for {price}] [in {categories}] will be transformed into<br />HTC Touch Diamond by HTC (Black color) for � 517.50 in Cell Phones - Electronics"
+"NOINDEX, FOLLOW Robots Meta Header For Additional Pages","NOINDEX, FOLLOW Robots Meta Header For Additional Pages"
+"NOINDEX, FOLLOW Robots Meta Header For Pages Without Content","NOINDEX, FOLLOW Robots Meta Header For Pages Without Content"
+Action,Action
+Add Canonical URL Meta Header,Add Canonical URL Meta Header
+Add Trailing Slash,Add Trailing Slash
+And Above,And Above
+Apply URL Template to All Products,Apply URL Template to All Products
+Apply,Apply
+Back,Back
+Can be either a full action name or a request path. Wildcard allowed<br/><b>Examples</b>:<br/>review_product_*<br/>review/product/*<br/>rss_*<br/>rss/*,Can be either a full action name or a request path. Wildcard allowed<br/><b>Examples</b>:<br/>review_product_*<br/>review/product/*<br/>rss_*<br/>rss/*
+Canonical URL Meta Header will not be added for these pages,Canonical URL Meta Header will not be added for these pages
+Canonical URL,Canonical URL
+Canonical Tag for Pages Filtered by Layered Navigation Leads to,Canonical Tag for Pages Filtered by Layered Navigation Leads to
+Catalog URL rewrites reindexed (100%)...,Catalog URL rewrites reindexed (100%)...
+Categories Report,Categories Report
+Category Name,Category Name
+Caterogies,Caterogies
+Checkout Pages,Checkout Pages
+CMS Report,CMS Report
+CMS,CMS
+Contact Us Page,Contact Us Page
+Content Heading,Content Heading
+Customer Account Pages,Customer Account Pages
+Current Category,Current Category
+Done,Done
+Duplicate,Duplicate
+Edit,Edit
+Enable Canonical Tag for Layered Navigation,Enable Canonical Tag for Layered Navigation
+Enable Dynamic Meta Title,Enable Dynamic Meta Title
+Enable Dynamic Meta Description,Enable Dynamic Meta Description
+Filtered Page,Filtered Page
+For use with <b>Use categories path for product URLs</b> setting<br/><b>Use Default</b> will use categories path related to the current categories path for product URL<br/><b>Use Longest</b> will use the longest categories path for product URL<br/><b>Use Shortest</b> will use the shortest categories path for product URL,For use with <b>Use categories path for product URLs</b> setting<br/><b>Use Default</b> will use categories path related to the current categories path for product URL<br/><b>Use Longest</b> will use the longest categories path for product URL<br/><b>Use Shortest</b> will use the shortest categories path for product URL
+form %s to %s,form %s to %s
+form %s,form %s
+Generate,Generate
+Ignore Pages,Ignore Pages
+Leave blank to use Product Meta Title Template,Leave blank to use Product Meta Title Template
+Leave blank to use Product URL Key Template,Leave blank to use Product URL Key Template
+Level,Level
+Long,Long
+MageWorx &gt; SEO Suite,MageWorx &gt; SEO Suite
+Meta Description,Meta Description
+Meta Title,Meta Title
+Missing,Missing
+Most search engines use up to 150.,Most search engines use up to 150.
+Most search engines use up to 70.,Most search engines use up to 70.
+Product Canonical URL,Product Canonical URL
+Product Compare Pages,Product Compare Pages
+Product Meta Title Template. See below for details,Product Meta Title Template. See below for details
+Product Meta Title,Product Meta Title
+Product Name,Product Name
+Product Review Pages,Product Review Pages
+Product Short Meta Description,Product Short Meta Description
+Product URL Key and Meta Title Templates,Product URL Key and Meta Title Templates
+Product URL Key Template. See below for details,Product URL Key Template. See below for details
+Product URL Key,Product URL Key
+Products Report,Products Report
+Products,Products
+Report has been successfully generated.,Report has been successfully generated.
+Robots,Robots
+RSS Feeds,RSS Feeds
+Search Pages,Search Pages
+Send Product Pages,Send Product Pages
+SEO Suite,SEO Suite
+Starting apply product URL key template...,Starting apply product URL key template...
+Starting to calculate store\'s category data...,Starting to calculate store\'s category data...
+Starting to calculate store\'s CMS data...,Starting to calculate store\'s CMS data...
+Starting to calculate store\'s product data...,Starting to calculate store\'s product data...
+Starting reindex catalog URL rewrites...,Starting reindex catalog URL rewrites...
+Tag Pages,Tag Pages
+Title,Title
+Total %1$s, processed %2$s records (%3$s%%)...,Total %1$s, processed %2$s records (%3$s%%)...
+Total %1$s, processed %2$s records (%3$s%%)...,Total %1$s, processed %2$s records (%3$s%%)...
+Type,Type
+Url,Url
+Use Config,Use Config
+Use Longest,Use Longest
+Use product short description for Description Meta Tag instead of full description,Use product short description for Description Meta Tag instead of full description
+Use Root,Use Root
+Use Shortest,Use Shortest
+View Duplicates,View Duplicates
+Wishlist Pages,Wishlist Pages
+You need to generate the report due to recent changes.,You need to generate the report due to recent changes.
+You’ve entered <span>0</span> character(s).,You’ve entered <span>0</span> character(s).

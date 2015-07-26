@@ -1,0 +1,134 @@
+#price-filter-max-text,
+#price-filter-min-text,
+#price-filter-max,
+#price-filter-min{
+	border-radius:50%; 	
+	-moz-border-radius:50%; 
+	khtml-border-radius:50%; 	
+	-webkit-border-radius:50%; 
+}
+	
+.price-filter-left{
+	float:left;
+}
+.price-filter-right{
+	float:right;
+}
+.price_filter{
+	height: 12px;
+	background: url(../images/bg-filter-price.png) repeat-x left center;
+	margin: 10px 0;
+	overflow:hidden;
+}
+.price_filter .price-from ,
+.price_filter .price-to {
+    height: 18px;
+    width: 18px;
+    cursor: e-resize;
+    display: block;
+	margin-top: 0px;
+	background: #fff;
+	position:relative;
+}
+.price_filter .price-to {
+    cursor: w-resize;
+    margin-top: -12px;
+	margin-left:-1px;
+}
+#price-filter-max-display{
+	float: right;
+}
+
+.price_filter .price-from:before,
+.price_filter .price-to:before {
+    content: "";
+    display: inline-block;
+    height: 4px;
+    position: absolute;
+    top: 4px;
+    width: 1000px;
+	background:#909090;
+}
+
+.price_filter .price-from:before {
+    left: -1000px;
+}
+.price_filter .price-to:before {
+    right: -1000px;
+}
+.sp-right{
+	float:right;
+}
+#loading{
+	background:rgba(0,0,0,0.5);
+	position:fixed;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	z-index:9999;
+}
+
+#loading img{
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin-left:-27px;
+	z-index:99999;
+}
+
+/*style shopby color*/
+#layered-navigation #narrow-by-list ol li.Black a:before{
+	background: #000000;
+}
+#layered-navigation #narrow-by-list ol li.Blue a:before{
+	background: #0000FF;
+}
+#layered-navigation #narrow-by-list ol li.Brown a:before{
+	background: #A52A2A;
+}
+#layered-navigation #narrow-by-list ol li.Charcoal a:before{
+	background: #222222;
+}
+#layered-navigation #narrow-by-list ol li.Green a:before{
+	background: #008000;
+}
+#layered-navigation #narrow-by-list ol li.Gray a:before{
+	background: #808080;
+}
+#layered-navigation #narrow-by-list ol li.Indigo a:before{
+	background: #460082;
+}
+#layered-navigation #narrow-by-list ol li.Ivory a:before{
+	background: #FFFFF0;
+}
+#layered-navigation #narrow-by-list ol li.Khaki a:before{
+	background: #F0E68C;
+}
+#layered-navigation #narrow-by-list ol li.Orange a:before{
+	background: #FFA500;
+}
+#layered-navigation #narrow-by-list ol li.Pink a:before{
+	background: #FFC0CB;
+}
+#layered-navigation #narrow-by-list ol li.Red a:before{
+	background: #ff0000;
+}
+#layered-navigation #narrow-by-list ol li.Royal_Blue a:before{
+	background: #4169E1;
+}
+#layered-navigation #narrow-by-list ol li.Silver a:before{
+	background: #C0C0C0;
+}
+#layered-navigation #narrow-by-list ol li.Taupe a:before{
+	background: #8b8589;
+}
+#layered-navigation #narrow-by-list ol li.White a:before{
+	background: #ffffff;
+}
+#layered-navigation #narrow-by-list ol li.Yellow a:before{
+	background: #FFFF00;
+}
+#layered-navigation #narrow-by-list ol li.Magneta a:before{
+	background: #FF00FF;
+}

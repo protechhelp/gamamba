@@ -1,0 +1,125 @@
+@border-color: #ddd;
+@border-radius: 2px;
+@googlefont: 'Raleway';
+
+body {
+  line-height: 1.6;
+  outline: none;
+  a {
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+    &:focus, &:hover {
+      color: @theme-color;
+      text-decoration: none;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+}
+
+body *:focus {
+  outline: none;
+}
+
+textarea {
+  width: 100%;
+}
+
+textarea, input, select,
+input[type="file"],
+input[type="checkbox"],
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+  padding: 7px 10px;
+  border: 1px solid @border-color;
+  color: #666;
+  outline: none !important;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+select {
+  padding: 7px 10px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  border: none;
+  padding: 0px !important;
+}
+
+.label{
+	color:inherit;
+}
+
+textarea:focus, select:focus,
+textarea:hover, select:hover,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+input[type="radio"]:focus,
+.uneditable-input:focus {
+  border: 1px solid @border-color;
+  outline: none !important;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+input[type="checkbox"],
+input[type="radio"],
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+  border: none;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  float: left;
+  margin: 0px 7px 0 0;
+}
+
+input.input-text:focus, textarea:focus {
+  border: 1px solid #ccc;
+}
+
+input[type="button"],
+input[type="checkbox"],
+input[type="password"],
+input[type="text"] {
+  khtml-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+input[type="text"] {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none !important;
+}

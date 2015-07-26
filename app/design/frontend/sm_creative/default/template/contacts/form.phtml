@@ -1,0 +1,78 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+<div class="row box-1-contact">
+    <?php if($this->getLayout()->createBlock('cms/block')->setBlockId('google-map')->toHtml()) { ?>
+    <div class="contact-map-wrap col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('google-map')->toHtml() ?>
+    </div>
+    <?php } ?>
+    <form class="contact-form col-lg-6 col-md-6 col-sm-6 col-xs-12" action="<?php echo Mage::getUrl(); ?>contacts/index/post/" id="contactForm" method="post">
+        <div class="form-wrapper">
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <div class="input-box">
+                            <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Your name') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Your name...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Your name...') ?>';" value="<?php echo ($this->helper('contacts')->getUserName())?$this->htmlEscape($this->helper('contacts')->getUserName()):Mage::helper('contacts')->__('Your name...'); ?>" class="input-text required-entry" type="text" />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="input-box">
+                            <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Your email') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Your email...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Your email...') ?>';" value="<?php echo ($this->helper('contacts')->getUserEmail())?$this->htmlEscape($this->helper('contacts')->getUserEmail()):Mage::helper('contacts')->__('Your email...'); ?>" class="input-text required-entry validate-email" type="text" />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="input-box field">
+                        <input name="subject" id="subject" title="<?php echo Mage::helper('contacts')->__('Title') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Subject') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Subject') ?>';" value="<?php echo ($this->helper('contacts')->getUserEmail())?$this->htmlEscape($this->helper('contacts')->getUserEmail()):Mage::helper('contacts')->__('Subject'); ?>" class="input-text" type="text" />  
+                    </div>
+                </li>
+                <li class="wide">
+                    <div class="input-box">
+                        <textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" onfocus="if(this.value=='<?php echo Mage::helper('contacts')->__('Comment...') ?>') this.value='';" onblur="if(this.value=='') this.value='<?php echo Mage::helper('contacts')->__('Comment...') ?>';" value="<?php echo Mage::helper('contacts')->__('Comment...'); ?>" class="required-entry input-text" cols="10" rows="7"><?php echo Mage::helper('contacts')->__('Comment...') ?></textarea>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="buttons-set">
+            <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+            <button type="submit" title="<?php echo Mage::helper('contacts')->__('Send Email') ?>" class="button"><span><span><?php echo Mage::helper('contacts')->__('Send Email') ?></span></span></button>
+        </div>
+    </form>
+    <div style="clear:both; padding:15px 0px;">&nbsp;</div>
+    
+    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('info-store')->toHtml() ?>
+    
+</div>
+
+
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', false);
+//]]>
+</script>

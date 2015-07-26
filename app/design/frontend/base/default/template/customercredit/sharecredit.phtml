@@ -1,0 +1,120 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php if($this->enableSendCredit()):?>
+<div class="box-account box-info box-customercredit-share">
+	<div class="box-head">
+        <h2><?php echo $this->__('Send Credit to friends') ?></h2>
+    </div>
+    <div class="customercredit_send_to_friend" id="customercredit_send_to_friend">
+        <form id="customercredit-form-content" method="post" <?php if($this->getVerifyEnable()): ?>action="<?php echo $this->getValidateUrl();?>"<?php else:?>action="<?php echo $this->getFormActionUrl();?>"<?php endif?>>
+            <ul class="form-list" style="float: left;">
+                <li class="cc_email fields"style="float: left;">
+                    <div class="customer-name">
+                        <div class="field name-firstname">
+                            <label for="customercredit_email_label"class="required"><em>*</em><?php echo $this->__("Email: ") ?></label>
+                            <div class="input-box">
+                                <input type="text" onchange="checkEmailExisted('<?php echo $this->getCustomerEmail();?>','<?php echo $this->getUrl('customercredit/index');?>');" class="customercredit_email_input input-text required-entry validate-email" id="customercredit_email_input" name="customercredit_email_input" style="width: 315px;"/>
+                                <p id="customercredit_show_loading" style="display: none;margin-top: 10px;">
+                                    <img src="<?php echo $this->getSkinUrl('images/customercredit/opc-ajax-loader.gif') ?>"/>
+                                    <?php echo $this->__('Loading...') ?>
+                                </p>
+                                <p id="customercredit_show_success" style="display: none;">
+                                    <img src="<?php echo $this->getSkinUrl('images/customercredit/i_msg-success.gif') ?>"/>
+                                    <?php echo $this->__('This email is an account email in this store!') ?>
+                                </p>
+                                <div class="validation-advice" id="advice-your-email" style="display: none;"><?php echo $this->__('You can\'t share credit for yourseft !') ?></div>
+                                <div id="customercredit_show_alert"style="display: none; width:125%;">
+                                    <p style="color: red;margin: 8px 0px 0px 2px;"><?php echo $this->__('Your friend’s email does not exist in the System. So your friend will receive credit via his/her email.');?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field name-lastname"style="width: 309px;">
+                            <label for="customercredit_value_input" class="required"><em>*</em><?php echo $this->__("Send Value : ".$this->getBalanceLabel()." available") ?></label>
+                            <div  class="input-box">
+                                <input type="text" class="customercredit_value_input input-text validate-number validate-greater-than-zero required-entry" id="customercredit_value_input" name="customercredit_value_input" style="width: 300px;" onchange="checkValidNumber();"/>
+                                <script>
+                                    function checkValidNumber() {
+                                        var current_value = <?php echo $this->getBalance();?>;
+                                        var value = $('customercredit_value_input').value;
+                                        if (value - current_value > 0) {
+                                            $('advice-validate-max-number').show();
+                                            inValidate('customercredit_value_input');
+                                            $('customercredit_send_credit_button').type = 'button';
+                                        }
+                                        else{
+                                            $('advice-validate-max-number').hide();
+                                            validate('customercredit_value_input');
+                                            //$('customercredit_send_credit_button').type = 'submit';
+                                        }
+                                    }
+                                </script>
+                                <div class="validation-advice" id="advice-validate-max-number" style="display: none;">
+                                    <?php  echo $this->__('Maximum credit is %s Please enter another number',$this->getBalanceLabel());?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul>
+                <li class="customercredit_message" style="float: left;">
+                    <label for="customercredit_message_textarea" style="font-weight: bold;"><?php echo $this->__("Message") ?>:</label>
+                    <div class="input-box">
+                        <textarea id="customercredit_message_textarea" name="customer-credit-share-message" style="min-height: 123px;width: 660px;"></textarea>
+                    </div>
+                </li>
+            </ul>
+            <div class="buttons-set">
+                <p id="customercredit_show_loading_p" style="display: none;margin-top: 10px;">
+                    <img src="<?php echo $this->getSkinUrl('images/customercredit/opc-ajax-loader.gif') ?>"/>
+                    <?php echo $this->__('Loading...') ?>
+                </p>
+                <button id="customercredit_send_credit_button" class="button" title="<?php echo $this->__('Send') ?>"  <?php if($this->getVerifyEnable()): ?> type="button" onclick="changeSendStatus(<?php echo $this->getBalance();?>,'<?php echo $this->getCustomerEmail();?>','<?php echo $this->getUrl('customercredit/index');?>');"<?php else: ?> type="submit" <?php endif?>>
+                    <span><span><?php echo $this->__('Send') ?></span></span>
+                </button>
+
+                <button id="customercredit_cancel_button" class="button" title="<?php echo $this->__('Cancel') ?>" type="button" onclick="setLocation('<?php echo $this->getBackUrl();?>')">
+                <span><span><?php echo $this->__('Cancel') ?></span></span>
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<?php endif;?>
+
+<script type="text/javascript">
+    var dataForm = new VarienForm('verify-code-form', true);
+    var dataForm = new VarienForm('customercredit-form-content', true);
+</script>
+<div class="box-account box-info box-customercredit-history" style="float: left;margin-top: 10px">
+    <div class="box-head">
+        <h2><?php echo $this->__('Credit Code List') ?></h2>
+    </div>
+    <?php echo $this->getChildHtml() ?>
+</div>

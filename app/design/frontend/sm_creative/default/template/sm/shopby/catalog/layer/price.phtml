@@ -1,0 +1,100 @@
+<?php
+/*------------------------------------------------------------------------
+ # SM Shop By - Version 1.0
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/?>
+
+<?php $current = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();?>
+<div class="price_main_filter">
+    <div class="filter-input filter-input-min">
+        <span><?php echo $current;?></span>
+        <input id="price-filter-min-text" type="text" value="<?php echo $this->getCurrentMinPriceFilter(); ?>">  
+    </div>
+    <div class="filter-input">
+        <span><?php echo $current;?></span>
+        <input id="price-filter-max-text" type="text" value="<?php echo $this->getCurrentMaxPriceFilter(); ?>">
+    </div>	
+    <div id="price-filter" class="price_filter">
+        <span id="price-filter-min" class="price-from" title="Minimum value"></span>
+        <span id="price-filter-max" class="price-to" title="Maximum value"></span>
+    </div>
+    <div class="a-right">
+        <button id="button-price-slider" class="button" onclick="priceEvent(this.value)" value=""><span><span><?php echo $this->__('Search') ?></span></span></button>
+    </div>
+</div>
+<!-- </div> -->
+<script type="text/javascript">
+    maxPrice = <?php echo $this->getMaxPriceFloat(); ?>;
+    minPrice = <?php echo $this->getMinPriceFloat(); ?>;
+	
+	max_price = $('price-filter-max-text').value;
+	min_price = $('price-filter-min-text').value;
+	$('price-filter-max-text').onchange = function(){
+		max_price = $('price-filter-max-text').value;
+		if( max_price > maxPrice){
+			$('price-filter-max-text').value = maxPrice;
+			max_price = maxPrice;
+		}
+		if( max_price < minPrice){
+			$('price-filter-max-text').value = minPrice;
+			max_price = minPrice;
+		}
+		min_price = $('price-filter-min-text').value;
+		$('button-price-slider').value = min_price+'-'+max_price;
+	};
+	$('price-filter-min-text').onchange = function(){
+		min_price = $('price-filter-min-text').value;
+		if( min_price > maxPrice){
+			$('price-filter-min-text').value = maxPrice;
+			min_price = maxPrice;
+		}
+		if( min_price < minPrice){
+			$('price-filter-min-text').value = minPrice;
+			min_price = minPrice;
+		}
+		max_price = $('price-filter-max-text').value;
+		$('button-price-slider').value = min_price+'-'+max_price;
+	};
+	
+	priceSliderUrl = '<?php echo $this->getUrlPattern(); ?>';    
+    <?php if (!$this->getRequest()->isAjax()): ?>
+    function priceEvent(val) {	
+        if (val) {
+            var url = priceSliderUrl.replace('__PRICE_VALUE__', val);
+            <?php if ($this->helper('sm_shopby')->isAjaxEnabled()): ?>
+            handleEvent(url);
+            <?php else: ?>
+            window.location.href = url;    
+            <?php endif; ?>
+        }
+    }
+    <?php endif; ?>
+    
+	timerSlider = null;
+    new Control.Slider([$('price-filter-min'), $('price-filter-max')], 'price-filter', {
+        range: $R(minPrice, maxPrice),
+        sliderValue: [<?php echo $this->getCurrentMinPriceFilter(); ?>, <?php echo $this->getCurrentMaxPriceFilter(); ?>],
+        values: $R(minPrice, maxPrice),
+        restricted: true,
+        onChange: function(val){
+            if (val[0] != <?php echo $this->getCurrentMinPriceFilter(); ?> || val[1] != <?php echo $this->getCurrentMaxPriceFilter(); ?>) {
+				if (timerSlider) {
+					clearTimeout(timerSlider);
+				}
+				//timerSlider = setTimeout(priceEvent, 1000, val.join('-'));
+				timerSlider = priceEvent(val.join('-'));
+            }
+			
+        },
+        onSlide: function(val){ 
+            $('price-filter-max-display').innerHTML = val[1];
+            $('price-filter-min-display').innerHTML = val[0];
+			$('price-filter-max-text').value = val[1];
+            $('price-filter-min-text').value = val[0];
+        }
+    });
+	
+</script>

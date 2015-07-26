@@ -1,0 +1,306 @@
+<?xml version="1.0"?>
+<!-- @copyright  Copyright (c) 2009 AITOC, Inc. -->
+<config>
+    <modules>
+        <Aitoc_Aitsys>
+            <version>3.2.1</version>
+        </Aitoc_Aitsys>
+    </modules>
+    
+    <admin>
+        <routers>
+            <aitsys>
+                <use>admin</use>
+                <args>
+                    <module>Aitoc_Aitsys</module>
+                    <frontName>aitsys</frontName>
+                </args>
+            </aitsys>
+        </routers>
+    </admin>
+
+    <aitsys>
+        <events />
+    </aitsys>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <aitsys>
+                    <file>aitcore.xml</file>
+                </aitsys>
+            </updates>
+        </layout>
+        <menu>
+            <system>
+                <children>
+                    <aitsys translate="title" module="aitsys"> 
+                        <title>Manage Aitoc Modules</title>
+                        <sort_order>1</sort_order>           
+                        <action>aitsys</action>
+                    </aitsys> 
+                </children>
+            </system>
+        </menu>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <aitsys translate="title" module="aitsys">
+                                    <title>Manage Aitoc Modules</title>
+                                    <sort_order>0</sort_order>
+                                </aitsys>
+                                <config>
+                                    <children>
+                                        <aitsys translate="title" module="aitsys">
+                                            <title>AITOC Store Specific Settings</title>
+                                        </aitsys>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <!-- Do not uncomment this (X_x) 
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <aitoc_notfications>
+                        <type>singleton</type>
+                        <class>aitsys/observer</class>
+                        <method>updateNews</method>
+                    </aitoc_notfications>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+        -->
+
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <ambase_upds>
+                        <type>singleton</type>
+                        <class>aitsys/observer</class>
+                        <method>updateNotification</method>
+                    </ambase_upds>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+    </adminhtml>
+    
+    <global>
+        <events>
+            <!-- events for custom autoload start -->
+            <resource_get_tablename>
+                <observers>
+                    <aitsys_rewriter_observer>
+                        <type>singleton</type>
+                        <class>aitsys/rewriter_observer</class>
+                        <method>init</method>
+                    </aitsys_rewriter_observer>
+                </observers>
+            </resource_get_tablename>
+            <core_collection_abstract_load_before>
+                <observers>
+                    <aitsys_rewriter_observer>
+                        <type>singleton</type>
+                        <class>aitsys/rewriter_observer</class>
+                        <method>init</method>
+                    </aitsys_rewriter_observer>
+                </observers>
+            </core_collection_abstract_load_before>
+            <!-- events for custom autoload end -->
+            
+            <!-- cache cleaning start -->
+            <application_clean_cache>
+                <observers>
+                    <aitsys_rewriter_observer>
+                        <type>singleton</type>
+                        <class>aitsys/rewriter_observer</class>
+                        <method>clearCache</method>
+                    </aitsys_rewriter_observer>
+                </observers>
+            </application_clean_cache>
+            
+            <controller_action_predispatch_adminhtml_cache_flushAll>
+                <observers>
+                    <aitsys_rewriter_observer>
+                        <type>singleton</type>
+                        <class>aitsys/rewriter_observer</class>
+                        <method>clearCache</method>
+                    </aitsys_rewriter_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_cache_flushAll>
+            
+            <controller_action_predispatch_adminhtml_cache_massRefresh>
+                <observers>
+                    <aitsys_rewriter_observer>
+                        <type>singleton</type>
+                        <class>aitsys/rewriter_observer</class>
+                        <method>clearCache</method>
+                    </aitsys_rewriter_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml_cache_massRefresh>
+            <!-- cache cleaning end -->
+
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <aitsys_rewriter_observer>
+                        <type>singleton</type>
+                        <class>aitsys/observer</class>
+                        <method>coreBlockAbstractToHtmlBefore</method>
+                    </aitsys_rewriter_observer>
+                </observers>
+            </core_block_abstract_to_html_before>
+
+            <aitoc_module_set_template_after>
+                <observers>
+                    <aitsys_aitpatch_observer>
+                        <type>singleton</type>
+                        <class>aitsys/aitpatch_observer</class>
+                        <method>pathTemplateReplaceBeforeToHtml</method>
+                    </aitsys_aitpatch_observer>
+                </observers>
+            </aitoc_module_set_template_after>
+
+            <controller_front_init_routers>
+                <observers>
+                    <aitsys_debuger_init>
+                        <type>singleton</type>
+                        <class>aitsys/observer</class>
+                        <method>correction</method>
+                    </aitsys_debuger_init>
+                </observers>
+            </controller_front_init_routers>
+            
+            <controller_action_predispatch>
+                <observers>
+                    <aitsys_error_render>
+                        <type>singleton</type>
+                        <class>aitsys/observer</class>
+                        <method>errorRender</method>
+                    </aitsys_error_render>
+                </observers>
+            </controller_action_predispatch>
+            
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <aitsys_compatibility>
+                        <type>singleton</type>
+                        <class>aitsys/observer</class>
+                        <method>coreBlockAbstractToHtmlAfter</method>
+                    </aitsys_compatibility>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+        <resources>
+            <aitsys_setup>
+                <setup>
+                    <module>Aitoc_Aitsys</module>
+                    <class>Aitoc_Aitsys_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+                <sql_files>
+                    <upgrade>
+                        <u1>1.0-2.0.0</u1>
+                        <u2>1.0.0-2.0.0</u2>
+                        <u3>2.7.3-2.7.4</u3>
+                        <u4>2.14.6-2.15.0</u4>
+                        <u6>2.15.5-2.15.6</u6>
+                        <u7>2.20.1-2.21.0</u7>
+                        <u8>2.99.0-3.0.0</u8>
+                        <u9>3.0.3-3.1.0</u9>
+                        <u10>3.1.4-3.2.0</u10>
+                    </upgrade>
+                    <install>
+                        <i1>3.0.0</i1>
+                    </install>
+                </sql_files>
+            </aitsys_setup>
+            
+            <aitsys_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </aitsys_write>
+            
+            <aitsys_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </aitsys_read>
+        
+        </resources>        
+    
+        <models>
+            <aitsys>
+                <class>Aitoc_Aitsys_Model</class>
+                <resourceModel>aitsys_mysql4</resourceModel>
+            </aitsys>
+            <aitsys_mysql4>
+                <class>Aitoc_Aitsys_Model_Mysql4</class>
+                <entities>
+                    <news>
+                        <table>aitsys_news</table>
+                    </news>
+                    <status>
+                        <table>aitsys_status</table>
+                    </status>
+                </entities>
+            </aitsys_mysql4>
+            
+            <compiler>
+                <rewrite>
+                    <process>Aitoc_Aitsys_Model_Core_Compiler_Process</process>
+                </rewrite>
+            </compiler>
+        </models>
+        
+        <blocks>
+            <aitsys>
+                <class>Aitoc_Aitsys_Block</class>
+            </aitsys>
+        </blocks>
+        
+        <helpers>
+            <aitsys>
+                <class>Aitoc_Aitsys_Helper</class>
+            </aitsys>
+        </helpers>
+        
+        <cache>
+            <types>
+                <aitsys translate="label,description" module="aitsys">
+                    <label>Class Rewrites</label>
+                    <description>Extended class-rewriting subsystem.</description>
+                    <tags>aitsys</tags>
+                </aitsys>
+            </types>
+        </cache>
+        
+    </global>
+
+    <default>
+        <aitsys>
+            <feed>
+                <feed_url>http://www.aitoc.com/en/feedrss</feed_url>
+                <store_url>http://www.aitoc.com/en/shopfeed</store_url>
+                <frequency>86400</frequency>
+                <interests>PROMO,EXTENSION_UPDATE_CUSTOMER,EXTENSION_UPDATE,NEW_EXTENSION,NEWS</interests>
+            </feed>
+            <service>
+                <url>https://www.aitoc.com/api/xmlrpc</url>
+            </service>
+            <settings>
+                <use_dynamic_patches>0</use_dynamic_patches>
+            </settings>
+        </aitsys>
+    </default>
+    
+</config>

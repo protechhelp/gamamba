@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Phoenix Medien GmbH & Co. KG (http://www.phoenix-medien.de)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<layout version="0.1.0">
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addCss" ifconfig="moneybookerspsp/moneybookerspsp_cc/active"><script>css/skrill/moneybookerspsp/opc.css</script></action>
+            <action method="addJs" ifconfig="moneybookerspsp/moneybookerspsp_cc/active"><script>skrill/moneybookerspsp/processing.js</script></action>
+        </reference>
+    </checkout_onepage_index>
+    <moneybookerspsp_processing_ccform>
+        <reference name="root">
+            <action method="setTemplate"><template>moneybookerspsp/blank.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="moneybookerspsp/ccForm" name="moneybookerspsp_ccform" template="moneybookerspsp/ccform.phtml" />
+        </reference>
+    </moneybookerspsp_processing_ccform>
+    <moneybookerspsp_processing_registersuccess>
+        <remove name="root"/>
+        <block type="moneybookerspsp/ccForm" name="processing_success" template="moneybookerspsp/processing/register/success.phtml" output="toHtml"/>
+    </moneybookerspsp_processing_registersuccess>
+    <moneybookerspsp_processing_registerfailed>
+        <remove name="root"/>
+        <block type="core/template" name="processing_failed" template="moneybookerspsp/processing/failed.phtml" output="toHtml"/>
+    </moneybookerspsp_processing_registerfailed>
+    <moneybookerspsp_processing_success>
+        <remove name="root"/>
+        <block type="moneybookerspsp/ccForm" name="processing_success" template="moneybookerspsp/processing/success.phtml" output="toHtml"/>
+    </moneybookerspsp_processing_success>
+    <moneybookerspsp_processing_failed>
+        <remove name="root"/>
+        <block type="core/template" name="processing_failed" template="moneybookerspsp/processing/success.phtml" output="toHtml"/>
+    </moneybookerspsp_processing_failed>
+    <moneybookerspsp_processing_agent>
+        <remove name="root"/>
+        <block type="core/template" name="transport_agent" template="moneybookerspsp/agent.phtml" output="toHtml"/>
+    </moneybookerspsp_processing_agent>
+    <moneybookerspsp_processing_redirect>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="moneybookerspsp_redirect" template="moneybookerspsp/payment.phtml" />
+        </reference>
+    </moneybookerspsp_processing_redirect>
+    <moneybookerspsp_processing_redirect_3ds_form>
+        <reference name="root">
+            <action method="setTemplate"><template>moneybookerspsp/3ds_redirect.phtml</template></action>
+        </reference>
+    </moneybookerspsp_processing_redirect_3ds_form>
+    <moneybookerspsp_processing_threeds>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="moneybookerspsp_3ds_container" template="moneybookerspsp/3ds_container.phtml" />
+        </reference>
+    </moneybookerspsp_processing_threeds>
+    <moneybookerspsp_processing_threeds_redirect>
+        <block type="core/template" name="root" output="toHtml" template="moneybookerspsp/redirect.phtml">
+        </block>
+    </moneybookerspsp_processing_threeds_redirect>
+</layout>
+

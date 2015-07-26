@@ -1,0 +1,25 @@
+<?php
+/**
+ * Configurable Checkout
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitconfcheckout
+ * @version      2.1.27
+ * @license:     2qI6oAD8hvvkjMutXwa7Vp1gcsMrnxn0DqZRLmfWz9
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+$_helper = Mage::helper('aitinstall');
+/* @var $_helper Aitoc_Aitinstall_Helper_Data */
+if ($_helper->isDoubleInstallerVersion()) { ?>
+<div class="notification-global">
+    <?php if ($_helper->isThereAnyLicenses()) {
+        echo $_helper->__('<strong>Do not delete</strong> the old AITOC Modules Manager (app/code/local/Aitoc/Aitsys) unless you convert licenses purschased
+                          prior to August 6th, 2013. You may <a href="%s" target="_blank">request AITOC support team</a> to convert your licenses and remove
+                          the old AITOC Modules Manager. More info available at <a href="%s" target="_blank">this guide</a>. If you delete the old AITOC Modules
+                          Manager without converting licenses your Magento will crash.', $_helper->getSupportLink() , $_helper->getInfoLink());
+    } else {
+        echo $_helper->__('You have both the new and old versions of the AITOC Module Manager.
+                           You may <a href="%s" target="_blank">request AITOC support team</a> to remove the old AITOC Modules Manager for you.', $_helper->getSupportLink());
+    } ?>
+</div>
+<?php } ?>

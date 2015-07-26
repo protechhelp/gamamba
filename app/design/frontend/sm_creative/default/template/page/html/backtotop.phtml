@@ -1,0 +1,31 @@
+<?php
+/*------------------------------------------------------------------------
+ # Copyright (c) 2014 YouTech Company. All Rights Reserved.
+ # @license - Copyrighted Commercial Software
+ # Author: YouTech Company
+ # Websites: http://www.magentech.com
+-------------------------------------------------------------------------*/?>
+
+<a id="yt-totop" href="#" title="Go to Top"></a>
+<script type="text/javascript">
+	jQuery(document).ready(function($){  
+		$("#yt-totop").hide();
+		$(function () {
+			var wh = $(window).height();
+			var whtml =  $(document).height();
+			$(window).scroll(function () {
+				if ($(this).scrollTop() > whtml/10) {
+					$('#yt-totop').fadeIn();
+				} else {
+					$('#yt-totop').fadeOut();
+				}
+			});
+			$('#yt-totop').click(function () {
+				$('body,html').animate({
+					scrollTop: 0
+				}, 800);
+				return false;
+			});
+		});
+	});
+</script>

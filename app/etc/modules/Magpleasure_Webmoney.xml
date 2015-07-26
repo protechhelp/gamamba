@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Magpleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Webmoney
+ * @copyright  Copyright (c) 2010-2014 Magpleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+ -->
+<config>
+    <modules>
+        <Magpleasure_Webmoney>
+            <active>true</active>
+            <codePool>local</codePool>
+        <edition>CE</edition><license>IQ3HABEUF0BZTVQB</license></Magpleasure_Webmoney>
+    </modules>
+</config>

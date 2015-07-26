@@ -1,0 +1,60 @@
+<!--@subject A customer credit from {{htmlescape var=$sendername}} @-->
+<!--@vars
+{"htmlescape var=$name":"Recipient Name",
+"htmlescape var=$sendername":"Sender name",
+"var code":"Customer Credit Code",
+"var balance":"Customer Credit Balance",
+"var status":"Status",
+"htmlescape var=$message":"Message",
+"var expiredat":"Expired At"}
+@-->
+
+<!--@styles
+body,td { background:#FFFFFF; margin:0; padding:0; color:#2f2f2f; font:13px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+pre{ white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;}
+@-->
+
+<div style="font:13px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=""}}">
+                            <img src="{{skin url="images/logo_email.gif" _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                        <p>
+                            <strong>Dear {{htmlescape var=$receiver_name}}</strong>,<br/>
+                            We are glad to inform you that <strong>{{htmlescape var=$send_name}}</strong> has just sent you <b>{{var value}}</b> at <b>{{var store.getFrontendName()}}</b>  {{if message}} with a message:
+                        </p>
+                        <p><i>"{{var message}}"</i>.</p>
+                        {{/if}}
+                        <p>
+                            You can use this credit to check out or send to your friends at <b>{{var store.getFrontendName()}}</b>.<br/>
+                            In order to add this credit amount into your account, please log into your account at <b>{{var store.getFrontendName()}}</b> first. After that, go to the <b>Redeem Credit</b> page and enter the code below in <b>Verification Code</b> box before submitting. 
+                        </p>
+                            <div class="wrap-box" style="background:#FFFFFF;width:255px; overflow:hidden; border:6px solid #59b1e1;padding:0 12px 0px 12px;">
+                                <input type="text" value="{{var creditcode}}" name="redemption" style="color:#FF7200;font-size: 22px; border: none; font-weight:bold;" readonly="true" />
+                                 </div>
+                        <p>
+                            Or else, you can just click directly on this link to quickly enter code:<br/> <a href="{{var redeemurl}}">{{var redeemurl}}</a>
+                        </p>
+
+                            <p>Yours sincerely,<br/><strong>{{var store.getFrontendName()}}</strong></p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

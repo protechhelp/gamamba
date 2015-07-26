@@ -1,0 +1,70 @@
+<script type="text/javascript">
+	optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+	optionsPrice.containers[5] = 'custom-product-price-' + optionsPrice.productId;
+</script>
+
+<?php echo $this->getChildHtml('jsforbundle');?>
+
+<script></script>
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+?>
+<form action="<?php echo $this->getAddToCartUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+	<div class="no-display">
+		<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+		<input type="hidden" name="related_product" id="related-products-field" value="" />
+	</div>	
+		<?php //echo $this->getChildHtml('product_js');?>
+	<div id="product-shop">
+	   
+		<div class="product-options" id="product-options-wrapper" style="margin:0">
+			<div class="product-name">
+                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            </div>
+			<?php echo $this->getChildHtml('product_configurable_options');?>
+			<?php echo $this->getChildHtml('product_downloadable_options');?>
+            <?php //var_dump($_product->getTypeId()); ?>
+			<?php if( $_product->getTypeId() == 'bundle'):?>
+					<div style=""><?php echo $this->getChildHtml('type_bundle_options');?></div>
+			<?php endif?>
+			<?php if ($this->hasRequiredOptions()):?>
+				<p class="required"><?php echo $this->__('* Required Fields') ?></p>
+			<?php endif;?>
+			<div style="display:none">
+				<?php echo $this->getChildHtml('product_type_data') ?>
+			</div>
+			<?php echo $this->getChildHtml('product_js');?>
+			<?php echo str_replace('var ', '', $this->getChildHtml('product_options'));?>
+			<?php //echo $this->getChildHtml('product_options');?>
+			<?php echo $this->getChildHtml('html_calendar');?>
+			<?php echo $this->getChildHtml('tierprices');?>
+			<?php echo $this->getChildHtml('product_price');?>
+			
+			<div style="margin:5px 0px 0px 0; float:left; width:100%;">
+				<?php echo $this->getChildHtml('addtocart');?>
+				<a href="javascript:void(0);" id="btcancel" onclick = "$('product_addtocart_form').remove();$('options').setStyle({display:'none'});">
+					<?php echo $this->__('Cancel')?>
+				</a>
+			</div>
+			<?php echo $this->getChildHtml('extrahind');?>
+		</div>
+		<script type="text/javascript">decorateGeneric($$('#product-options-wrapper dl'), ['last']);</script>
+	</div>
+
+	<?php if(Mage::getSingleton('checkout/session')->getIsfirst()==2):?>
+		<input type="hidden" value="1" name="miniwishtocart"> 
+	<?php endif?>
+</form>
+<script type="text/javascript">
+// //<![CDATA[
+	// productAddToCartForm = new VarienForm('product_addtocart_form');
+	// productAddToCartForm.submit = function(){
+			// if (this.validator.validate()) {
+					// //this.form.submit();
+					// url=$('product_addtocart_form').action;
+					// ajaxUpdate(url,'form');
+			// }
+	// }.bind(productAddToCartForm);
+// //]]>
+</script>

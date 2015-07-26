@@ -1,0 +1,692 @@
+<script type="text/javascript">
+//<![CDATA[
+	var isCart=<?php echo (strpos(Mage::app()->getFrontController()->getRequest()->getPathInfo(),'/checkout/')!==false  
+			AND strpos(Mage::app()->getFrontController()->getRequest()->getPathInfo(),'/checkout/cart/configure/')===false 
+			)?'1':'0'?>;
+	var _skipProductlink ='<?php 	
+	if (strpos(Mage::app()->getFrontController()->getRequest()->getPathInfo(),'/checkout/cart/configure/')!==false ){
+			$matches=NULL;
+			preg_match('/\/id\/\d+\//', Mage::app()->getFrontController()->getRequest()->getPathInfo(), $matches);
+			echo $matches[0];
+	}?>';
+	var enable_ajax_cart = <?php echo (Mage::getStoreConfig('cartpro_cfg/general/enable_ajax_cart'))?true:0; ?>;
+	var enable_ajax_compare = <?php echo (Mage::getStoreConfig('cartpro_cfg/general/enable_ajax_compare'))?true:0; ?>;
+	var enable_ajax_wishlist = <?php echo (Mage::getStoreConfig('cartpro_cfg/general/enable_ajax_wishlist'))?true:0; ?>;
+	var enable_ajax_update = <?php echo (Mage::getStoreConfig('cartpro_cfg/general/enable_ajax_update'))?true:0; ?>;
+	var confirm_display = <?php echo (Mage::getStoreConfig('cartpro_cfg/confirm_display_setting/confirm_display'))?true:0; ?>;
+	var confirm_countdown_number = <?php echo Mage::getStoreConfig('cartpro_cfg/confirm_display_setting/confirm_countdown_number') ?>;
+	var confirm_item_display = <?php echo (Mage::getStoreConfig('cartpro_cfg/confirm_display_setting/confirm_item_display'))?true:0; ?>;
+	
+	var isWishlist=<?php echo (strpos(Mage::app()->getFrontController()->getRequest()->getPathInfo(),'/wishlist/')!==false)?'1':'0'?>;
+	var isCompare=<?php echo (strpos(Mage::app()->getFrontController()->getRequest()->getPathInfo(),'/catalog/product_compare/')!==false)?'1':'0'?>;
+	var setfocus=1;
+	//var isIE6= new RegExp("MSIE 6").test(navigator.userAgent);
+	var isIE7= new RegExp("MSIE 7").test(navigator.userAgent);
+	var iffix="";
+	//if(isIE6) {iffix="<iframe id='iffix'></iframe>";}
+	var iprocess='<div id="loadmask"><p class="loader"><img alt="<?php echo Mage::helper('cartpro')->__('Loading...');?>" src="<?php echo $this->getSkinUrl('sm/cartpro/images/ajax-loader-tr.gif')?>"><br><?php echo Mage::helper('cartpro')->__('Please wait...');?></p></div>'+iffix;
+	var iconfirm="";
+	var islogin="<?php echo (Mage::getSingleton('customer/session')->isLoggedIn())?1:0?>";
+	var bundle;
+	var optionsPrice;
+	var calendar;
+	var productAddToCartForm;
+	var dConfig;
+	var classBtnAddtocart = '.btn-cart';
+	function ajaxUpdate(args,type)
+	{
+		if(type=="url"){
+			//var param=""+args;
+			//url="<?php echo Mage::getUrl('cartpro/index/add')?>";
+			url=args;
+			new Ajax.Request(url, {encoding:'UTF-8',method: 'post',
+				 parameters:{
+					isCart:isCart,	//check current page is product page, or My cart page, and check this request is ajax or not
+					isWishlist:isWishlist	
+				}, 
+				// req.setRequestHeader("Content-type", "text/x-json");
+
+				onSuccess : function(resp)
+				{
+					var respjson=resp.responseText.evalJSON();
+					updateCart(respjson);
+				},
+				onLoading : function(resp)
+				{	$("fancybox-wrap-clone").setStyle({display:"none"});
+					$("process").innerHTML=iprocess;
+					$("process").setStyle({display:"block"});
+					$("options").setStyle({display:"block"});
+					$("blurmask").setStyle({display:"block"});
+					fixcenter();
+				},
+				onFailure : function(resp)
+				{
+					Element.setInnerHTML( display, resp.responseText);
+				},
+				onComplete: function()
+				{
+					$("process").setStyle({display:"none"});
+					$("blurmask").setStyle({display:"none"});
+				}
+			}); 
+		}
+		else{
+			$('product_addtocart_form').request({			//form-example  id form
+				encoding:'UTF-8',
+				method:'post',
+				//setRequestHeader: {Accept: 'text/html'},
+				parameters:{isCart:isCart},		
+				onLoading : function(resp)
+				{
+					$("process").innerHTML=iprocess;
+					$("process").setStyle({display:"block"})
+					$("fancybox-wrap-clone").setStyle({display:"none"});
+					$("options").setStyle({display:"block"});
+					$("blurmask").setStyle({display:"block"});
+					fixcenter();
+				},				
+				onComplete: function(resp){
+					$("process").setStyle({display:"none"});
+					$("blurmask").setStyle({display:"none"});
+					var respjson=resp.responseText.evalJSON();
+					updateCart(respjson);
+				}
+			});		
+		}
+	}
+	function updatePCart(resp){
+		if(resp.r=='0'){ //add to cart
+			if(!resp.options){
+				if(opener.isCart=='1'){
+					opener.updateBigcart(resp);
+					$("options").setStyle({display:"none"});
+				}
+				else{
+					opener.updateCartSidebar(resp);
+					if(hideConfirm!=1)
+					showPConfirm(resp);
+					
+					hideConfirm=0;
+				}
+			}
+			else{
+				showOptions(resp);
+				showPConfirm(resp);
+			}
+		}
+		else if(resp.r=='1'){		//apply add wishlist
+			if(isWishlist=='1'){
+				opener.updateWishlistRemove(resp);
+			}
+			else{
+				opener.updateMiniWish(resp);
+				if(hideConfirm!=1)
+				showPConfirm(resp);
+				hideConfirm=0;
+			}			
+		}		
+	}
+	function updateCart(resp){
+		if(resp.r=='0'){ //  apply action add to cart
+			if(!resp.options){
+				if(isCart=='1'){	// in my cart page
+					updateBigcart(resp);
+					$("options").setStyle({display:"none"});
+					if(hideConfirm!=1)
+						showConfirm(resp);
+					hideConfirm=0;
+				}
+				else{
+					
+					if(resp.wishlist){
+						updateWishlist(resp); //update mini wish ,or big wishlist when click addtocart
+					}
+					updateCartSidebar(resp);
+					
+					if(hideConfirm!=1)
+						showConfirm(resp);
+					hideConfirm=0;
+				}
+				updateMiniCartPro(resp);
+				updateDeleteLinks();	//for btn delete in table item added tocart
+				updateLinks(resp);
+				if(islogin=="1"){
+					updateWishlistLinks();
+				}
+				updateProductCompareLinks();						
+			}
+			else{
+				if(resp.wishlist){
+						updateWishlist(resp);
+				}		
+				showOptions(resp);
+				//showConfirm(resp);	//fixed for mage 324
+			}
+		}
+		else if(resp.r=='1'){		//apply action add wishlist 
+			if(isWishlist=='1'){
+				updateWishlistRemove(resp);  //in wishlist page have only case remove item in big wishlist, => only update bigwishlist
+				if(hideConfirm!=1)
+				showConfirm(resp);
+				hideConfirm=0;
+			}
+			else{
+				updateMiniWish(resp);  //not in wishlist page have 2case : add item, and remove item in miniwish => only update miniwish
+				if(hideConfirm!=1)
+				showConfirm(resp);
+				hideConfirm=0;
+			}			
+		}
+		else if(resp.r=='2'){		//apply action add product compare
+			updateProductCompare(resp);
+			if(isCompare && deletePCompare){
+				//deletePCompare=0;
+				win.location.reload();
+			}
+			if(hideConfirm!=1)
+			showConfirm(resp);
+			deletePCompare=0;
+			hideConfirm=0;
+		}
+	}
+	function updateBigcart(resp){
+		var bcart=$$("#yt_content .cart");
+		if(typeof(bcart)!='undefined'){
+			bcart.each(function(el){ el.innerHTML = resp.cart; });
+		}
+	}
+	function updateCartSidebar(resp){
+		//for(var x in elem){console.log(x);}
+		//Effect add to cart
+		// if(elem!=undefined){
+			// var clone = elem.cloneNode(true);
+			
+			// elem.up().insert(clone);
+			// clone.setStyle({position:"absolute"});elem.setStyle({position:"absolute"});
+			// //console.log(clone);
+			// //console.log($$(minicart)[0].offsetLeft,$$(minicart)[0].offsetTop);
+
+			// ProdX=elem.up(2).offsetLeft+elem.offsetLeft;
+			// ProdY=elem.up(2).offsetTop+elem.offsetTop;
+
+			// //console.log(elem.up(2).tagName);
+			// if(isIE6 ||isIE7){
+			// CartX=$$(minicart)[0].offsetLeft+$$(minicart)[0].up().offsetLeft+$$(minicart)[0].up(1).offsetLeft;
+			// CartY=$$(minicart)[0].offsetTop+$$(minicart)[0].up().offsetTop+$$(minicart)[0].up(1).offsetTop;
+			// }
+			// else{
+			// CartX=$$(minicart)[0].offsetLeft;
+			// CartY=$$(minicart)[0].offsetTop;
+			// }
+			// //pCartX=$$(minicart)[0].offsetParent.offsetLeft ;
+			// //pCartY=$$(minicart)[0].offsetParent.offsetTop ;
+			// //prod=elem.realOffset();
+			// var gotoX           = CartX - ProdX;
+			// var gotoY           = CartY - ProdY;
+			// //alert(gotoX+":"+gotoY+":"+ProdY+":"+ProdX+":"+CartX+":"+CartY+":"+pCartX+":"+pCartY+":"+CartX2+":"+CartY2);
+			// var pos=fixcenter();
+			// //console.log(CartX);console.log(CartY );console.log(pos[0]);console.log(pos[1]);console.log(ProdX);console.log(ProdY);//console.log(prod[0]);console.log(prod[1]);
+			// new Effect.Parallel(
+			 // [
+			 // new Effect.MoveBy(clone,gotoY, gotoX , { sync: true }),
+			 // new Effect.Scale(clone, 75, { sync: true }),
+			 // new Effect.Opacity(clone,{sync: true,from:1,to:0})
+			 // ],
+			 // {duration: 3}
+			 // );		
+			// //clone.remove();
+		// }
+		//var bcart=$$(".block-cart");
+		//minicart=($$('.mini-cart')!='')?$$('.mini-cart')[0]:$$('.block-cart')[0];
+		//var bcart=$$(sidebarcart);
+		if(typeof($$(sidebarcart))!='undefined'){
+			$$(sidebarcart).each(function(blockitem){ blockitem.replace(resp.cart); } );
+			truncateOptions();		
+		}
+	}
+	function updateMiniCartPro(resp){
+		//var bcart=$$(minicartpro)[0];
+		if(typeof($$(minicartpro))!='undefined'){
+			$$(minicartpro).each(function(blockitem){ 
+				if(resp.cartpro!=""){
+					blockitem.replace(resp.cartpro);
+				}
+			});
+			truncateOptions();	
+		}
+	}	
+	function updateMiniWish(resp){
+		//var bminiwish=$$(".block-wishlist");
+		var bminiwish=$$(miniwish);
+		//var bcart=$$(".block-cart");
+		var bcart=$$(minicart);
+		if(typeof(bminiwish)!='undefined'){ 
+			bminiwish.each(function(el){ el.replace(resp.cart); })
+		}else if(typeof(bcart)!='undefined'){
+			bcart.each(function(el){ el.insert({after:resp.cart}); });
+		}
+		updateWishlistAddCartLinks();
+		updateRemoveWishLinks();		
+		updateWishlinks(resp);
+	}
+	function updateLinks(resp){
+		//var links=$$(".top-link-cart");
+		//links[0].innerHTML=resp.links;
+		var links=$$(toplinkcart);
+		links.each(function(el){ el.innerHTML=resp.links; });
+	}
+	function updateWishlistRemove(resp){	//update wishlist when remove item
+		updateWishlist(resp);
+	}
+	function updateWishlist(resp){			//update wish list when add item to wishlist
+		var strwish="";
+		if(resp.wishlist){
+			strwish=resp.wishlist;
+		}else{
+			strwish=resp.cart;		
+		}
+		if(isWishlist=='0'){
+			//var bminiwish=$$(".block-wishlist");
+			var bminiwish=$$(miniwish);
+			//var bcart=$$(".block-cart");
+			var bcart=$$(minicart);
+			if(typeof(bminiwish)!='undefined'){
+				bminiwish.each(function(el){ el.replace(strwish); });
+			}
+			else if(typeof(bcart)!='undefined'){
+				bcart.each(function(el){ el.insert({after:strwish}); });
+			}
+			updateWishlistAddCartLinks();
+		}else{
+			//var bwish=$$(".my-account");
+			var bwish=$$(".col-main .my-account");
+			bwish.each(function(el){ 
+				el.innerHTML="";
+				el.innerHTML=strwish;
+			});
+		}
+		//bwish[0].replace(resp.wishlist);
+		updateRemoveWishLinks();
+		updateWishlinksCart(resp);
+		
+	}
+	function updateWishlinksCart(resp){		//update wishlink when add to cart item from wishlist
+		updateWishlinks(resp);
+	}
+	function updateWishlinks(resp){		//update wishlink when add product, remove product vao wishlist
+		var links=$$(".top-link-wishlist");
+		links[0].innerHTML=resp.links;	
+		var strwishlink="";
+		if(resp.wishlinks){
+			strwishlink=resp.wishlinks;
+		}else{
+			strwishlink=resp.links;		
+		}	
+		//var links=$$(".top-link-wishlist");
+		//links[0].innerHTML=strwishlink;			
+		
+		if(toplinkwish!=''){
+			$$(toplinkwish).each(function(el){ el.innerHTML=strwishlink; });
+		}
+		else{
+			var links = getToplinkwish();
+			if(links.length){
+				links.each(function(el){ el.innerHTML=strwishlink; });
+			}
+		}
+	}
+	function updateProductCompare(resp){
+		//var bproductcompare=$$('.block-compare');
+		var bproductcompare=$$(compare)[0];
+		//bproductcompare[0].replace(resp.cart);
+		if(typeof(bproductcompare)!='undefined'){
+			bproductcompare.replace(resp.cart);
+			updateRemovePCompareLinks();
+			updateClearPCompareLinks();
+		}
+		
+	}
+
+	function showConfirm(resp){
+		if(!confirm_display){ return false; }
+		timedown = confirm_countdown_number;
+		var cnext="";
+		var addto="";
+		var cshop="";
+		var txtaddedto=(hideConfirm==1 || deletePCompare==1)?"<?php echo Mage::helper('cartpro')->__('item deleted from');?> ":" <?php echo Mage::helper('cartpro')->__('added to');?> ";
+		
+		if(isCompare){
+			cshop='<li><button id="btcshop" title="<?php echo Mage::helper('cartpro')->__('Continue Compare');?>" class="button" onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});isCompare=0;win.focus();"><span id="setcdown"><?php //echo Mage::helper('cartpro')->__('Continue Compare');?>'+ timedown +' s</span> </button></li>';		
+		}
+		else{
+			cshop='<li><button id="btcshop" title="<?php echo Mage::helper('cartpro')->__('Continue Shopping');?>" class="button" onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});"><span id="setcdown"><?php //echo Mage::helper('cartpro')->__('Continue Shopping');?>'+ timedown +' s</span> </button></li>';
+		}
+		if(resp.r=='0'){
+				var tnext=(isCart==1)?"<?php echo Mage::helper('cartpro')->__('Proceed to Checkout');?>":"<?php echo Mage::helper('cartpro')->__('View cart & checkout');?>";
+				var linknext=(isCart==1)?"<?php echo Mage::getUrl('checkout/onepage/') ?>":"<?php echo Mage::getUrl('checkout/cart/') ?>";
+				cnext='<li><a id="btccart" title="<?php echo Mage::helper('cartpro')->__('Checkout');?>"  onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});window.location=\''+linknext+'\';"  href="'+linknext+'">	<span>'+tnext+'</span></a></li>';
+				addto="<?php echo Mage::helper('cartpro')->__('your shopping cart.');?>";
+		}
+		else if(resp.r=='1'){
+				cnext='<li><a id="btccart" title="<?php echo Mage::helper('cartpro')->__('View Wishlist');?>" class="button" onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});window.location=\'<?php echo Mage::getUrl('wishlist/index/') ?>\';"  href="<?php echo Mage::getUrl('wishlist/index/') ?>">	<span><?php echo Mage::helper('cartpro')->__('View Wishlist');?></span></a></li>';
+				addto="<?php echo Mage::helper('cartpro')->__('your wishlist.');?>";
+		}
+		else if(resp.r=='2'){
+				var str=resp.cart;
+				var strclick=str.substring(str.indexOf("popWin('"),str.indexOf(")",str.indexOf("popWin('"))+1);
+				cnext='<li><a id="btccart" title="<?php echo Mage::helper('cartpro')->__('View Comparison');?>" href="javascript:void(\'0\')" onclick="$(\'confirmbox\').innerHTML=\'\';$(\'fancybox-wrap-clone\').setStyle({display:\'none\'});$(\'options\').setStyle({display:\'none\'});'+strclick+'">	<span><?php echo Mage::helper('cartpro')->__('View Comparison');?></span></a></li>';
+				addto="<?php echo Mage::helper('cartpro')->__('comparison list.');?>";
+		}
+		var info= (typeof resp.infoitem !="undefined")?resp.infoitem:"";
+		var sometext = '<div class="moretext"><?php echo $this->__('Thank you for your choosing !')?></div>';
+		
+		var headinfo = '<p class="head-iteminfo '+((resp.r=='1' || resp.r=='2')?'show':'')+'"><span id="item-name"><?php echo $this->__('"')?>'+resp.nameitem+'<?php echo $this->__('"')?></span>'+txtaddedto+addto+'</p>';
+		var blockconfirm=	headinfo
+							+ ((typeof info.item !="undefined" && info.item!="" && confirm_item_display)?(info.item + sometext):"") + ((typeof info.other !="undefined" && info.other!="")?info.other:"") 
+							
+							+'<div id="btnavi"><ul>'+cshop+cnext+'</ul></div>'+iffix;
+		$("confirmbox").innerHTML=blockconfirm;
+		setTimeout("cdown(timedown)",1000);
+		$("fancybox-wrap-clone").setStyle({display:"block"});
+		$("options").setStyle({display:"block"});
+		fixcenter();
+		
+		if(timedown==0)
+			isCompare=0;
+	}
+	function showPConfirm(resp){
+		timedown = confirm_countdown_number;
+		var cnext="";
+		var addto="";
+		var cshop='<li><a id="btcshop"  onclick="$(\'confirmbox\').remove();$(\'options\').setStyle({display:\'none\'});" href="javascript:void(0);"><span id="setcdown">Continue Shopping<span id="cdown">('+timedown+')</span></span> </a></li>';
+		var cclose='<li><a id="btcclose"  onclick="window.close();" href="javascript:void(0);"><span>Close Compare</span> </a></li>';
+		if(resp.r=='0'){
+				var cnext='<li><a id="btccart"  onclick="opener.window.location.href=\'<?php echo Mage::getUrl('checkout/cart/') ?>\';window.close();"  href="javascript:void(0)">	<span>View cart & checkout</span></a></li>';
+				addto="your shopping cart.";
+		}
+		else if(resp.r=='1'){
+				var cnext='<li><a id="btccart"  onclick="opener.location.href=\'<?php echo Mage::getUrl('checkout/cart/') ?>\';window.close();"  href="javascript:void(0)">	<span>View Wishlist</span></a></li>';
+				addto="your wishlist.";
+		}
+		var blockconfirm='<div id="confirmbox" ><p><span id="product_name">'+resp.nameitem+'</span> added to '+addto+'</p><br><div id="btnavi"><ul>'+cshop+cnext+cclose+'</ul></div></div>'+iffix;
+		
+		$("confirmbox").innerHTML=blockconfirm;setTimeout("cdown(timedown)",1000);		
+		$("fancybox-wrap-clone").setStyle({display:"block"});
+		$("process").setStyle({display:"none"});	
+		$("options").setStyle({display:"block"});		
+	}
+	function cdown(timedown){
+		var cto="";
+		//cto=(isCompare)?"<?php echo Mage::helper('cartpro')->__('Continue Compare');?>":"<?php echo Mage::helper('cartpro')->__('Continue Shopping');?>";
+
+		if(timedown!=1){  //show box and count down timer when timeout will close box
+			try{
+					time=timedown-1;
+					$("setcdown").innerHTML= time+"  s";setTimeout("cdown(time)",1000);
+				}
+			catch(e){}
+		}
+		else{
+			$("options").setStyle({display:"none"});
+			$('fancybox-wrap-clone').setStyle({display:'none'});
+			if(isCompare) {isCompare=0;win.focus();}
+			
+			return;
+		}
+	}
+	function showOptions(resp){
+		            //tmpDiv = win.document.createElement('div');
+					var i;
+
+                    var scripts = resp.cart.extractScripts();
+			
+					//$("zoptions").innerHTML=resp.cart.stripScripts()+iffix;//iframe hack IE6 , make for div have zindex great than z-index select form
+									
+                    for (i=0; i<scripts.length; i++)
+                    {
+                        if (typeof(scripts[i]) != 'undefined' && i<2){
+                            try{
+								eval(scripts[i]);
+							}
+							catch(e){
+								console.debug(e);
+							}
+                        }
+						else{
+							break;
+						}
+                    }
+						
+					$("confirmbox").innerHTML=resp.cart.stripScripts()+iffix;	
+				   //tmpDiv.innerHTML = resp.cart.stripScripts();
+                   // win.document.body.appendChild(tmpDiv);
+					$("process").setStyle({display:"none"});
+
+					$("fancybox-wrap-clone").setStyle({display:"block"});
+                    $("options").setStyle({display:"block"});
+					try{
+						fixcenter();
+						}
+					catch(e){
+						console.debug(e);
+					}					
+                   // showOptionsDialog();
+                   // hideProgressAnimation();
+                    for (i; i<scripts.length; i++)
+                    {
+                        if (typeof(scripts[i]) != 'undefined')
+                        {	
+                            try{
+								eval(scripts[i]);
+							}
+							catch(e){
+								console.debug(e);
+							}
+                        }
+                    }
+                    productAddToCartForm = new VarienForm('product_addtocart_form');
+                    decorateGeneric($$('#product-options-wrapper dl'), ['last']);
+                    addSubmitEvent();
+                    //if (typeof($$('#acp_configurable_block .focus')[0]) != 'undefined') $$('#acp_configurable_block .focus')[0].focus();
+                  //  bundle.reloadPrice();
+	}
+	function truncateOptions() { //box show description options of product configurable when hover "details" in sidebar or minicartpro
+		 $$('.truncated').each(function(element){
+			 Event.observe(element, 'mouseover', function(){
+					 if (element.down('div.truncated_full_value')) {
+						element.down('div.truncated_full_value').addClassName('show')
+					 }
+				 });
+			 Event.observe(element, 'mouseout', function(){
+				 if (element.down('div.truncated_full_value')) {
+					element.down('div.truncated_full_value').removeClassName('show')
+				 }
+			});
+		 });
+	} 
+	function addSubmitEvent()
+	{
+		if (enable_ajax_cart && (typeof productAddToCartForm != 'undefined' ))
+		{
+			productAddToCartForm.submit = function(url){
+				if(this.validator && this.validator.validate()){
+					url=$('product_addtocart_form').action;	//url cua form trong category view
+					ajaxUpdate(url,'form');
+				}
+				return false;
+			}
+		}
+	}
+
+	//this code below allow product type download is valid when addtocart
+	Product.Downloadable = Class.create();
+	Product.Downloadable.prototype = {
+		config : {},
+		initialize : function(config){
+			this.config = config;
+			this.reloadPrice();
+		},
+		reloadPrice : function(){
+			var price = 0;
+			config = this.config;
+			$$('.product-downloadable-link').each(function(elm){
+				if (config[elm.value] && elm.checked) {
+					price += parseFloat(config[elm.value]);
+				}
+			});
+			try {
+				var _displayZeroPrice = optionsPrice.displayZeroPrice;
+				optionsPrice.displayZeroPrice = false;
+				optionsPrice.changePrice('downloadable', price);
+				optionsPrice.reload();
+				optionsPrice.displayZeroPrice = _displayZeroPrice;
+			} catch (e) {
+
+			}
+		}
+	};
+
+	function validateDownloadableCallback(elmId, result) {
+		var container = $('downloadable-links-list');
+		if (result == 'failed') {
+			container.removeClassName('validation-passed');
+			container.addClassName('validation-failed');
+		} else {
+			container.removeClassName('validation-failed');
+			container.addClassName('validation-passed');
+		}
+	} 
+    Product.Options = Class.create();
+    Product.Options.prototype = {
+        initialize : function(config){
+            this.config = config;
+            this.reloadPrice();
+        },
+        reloadPrice : function(){
+            price = new Number();
+            config = this.config;
+            skipIds = [];
+            $$('.product-custom-option').each(function(element){
+                var optionId = 0;
+                element.name.sub(/[0-9]+/, function(match){
+                    optionId = match[0];
+                });
+                if (this.config[optionId]) {
+                    if (element.type == 'checkbox' || element.type == 'radio') {
+                        if (element.checked) {
+                            if (config[optionId][element.getValue()]) {
+                                price += parseFloat(config[optionId][element.getValue()]);
+                            }
+                        }
+                    } else if(element.hasClassName('datetime-picker') && !skipIds.include(optionId)) {
+                        dateSelected = true;
+                        $$('.product-custom-option[id^="options_' + optionId + '"]').each(function(dt){
+                            if (dt.getValue() == '') {
+                                dateSelected = false;
+                            }
+                        });
+                        if (dateSelected) {
+                            price += parseFloat(this.config[optionId]);
+                            skipIds[optionId] = optionId;
+                        }
+                    } else if(element.type == 'select-one' || element.type == 'select-multiple') {
+                        if (element.options) {
+                            $A(element.options).each(function(selectOption){
+                                if (selectOption.selected) {
+                                    if (this.config[optionId][selectOption.value]) {
+                                        price += parseFloat(this.config[optionId][selectOption.value]);
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        if (element.getValue().strip() != '') {
+                            price += parseFloat(this.config[optionId]);
+                        }
+                    }
+                }
+            });
+            try {
+                optionsPrice.changePrice('options', price);
+                optionsPrice.reload();
+            } catch (e) {
+
+            }
+        }
+    }
+    function validateOptionsCallback(elmId, result){
+        var container = $(elmId).up('ul.options-list');
+        if (result == 'failed') {
+            container.removeClassName('validation-passed');
+            container.addClassName('validation-failed');
+        } else {
+            container.removeClassName('validation-failed');
+            container.addClassName('validation-passed');
+        }
+    }
+
+
+
+    var CartForm = Class.create();
+        CartForm.prototype = { 
+        		initialize: function(form, addressUrl, saveUrl){
+						this.form = form;
+						if ($(this.form)) {
+						     $(this.form).observe('submit', function(event){this.save();Event.stop(event);}.bind(this)); //prevent event submit form
+						}
+						this.addressUrl = addressUrl;
+						this.saveUrl = saveUrl;
+						this.onSave = this.reloadCart.bindAsEventListener(this);
+						this.onComplete = this.hideLoading.bindAsEventListener(this);
+						this.onFailure = this.ajaxFailure.bindAsEventListener(this);
+						this.onLoading = this.showLoading.bindAsEventListener(this);
+						this.onChanged = false;
+        			 }, 
+        		save: function(){
+	        			
+		        		var validator = new Validation(this.form);
+						if (validator.validate()) {
+	        				 if(enable_ajax_update){	   
+		        				 var request = new Ajax.Request(
+			        				 this.saveUrl,
+			        				 {
+				        				 method: 'post',
+				        				 onComplete: this.onComplete,
+				        				 onSuccess: this.onSave,
+				        				 //onFailure: this.onFailure,
+				        				 onLoading: this.onLoading,
+				        				 parameters: Form.serialize(this.form)+'&isCart='+isCart,
+			        				 }
+		        				 );
+	        				 }else{
+								//return VarienForm.prototype.submit.bind(new VarienForm(this.form.id))();
+									$(this.form).submit();
+	        				 }	 
+	        			}
+        			},
+  
+				reloadCart: function(resp){
+						var respjson=resp.responseText.evalJSON();
+						hideConfirm = 1;
+						updateCart(respjson);
+					},
+				ajaxFailure: function(){
+
+				},
+				showLoading: function(){
+					$("fancybox-wrap-clone").setStyle({display:"none"});
+					$("process").innerHTML=iprocess;
+					$("process").setStyle({display:"block"});
+					
+					$("options").setStyle({display:"block"});
+					$("blurmask").setStyle({display:"block"});
+					fixcenter();				
+				},
+				hideLoading: function(){
+					$("process").setStyle({display:"none"});
+					$("blurmask").setStyle({display:"none"});
+				}					        			        			 	
+        };
+        
+//]]>    
+</script>

@@ -1,0 +1,311 @@
+#cpanel_wrapper {
+	background: #e5e5e5;
+	border: 1px solid #f3f3f3;
+	border-right: none;
+	color: #555;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	padding: 8px;
+	position: fixed;
+	top: 90px;
+	width: 300px;
+	z-index: 999;
+	right: -302px;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.4);
+}
+#cpanel_btn {
+	background: url(../../images/cpanel/bg-cpanel-head.png) repeat left center #666 ;
+	width: 40px;
+	border-right: none;
+	position: absolute;
+	left: -41px;
+	top: 8px;
+	padding: 8px 0 9px;
+	cursor: pointer;
+	text-align: center;
+	color: #fff;
+	border-radius: 3px 0 0 3px;
+}
+#cpanel_wrapper .cpanel-head {
+	background: url(../../images/cpanel/bg-cpanel-head.png) repeat left center #666 ;
+	font-size: 14px;
+	font-weight: bold;
+	width: 100%;
+	padding: 3px 10px 0 10px;
+	float: left;
+	color: #fff;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset;
+}
+#cpanel_wrapper .cpanel-reset {
+    float: right;
+    margin: -3px -10px 0 0;
+    position: relative;
+    z-index: 1;
+}
+#cpanel_wrapper .cpanel-reset:before {
+    border-color: rgba(0, 0, 0, 0) #0291FF rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    border-width: 8px 8px 8px 0;
+    content: "";
+    left: 3px;
+    position: absolute;
+    top: 9px;
+}
+#cpanel_wrapper .cpanel-reset .btn {
+    background: none repeat scroll 0 0 #0291FF;
+    border: medium none;
+    border-radius: 0;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) inset;
+    font-weight: normal;
+    padding: 8px 15px;
+    text-transform: none;
+    transition: all 0.2s ease 0s;
+	color: #fff !important;
+}
+#cpanel_wrapper .cpanel-reset .btn:hover,
+#cpanel_wrapper .cpanel-reset .btn:focus{
+	outline: none;
+}
+#cpanel_wrapper .cpanel-reset:hover .btn {
+    padding-right: 25px;
+	outline: none;
+}
+#ytcpanel_accordion .accordion-heading{
+    background-color: #F9F9F9;
+    background-image: linear-gradient(to bottom, #FFFFFF, #F1F1F1);
+    background-repeat: repeat-x;
+    border: 1px solid #BCBCBC;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5) inset;
+    margin: -1px;
+	padding: 7px 10px;
+}
+#ytcpanel_accordion .accordion-heading:hover {
+    background-color: #EDEDED;
+    background-image: linear-gradient(to bottom, #F5F5F5, #E0E0E0);
+    background-repeat: repeat-x;
+}
+#ytcpanel_accordion .accordion-heading.accordion-open {
+	background: #888888;
+    background: linear-gradient(to bottom, #999999, #777777) repeat-x scroll 0 0 #8B8B8B;
+    border-color: #777777;
+    box-shadow: none;	
+}
+#ytcpanel_accordion .accordion-heading .accordion-toggle {
+    color: #555555 !important;;
+    font-size: 12px;
+    font-weight: bold;
+}
+#ytcpanel_accordion .accordion-heading .accordion-toggle i{
+	color: #999999;
+    float: left;
+    font-size: 14px;
+    margin: 2px 5px 0 0;
+}
+#ytcpanel_accordion .accordion-heading.accordion-open .accordion-toggle,
+#ytcpanel_accordion .accordion-heading.accordion-open .accordion-toggle i{
+	color: #fff !important;;
+}
+#ytcpanel_accordion .accordion-heading.accordion-open .accordion-toggle 
+.icon-expand-alt:before{
+	content:"\f117";
+}
+#ytcpanel_accordion .accordion-group .collapse {
+    background: none repeat scroll 0 0 #FFFFFF;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+#ytcpanel_accordion .accordion-group .collapse:before {
+    border-color: #777777 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+    border-style: solid;
+    border-width: 8px 8px 0;
+    content: "";
+    left: 15px;
+    position: absolute;
+    top: -2px;
+}
+#ytcpanel_accordion{
+	float: left;
+	margin-top: 10px;
+	width: 100%;
+}
+#ytcpanel_accordion .accordion-inner {
+	padding: 15px 10px 10px;
+	border: none;
+}
+
+
+
+#cpanel_wrapper option,#cpanel_wrapper optgroup,
+#cpanel_wrapper input,#cpanel_wrapper select{
+	background: none;
+	color: #333;
+}
+#cpanel_wrapper select#select-store{
+	padding: 3px 2px;
+}
+
+#cpanel_wrapper input.inputbox {
+	border-radius: 0 0 0 0 !important;
+	box-shadow: none !important;
+	font-size: 11px !important;
+	margin: 0 3px 0 0 !important;
+	padding: 0 3px !important;
+	width: 80px !important;
+}
+
+select.cp_select {
+	font-size: 11px;
+	height: auto;
+	padding: 3px 2px;
+	width: 120px;
+	border-radius: 0px;
+	color: #333;
+}
+
+
+.cpanel-head > span{
+	float: left;
+    margin-top: 5px;
+	text-transform: uppercase;
+}
+
+
+.theme-color-heading {
+	font-weight: bold;
+	padding: 5px 0;
+	display: block;
+}
+
+.cpanel-theme-color .theme-color.active {
+	box-shadow: 0 0 0 2px rgba(173, 35, 35, 1) inset;
+}
+
+.cpanel-theme-color .theme-color {
+	background-color: #CCC;
+	width: 38px;
+	height: 25px;
+	line-height: 35px;
+	text-align: center;
+	float: left;
+	margin: 0 4px 5px 0;
+	cursor: pointer;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+}
+
+.cpanel-theme-color .theme-color:hover {
+	opacity: 0.7;
+}
+
+.cpanel-theme-color .theme-color.cyan {
+	background-color: #03997E;
+}
+
+.cpanel-theme-color .theme-color.blue {
+	background-color: #3bc2df;
+}
+
+.cpanel-theme-color .theme-color.green {
+	background-color: #5B9903;
+}
+
+.cpanel-theme-color .theme-color.orange {
+	background-color: #ef9758;
+}
+
+.cpanel-theme-color .theme-color.yellow {
+	background-color: #f7c221;
+}
+
+.cpanel-theme-color .theme-color.red {
+	background-color: #f25448;
+}
+
+#ytcpanel_accordion .accordion-group {
+	border:1px solid #bcbcbc;
+	margin-bottom: 5px;
+}
+#ytcpanel_accordion .accordion-inner{
+	background: #fff;
+}
+
+
+#ytcpanel_accordion .cp-item {
+	width: 33%;
+	float: left;
+}
+#ytcpanel_accordion .cp-item > span,
+#ytcpanel_accordion .store-switcher > span{
+	width: 100%;
+	float: left;
+	margin-bottom: 2px;
+}
+
+#ytitem_3 .cp-item,
+#ytitem_7 .cp-item{
+	margin-bottom: 5px;
+}
+#ytitem_4 .cp-item,
+#ytitem_5 .cp-item{
+	margin-bottom: 5px;
+	width: 100%;
+}
+
+#ytcpanel_accordion .cp-item.body-background-image {
+	width: 100%;
+	margin-bottom: 0;
+}
+
+#ytcpanel_accordion .cpanel-typography .cp-item {
+	width: 50%;
+}
+
+
+
+.cp-item .pattern {
+	height: 20px;
+	margin: 0 5px 5px 0;
+	width: 30px;
+	border: 1px solid #CCC;
+	float: left;
+	cursor: pointer;
+	text-indent: -999em;
+	background-color: #f5f5f5;
+}
+
+.cp-item .pattern:hover {
+	background-color: #ccc;
+	border-color: #535353;
+}
+
+.cp-item .pattern.active {
+	border-color: #535353;
+}
+
+#cpanel_wrapper a.reset {
+	margin: 0 0 0 10px;
+	color: #000;
+}
+
+.cpanel-input {
+	padding: 1px 5px !important;
+	width: 30px;
+	font-size: 11px !important;
+}
+
+.cpanel-select {
+	height: auto;
+	padding: 2px !important;
+	width: 90px;
+	font-size: 11px !important;
+}
+
+#cpanel_btn i {
+	vertical-align: top;
+}
+
+#cpanel_btn i:before {
+	font-size: 18px;
+}

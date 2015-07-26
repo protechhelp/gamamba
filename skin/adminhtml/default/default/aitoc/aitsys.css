@@ -1,0 +1,130 @@
+@CHARSET "UTF-8";
+
+.aitsys-list
+{
+    width: 100%;
+}
+
+.aitsys-list .list
+{
+    width: 50%;
+}
+
+.license-params-table td
+{
+	padding-top:0 !important;
+	padding-bottom:0 !important;
+    padding-left:0;
+    padding-right:10px;
+}
+
+.aitoc-note-message
+{
+    font-size: 14px;
+}
+
+#license .agreements_frame
+{
+    overflow-y: scroll;
+    height: 400px;
+    
+}
+
+.aitsys-list .entry-edit #module_list .form-list td.label
+{
+    white-space: nowrap;
+    width: 200px;
+}
+
+.aitsys-list .entry-edit #module_list .form-list td.label label
+{
+    display: inline;
+    width: 100%;
+}
+
+.form-list td 
+{
+    background:none repeat scroll 0 50% transparent !important;
+    border:0 none !important;
+    padding-bottom:5px !important;
+    padding-top:5px !important;
+}
+
+.aitsys-patch-instructions
+{
+    margin-botton: 12px;
+}
+
+.aitsys-patch-instructions pre
+{
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 4px;
+    border: 1px solid #EB5E00;
+}
+
+.aitsys-index-index .content-header {
+    width: 50%;
+}
+
+.aitsys-index-index .aitsys-list
+{
+    width: 50%;
+    float: left;
+}
+
+.aitsys-index-index .notifications
+{
+    float: right;
+    margin-left: 5px;
+    margin-top: -50px;
+    width: 49%;
+}
+
+.serial{
+    font-size: 11px;
+    color: #999999;
+}
+
+.aitsys-index-index .form-list{
+    width: 100%;
+}
+
+.aitsys-index-index .form-list .module td {
+    padding: 10px 15px 10px 10px !important;
+    vertical-align: middle;
+    border-bottom:1px solid #e8e8e8 !important;
+}
+
+.aitsys-index-index .form-list .value {
+    text-align: center;
+    width: 100px;
+}
+.aitsys-index-index .form-list th {
+    padding: 5px 10px 10px 10px !important;
+    vertical-align: middle;
+    background-color: #d6d6d6;
+    color:#9a9a9a;
+    font: 16px/2em Arial,Helvetica,sans-serif !important;
+}
+
+.aitsys-index-index .fieldset-legend{
+    font: 16px/2em Arial,Helvetica,sans-serif !important;
+}
+.aitsys-index-index #module_list{
+    padding:0;
+}
+
+.aitsys-index-index .form-list .module td.label .note {
+    white-space: normal;
+}
+.aitsys-rewriter-index .form-list td.value input.input-text{
+    width: 38px;
+}
+.aitsys-rewriter-index .form-list .hor-scroll td{
+    padding-bottom:0px !important;
+    padding-top:0px !important;
+}
+li span.noBold {
+    font-weight: normal !important;
+}

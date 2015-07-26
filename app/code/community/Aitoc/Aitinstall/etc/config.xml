@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- @copyright  Copyright (c) 2009 AITOC, Inc. -->
+<config>
+    <modules>
+        <Aitoc_Aitinstall>
+            <version>1.0.1</version>
+        </Aitoc_Aitinstall>
+    </modules>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <aitinstall>
+                    <file>aitinstall.xml</file>
+                </aitinstall>
+            </updates>
+        </layout>
+    </adminhtml>
+    
+    <global>
+        <helpers>
+            <aitinstall>
+                <class>Aitoc_Aitinstall_Helper</class>
+            </aitinstall>
+        </helpers>
+    </global>
+</config>

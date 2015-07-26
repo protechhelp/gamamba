@@ -1,0 +1,211 @@
+<?php
+/*
+* ModifyMage Solutions (http://ModifyMage.com)
+* Serial Codes - Serial Numbers, Product Codes, PINs, and More
+*
+* NOTICE OF LICENSE
+* This source code is owned by ModifyMage Solutions and distributed for use under the
+* provisions, terms, and conditions of our Commercial Software License Agreement which
+* is bundled with this package in the file LICENSE.txt. This license is also available
+* through the world-wide-web at this URL: http://www.modifymage.com/software-license
+* If you do not have a copy of this license and are unable to obtain it through the
+* world-wide-web, please email us at license@modifymage.com so we may send you a copy.
+*
+* @category		Mmsmods
+* @package		Mmsmods_Serialcodes
+* @author		David Upson
+* @copyright	Copyright 2013 by ModifyMage Solutions
+* @license		http://www.modifymage.com/software-license
+*/
+?>
+<?php $viewable = Mage::getSingleton('admin/session')->isAllowed('sales/serialcodes_items') ?>
+<?php $editable = Mage::getSingleton('admin/session')->isAllowed('sales/serialcodes_items/serialcodes_items_edit') ?>
+<?php $formkey = Mage::getSingleton('core/session')->getFormKey() ?>
+<?php if($viewable) { ?>
+	<?php $_order = $this->getOrder() ?>
+	<?php $_items = $this->getItemsCollection() ?>
+	<div class="entry-edit">
+		<div class="entry-edit-head">
+			<h4 class="icon-head head-serialcodes"><?php echo Mage::helper('serialcodes')->__('Serial Codes Issued') ?></h4>
+			<?php if($editable) { ?>
+				<script type="text/javascript">
+				//<![CDATA[
+					function getChecked(button)
+					{
+						var table = document.getElementById("serial_codes_table");
+						var inputs = table.getElementsByTagName("input");
+						var items = new Array();
+						var j = 0
+						for(var i = 0; i < inputs.length; i++)
+						{
+							if(inputs[i].type == "checkbox" && inputs[i].checked == true)
+							{
+								items[j] = inputs[i].value;
+								j++
+							}
+						}
+						if (items.length < 1)
+						{
+							alert("<?php echo Mage::helper('serialcodes')->__('Please select items.') ?>");
+							return;
+						}
+						document.sc_item_select.elements['sc_items'].value = items.join();
+						if(button == 'email')
+						{
+							var x = confirm("<?php echo Mage::helper('serialcodes')->__('Are you sure you want to email the codes for the selected items to the customer?') ?>");
+							if (x)
+							{
+								document.sc_item_select.action = "<?php echo Mage::helper("adminhtml")->getUrl('serialcodes/adminhtml_serialcodes_items/email', array('id' => $_order->getId())) ?>";
+							} else {
+								return;
+							}
+						} else {
+							var x = confirm("<?php echo Mage::helper('serialcodes')->__('Are you sure you want to issue codes to the selected items?') ?>");
+							if (!x)
+							{
+								return;
+							}						
+						}
+						document.sc_item_select.submit();					
+					}
+				//]]>
+				</script>
+				<form id="sc_item_select" name="sc_item_select" action="<?php echo Mage::helper("adminhtml")->getUrl('serialcodes/adminhtml_serialcodes_items/issue', array('id' => $_order->getId())) ?>" method="post">
+					<input type="hidden" name="form_key" value="<?php echo $formkey ?>" />
+					<input type="hidden" name="sc_items" value="" />
+					<div class="box-right">
+						<div class="button-set a-right" style="margin-right:-7px;">
+							<button type="button" class="scalable" style="height:18px;margin:0px 1px;" onclick="getChecked('issue')">Issue Serial Codes</button>
+							<button type="button" class="scalable" style="height:18px;margin:0px;" onclick="getChecked('email')">Email Serial Codes</button>
+						</div>
+					</div>
+				</form>
+			<?php } ?>
+		</div>
+	</div>
+	<div class="grid np">
+	  <div class="hor-scroll">
+		<table id="serial_codes_table" cellspacing="0" class="data serialcodes-table">
+			<col width="1" />
+			<col width="1" />
+			<col />
+			<col width="1" />
+			<col width="1" />
+			<col width="1" />
+			<thead>
+				<tr class="headings">
+					<th class="a-center"><?php echo '' ?></th>
+					<th class="a-center"><?php echo $this->helper('serialcodes')->__('Ordered') ?></th>
+					<th><?php echo $this->helper('serialcodes')->__('Product') ?></th>
+					<th><span class="nobr"><?php echo $this->helper('serialcodes')->__('Serial Code Type') ?></span></th>
+					<th><span class="nobr"><?php echo $this->helper('serialcodes')->__('Serial Codes') ?></span></th>
+					<th class="a-center last"><span class="nobr"><?php echo $this->helper('serialcodes')->__('Action') ?></span></th>
+				</tr>
+			</thead>
+			<tbody class="serialcodes-table-body">
+				<?php $i=0;foreach ($_items as $_item): ?>
+					<?php $type = '';if ($parent = $_item->getParentItem()) $type = $parent->getProductType(); ?>
+					<?php if ($type == 'configurable') continue; else $i++; ?>
+					<?php $item_values = array(
+						'id' 		=> $_item->getId(),
+						'order'		=> $_order->getIncrementId(),
+						'customer'	=> $this->htmlEscape($_order->getCustomerName()),
+						'product'	=> $_item->getName(),
+						'qty'		=> $_item->getQtyOrdered(),
+						'type'		=> $_item->getSerialCodeType(),
+						'codes'		=> $_item->getSerialCodes(),
+						'codeids'	=> $_item->getSerialCodeIds(),
+						'issued'	=> $_item->getSerialCodesIssued(),
+						'child'		=> $_item->getParentItemId()
+						); ?>
+					<?php $pcodes = explode("\n",$item_values['codes']);
+						$icodes = array_pad(explode(',',$item_values['codeids']),round($item_values['qty']),'');
+						$item_values['codes'] = Mage::getSingleton('serialcodes/serialcodes')->addStatusText($item_values['qty'], $icodes, $pcodes);?>
+					<tr class="<?php echo $i%2?'even':'odd' ?>">
+						<td class="a-center"><?php echo '<input type="checkbox" name="sc_item_'.$item_values['id'].'" value="'.$item_values['id'].'" class="massaction-checkbox">' ?></td>
+						<td class="a-center"><?php echo round($item_values['qty']) ?></td>
+						<td><?php if($item_values['child']) { echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$item_values['product']; }else{ echo '<b>'.$item_values['product'].'</b>'; } ?></td>
+						<td style="white-space:nowrap;"><?php echo $item_values['type'] ?></td>
+						<td style="white-space:nowrap;"><?php echo $item_values['codes'] ?></td>
+						<td class="a-center">
+							<?php if(!$editable) { ?>&ndash;<?php } else { ?>
+								<a href = "#" onclick = "document.getElementById('serialcodes_mask').style.display='block';document.getElementById('serialcodes_popup_<?php echo $item_values['id'] ?>').style.display='block';return false;"><?php echo Mage::helper('serialcodes')->__('Edit') ?></a>
+								<div id="serialcodes_popup_<?php echo $item_values['id'] ?>" style="display:none;position:fixed;top:110px;left:50%;width:535px;height:470px;margin-left:-220px;background-color:#FAFAFA;border:1px solid #D6D6D6;z-index:400;">
+									<div class="entry-edit">
+										<div class="entry-edit-head">
+											<h4 class="icon-head head-serialcodes"><?php echo Mage::helper('serialcodes')->__('Edit Serial Codes') ?></h4>
+										</div>
+									</div>
+									<form id="sc_edit_form_<?php echo $item_values['id'] ?>" name="sc_edit_form_<?php echo $item_values['id'] ?>" action="<?php echo Mage::helper("adminhtml")->getUrl('serialcodes/adminhtml_serialcodes_items/savepopup', array('id' => $item_values['id'])) ?>" method="post">
+										<input name="form_key" type="hidden" value="<?php echo $formkey ?>" />
+										<div id="serialcodes_items_form_<?php echo $item_values['id'] ?>" class="fieldset" style="border:0;margin-bottom:0px;padding-bottom:5px;">
+											<div class="hor-scroll">
+												<table cellspacing="0" class="form-list" style="text-align:left;">
+													<col width="1" />
+													<col />
+													<tbody style="background:transparent;">
+														<tr style="background:transparent !important;">
+															<td class="label"><label for="sc_order_<?php echo $item_values['id'] ?>">Order Number</label></td>
+															<td class="value">
+																<input id="sc_order_<?php echo $item_values['id'] ?>" name="sc_order_<?php echo $item_values['id'] ?>" value="<?php echo $item_values['order'] ?>" class="disabled input-text" disabled="disabled" readonly="1" type="text"/>
+															</td>
+														</tr>
+														<tr style="background:transparent !important;">
+															<td class="label"><label for="sc_customer_<?php echo $item_values['id'] ?>">Customer Name</label></td>
+															<td class="value">
+																<input id="sc_customer_<?php echo $item_values['id'] ?>" name="sc_customer_<?php echo $item_values['id'] ?>" value="<?php echo $item_values['customer'] ?>" class="disabled input-text" disabled="disabled" readonly="1" type="text"/>
+															</td>
+														</tr>
+														<tr style="background:transparent !important;">
+															<td class="label"><label for="sc_name_<?php echo $item_values['id'] ?>">Product</label></td>
+															<td class="value">
+																<input id="sc_name_<?php echo $item_values['id'] ?>" name="sc_name_<?php echo $item_values['id'] ?>" value="<?php echo $item_values['product'] ?>" class="disabled input-text" disabled="disabled" readonly="1" type="text"/>
+															</td>
+														</tr>
+														<tr style="background:transparent !important;">
+															<td class="label"><label for="sc_qty_<?php echo $item_values['id'] ?>">Quantity Ordered</label></td>
+															<td class="value">
+																<input id="sc_qty_<?php echo $item_values['id'] ?>" name="sc_qty_<?php echo $item_values['id'] ?>" value="<?php echo $item_values['qty'] ?>" class="disabled input-text" disabled="disabled" readonly="1" type="text"/>
+															</td>
+														</tr>
+														<tr style="background:transparent !important;">
+															<td class="label"><label for="sc_type_<?php echo $item_values['id'] ?>">Serial Code Type</label></td>
+															<td class="value">
+																<input id="sc_type_<?php echo $item_values['id'] ?>" name="sc_type_<?php echo $item_values['id'] ?>" value="<?php echo $item_values['type'] ?>" class="optional input-text" type="text"/>
+															</td>
+														</tr>
+														<tr style="background:transparent !important;">
+															<td class="label"><label for="serial_codes_<?php echo $item_values['id'] ?>">Serial Codes (one per line)</label></td>
+															<td class="value">
+																<textarea id="serial_codes_<?php echo $item_values['id'] ?>" name="serial_codes_<?php echo $item_values['id'] ?>" class="optional textarea" rows="2" cols="15" ><?php echo $_item->getSerialCodes() ?></textarea>
+															</td>
+														</tr>
+														<tr style="background:transparent !important;">
+															<td class="label" style=""><label for="sc_issued_<?php echo $item_values['id'] ?>">Number Serial Codes Issued</label></td>
+															<td class="value" style="">
+																<input id="sc_issued_<?php echo $item_values['id'] ?>" name="sc_issued_<?php echo $item_values['id'] ?>" value="<?php echo $item_values['issued'] ?>" class="optional input-text" type="text"/>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="button-set a-right">
+											<button type="button" class="back scalable" style="height:19px;margin-right:10px;" onclick = "document.getElementById('serialcodes_popup_<?php echo $item_values['id'] ?>').style.display='none';document.getElementById('serialcodes_mask').style.display='none';"><?php echo Mage::helper('serialcodes')->__('Cancel') ?></button>
+											<button type="button" class="scalable" style="height:19px;margin-right:30px;" onclick="var editForm = new varienForm('sc_edit_form_<?php echo $item_values['id'] ?>'); editForm.submit();"><?php echo Mage::helper('serialcodes')->__('Save Codes') ?></button>
+										</div>
+									</form>
+								</div>
+							<?php } ?>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	  </div>
+	</div>
+	<?php if($editable) { ?>
+		<div id="serialcodes_mask" style="display:none;position:fixed;top:0%;left:0%;width:100%;height:100%;background-color:transparent;background-color:rgba(239,239,239,0.5);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#80EFEFEF,endColorstr=#80EFEFEF);-ms-filter:'progid:DXImageTransform.Microsoft.gradient(startColorstr=#80EFEFEF,endColorstr=#80EFEFEF)';z-index:399;"></div>
+	<?php } ?>
+	<br />
+<?php } ?>

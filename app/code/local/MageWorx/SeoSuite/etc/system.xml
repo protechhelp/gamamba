@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * MageWorx
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MageWorx EULA that is bundled with
+ * this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.mageworx.com/LICENSE-1.0.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please refer to http://www.mageworx.com/ for more information
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SeoSuite
+ * @copyright  Copyright (c) 2012 MageWorx (http://www.mageworx.com/)
+ * @license    http://www.mageworx.com/LICENSE-1.0.html
+ */
+
+/**
+ * SEO Suite extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_SeoSuite
+ * @author     MageWorx Dev Team
+ */
+-->
+<config>
+	<sections>
+        <mageworx_seo translate="label" module="mageworx">
+            <label>SEO Suite Ultimate</label>
+            <tab>mageworx</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <seosuite translate="label" module="seosuite">
+                    <label>SEO Suite</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Add Canonical URL Meta Header</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <trailing_slash translate="label">
+                            <label>Add Trailing Slash</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </trailing_slash>
+                        <disable_layered_rewrites translate="label">
+                            <label>Disable Layered Rewrites</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disable_layered_rewrites>
+                        <enable_rich_snippets translate="label">
+                            <label>Enable Rich Snippets</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_rich_snippets>
+                        <cross_domain translate="label">
+                            <label>Cross Domain Canonical URL</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>seosuite/system_config_source_crossdomain</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cross_domain>
+                        <ignore_pages translate="label comment">
+                            <label>Ignore Pages</label>
+                            <comment>Canonical URL Meta Header will not be added for these pages</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ignore_pages>
+                        <noindex_pages translate="label">
+                            <label>NOINDEX, FOLLOW Robots Meta Header For Pages Without Content</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>seosuite/system_config_source_noindex</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </noindex_pages>
+                        <noindex_pages_user translate="label comment">
+                            <label>NOINDEX, FOLLOW Robots Meta Header For Additional Pages</label>
+                            <comment><![CDATA[Can be either a full action name or a request path. Wildcard allowed<br/><b>Examples</b>:<br/>review_product_*<br/>review/product/*<br/>rss_*<br/>rss/*]]></comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </noindex_pages_user>
+                        <robots_editor translate="label comment">
+                            <label>Robots.txt Editor</label>
+                            
+                            <frontend_type>textarea</frontend_type>
+                            <backend_model>seosuite/system_config_backend_robots</backend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                            <comment><![CDATA[Robots.txt file should be granted 777 permissions.]]></comment>
+                        </robots_editor>
+                        <product_og_enabled translate="label">
+                            <label>Enable Open Graph protocol for products</label>
+                            <frontend_type>select</frontend_type>
+                            <comment><![CDATA[Please visit <a target='_blank' href='http://ogp.me/'>Official site</a> for more info]]>
+                            </comment>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_og_enabled>      
+                        
+                        <product_canonical_url translate="label comment">
+                            <label>Product Canonical URL</label>
+                            <comment><![CDATA[For use with <b>Use categories path for product URLs</b> setting<br/><b>Use Longest</b> will use the longest categories path for product URL<br/><b>Use Shortest</b> will use the shortest categories path for product URL]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>seosuite/system_config_source_product_canonical</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_canonical_url>
+                        <reviews_friendly_urls translate="label">
+                            <label>Product Reviews Friendly URLs</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </reviews_friendly_urls>
+                        
+                        <pager_url_format translate="label comment">
+                            <label>Pager URL Format for Categories</label>
+                            <comment><![CDATA[]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[If empty, original URL format is used:<br/>/mobile-phones.html?p=2<br/><b>Examples:</b><br/>-page[page_number] &nbsp;&nbsp; <i>will transform URL into</i><br/>/mobile-phones-page2.html<br/>/p/[page_number] &nbsp;&nbsp; <i>will transform URL into</i><br/>/mobile-phones/p/2.html<br/>-[page_number] &nbsp; <b>is not recommended if you do have categories ending with "-[0-9]":</b><br/>/laptop-series-3.html, /phones-60.html, etc]]></comment>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </pager_url_format>
+                        
+                        <enable_link_rel translate="label comment">
+                            <label>Enable Link Rel="next/prev"</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_link_rel>                        
+                        
+                        <layered_friendly_urls translate="label comment">
+                            <label>Layered Navigation Friendly URLs</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </layered_friendly_urls>
+                        <layered_hide_attributes translate="label comment">
+                            <label>Hide Attribute Names</label>
+                            <comment><![CDATA[Hide Attribute Names in Layered Navigation URLs when possible]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </layered_hide_attributes>
+                        <layered_separatort translate="label comment">
+                            <label>Layered Navigation Separator</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </layered_separatort>
+                        
+                        
+                        <enable_dynamic_meta_title translate="label">
+                            <label>Enable Dynamic Meta Title</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_dynamic_meta_title>
+                        
+                        <enable_dynamic_meta_desc translate="label">
+                            <label>Enable Dynamic Meta Description</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_dynamic_meta_desc>
+                            
+                        <enable_dynamic_meta_keywords translate="label">
+                            <label>Enable Dynamic Meta Keywords</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_dynamic_meta_keywords>
+                        
+                        <https_robots translate="label">
+                            <label>Robots Meta Header for HTTPS</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>seosuite/system_config_source_robots</source_model>
+                            <sort_order>230</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </https_robots>
+                        <enable_canonical_tag_for_layered_navigation translate="label">
+                            <label>Enable Canonical Tag for Layered Navigation</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>240</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_canonical_tag_for_layered_navigation>
+                        <template_limit>
+                            <label>Number of Products for One-Time Processing during Dynamic Templates Applying</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </template_limit>
+                        <add_canonical_url_port>
+                            <label>Add Canonical URL Port</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </add_canonical_url_port>
+                    </fields>
+	            </seosuite>
+            </groups>
+        </mageworx_seo>
+	</sections>
+</config>

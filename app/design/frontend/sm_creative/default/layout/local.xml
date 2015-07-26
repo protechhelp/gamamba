@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <catalog_category_layered>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/ias/jquery.ias.min.js</name></action>
+            <action method="addItem"><type>skin_css</type><name>css/ajaxscroll/ias.css</name></action>
+        </reference>
+    </catalog_category_layered>
+</layout>

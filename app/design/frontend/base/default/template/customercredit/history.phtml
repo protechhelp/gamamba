@@ -1,0 +1,76 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+    $transactions = $this->getCollection();
+?>
+<div class="box-account box-info box-customercredit-history">
+    <div class="box-head">
+        <h2><?php echo $this->__('Transactions history') ?></h2>
+        <?php echo $this->getPagerHtml()?>
+    </div>
+<!--    --><?php //echo $this->getPagerHtml() ?>
+    <div class="data-table-div">
+        
+            <table class="data-table" id="transactions-history-new">
+            <col class="id" />
+            <col class="points" />
+            <col class="title" />
+            <col class="date" />
+            <col class="expired" />
+            <thead>
+            <tr>
+                <th style="width: 75px;"><?php echo $this->__('Date') ?></th>
+                <th><?php echo $this->__('Transaction Type') ?></th>
+                <th><?php echo $this->__('Transaction Details') ?></th>
+                <th><?php echo $this->__('Added/Deducted') ?></th>
+                <th><?php echo $this->__('Credit Balance') ?></th>
+            </tr>
+            <tbody>
+            <?php foreach($transactions as $transaction): ?>
+                <tr>
+                    <td><?php echo Mage::helper('core')->formatDate($transaction->getTransactionTime(),
+                                Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM)."<br /> ";
+                              echo Mage::helper('core')->
+                                  formatTime($transaction->getTransactionTime(),
+                              Mage_Core_Model_Locale::FORMAT_TYPE_SHORT); ?></td>
+
+                    <td><?php echo $this->__($this->getTransactionType($transaction->getTypeTransactionId())) ?></td>
+                    <td><?php echo $transaction->getDetailTransaction() ?></td>
+                    <td><?php echo $this->getCurrencyLabel($transaction->getAmountCredit()) ?></td>
+                    <td><?php echo $this->getCurrencyLabel($transaction->getEndBalance()) ?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+            </thead>
+        </table>
+        <?php echo $this->getPagerHtml() ?>
+        <script type="text/javascript">decorateTable('transaction_id');</script>
+    </div>
+<!--    --><?php //echo $this->getPagerHtml() ?>
+    <div class="box-bottom">
+    </div>
+</div>

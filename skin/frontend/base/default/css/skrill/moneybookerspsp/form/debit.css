@@ -1,0 +1,13 @@
+#frontend_data {
+    height: 600px;
+    overflow: hidden;
+    border: none;
+}
+
+html, body { background: none; }
+
+.maintable td { vertical-align: top; }
+
+#header_bar, .bar {display: none; }
+
+.frm_box { border: none; background-color: transparent; }

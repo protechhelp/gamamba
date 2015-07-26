@@ -1,0 +1,1093 @@
+<script type="text/javascript">
+
+jQuery(document).ready(function() {
+
+
+	jQuery('.m-tc-right').click(function(event) {
+		if ((parseInt(jQuery('.m-tips-mover').css("left")) % 425) == 0) {
+		var max = (((jQuery('.m-tip').size() - 1) * 425) * -1) + "px";
+		if (jQuery('.m-tips-mover').css("left") == max) {
+			jQuery('.m-tips-mover').css("left", "0px");
+		} else {
+			var ileTeraz = (parseInt(jQuery('.m-tips-mover').css("left")) - 425) + "px";
+			jQuery('.m-tips-mover').css("left", ileTeraz);
+		}
+		};
+	});
+
+
+	jQuery('.m-tc-left').click(function(event) {
+		if ((parseInt(jQuery('.m-tips-mover').css("left")) % 425) == 0) {
+		var max = (((jQuery('.m-tip').size() - 1) * 425) * -1) + "px";
+		if (jQuery('.m-tips-mover').css("left") == "0px") {
+			jQuery('.m-tips-mover').css("left", max);
+		} else {
+			var ileTeraz = (parseInt(jQuery('.m-tips-mover').css("left")) + 425) + "px";
+			jQuery('.m-tips-mover').css("left", ileTeraz);
+		}
+		}
+	});
+	
+	
+	jQuery('.m-select').click(function(event) {
+		if(jQuery(this).hasClass('active')) {		
+			jQuery(this).removeClass('active');			 
+			jQuery(this).find('ul').hide();
+                      
+		} else {
+			jQuery(this).addClass('active');
+			jQuery(this).find('ul').show();			
+		}
+	});
+	
+	jQuery('.m-select').find('.u_select').mouseleave(function() {
+		jQuery(this).find('ul').hide();
+		jQuery(this).parent().removeClass('active');
+	});
+	
+
+	jQuery('.m-select ul li').click(function(event) {            
+		var thisText = jQuery(this).html();
+		var thisValue = jQuery(this).val();
+		var stringThisValue = jQuery(this).attr('data-val');
+		var thisDataValue = jQuery(this).data('value');
+		jQuery(this).parent().parent().parent().find('span').html(thisText);
+		jQuery(this).parent().parent().parent().find('span').attr('data-value', thisDataValue);
+		jQuery(this).parent().parent().parent().find('input').val(thisValue);
+
+		if(stringThisValue) {
+			jQuery(this).parent().parent().parent().find('input').val(stringThisValue);
+		}
+		var m_select = jQuery(this).parent().parent().parent();
+		jQuery(m_select).find('ul').slideUp('600', function(){
+			  jQuery(m_select).removeClass('active');
+		});
+
+        if(stringThisValue == 'retail'){
+            jQuery('.wholesale-price, .mp-add-price-range').hide();
+        } else {
+            jQuery('.wholesale-price, .mp-add-price-range').show();
+        }
+
+        if(stringThisValue == 'wholesale'){
+            jQuery('.retail-price').hide();
+            jQuery('.request-selected').hide();
+
+        } else {
+            jQuery('.retail-price').show();
+            jQuery('.request-selected').show();
+        }
+
+	});
+	
+	jQuery('.m-tips-mover').css("width", jQuery('.m-tip').size() * 480 );
+
+	jQuery('.mp-acc-balance-drop ').click(function(event) {
+		if(jQuery(this).hasClass('active')) {
+			jQuery(this).removeClass('active');
+			jQuery(this).find('ul').hide();
+		} else {
+			jQuery(this).addClass('active');
+			jQuery(this).find('ul').show();
+		}
+	});
+	
+	jQuery('.mp-acc-balance-drop').find('.u_select2').mouseleave(function() {	
+		jQuery(this).find('ul').hide();
+		jQuery(this).parent().removeClass('active');
+	});
+
+	jQuery('.mp-acc-balance-drop ul').click(function(event) {
+		jQuery(this).slideUp();
+	});
+
+
+	
+
+
+
+
+	jQuery('.mp-front-menu li').click(function(event) {
+		if (jQuery(event.target).hasClass('mp-fm-close')) {
+			return false;
+		} else {
+			if(jQuery(this).hasClass('pushed')) {
+				jQuery(this).removeClass('pushed');
+				jQuery(this).find('ul').hide();
+
+			} else {
+				jQuery(this).addClass('pushed');
+				jQuery(this).find('ul').show();
+			}
+		}
+	});
+
+	jQuery('.mp-front-menu > li ul li').click(function(event) {
+		jQuery(this).addClass('active');   
+		var value = jQuery(this).text();
+		var numval = jQuery(this).attr('data-rel');
+		
+		jQuery(this).parent().parent().parent().find('span span').text(value);
+		
+		if(numval == 0)
+			jQuery(this).parent().parent().parent().removeClass('active');
+		else
+			jQuery(this).parent().parent().parent().addClass('active');
+	});
+
+  jQuery('.mp-front-menu > li').find('.mp-front-menu-drop-down').mouseleave(function() {	
+		jQuery(this).find('ul').hide();
+		jQuery(this).parent().removeClass('pushed');
+	});
+
+	jQuery('.mp-front-menu li span img').click(function(event) {
+		var value = jQuery(this).parent().parent().data('default');
+		jQuery(this).parent().parent().find('span span').text(value);
+		jQuery(this).parent().parent().removeClass('active');
+	});
+
+	jQuery('.mp-acc-menu > ul > li.active').each(function(index, el) {
+		var src = jQuery(this).find('.mp-menu-ico img').attr("src");
+		src =  src.replace('.png', '-h.png');
+		jQuery(this).find('.mp-menu-ico img').attr("src", src);
+	});
+
+	jQuery('.mp-offerts li').click(function(event) {
+		if (jQuery(this).find('.mp-o-ratio').hasClass('active')) {
+			jQuery(this).find('.mp-o-ratio').removeClass('active');
+		} else {
+			jQuery('.mp-o-ratio').removeClass('active');
+			jQuery(this).find('.mp-o-ratio').addClass('active');
+		}
+	});
+
+	jQuery('.mp-acc-front > li').hover(function() {
+		var src = jQuery(this).find('.mp-acc-f-head img').attr("src");
+		src = src.replace('.png', '-h.png');
+		jQuery(this).find('.mp-acc-f-head img').attr("src", src);
+	}, function() {
+		var src = jQuery(this).find('.mp-acc-f-head img').attr("src");
+		src = src.replace('-h.png', '.png');
+		jQuery(this).find('.mp-acc-f-head img').attr("src", src);
+	});	
+		
+	jQuery('.my-account .notify_status span').click(function(e){
+		e.stopPropagation();
+		var id = jQuery(this).parent().attr('id').split('_')[1];
+		if (id > 0) {
+			delNotifyDrop(id);
+		}
+	});
+
+
+    jQuery('.request-selected-btn img').hover(function() {
+        jQuery('.request-selected-btn .request-selected-tooltip').show();
+    }, function() {
+        jQuery('.request-selected-btn .request-selected-tooltip').hide();
+    });
+
+    jQuery('.feeTooltip').hover(function() {
+        jQuery('.feeTooltip-content').show();
+    }, function() {
+        jQuery('.feeTooltip-content').hide();
+    });
+
+    jQuery('.request-selected-input input').keyup();
+
+});
+
+//------------------------ notify -----------------------
+function moveToNotifyUrl(url){
+	location.href = url;
+	
+	return;
+}
+
+function delNotifyDrop(id, type){
+	if (type == 'basket-important') {
+		var height = jQuery('#basket-important #dropnotify_'+id).height()+20;
+		jQuery('#basket-important #dropnotify_'+id).css('height', height).html('<td colspan="3"><span class="loading"></span></td>');
+	}
+	
+	jQuery('div.my-acc-basket #dropnotify_'+id+' var').remove();
+	jQuery('div.my-acc-basket #dropnotify_'+id+' .mark').removeClass('mark');
+	jQuery('div.my-acc-basket #dropnotify_'+id).removeClass('important');
+	jQuery('#notifygrid #listnotify_'+id+' span').remove();
+	jQuery('#notifygrid #listnotify_'+id).parent().removeClass('important');
+	jQuery('#important-notifications #listnotifyimportant_'+id+' span').remove();
+	jQuery('#important-notifications #listnotifyimportant_'+id).parent().removeClass('important');
+	var uri = jQuery('div.my-acc-basket #mp-head-notify').attr('data-rel');
+	var cnt = parseInt(jQuery('div.my-acc-basket .headerNotifyCount').text());
+	cnt--;
+	
+	if(cnt<=0) {
+		jQuery('div.headerNotifyCount').remove();
+		if (jQuery("#important-nav").length > 0){
+			jQuery('#important-nav var').remove();
+		}
+		if (jQuery("#basketNav_important").length > 0){
+			jQuery('#basketNav_important var').remove();
+		}
+	} else {
+		jQuery('div.headerNotifyCount').text(cnt);
+		if (jQuery("#important-nav").length > 0){
+			jQuery('#important-nav var').text(cnt);
+		}
+		if (jQuery("#basketNav_important").length > 0){
+			jQuery('#basketNav_important var').text(cnt);
+		}
+	}
+	
+	jQuery.ajax({
+		type: "POST",
+		url: uri+'notifications',
+		data: 'notify='+id,
+		dataType: 'json',
+		beforeSend: function( xhr ) {
+			
+		}
+	}).done(function(data) {
+		if (type == 'basket-important' || type == 'basket-all') {
+			jQuery.ajax({
+				url: uri+'notificationsload'
+			}).done(function(data) {
+				jQuery('#basket-important > table').html(data);
+				
+				jQuery('#basket-all .mark').click(function(e){
+
+
+					e.stopPropagation();		
+					var id = jQuery(this).parent().attr('id').split('_')[1];
+					if (id > 0) {
+						delNotifyDrop(id, 'basket-all');
+					}
+				});
+				
+				jQuery('#basket-important .mark').click(function(e){
+					e.stopPropagation();
+					var id = jQuery(this).parent().attr('id').split('_')[1];
+					if (id > 0) {                
+						delNotifyDrop(id, 'basket-important');
+					}
+				});
+			});
+		}
+	});
+}
+
+
+</script>
+<script type="text/javascript">
+
+var AWLIB = AWLIB || {};
+AWLIB.FileUploader = Class.create({
+    initialize: function(input, options) {
+        this.input = input;
+        this.options = options;
+        this._stopObserverFnList = [];
+
+        this.isBrowserSupportFileAPI = !Object.isUndefined(window.File) && !Object.isUndefined(window.FileReader)
+            && !Object.isUndefined(window.FileList)
+        ;
+        this.startObservers();
+    },
+
+    startObservers: function() {
+        var me = this;
+        var fn = this.onFileSelect.bind(this);
+        me.input.observe('change', fn);
+        me._stopObserverFnList.push(function(){
+            me.input.stopObserving('change', fn);
+        });
+    },
+
+    stopObservers: function() {
+        this._stopObserverFnList.each(function(fn){
+            fn();
+        });
+    },
+
+    onFileSelect: function(e) {
+        if (!this.isBrowserSupportFileAPI) {
+            return this._onFileSelectForOldBrowser(e);
+        }
+        return this._onFileSelect(e);
+    },
+
+    _onFileSelect: function(e) {
+        var me = this;
+        if (Object.isUndefined(me.list)) {
+            me.list = new Element('ul');
+            if (me.options.fileListClassName) {
+                me.list.addClassName(me.options.fileListClassName);
+            }
+            me.input.up().insert(me.list, {'after':me.input});
+        }
+        var files = e.target.files;
+        me.list.update('');
+        Object.keys(files).each(function(index){
+            if (!isFinite(index)) {
+                return;
+            }
+            var file = files[index];
+            var li = new Element('li');
+            me.list.appendChild(li);
+            if (!me._isFileSizeAllow(file.size)) {
+                li.addClassName(me.options.errorMsgClassName);
+                li.update(me.options.unexpectedFileSizeMessage(file.name));
+                return;
+            }
+            if (!me._isFileMimeTypeAvailable(file.type)) {
+                li.addClassName(me.options.errorMsgClassName);
+                li.update(me.options.unexpectedFileExtensionMessage(file.name));
+                return;
+            }
+
+            var titleSpan = new Element('span');
+            titleSpan.update(
+                '<label title="' + file.name + '">' +
+                    '<nobr>' +
+                    '<input type="checkbox" name="' + (me.options.fileListElName + '[' + index + ']') + '" checked>' +
+                    file.name +
+                    '</nobr>' +
+                '</label>'
+            );
+            li.appendChild(titleSpan);
+            if (file.type.match('image.*')) {
+                var image = new Element('img');
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    image.setAttribute('src', e.target.result);
+                    image.setAttribute('title', file.name);
+                    li.appendChild(image);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    },
+
+    _onFileSelectForOldBrowser: function(e) {
+        var newInput = this._createNewFileInput();
+        this.input.up().insert(newInput, {'after':this.input});
+        this.stopObservers();
+        this.input = newInput;
+        this.startObservers();
+    },
+
+    _createNewFileInput: function() {
+        var fileInput = new Element('input');
+        var me = this;
+        Object.keys(this.input.attributes).each(function(index){
+            var attributeName = me.input.attributes.item(index).nodeName;
+            fileInput.setAttribute(attributeName, me.input.getAttribute(attributeName));
+        });
+        return fileInput;
+    },
+
+    _isFileMimeTypeAvailable: function(mimeType) {
+        if (Object.isUndefined(this.options.availableFileExtensionList)) {
+            return true;
+        }
+        var listIsNotNull = this.options.availableFileExtensionList.all(function(element){
+            if (!element || !element.length) {
+                return false;
+            }
+            return true;
+        });
+        if (!listIsNotNull) {
+            return true;
+        }
+
+        var extensionName = mimeType.replace(/[^\/]+\//, '');
+        return (this.options.availableFileExtensionList.indexOf(extensionName) != -1);
+    },
+
+    _isFileSizeAllow: function(size) {
+        if (!this.options.maxFileSizeInBytes) {
+            return true;
+        }
+        return size <= this.options.maxFileSizeInBytes;
+    }
+
+});
+
+
+</script>
+<style>
+
+
+
+</style>
+
+<div class="support_main_page">
+	<div class="support_top_banner">
+    	<img src="<?php echo $this->getSkinUrl("images/support_back.jpg") ?>" />
+        <?php /*?> <div class="how_help"> How we Can <span> Help </span> You ? </div> <?php */?>
+    </div>
+    <div class="support_active_pro">
+    	<h2>How to activate my product?</h2>
+        <div class="active_product_main">
+        	<div class="active_product_main_left">
+            	<i class="fa fa-unlock-alt"></i>
+            </div>
+            <div class="active_product_main_right">
+            	<p>Please select the platform:</p>
+                <h2>
+                	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('how-to-active-my-product')->toHtml(); ?>
+                </h2>
+                <h3><a id="activation_guide" href="#" target="_new"><button class="button"><span><span>Download activation guide</span></span></button></a></h3>
+                <script>
+					var sel = document.getElementById('activation_guide_select');
+					sel.onchange = function () {
+					document.getElementById("activation_guide").href = "media/activation_guide/" + this.value + ".pdf";
+					}
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="contacts">
+<div class="wrapper">
+<div class="wrapperC">
+<div class="contactsContainer" style="overflow:hidden ;padding: 60px 0; max-width: 725px; padding: 60px 0; margin:0px auto">
+<ul style="margin-left:-100%;  width: 300%; padding: 0;list-style: outside none none;display: inline-block;"  class="contactsWrap">
+<li class="contactsBox contactsLivechat" style="border: 1px solid transparent; display: inline-block; float: left; width: 33.33%;">
+            <div class="contactsContainerTitle text-center">
+             Contact our Live Chat<span class="icon-arrow_right right" id="jq-contacts-back-livechat"><i class="fa fa-chevron-right"></i></span>
+        </div>
+        <div class="contactsLiveChatMain">
+            <ul class="contactsLiveChatMainList">
+                <li onclick="window.open('https://c1.websitealive.com/5099/visitor/window/?code_id=4516&dl='+escape(document.location.href),'wsa_5099_0','height=400,width=400')" class="pull-left">
+                    <img class="img-responsive" src="<?php echo $this->getSkinUrl("images/lan/lan1.png") ?>" />
+                    <span>English</span>
+                </li>
+                <li onclick="window.open('https://c1.websitealive.com/5099/visitor/window/?code_id=4516&dl='+escape(document.location.href),'wsa_5099_0','height=400,width=400')" class="pull-left">
+                                        <img class="img-responsive" src="<?php echo $this->getSkinUrl("images/lan/lan2.png") ?>" />
+                    <span>Spanish</span>
+                </li>
+
+                <li onclick="window.open('https://c1.websitealive.com/5099/visitor/window/?code_id=4516&dl='+escape(document.location.href),'wsa_5099_0','height=400,width=400')" class="pull-left">
+                                        <img class="img-responsive" src="<?php echo $this->getSkinUrl("images/lan/lan3.png") ?>" />
+                    <span>German</span>
+                </li>
+
+                <li onclick="window.open('https://c1.websitealive.com/5099/visitor/window/?code_id=4516&dl='+escape(document.location.href),'wsa_5099_0','height=400,width=400')" class="pull-left">
+                                        <img class="img-responsive" src="<?php echo $this->getSkinUrl("images/lan/lan4.png") ?>" />
+                    <span>Russian</span>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+<li class="contactsBox contactsMain active">
+    <div class="text-center">
+        <div class="contactsContainerTitle">Contact Our Support</div>
+
+        <ul class="contactsMainList">
+                    <li data-box="Livechat" class="pull-left">
+                        <div class="circle circleLivechat"><div class="fa fa-weixin icon icon-support"></div></div>
+                        <span class="s1">LiveChat</span>
+                    </li>
+
+                    <li data-box="Form" class="pull-left">
+				       <div class="circle circleMail"><div class="fa fa-envelope-o icon icon-mail"></div></div>
+				       <span class="s3">E-mail us</span>
+			       </li>
+		</ul>
+	</div>
+</li>
+                    <!-- CONTACT FORM -->
+                    <li class="contactsBox contactsForm">
+                        <form enctype="multipart/form-data" method="post" id="jq-form-ticket" action="<?php echo $this->getUrl(); ?>helpdesksupport/index/addticket">
+                            <div class="contactsContainerTitle text-center">
+                                <span class="icon-arrow_left left" id="jq-contacts-back-form"><i class="fa fa-chevron-left"></i></span>
+                                E-mail us                            </div>
+                            <div class="contactsContainerSubTitle text-center">Select the topic of message</div>
+
+                                <input type="hidden" value="general" id="jq-form-category" name="category">
+
+                                <div style="display: none;" class="contactsEmailList2 mobile">
+                                    <div class="inputSelectcontainer">
+                                        <div id="contactEmailSelect" class="m-select">
+                                            <input type="hidden" value="" id="isContactEmail" name="contactEmail">
+                                            <span>-- Please select --</span>
+                                            <div class="m-select-arrow"></div>
+                                            <div style="z-index: 6;" class="u_select">
+                                                <ul style="display: none;" class="contactsEmailList2">
+                                                    <li data-value="general">General information</li>
+                                                    <li data-value="orders">Orders</li>
+                                                    <li data-value="products">Products</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ul class="contactsEmailList desktop text-center">
+                                    <a id="ticketform"></a>
+                                    <li data-value="general" class="pull-left active">
+                                        <div class="icon icon-info"><img src="<?php echo $this->getSkinUrl("images/lan/email1.png") ?>" /></div>
+                                        <div class="listText">General information</div>
+                                        <div class="SHtriangle"></div>
+                                    </li>
+
+                                    <li data-value="orders" class="pull-left">
+                                        <div class="icon icon-order"><img src="<?php echo $this->getSkinUrl("images/lan/email2.png") ?>" /></div>
+                                        <div class="listText">Orders</div>
+                                        <div class="SHtriangle"></div>
+                                    </li>
+
+                                    <li data-value="products" class="pull-left">
+                                        <div class="icon icon-product"><img src="<?php echo $this->getSkinUrl("images/lan/email3.png") ?>" /></div>
+                                        <div class="listText">Products</div>
+                                        <div class="SHtriangle"></div>
+                                    </li>
+                                </ul>
+
+                                <div class="contactsEmailForm">
+
+                                    <div class="inputRadioWrapper" style="display: none;" id="jq-subcat-c">
+                                        <input type="hidden" value="" id="jq-form-select-for" name="select-for">
+
+                                        <div data-value="1" class="inputRadioWrapperBox active">
+                                            <div class="inputRadio"><div class="inputRadioActive"></div></div>
+                                            <div class="inputRadioLabel">For buyers</div>
+                                        </div>
+                                        <div data-value="2" class="inputRadioWrapperBox">
+                                            <div class="inputRadio"><div class="inputRadioActive"></div></div>
+                                            <div class="inputRadioLabel">For sellers</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="inputSelectcontainer">
+                                        <div id="subjectSelect" class="m-select">
+                                            <input type="hidden" value="11" id="iSubject" name="subject">
+											 <input type="hidden" value="General" id="iSubjectto" name="subjectto">
+                                            <span>Pre-orders</span>
+                                            <div class="m-select-arrow"></div>
+                                            <div style="z-index: 6;" class="u_select">
+                                                <ul style="display: none;" id="subjectelectUl"><li value="11">Pre-orders</li><li value="12">Promo codes</li><li value="13">General questions</li><li value="14">Cooperation</li></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="jq-form" class="contactsInputs active">
+                                        <hr class="contactsHr">
+                                           <input type="hidden" value="en" id="jq-dep" name="department">
+                                        <div class="rowForm">
+                                            <div class="rowLabel">Email:<span>*</span></div>
+                                            <div class="rowInput rowIcoEmail">
+                                                <input type="text" placeholder="E-mail address ..." name="email" id="email">
+                                                <div class="tooltipError">
+                                                    <div class="triangleError"></div>
+                                                    <span>Fill this field</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- NEGATIVE FEEDBACK ONLY -->
+                                        <div style="display:none;" id="jq-feedback-c">
+                                            <div class="rowLabel">Key:<span>*</span></div>
+                                            <div class="rowInput rowIcoKey">
+                                                <input type="text" placeholder="CD-Key" id="r-key" name="r-key">
+                                                <div class="tooltipError">
+                                                    <div class="triangleError"></div>
+                                                    <span>Fill this field</span>
+                                                </div>
+                                            </div>
+                                            <div class="rowLabel">Product name:<span>*</span></div>
+                                            <div placeholder="Product name ..." id="r-product" name="r-product" text"="" class="rowInput rowIcoProduct &gt;
+                                                &lt;input type="">
+                                                <div class="tooltipError">
+                                                    <div class="triangleError"></div>
+                                                    <span>Fill this field</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="rowForm" style="" id="jq-order-c">
+                                            <div class="rowLabel">Order number:<span>*</span></div>
+                                            <div class="rowInput rowIcoOrder">
+                                                <input type="text" placeholder="Order number ..." name="order" id="order">
+                                                <div class="tooltipError">
+                                                    <div class="triangleError"></div>
+                                                    <span>Fill this field</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="rowForm" style="display:none;" id="jq-key-c">
+                                            <div class="rowLabel">Key:</div>
+                                            <div class="rowInput rowIcoKey">
+                                                <input type="text" placeholder="CD-Key" name="key" id="key">
+                                                <div class="tooltipError">
+                                                    <div class="triangleError"></div>
+                                                    <span>Fill this field</span>
+                                                </div>
+                                                <div class="rowInfo">If you wish to return ordered key, please do not open the link with them and leave this section empty.</div>
+                                            </div>
+                                        </div>
+
+										
+
+                                       <div style="position: relative" class="rowForm">
+                                       <div class="rowFile">
+                                           		<?php /*?><label class="rowFileValue" id="attachment" for="awhdu3-ticketform-attachments"><?php echo $this->__('+ Attachments') ?></label><?php */?>
+                                            <div class="input-box ">
+                                                <?php if ($this->getMaxAvailableFileSize()):?>
+                                                <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $this->getMaxAvailableFileSize() * 1024 * 1024;?>" />
+                                                <?php endif;?>
+                                                <input name="attachments[]" id="awhdu3-ticketform-attachments" title="<?php echo $this->__('Attachments') ?>" value="" class="input-file" type="file" multiple/>
+                                                <div class="rowFileValue">+ Add attachment</div>
+                                                <div class="tooltipError">
+                                                	<div class="triangleError"></div>
+                                                	<span>Fill this field</span>
+                                                </div>
+                                            </div>
+                                            <script type="text/javascript">
+                                                new AWLIB.FileUploader($('awhdu3-ticketform-attachments'), {
+                                                    fileListClassName: 'awhdu3-ticketform-file-list',
+                                                    errorMsgClassName: 'awhdu3-ticketform-file-list-error-el',
+                                                    fileListElName: 'attachment_needed',
+                                                    availableFileExtensionList: <?php echo Zend_Json::encode($this->getAvailableFileExtensionList());?>,
+                                                    maxFileSizeInBytes: <?php echo Zend_Json::encode($this->getMaxAvailableFileSize() * 1024 * 1024);?>,
+                                                    unexpectedFileExtensionMessage: function(fileName) {
+                                                        return '<?php echo $this->__('Unexpected extension for file: %s. Extension must be one of: %s', "' + fileName + '", join(', ', $this->getAvailableFileExtensionList()));?>';
+                                                    },
+                                                    unexpectedFileSizeMessage: function(fileName) {
+                                                        return '<?php echo $this->__('File "%s" is too large. File size must be less than %s Mb', "' + fileName + '", $this->getMaxAvailableFileSize());?>';
+                                                    }
+                                                });
+                                            </script>
+                						</div>
+                                        </div>
+                                        <div class="rowForm" style="clear:both;">
+                                            <div class="rowLabel labelMessage">Message:<span>*</span></div>
+                                            <div class="rowInput rowTextarea">
+                                                <textarea id="message" name="message"></textarea>
+                                                <div class="tooltipError">
+                                                    <div class="triangleError"></div>
+                                                    <span>Fill this field</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="rowForm">
+                                            <div class="formError jq-form-error"></div>
+                                            <div class="formSuccess jq-form-success"></div>
+                                        </div>
+                                        <div class="rowForm">
+                                            <div class="pull-right rowSubmit">
+                                                <button class="formSubmit btn-blue button"><span><span>Submit</span></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+            var formConfig = {"general":{"def":{"dep":1,"11":{"label":"Pre-orders","show":[1,0]},"12":{"label":"Promo codes","show":[0,0]},"13":{"label":"General questions","show":[0,0]},"14":{"label":"Cooperation","show":[0,0]}}},"orders":{"def":{"dep":1,"21":{"label":"Bad Key","show":[1,1]},"22":{"label":"Shipment","show":[1,0]},"23":{"label":"Order cancellation","show":[1,0]},"24":{"label":"Order rejected","show":[1,0]}}},"products":{"def":{"dep":1,"31":{"label":"Pre-orders","show":[1,0]},"32":{"label":"Product information","show":[0,0]},"33":{"label":"General questions","show":[0,0]}}},"marketplace":{"sellers":{"dep":9,"411":{"label":"Banned account","show":[0,0]},"412":{"label":"Payout problems","show":[0,0]},"413":{"label":"General questions","show":[0,0]},"414":{"label":"Negative feedback","show":[0,0,1]},"415":{"label":"Banned auction","show":[0,0]}},"buyers":{"dep":17,"421":{"label":"Bad Key","show":[1,1]},"422":{"label":"Shipment","show":[1,0]},"423":{"label":"General questions","show":[1,0]}}},"goldmine":{"def":{"dep":7,"51":{"label":"Pay out problem","show":[0,0]},"52":{"label":"Structure","show":[0,0]},"53":{"label":"General questions","show":[0,0]}}}};
+			console.log(formConfig);
+            var formFields = ['jq-order-c','jq-key-c','jq-feedback-c'];
+
+            function formCategoryChange(data, type)
+            {
+                jQuery('#subjectelectUl').html('');
+                jQuery('#iSubject').val('');
+                jQuery('#subjectSelect span:first').html("-- Please select --");
+
+                jQuery.each(data, function(index, value) {
+                    if(index !== 'dep') {
+                        jQuery('#subjectelectUl').append('<li value="'+index+'">'+value.label+'</li>');
+                    }
+                });
+
+                jQuery.each(formFields, function(index, value) {
+                    jQuery('#'+value).hide();
+                });
+
+                if(type == 'marketplace' || type == 'goldmine'){
+                    jQuery('.contactsLangsFlag[data-rel="en"]').click();
+                    jQuery('.contactsLangsFlag').hide();
+                    jQuery('.contactsLangsFlag[data-rel="en"]').show();
+                }
+                else{
+                    jQuery('.contactsLangsFlag').show();
+
+                    var timeNow = '1427869869' * 1000;
+
+                    // RU
+                    var timeRUFrom = new Date(timeNow);
+                    timeRUFrom.setHours(8);
+                    timeRUFrom.setMinutes(0);
+                    timeRUFrom.setSeconds(0);
+
+                    var timeRUTo = new Date(timeNow);
+                    timeRUTo.setHours(23);
+                    timeRUTo.setMinutes(59);
+                    timeRUTo.setSeconds(0);
+
+                    if (timeNow < new Date(timeRUFrom).getTime() || timeNow > new Date(timeRUTo).getTime()) {
+                        jQuery('.contactsLangsFlag[data-rel="ru"]').hide();
+                    }
+
+                    // FR
+                    var timeFRFrom = new Date(timeNow);
+                    timeFRFrom.setHours(8);
+                    timeFRFrom.setMinutes(0);
+                    timeFRFrom.setSeconds(0);
+
+                    var timeFRTo = new Date(timeNow);
+                    timeFRTo.setHours(23);
+                    timeFRTo.setMinutes(59);
+                    timeFRTo.setSeconds(0);
+
+                    if (timeNow < new Date(timeFRFrom).getTime() || timeNow > new Date(timeFRTo).getTime()) {
+                        jQuery('.contactsLangsFlag[data-rel="fr"]').hide();
+                    }
+
+                    // ZH
+                    var timeZHFrom = new Date(timeNow);
+                    timeZHFrom.setHours(8);
+                    timeZHFrom.setMinutes(0);
+                    timeZHFrom.setSeconds(0);
+
+                    var timeZHTo = new Date(timeNow);
+                    timeZHTo.setHours(15);
+                    timeZHTo.setMinutes(30);
+                    timeZHTo.setSeconds(0);
+
+                    if (timeNow < new Date(timeZHFrom).getTime() || timeNow > new Date(timeZHTo).getTime()) {
+                        jQuery('.contactsLangsFlag[data-rel="zh"]').hide();
+                    }
+                }
+            }
+
+            function formSubjectChange(subject)
+            {
+                var cat = jQuery('#jq-form-category').val();
+                var subcat = jQuery('#jq-form-select-for').val();
+
+                if(subcat == 1)
+                    subcat = 'buyers';
+                else if (subcat == 2)
+                    subcat = 'sellers';
+                else
+                    subcat = 'def';
+
+                var fieldShow = formConfig[cat][subcat][subject].show;
+
+                jQuery.each(formFields, function(index, value) {
+                    if(fieldShow[index] == 1)
+                        jQuery('#'+value).show();
+                    else
+                        jQuery('#'+value).hide();
+                });
+            }
+
+            jQuery(document).ready(function() {
+
+                jQuery('.contactsMainList li').click(function() {
+                    var box = jQuery(this).data('box');
+                    jQuery('.contactsContainer').removeClass('active');
+
+                    if (box === 'Form') {
+                        jQuery('.contactsWrap').animate({
+						 marginLeft: '-=100%'
+                        }, 500);
+
+                        jQuery('.contactsMain').removeClass('active');
+                        jQuery('.contacts' + box).addClass('active');
+
+                        jQuery('.contactsContainer').addClass('active');
+                    }
+
+                    if (box === 'Livechat') {
+					
+                        jQuery('.contactsWrap').animate({
+						marginLeft: '+=100%'
+                        }, 500);
+
+                        jQuery('.contactsMain').removeClass('active');
+                        jQuery('.contacts' + box).addClass('active');
+                    }
+                });
+
+                jQuery('#jq-contacts-back-livechat').click(function() {
+                    jQuery('.contactsWrap').animate({
+                        marginLeft: '-100%'
+                    }, 500,function() {
+                        jQuery('.contactsMain').addClass('active');
+                        jQuery('.contactsLivechat').removeClass('active');
+                    });
+                });
+
+                jQuery('#jq-contacts-back-form').click(function() {
+                    jQuery('.contactsWrap').animate({
+                        marginLeft: '-100%'
+                    }, 500 ,function() {
+                        jQuery('.contactsMain').addClass('active');
+                        jQuery('.contactsForm').removeClass('active');
+                    });
+                });
+
+                // Form Email
+                jQuery('.contactsEmailList li').click(function() {
+                    if (!jQuery(this).hasClass('active')) {
+                        var type = jQuery(this).data('value');
+                        console.log(type);
+                        jQuery('#jq-form-category').val(type);
+                        jQuery('.contactsEmailList li').removeClass('active');
+                        jQuery(this).addClass('active');
+
+                        if(typeof(formConfig[type].def) != 'undefined')
+                        {
+                            jQuery('#jq-subcat-c').hide();
+                            jQuery('#jq-form-select-for').val('');
+
+                            formCategoryChange(formConfig[type].def, type);
+                        }
+                        else
+                        {
+                            jQuery('#jq-subcat-c').show();
+                            jQuery('#jq-form-select-for').val('1');
+
+                            formCategoryChange(formConfig[type].buyers, type);
+                        }
+
+                        jQuery('#jq-form').removeClass('active');
+                    }
+                });
+
+                jQuery('.contactsEmailList li').first().click();
+
+                jQuery('.contactsEmailList2 li').on('click', function() {
+
+                        var type = jQuery(this).data('value');
+
+                        jQuery('#jq-form-category').val(type);
+                        jQuery('.contactsEmailList li').removeClass('active');
+
+                        jQuery(this).addClass('active');
+
+                        if(typeof(formConfig[type].def) != 'undefined')
+                        {
+                            jQuery('.contactsEmailForm ').show();
+                            jQuery('#jq-subcat-c').hide();
+                            jQuery('#jq-form-select-for').val('');
+
+                            formCategoryChange(formConfig[type].def, type);
+                        }
+                        else
+                        {
+                            jQuery('.contactsEmailForm ').show();
+                            jQuery('#jq-subcat-c').show();
+                            jQuery('#jq-form-select-for').val('1');
+
+                            formCategoryChange(formConfig[type].buyers, type);
+                        }
+                });
+
+                jQuery('#contactEmailSelect').bind('click', function() {
+                    if(jQuery(this).hasClass('active')) {
+                        jQuery('.contactsContainer').css('overflow', 'visible');
+                    } else {
+                        jQuery('.contactsContainer').css('overflow', 'visible');
+                    }
+                });
+
+                jQuery('.inputRadiocontainerBox').click(function() {
+                    if (!jQuery(this).hasClass('active')) {
+                        var type = jQuery(this).data('value');
+
+                        jQuery('#jq-form-select-for').val(type);
+
+                        jQuery('.inputRadiocontainerBox').removeClass('active');
+                        jQuery(this).addClass('active');
+
+                        var values = formConfig.marketplace.buyers;
+
+                        if(type == 2)
+                            values = formConfig.marketplace.sellers;
+
+                        formCategoryChange(values, 'marketplace');
+                        jQuery('#jq-form').removeClass('active');
+                    }
+                });
+
+                jQuery('.inputRadioWrapperBox').click(function() {
+                        if (!jQuery(this).hasClass('active')) {
+                            var type = jQuery(this).data('value');
+
+                            jQuery('#jq-form-select-for').val(type);
+
+                            jQuery('.inputRadioWrapperBox').removeClass('active');
+                            jQuery(this).addClass('active');
+
+                            var values = formConfig.marketplace.buyers;
+
+                            if(type == 2)
+                                values = formConfig.marketplace.sellers;
+
+                            formCategoryChange(values, 'marketplace');
+                            jQuery('#jq-form').removeClass('active');
+                        }
+                    });
+
+                jQuery("#subjectelectUl").on("click", "li", function() {
+                    var thisText = jQuery(this).html();
+                    var thisValue = jQuery(this).attr('value');
+
+                    jQuery('#subjectSelect').find('span').html(thisText);
+                    jQuery('#subjectSelect').find('input').val(thisValue);
+                    jQuery('#iSubjectto').val(thisText);
+                    formSubjectChange(thisValue);
+
+                    jQuery('.jq-form-error').removeClass('active');
+                    jQuery('.jq-form-success').removeClass('active');
+                    jQuery('#jq-form').addClass('active');
+
+                    jQuery('#subjectSelect').find('ul').slideUp('600', function() {
+                        jQuery('#subjectSelect').removeClass('active');
+                    });
+                });
+
+ 
+
+                jQuery('#attachment').change(function() {
+                    var text = jQuery(this).val();
+
+                    var pos = text.lastIndexOf('\\');
+                    text = text.substring(pos + 1, text.length);
+
+                    var pos2 = text.lastIndexOf('.');
+                    var ext = text.substring(pos2 + 1, text.length);
+
+                    var arr = ['pdf', 'png', 'jpg', 'jpeg','zip', 'gif'];
+                    
+                    if (arr.indexOf(ext.toLowerCase()) < 0) {
+                        jQuery(this).replaceWith(jQuery(this).val('').clone(true));
+                        jQuery('#file_name').html('');
+                        jQuery('.rowFile').find('.tooltipError span').html("Bad file format.");
+                        jQuery('.rowFile').addClass('errorInput');
+                    } else {
+                        jQuery('.rowFile').removeClass('errorInput');
+                        jQuery('#file_name').html(text);
+                    }
+                });
+
+                jQuery('.formSubmit').click(function() {
+                    var ok = true;
+                    var form = jQuery('#jq-form-ticket');
+                    var cat = jQuery('#jq-form-category').val();
+                    var subcat = jQuery('#jq-form-select-for').val();
+                    var subject = jQuery('#iSubject').val();
+
+                    jQuery('.jq-form-error').removeClass('active');
+                    jQuery('.jq-form-success').removeClass('active');
+
+                    if(subcat == 1)
+                        subcat = 'buyers';
+                    else if (subcat == 2)
+                        subcat = 'sellers';
+                    else
+                        subcat = 'def';
+
+                    if(cat && subcat && subject)
+                        var fieldShow = formConfig[cat][subcat][subject].show;
+                    else
+                        var fieldShow = [0,0];
+
+ 
+
+                    if (fieldShow[0] == 1 && !jQuery('#order').val()) {
+                        jQuery('#order').parent().addClass('errorInput');
+                        ok = false;
+                    } else {
+                        jQuery('#order').parent().removeClass('errorInput');
+                    }
+
+                    if (fieldShow[1] == 1 && !jQuery('#key').val()) {
+                        jQuery('#key').parent().addClass('errorInput');
+                        ok = false;
+                    } else {
+                        jQuery('#key').parent().removeClass('errorInput');
+                    }
+                    if (fieldShow[2] == 1 && !jQuery('#r-key').val()) {
+                        jQuery('#r-key').parent().addClass('errorInput');
+                        ok = false;
+                    } else {
+                        jQuery('#r-key').parent().removeClass('errorInput');
+                    }
+                    if (fieldShow[2] == 1 && !jQuery('#r-product').val()) {
+                        jQuery('#r-product').parent().addClass('errorInput');
+                        ok = false;
+                    } else {
+                        jQuery('#r-product').parent().removeClass('errorInput');
+                    }
+                    if (!jQuery('#message').val()) {
+                        jQuery('#message').parent().addClass('errorInput');
+                        ok = false;
+                    } else {
+                        jQuery('#message').parent().removeClass('errorInput');
+                    }
+
+                    if (!jQuery('#email').val()) {
+                        jQuery('#email').parent().addClass('errorInput');
+                        ok = false;
+                    } else {
+                        jQuery('#email').parent().removeClass('errorInput');
+                    }
+
+                    if(ok !== false) {
+                        var formData = new FormData(jQuery('#jq-form-ticket')[0]);
+
+						jQuery("#processsupport").css("display","block");
+						jQuery("#loadmasksupport .loadersupport").css("display","block");		
+
+                        jQuery.ajax({
+                            type: "POST",
+                            mimeType: "multipart/form-data",
+                            url: form.attr('action'),
+                            data: formData,
+                            dataType: 'json',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            xhr: function() {
+                                var myXhr = jQuery.ajaxSettings.xhr();
+                                return myXhr;
+                            }
+                        }).done(function(data) {
+							jQuery("#processsupport").css("display","none");
+							jQuery("#loadmasksupport .loadersupport").css("display","none");
+                            if(data === 'ok') {
+                                var msg = "Your inquiry was submitted and will be responded to as soon as possible. Thank you for contacting us. ";
+                                jQuery('.jq-form-success').html(msg).addClass('active');
+                                jQuery('#file_name').html('');
+                                jQuery(form).trigger('reset');
+                            } else {
+                                jQuery('.jq-captcha-reload').click();
+                                jQuery('.jq-form-error').html(data).addClass('active');
+                            }
+                        });
+                    }
+                    return false;
+                });
+                jQuery('.contactsLangsFlag').click(function() {
+                    jQuery('.contactsLangsFlag').removeClass('active');
+                    jQuery(this).addClass('active');
+                    jQuery('#jq-dep').val(jQuery(this).attr('data-rel'));
+                });
+            });
+            </script>
+            
+            
+            
+<div id="processsupport" style="display: none;"><div id="loadmasksupport"><p class="loadersupport"><img alt="Loading..." src="http://127.1.0.1/g2aclone/skin/frontend/sm_creative/default/sm/cartpro/images/ajax-loader-tr.gif"><br>Please wait...</p></div></div>

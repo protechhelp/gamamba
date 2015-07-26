@@ -1,0 +1,180 @@
+/* Using CSS3 for some visual enhancements. (Will be degraded nicely for non-CSS3 browsers.)*/
+/*
+opacity: 0; filter:alpha(opacity = 0);
+	visibility:hidden;
+content: "\f107";
+font-family: 'FontAwesome'; 
+color:#999;
+font-size:13px;
+
+background-color: rgba(255, 255, 255, 0.3);
+*/
+
+.language-currency .switcher-wrap .switch-content,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu .sm_megamenu_dropdown_1column, 
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu .sm_megamenu_dropdown_2columns, 
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu .sm_megamenu_dropdown_3columns, 
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu .sm_megamenu_dropdown_4columns,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu .sm_megamenu_dropdown_5columns,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu .sm_megamenu_dropdown_6columns,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_1column, 
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_2columns, 
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_3columns,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_4columns,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_5columns,
+.sm_megamenu_wrapper_vertical_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_6columns,
+
+.yt-menu-nav #nav > li:hover > a:before,
+.yt-menu-nav #nav > li > a:before,
+.yt-menu-nav #nav > li:hover > a,
+.yt-menu-nav #nav > li > a,
+.toolbar .select-inner:hover ul,
+.toolbar .select-inner ul{
+	-moz-transition: all 0.3s ease-in-out 0s;
+	-webkit-transition: all 0.3s ease-in-out 0s;
+	-o-transition: all 0.3s ease-in-out 0s;
+	-ms-transition: all 0.3s ease-in-out 0s;
+	transition: all 0.3s ease-in-out 0s;
+}
+
+
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_1column, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_2columns, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_3columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_4columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_5columns, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_6columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_1column, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_2columns, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_3columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_4columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_5columns, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_6columns,
+
+.yt-product-detail .tab-product-detail .yt-tab-navi > li > a:before,
+.yt-product-detail .tab-product-detail .yt-tab-navi > li > a:hover:before,
+
+.toolbar .pagination-wrap .pagination .pages ol li a.next:hover, 
+.toolbar .pagination-wrap .pagination .pages ol li a.previous:hover,
+
+.slider-happy-client .owl-controls .owl-next:hover, 
+.slider-happy-client .owl-controls .owl-prev:hover,
+.yt-payment .block-payment a:hover img,
+.yt-payment .block-payment a img,
+.mini-cartpro .block-content .mini-products-list .item:hover .product-image:before,
+.mini-cartpro .block-content .mini-products-list .item .product-image:before,
+#yt_wrapper .button,
+#yt_wrapper .button:hover {
+	-moz-transition: all 0.2s ease-in-out 0s;
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	-o-transition: all 0.2s ease-in-out 0s;
+	-ms-transition: all 0.2s ease-in-out 0s;
+	transition: all 0.2s ease-in-out 0s;
+}
+.onpen-sidebar #yt_wrapper,
+#yt_wrapper,
+.yt_ressidebar_screennav,
+ul.nav-menu li.parent > .res-wrapnav,
+ul.nav-menu li.parent.open > .res-wrapnav{
+	-moz-transition: all 0.5s ease-in-out 0s;
+	-webkit-transition: all 0.5s ease-in-out 0s;
+	-o-transition: all 0.5s ease-in-out 0s;
+	-ms-transition: all 0.5s ease-in-out 0s;
+	transition: all 0.5s ease-in-out 0s;
+}
+.language-currency .switcher-wrap .switch-content,
+.toolbar .select-inner ul{
+	transform: scale(0) rotate(0deg);
+	-ms-transform: scale(0) rotate(0deg);
+	-moz-transform: scale(0) rotate(0deg);
+	-webkit-transform: scale(0) rotate(0deg);
+	-o-transform: scale(0) rotate(0deg);
+}
+.language-currency .switcher-wrap:hover .switch-content,
+.toolbar .select-inner:hover ul{
+	transform: scale(1.0) rotate(0deg);
+	-ms-transform: scale(1.0) rotate(0deg);
+	-moz-transform: scale(1.0) rotate(0deg);
+	-webkit-transform: scale(1.0) rotate(0deg);
+	-o-transform: scale(1.0) rotate(0deg);
+}
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_1column, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_2columns, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_3columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_4columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_5columns, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li:hover .sm_megamenu_dropdown_6columns,
+.item .item-inner:hover .sm_quickview_handler{
+	transform: scale(1.0) rotate(0deg);
+	-ms-transform: scale(1.0) rotate(0deg);
+	-moz-transform: scale(1.0) rotate(0deg);
+	-webkit-transform: scale(1.0) rotate(0deg);
+	-o-transform: scale(1.0) rotate(0deg);
+}
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_1column, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_2columns, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_3columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_4columns,
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_5columns, 
+.sm_megamenu_wrapper_horizontal_menu .sm_megamenu_menu li .sm_megamenu_dropdown_6columns,
+
+.item .item-inner .sm_quickview_handler{
+	transform: scale(0) rotate(0deg);
+	-ms-transform: scale(0) rotate(0deg);
+	-moz-transform: scale(0) rotate(0deg);
+	-webkit-transform: scale(0) rotate(0deg);
+	-o-transform: scale(0) rotate(0deg);
+}
+
+/*.slider-happy-client .owl-controls .owl-next:hover, 
+.slider-happy-client .owl-controls .owl-prev:hover{
+	transform: scale(1.1) rotate(0deg);
+	-ms-transform: scale(1.1) rotate(0deg);
+	-moz-transform: scale(1.1) rotate(0deg);
+	-webkit-transform: scale(1.1) rotate(0deg);
+	-o-transform: scale(1.1) rotate(0deg);
+}*/
+/*
+.banner-home .banner2 a img{
+	transform: scale(1.0) rotate(0deg);
+	-ms-transform: scale(1.0) rotate(0deg);
+	-moz-transform: scale(1.0) rotate(0deg);
+	-webkit-transform: scale(1.0) rotate(0deg);
+	-o-transform: scale(1.0) rotate(0deg);
+}
+.banner-home .banner2 a:hover img{
+	transform: scale(1.05) rotate(0deg);
+	-ms-transform: scale(1.05) rotate(0deg);
+	-moz-transform: scale(1.05) rotate(0deg);
+	-webkit-transform: scale(1.05) rotate(0deg);
+	-o-transform: scale(1.05) rotate(0deg);
+}
+*/
+
+
+
+
+
+/*.category-products .item:hover .product-image a img{
+	transform: rotateY(180deg); 
+	-ms-transform: rotateY(180deg); 
+	-moz-transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg); 	
+}
+.yt-payment .block-payment a:hover img {	
+	transform: rotateX(180deg); 
+	-ms-transform: rotateX(180deg); 
+	-moz-transform: rotateX(180deg);
+	-webkit-transform: rotateX(180deg);
+	-o-transform: rotateX(180deg); 	
+}
+.banner-top .bannertop-img:hover .img-bg{
+	transform: scale(1.1) rotate(0deg);
+	-ms-transform: scale(1.1) rotate(0deg);
+	-moz-transform: scale(1.1) rotate(0deg);
+	-webkit-transform: scale(1.1) rotate(0deg);
+	-o-transform: scale(1.1) rotate(0deg);
+}
+*/
+

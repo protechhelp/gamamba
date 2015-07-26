@@ -1,0 +1,452 @@
+
+
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */ 
+ 
+ 
+include (dirname(dirname(__FILE__)).'/sm/yt_prepar.php');
+global $var_yttheme;
+?>
+
+
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+
+<script src='//rum.monitis.com/get/jsbenchmark.min.js?id=100904' type='text/javascript' async='async'></script>
+
+<?php if( $var_yttheme->getParam('device_responsive') == 1 ){?>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<?php }?>
+
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ; ?>
+
+<!-- Start Alexa Certify Javascript -->
+<script type="text/javascript">
+_atrk_opts = { atrk_acct:"kJyCl1ao9rD0bm", domain:"gamamba.com",dynamic: true};
+(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=kJyCl1ao9rD0bm" style="display:none" height="1" width="1" alt="smile" /></noscript>
+<!-- End Alexa Certify Javascript -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64679507-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+	var SKIN_URL = '<?php echo $var_yttheme->skinurl();?>';
+	var TMPL_NAME = '<?php echo $var_yttheme->template;?>';
+	var TMPL_COOKIE = <?php echo json_encode($paramscookie); ?>;
+//]]>
+</script>
+
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('css/theme-'.$var_yttheme->getParam('theme_color').'.css') ?>" type="text/css" />
+<?php 
+if( isset($_SERVER['HTTPS'] )  && $_SERVER['HTTPS'] != 'off' ) {
+    $http = 'https';
+} else {
+    $http = 'http'; 
+}
+$googleWebFont = $var_yttheme->getParam('googleWebFont');
+$googleWebFontTargets = $var_yttheme->getParam('googleWebFontTargets');
+if ( $googleWebFont != "" && $googleWebFont != "" ) {
+	$googleWebFontFamily = str_replace(" ","+",$googleWebFont);
+	$googleWebFontFamily = strpos($googleWebFontFamily, ':')?substr($googleWebFontFamily, 0, strpos($googleWebFontFamily, ':')):$googleWebFontFamily;
+}
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $http;?>://fonts.googleapis.com/css?family=<?php echo $googleWebFontFamily; ?>" media="all" />
+<link rel="stylesheet" type="text/css" href="<?php echo $http;?>://fonts.googleapis.com/css?family=Raleway" media="all" />
+<style type="text/css">
+<?php
+// Body Font size
+echo 'body{	
+		font-size:'.$var_yttheme->getParam('fontsize').';	
+	}';	
+if( trim($var_yttheme->getParam('font_name'))!='' )
+	echo '
+		body{
+			font-family:'.$var_yttheme->getParam('font_name').';	
+		}';
+if( trim($googleWebFontTargets)!="" )
+	echo $googleWebFontTargets.'{
+			font-family:'.$googleWebFont.', serif !important;
+		}';
+$titlecolorTargets = $var_yttheme->getParam('titlecolorTargets');
+if( trim($titlecolorTargets)!="" )
+	echo $titlecolorTargets.'{
+			color:#'.$var_yttheme->getParam('titlecolor').' ;
+		}';		
+	echo '
+		body.'.$var_yttheme->template.'{	
+			color:#'.$var_yttheme->getParam('textcolor').' ;			
+		}
+		body.'.$var_yttheme->template.'{	
+			background-color:#'.$var_yttheme->getParam('bgcolor').' ;
+		}
+		a{	
+			color:#'.$var_yttheme->getParam('linkcolor').' ;	
+		}
+		a:focus,
+		a:hover{	
+			color:#'.$var_yttheme->getParam('linkcolorhover').' ;	
+		}	
+		';
+if ( $var_yttheme->getParam('usebgimage') == 1 && $var_yttheme->getParam('usecustomizeimage') == 1 && $var_yttheme->getParam('bgcustomizeimage') !="" ){
+	$media_base = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+	echo '
+		body.'.$var_yttheme->template.'{	
+			background-attachment: fixed;
+			background-image: url('.$media_base.'pattern/'.$var_yttheme->getParam('bgcustomizeimage').');
+			background-repeat:'.$var_yttheme->getParam('bgimagerepeat').' ;	
+			background-position:'.$var_yttheme->getParam('bgimageposition').' ;				
+		}		
+		';
+}		
+if ( $var_yttheme->getParam('usebgimage') == 1 ){
+	echo '
+		.pattern1,
+		.pattern2,
+		.pattern3,
+		.pattern4,
+		.pattern5,
+		.pattern6,
+		.pattern7,
+		.pattern8{	
+			background-repeat:'.$var_yttheme->getParam('bgimagerepeat').' ;	
+			background-position:'.$var_yttheme->getParam('bgimageposition').' ;			
+		}		
+		';
+}
+//detail config
+if ( $var_yttheme->getParam('show_imagezoom') == 0 ){
+	echo '
+		.cloud-zoom-big {
+			display: none !important;
+		}
+		.cloud-zoom-lens {
+			cursor: pointer;	
+		}
+		';	
+}
+if ( $var_yttheme->getParam('zoom_mode') == 2 ){
+	echo '
+		.cloud-zoom-lens{	
+			border: 1px solid #ccc;
+			background: #fff;
+						
+		}
+		.cloud-zoom-big {
+			overflow: hidden;
+			border: 2px solid #ccc;
+			top: 0 !important;
+		}		
+		';	
+}else{
+	echo '
+		.cloud-zoom-big {
+			top: 0 !important;
+			left: 0 !important;
+			width: 100% !important;
+			height: 100% !important;
+		}
+		';	
+}
+//Advanved config
+if ( $var_yttheme->getParam('show_addtocart') == 0 ){
+	echo '
+		.item-addcart,
+		.product-addcart,
+		.header-cart,
+		.wrap-qty,
+		.add-to-cart{
+			display: none;
+		}
+		';
+}
+if ( $var_yttheme->getParam('show_wishlist') == 0 ){
+	echo '
+		.item-wishlist,
+		.product-wishlist,
+		.add-to-links .wishlist{
+			display: none;
+		}
+		';
+}
+if ( $var_yttheme->getParam('show_compare') == 0 ){
+	echo '
+		.item-compare,
+		.product-compare,
+		.add-to-links .compare{
+			display: none;
+		}
+		';
+}
+if ( $var_yttheme->getParam('custom_css') != '' ){
+	echo $var_yttheme->getParam('custom_css');
+}
+?>
+</style>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function($){
+		$(".overwrite-sortby").click(function(){
+			$(this).next('ul').toggleClass('active_dropdown');
+			
+			$(".limiter-wrap .select-inner ul").removeClass("active_dropdown");
+		});
+		
+		$(".overwrite-limiter").click(function(){
+			$(this).next('ul').toggleClass('active_dropdown');
+			
+			$(".sort-by-wrap .select-inner ul").removeClass("active_dropdown");
+		});
+		
+		$(".head-search .btn-search").click(function(){
+			$(".head-search #search_mini_form").addClass("show");
+		});
+		
+		$(".head-search .search_hidden").click(function(){
+			$(".head-search #search_mini_form").removeClass("show");
+		});
+	
+		//custom js (theme config) 
+		<?php if ( $var_yttheme->getParam('custom_js') != '' ){
+			echo $var_yttheme->getParam('custom_js');
+		}?>	
+		//block brand homepage
+		$('.block-brand-content').owlCarousel({
+			pagination: false,
+			center: false,
+			nav: true,
+			loop: true,
+			margin: 30,
+			navText: [ '', '' ],
+			slideBy: 1,
+			autoplay: false,
+			autoplayTimeout: 2500,
+			autoplayHoverPause: true,
+			autoplaySpeed: 800,
+			startPosition: 0, 
+			responsive:{
+				0:{
+					items:2
+				},
+				480:{
+					items:3
+				},
+				768:{
+					items:4
+				},
+				1200:{
+					items:6
+				}
+			}
+		});
+
+		//from blog homepage
+		$('.from-blog-content').owlCarousel({
+			pagination: false,
+			center: false,
+			nav: true,
+			loop: true,
+			margin: 30,
+			navText: [ '', '' ],
+			slideBy: 1,
+			autoplay: false,
+			autoplayTimeout: 2500,
+			autoplayHoverPause: true,
+			autoplaySpeed: 800,
+			startPosition: 0, 
+			responsive:{
+				0:{
+					items:1
+				},
+				480:{
+					items:2
+				},
+				768:{
+					items:3
+				},
+				1200:{
+					items:3
+				}
+			}
+		});		
+		
+		//block testimolials
+		$('.client-say-slider').owlCarousel({
+			pagination: false,
+			center: false,
+			nav: true,
+			loop: true,
+			margin: 0,
+			navText: [ '', '' ],
+			slideBy: 1,
+			autoplay: false,
+			autoplayTimeout: 2500,
+			autoplayHoverPause: true,
+			autoplaySpeed: 800,
+			startPosition: 0, 
+			responsive:{
+				0:{
+					items:1
+				},
+				480:{
+					items:1
+				},
+				768:{
+					items:1
+				},
+				1200:{
+					items:1
+				}
+			}
+		});	
+
+		//deal homepage
+		$('.deal-items').owlCarousel({
+			pagination: false,
+			center: false,
+			nav: false,
+			loop: false,
+			margin: 30,
+			navText: [ '', '' ],
+			responsive:{
+				0:{
+					items:1
+				},
+				480:{
+					items:1
+				},
+				768:{
+					items:1
+				},
+				1200:{
+					items:1
+				}
+			}
+		});
+		
+		//best seller left
+		$('.product-left').owlCarousel({
+			pagination: false,
+			center: false,
+			nav: false,
+			loop: true,
+			margin: 0,
+			navText: [ '', '' ],
+			responsive:{
+				0:{
+					items:1
+				},
+				480:{
+					items:1
+				},
+				768:{
+					items:1
+				},
+				1200:{
+					items:1
+				}
+			}
+		});
+		
+		//best seller homepage
+		$('.basic-bestsale-home .bs-items').owlCarousel({
+			pagination: false,
+			center: false,
+			nav: false,
+			loop: false,
+			margin: 30,
+			navText: [ '', '' ],
+			responsive:{
+				0:{
+					items:1
+				},
+				480:{
+					items:1
+				},
+				768:{
+					items:1
+				},
+				1200:{
+					items:1
+				}
+			}
+		});	
+
+		//menu on top
+		<?php if( $var_yttheme->getParam('menuontop') == 1 ){ ?>		
+			$window = $(window);			
+			menu_offset_top = 150;
+			function processScroll() {
+				var scrollTop = $window.scrollTop();
+				if ( scrollTop >= menu_offset_top) {
+					$('.yt-header').addClass('menu-on-top');
+				} else if (scrollTop <= menu_offset_top) {
+					$('.yt-header').removeClass('menu-on-top');
+				}
+			}
+
+			if( $('.yt-header-bottom') ){
+				// fix sub nav on scroll
+				processScroll();
+				$window.scroll(function(){
+					processScroll();
+				});
+			}				
+		<?php }?>		
+		
+	});
+//]]>	
+</script>
+
+

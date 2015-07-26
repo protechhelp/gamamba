@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Request version="1.0">
+    <Header>
+        <Security sender="{{SECURITY.SENDER}}" token="{{SECURITY.TOKEN}}"/>
+    </Header>
+    <Transaction mode="{{TRANSACTION.MODE}}" response="{{TRANSACTION.RESPONSE}}" channel="{{TRANSACTION.CHANNEL}}">
+        <User login="{{USER.LOGIN}}" pwd="{{USER.PWD}}"/>
+        <Identification>
+            <TransactionID>{{IDENTIFICATION.TRANSACTIONID}}</TransactionID>
+            <ReferenceID>{{IDENTIFICATION.REFERENCEID}}</ReferenceID>
+            <ShopperID>{{IDENTIFICATION.SHOPPERID}}</ShopperID>
+            <InvoiceID>{{IDENTIFICATION.INVOICEID}}</InvoiceID>
+        </Identification>
+        <Payment code="{{PAYMENT.CODE}}">
+            <Presentation>
+                <Amount>{{PRESENTATION.AMOUNT}}</Amount>
+                <Currency>{{PRESENTATION.CURRENCY}}</Currency>
+                <Usage>{{PRESENTATION.USAGE}}</Usage>
+            </Presentation>
+        </Payment>
+        <Account registration="{{ACCOUNT.REGISTRATION}}">
+            <Id>{{ACCOUNT.ID}}</Id>
+            <Brand>MONEYBOOKERS</Brand>
+        </Account>
+        <Customer>
+            <Name>
+                <Given>{{NAME.GIVEN}}</Given>
+                <Family>{{NAME.FAMILY}}</Family>
+            </Name>
+            <Address>
+                <Street>{{ADDRESS.STREET}}</Street>
+                <Zip>{{ADDRESS.ZIP}}</Zip>
+                <City>{{ADDRESS.CITY}}</City>
+                <State>{{ADDRESS.STATE}}</State>
+                <Country>{{ADDRESS.COUNTRY}}</Country>
+            </Address>
+            <Contact>
+                <Email>{{CONTACT.EMAIL}}</Email>
+                <Ip>{{CONTACT.IP}}</Ip>
+            </Contact>
+        </Customer>
+        <Frontend>
+            <ResponseUrl>{{FRONTEND.RESPONSE_URL}}</ResponseUrl>
+    	    <SessionID>{{FRONTEND.SESSION_ID}}</SessionID>
+        </Frontend>
+    </Transaction>
+    <Analysis>
+        <Criterion name="MONEYBOOKERS_recipient_description">{{CRITERION.MONEYBOOKERS_recipient_description}}</Criterion>
+        <Criterion name="MONEYBOOKERS_hide_login">{{CRITERION.MONEYBOOKERS_hide_login}}</Criterion>
+    </Analysis>
+</Request>

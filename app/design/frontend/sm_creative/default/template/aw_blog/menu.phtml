@@ -1,0 +1,39 @@
+<div class="block block-blog">
+    <div class="block-title">
+        <strong><span><?php echo Mage::helper('blog')->__('Recent Posts'); ?></span></strong>
+    </div>
+    <!-- <div class="block-content"> -->
+        <?php if ($posts = $this->getRecent()): ?>
+            <div class="menu-recent">               
+                <ul>
+                    <?php foreach ($posts as $post): ?>
+                        <li><a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+    <!-- </div> -->
+    <?php if ($this->getCategories()->count() && Mage::getStoreConfig('blog/menu/category')): ?>
+    <div class="block-title">
+        <strong><span><?php echo Mage::getStoreConfig('blog/blog/title'); ?></span></strong>
+    </div>
+    <!-- <div class="block-content"> -->        
+            <div class="menu-categories">                
+                <ul>
+                    <?php $cats = $this->getCategories(); ?>
+                    <?php foreach ($cats as $cat): ?>
+                        <li><a href="<?php echo $cat->getAddress(); ?>" ><?php echo $cat->getTitle(); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>       
+    <!-- </div> -->
+     <?php endif; ?>
+    <?php if($this->getChildHtml('blog_tags')){ ?>
+    <!--div class="block-title">
+        <span><?php //echo Mage::helper('blog')->__('Blog tags'); ?></span>
+    </div>
+    <div class="block-content">
+        <?php //echo $this->getChildHtml('blog_tags'); ?>
+    </div-->
+    <?php } ?>
+</div>

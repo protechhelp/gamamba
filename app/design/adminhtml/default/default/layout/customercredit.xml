@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <customercreditadmin_adminhtml_customercredit_index>
+        <reference name="content">
+            <block type="customercredit/adminhtml_customercredit" name="customercredit" />
+        </reference>
+    </customercreditadmin_adminhtml_customercredit_index>
+    
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <action method="addTab">
+                <name>credit_balance</name>
+                <block>customercredit/adminhtml_customer_tab_storecredit</block>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+    
+    <customercreditadmin_adminhtml_reporttransaction_index>
+        <reference name="content">
+            <!--            <block type="customercredit/adminhtml_percentcredit" name="customercredit-percent"/>-->
+            <block type="customercredit/adminhtml_transaction" name="customercredit-report"/>
+        </reference>
+    </customercreditadmin_adminhtml_reporttransaction_index>
+    
+    <customercreditadmin_adminhtml_creditproduct_index>
+        <reference name="content">
+            <block type="customercredit/adminhtml_creditproduct" name="customercredit-credit_product" />
+        </reference>
+    </customercreditadmin_adminhtml_creditproduct_index>
+    <adminhtml_sales_order_view>
+        <reference name="order_totals">
+            <block type="customercredit/order_totals" />
+        </reference>
+    </adminhtml_sales_order_view>	
+
+    <adminhtml_sales_order_invoice_new>
+        <reference name="invoice_totals">
+            <block type="customercredit/order_invoice_totals" />
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="invoice_totals">
+            <block type="customercredit/order_invoice_totals"/>
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+    <adminhtml_sales_order_invoice_view>
+        <reference name="invoice_totals">
+            <block type="customercredit/order_invoice_totals" />
+        </reference>
+    </adminhtml_sales_order_invoice_view>	
+
+    <adminhtml_sales_order_invoice_print>
+        <reference name="invoice_totals">
+            <block type="customercredit/order_invoice_totals" />
+        </reference>
+    </adminhtml_sales_order_invoice_print>
+    	
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="creditmemo_totals">
+            <block type="customercredit/order_creditmemo_totals" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="creditmemo_totals">
+            <block type="customercredit/order_creditmemo_totals" />
+        </reference>
+        <reference name="submit_before">
+            <block type="customercredit/order_creditmemo_controls" name="customerbalance" template="customercredit/sales/creditmemo/refund.phtml" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="submit_before">
+            <block type="customercredit/order_creditmemo_controls" name="customerbalance" template="customercredit/sales/creditmemo/refund.phtml" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="creditmemo_totals">
+            <block type="customercredit/order_creditmemo_totals" />
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    
+    <!--Creaer Order backend>
+    <adminhtml_sales_order_create_index>
+        <reference name="billing_method">
+            <block type="customercredit/order_create_credit" name="abc" template="customercredit/sales/create/credit.phtml" />
+        </reference>
+    </adminhtml_sales_order_create_index-->
+    <!-- Backend create order -->
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/magestore/customercredit.js</name>
+                <params/>
+            </action>
+        </reference>
+        <reference name="items_grid">
+            <block type="customercredit/order_create_credit" template="customercredit/form.phtml" name="customercredit.using" />
+        </reference>
+    </adminhtml_sales_order_create_index>
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="items_grid">
+            <block type="customercredit/order_create_credit" template="customercredit/form.phtml" name="customercredit.using" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+    <adminhtml_sales_order_create_load_block_items>
+        <reference name="items_grid">
+            <block type="customercredit/order_create_credit" template="customercredit/form.phtml" name="customercredit.using" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
+</layout>

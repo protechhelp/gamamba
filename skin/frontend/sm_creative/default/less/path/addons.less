@@ -1,0 +1,222 @@
+/* Eric Meyer's CSS Tools: Reset CSS (Modified by Hieu Nguyen)
+-------------------------------------------------------------*/
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+
+body, 
+html, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, button,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+}
+
+ul, ol {
+	list-style: none;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border:0; 
+	border-collapse: collapse;
+	border-spacing:0; 
+	empty-cells:show; 
+	font-size:100%; 
+}
+
+/* Clearfix
+-------------------------------------------------------------*/
+* html .clearfix {
+	height: 1%; /* IE5-6 */
+}
+
+html[xmlns] .clearfix { /* O */
+	display: block;  
+}
+
+.clearfix:after { /* FF, O, etc. */
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+*:first-child+html .clearfix { /* IE 7 */
+	display: inline-block;
+}
+
+/* Mis.
+-------------------------------------------------------------*/
+.clear, .divider {clear: both;}
+
+.no-display {display: none !important;}
+
+.nowrap,th .nobr {white-space: nowrap !important;}
+
+.no-border {
+	border: 0 !important;
+}
+
+.no-padding {padding: 0 !important}
+.no-margin 	{margin: 0 !important;}
+
+.pipe {
+	padding: 0 4px;
+	text-align: center;
+	color: #999999;
+}
+
+/*Alignment---*/
+.v-top 		{vertical-align: top;}
+.v-middle	{vertical-align: middle;}
+.v-bottom 	{vertical-align: bottom;}
+
+.a-left		{text-align: left;}
+.a-center	{text-align: center;}
+.a-right		{text-align: right;}
+
+.left		{float: left;}
+.right	{float: right;}
+
+.normal-weight {font-weight: normal;}
+
+.auto-width {width: auto;}
+
+/*Various Clears---*/
+.clear:after,
+.col2-set:after,
+.col3-set:after,
+.col4-set:after,
+.col2-alt-set:after,
+.head:after,
+.inner-head:after,
+.box .head:after,
+.box ol li:after,
+.header-top:after,
+.quick-access:after,
+.header-nav:after,
+.middle:after,
+.more-views ul:after,
+.button-set:after,
+.actions:after,
+.legend:after,
+.form-list li:after,
+.button-container:after,
+.ratings:after,
+.page-head:after,
+.page-head-alt:after,
+.page-popup .print-head:after,
+.group-select li:after,
+.search-autocomplete li:after,
+.tool-tip .btn-close:after,
+.account-box li:after,
+.address-list li:after,
+.generic-product-list li:after,
+.listing-type-list .listing-item:after,
+.listing-type-list .product-info .product-reviews:after,.listing-type-grid .item:after,
+.my-review-detail:after,
+.product-options dt:after,
+.product-options-bottom:after,
+.product-options dd ul.options-list li:after,
+.add-to-holder:after,
+.listing-type-grid .grid-row:after,
+.advanced-search-summary-box:after,
+.shopping-cart-totals .checkout-types:after,
+#nav ul li:after,
+.clearer:after,
+.header-container:after,
+.header-container .top-container:after,
+.header:after,
+.header .quick-access:after,
+#nav:after,
+.main:after,
+.footer:after,
+.footer-container .bottom-container:after,
+.col-main:after,
+.col2-set:after,
+.col3-set:after,
+.col4-set:after,
+.search-autocomplete li:after,
+.block .block-content:after,
+.block .actions:after,
+.block li.item:after,
+.block-poll li:after,
+.block-layered-nav .currently li:after,
+.page-title:after,
+.products-grid:after,
+.products-list li.item:after,
+.box-account .box-head:after,
+.dashboard .box .box-title:after,
+.box-reviews li.item:after,
+.box-tags li.item:after,
+.pager:after,
+.toolbar-inner:after,
+.sorter:after,
+.ratings:after,
+.add-to-box:after,
+.add-to-cart:after,
+.product-essential:after,
+.product-collateral:after,
+.product-view .product-img-box .more-views ul:after,
+.product-view .box-tags .form-add:after,
+.product-options .options-list li:after,
+.product-options-bottom:after,
+.product-review:after,
+.cart:after,
+.cart-collaterals:after,
+.cart .crosssell li.item:after,
+.opc .step-title:after,
+.checkout-progress:after,
+.multiple-checkout .place-order:after,
+.group-select li:after,
+.form-list li:after,
+.form-list .field:after,
+.buttons-set:after,
+.page-print .print-head:after,
+.advanced-search-summary:after,
+.gift-messages-form .item:after,
+.send-friend .form-list li p:after,
+#nav li:after,
+.ytm-tabs-title:after,
+.ytm-tabs-title:after,
+.product-options dl:after,
+.yt-top .block-currency:after {
+	content:"."; 
+	display:block; 
+	clear:both; 
+	height:0; 
+	font-size:0; 
+	line-height:0; 
+	visibility:hidden; 
+	overflow:hidden;
+}
+

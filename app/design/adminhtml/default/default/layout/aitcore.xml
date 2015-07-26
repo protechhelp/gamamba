@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="notifications">
+            <block type="aitsys/rewriter_notifications" name="aitsys_rewriter_notifications" template="aitcore/rewriter/notifications.phtml" />
+        </reference>
+    </default>
+    
+    <aitsys_index_index>
+        <reference name="head">
+            <action method="addCss"><name>aitoc/aitsys.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="aitsys/edit" name="aitsys.edit" template="aitcore/edit.phtml">
+                <block type="aitsys/news" name="aitsys.news" template="aitcore/news.phtml" />
+            </block>
+        </reference>
+    </aitsys_index_index>
+    
+    <aitsys_patch_index>
+        <reference name="head">
+            <action method="addCss"><name>aitoc/aitsys.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="aitsys/patch_view" name="aitsys.patch.view" template="aitcore/patch/view.phtml" />
+        </reference>
+    </aitsys_patch_index>
+    
+    <aitsys_patch_instruction>
+        <reference name="head">
+            <action method="addCss"><name>aitoc/aitsys.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="aitsys/patch_instruction" name="aitsys.patch.instruction" template="aitcore/patch/instruction.phtml">
+                <block type="aitsys/patch_instruction_one" name="aitsys.patch.instruction.one" template="aitcore/patch/instruction/one.phtml" />
+            </block>
+        </reference>
+    </aitsys_patch_instruction>
+    
+    <aitsys_rewriter_index>
+        <reference name="head">
+            <action method="addCss"><name>aitoc/aitsys.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="aitsys/rewriter_list" name="aitsys.rewriter.list" template="aitcore/rewriter/list.phtml" />
+        </reference>
+    </aitsys_rewriter_index>
+</layout>
+
+<!--
+/**
+ * Configurable Checkout
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitconfcheckout
+ * @version      2.1.27
+ * @license:     2qI6oAD8hvvkjMutXwa7Vp1gcsMrnxn0DqZRLmfWz9
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

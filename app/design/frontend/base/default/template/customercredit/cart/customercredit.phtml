@@ -1,0 +1,119 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php echo $this->getCouponHtml() ?>
+<?php if ($this->isEnableCredit()): ?>
+<form id="customer-credit-form-code" action="<?php echo $this->getUrl('customercredit/checkout/setAmountPost') ?>" method="post">
+    <?php if (!$this->isLoggedIn()) { ?>
+    <div class="discount">
+        <dl id="">
+            <dt></dt>
+            <dd>
+                <h2><?php echo $this->__('Customer Credit') ?></h2>
+                <div>
+                    <div class="checkout-cart-credit-amount">
+                        <p>
+                            <?php echo $this->__('Please ') . "<a href=\"" . $this->getUrl('customer/account/login') . "\">" . $this->__('login') . "</a>" . $this->__(' to use customer credit.'); ?>
+                        </p>
+                    </div>
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <?php } elseif ($this->shoppingCartHasCredit()) { ?>
+    <div class="discount">
+        <dl id="">
+            <dt></dt>
+            <dd>
+                <h2><?php echo $this->__('Customer Credit') ?></h2>
+                <div>
+                    <div class="checkout-cart-credit-amount">
+                        <p><?php echo $this->__('Your current credit Balance is ') ?><span style="color: #020EBA;"><?php echo $this->getCustomerCreditLabel(); ?></span> </p>
+                        <p>
+                            <?php echo $this->__('Customer credit can not be used because your cart has at least one credit product'); ?>
+                        </p>
+                    </div>
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <?php } elseif (!Mage::helper('customercredit/account')->customerGroupCheck() && $this->isLoggedIn()) {
+    ?>
+
+    <?php } else { ?>
+    <div class="discount">
+        <dl id="">
+            <dt></dt>
+            <dd>
+                <h2><?php echo $this->__('Customer Credit') ?></h2>
+                <div>
+                    <div class="checkout-cart-credit-amount">
+                        <p><?php echo $this->__('Your current credit Balance is ') ?><span style="color: #020EBA;"><?php echo $this->getCustomerCreditLabel(); ?></span> </p>
+                        <p>
+                            <?php echo $this->__('Enter your credit amount if you want to pay by Customer Credit'); ?>
+                        </p>
+                        <div class="input-box">
+                            <input  type="text" class="input-text required-entry validate-number validate-zero-or-greater" id= "checkout-cart-credit-amount-textbox" onchange="checkoutCartCreditAmount()" value="<?php echo $this->getCurrentCreditAmount(); ?>" title="<?php echo $this->__('Gift Card Credit') ?>" name="customer_credit" />
+                            <script type="text/javascript">
+                                function checkoutCartCreditAmount() {
+                                    var button = $('checkout-cart-credit-amount-button');
+                                    button.type = 'submit';
+                                    var warning = $('advice-validate-number-customer_credit')
+                                    warning.hide();
+                                    var amount = $('checkout-cart-credit-amount-textbox').value;
+                                    if (isNumeric(amount) && amount >= 0) {
+                                        var current = <?php echo $this->getCustomerCredit(); ?>;
+                                        if (amount - current > 0) {
+                                            warning.show();
+                                            button.type = 'button';
+                                        }
+                                    }
+                                }
+                            </script>
+                            <div class="validation-advice" id="advice-validate-number-customer_credit" style="display: none"><?php echo $this->__('Please enter a number smaller than or equal to “%s”!', $this->getCustomerCreditLabel()); ?></div>
+                        </div>
+                    </div>
+            </dd>
+            <dt></dt>
+            <dd>
+                <ul>
+                    <li>
+                        <div class="input-box">
+                            <button <?php if ($this->hasCustomerCreditItem()) { ?>type="button" <?php } else { ?> type="submit"<?php } ?> class="button" id="checkout-cart-credit-amount-button">
+                                <span><span><?php echo $this->__('Apply Customer Credit') ?></span></span>
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+    <?php } ?>
+</form>
+<script type="text/javascript">
+    var customerForm = new VarienForm('customer-credit-form-code', true);
+</script>
+<?php endif ?>

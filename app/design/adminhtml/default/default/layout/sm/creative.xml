@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<adminhtml_system_config_edit>
+		<update handle="editor"/>
+		<reference name="head">
+			<action method="addCss"><stylesheet>sm/creative/css/sm-setting.css</stylesheet></action>
+			<action method="addItem"><type>skin_js</type><name>sm/creative/js/jquery-1.7.2.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>sm/creative/js/jquery.noconflict.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>sm/creative/js/sm-setting.js</name></action>
+			<action method="addJs"><file>jscolor/jscolor.js</file></action>
+			<action method="setCanLoadTinyMce"><load>1</load></action>
+		</reference>
+	</adminhtml_system_config_edit>
+</layout>

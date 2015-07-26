@@ -1,0 +1,415 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <sm translate="label" module="cartpro">
+            <label>MagenTech.com</label>
+            <sort_order>300</sort_order>
+        </sm>
+    </tabs>
+    <sections>
+        <cartpro_cfg translate="label" module="cartpro">
+            <label>SM Cart Pro</label>
+            <tab>sm</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>150</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>   
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>		
+                    	<enable>			
+                            <label>Enable CartPro Module</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model> 
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                    			
+                    	</enable>				
+						<enable_ajax_cart translate="label">
+                            <label>Enable Ajax Cart</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model> 
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends><enable>1</enable></depends>		                            
+                        </enable_ajax_cart>
+						<enable_ajax_compare translate="label">
+                            <label>Enable Ajax for Compare</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model> 
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends><enable>1</enable></depends>	                            
+                        </enable_ajax_compare>
+						<enable_ajax_wishlist translate="label">
+                            <label>Enable Ajax for Wishlist</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model> 
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends><enable>1</enable></depends>	                            
+                        </enable_ajax_wishlist>
+						<enable_ajax_update translate="label">
+                            <label>Enable Ajax for Update</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model> 
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<depends><enable>1</enable></depends>	                            
+                        </enable_ajax_update>
+                    </fields>
+                </general>
+				<confirm_display_setting translate="label">
+	            	<label>Confirm Box Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<confirm_display translate="label">
+                    		<label>Display Confirm Box</label>
+		            		<frontend_type>select</frontend_type>
+		            		<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>10</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                    	</confirm_display>                  	
+	            		<confirm_countdown_number translate="label">
+		            		<label>Countdown Number</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>20</sort_order>
+		            		<validate>validate-greater-than-zero</validate>
+		            		<comment>time(seconds)</comment>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><confirm_display>1</confirm_display></depends>								
+						</confirm_countdown_number>
+	            		<confirm_item_display translate="label">
+                    		<label>Display Item in Confirm Box</label>
+		            		<frontend_type>select</frontend_type>
+		            		<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>30</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><confirm_display>1</confirm_display></depends>								
+						</confirm_item_display>
+					</fields>
+	            </confirm_display_setting>
+	            
+				<mini_cartpro_setting translate="label">
+	            	<label>Mini CartPro Box Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<mini_cartpro_display translate="label">
+                    		<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+		            		<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>10</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+                    	</mini_cartpro_display>        
+	            		<mini_cartpro_effect_selector translate="label">
+                    		<label>Effect Selector</label>
+		            		<frontend_type>select</frontend_type>
+		            		<source_model>cartpro/system_config_source_listEffectSelector</source_model>
+		            		<sort_order>20</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><mini_cartpro_display>1</mini_cartpro_display></depends>								
+						</mini_cartpro_effect_selector>                    	          	
+	            		<mini_cartpro_effect_toggle translate="label">
+		            		<label>Effect Toggle</label>
+		            		<frontend_type>select</frontend_type>
+		            		<source_model>cartpro/system_config_source_listEffectToggle</source_model>
+		            		<sort_order>40</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><mini_cartpro_display>1</mini_cartpro_display></depends>								
+						</mini_cartpro_effect_toggle>
+	            		<mini_cartpro_effect_duration translate="label">
+		            		<label>Effect Duration</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>50</sort_order>
+		            		<validate>validate-greater-than-zero</validate>
+		            		<comment>time(seconds)</comment>		            		
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><mini_cartpro_display>1</mini_cartpro_display></depends>								
+						</mini_cartpro_effect_duration>
+					</fields>
+	            </mini_cartpro_setting>
+	            
+				<product_display_setting translate="label">
+					<label>Products Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+					
+					<fields>
+						<product_image_heading translate="label">
+							<label>Product image</label>
+		            		<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		            		<sort_order>10</sort_order>
+		            		<show_in_default>1</show_in_default>
+						</product_image_heading>
+						<product_image_display translate="label">
+							<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>20</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_image_display>
+						<product_image_linkable translate="label">
+							<label>Linkable</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>30</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><product_image_display>1</product_image_display></depends>							
+						</product_image_linkable>
+						<product_image_width translate="label">
+		            		<label>Thumbnail width</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>40</sort_order>
+							<validate>validate-greater-than-zero</validate>
+							<comment>unit(pixel)</comment>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><product_image_display>1</product_image_display></depends>								
+						</product_image_width>
+	            		<product_image_height translate="label">
+		            		<label>Thumbnail height</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>50</sort_order>
+							<validate>validate-greater-than-zero</validate>
+							<comment>unit(pixel)</comment>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><product_image_display>1</product_image_display></depends>								
+						</product_image_height>
+						
+						<product_title_heading translate="label">
+							<label>Product title</label>
+		            		<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		            		<sort_order>100</sort_order>
+		            		<show_in_default>1</show_in_default>
+						</product_title_heading>
+						<product_title_display translate="label">
+							<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>110</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_title_display>
+						<product_title_linkable translate="label">
+							<label>Linkable</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>120</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><product_title_display>1</product_title_display></depends>
+						</product_title_linkable>
+					
+						<product_description_heading translate="label">
+							<label>Product description</label>
+		            		<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		            		<sort_order>200</sort_order>
+		            		<show_in_default>1</show_in_default>
+						</product_description_heading>
+						<product_description_display translate="label">
+							<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>210</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_description_display>
+						
+						<product_description_src translate="label">
+							<label>Short Description</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>220</sort_order>
+		            		<comment>if false, long description will used</comment>
+		            		<depends><product_description_display>1</product_description_display></depends>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_description_src>		
+										
+						<product_description_max_length translate="label">
+							<label>Max characters</label>
+		            		<frontend_type>text</frontend_type>
+		            		<sort_order>230</sort_order>
+							<validate>validate-not-negative-number</validate>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<depends><product_description_display>1</product_description_display></depends>
+						</product_description_max_length>
+						
+						<product_description_strip_tags translate="label">
+							<label>Strip Tags</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>240</sort_order>
+		            		<depends><product_description_display>1</product_description_display></depends>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_description_strip_tags>		
+										
+						<product_price_infomations_heading translate="label">
+							<label>Product Price</label>
+		            		<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		            		<sort_order>300</sort_order>
+		            		<show_in_default>1</show_in_default>
+						</product_price_infomations_heading>
+
+						<product_price_display translate="label">
+							<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>320</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_price_display>
+						
+						<product_rating_summary_infomations_heading translate="label">
+							<label>Product Rating Summary</label>
+		            		<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		            		<sort_order>330</sort_order>
+		            		<show_in_default>1</show_in_default>
+						</product_rating_summary_infomations_heading>
+												
+						<product_rating_summary_display translate="label">
+							<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>340</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_rating_summary_display>
+						
+						<product_quantity_heading translate="label">
+							<label>Product Quantity</label>
+		            		<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		            		<sort_order>350</sort_order>
+		            		<show_in_default>1</show_in_default>
+						</product_quantity_heading>
+						
+						<product_quantity_display translate="label">
+							<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>360</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_quantity_display>
+						
+						<product_quantity_input_display translate="label">
+							<label>Display Input</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>370</sort_order>
+		            		<depends><product_quantity_display>1</product_quantity_display></depends>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_quantity_input_display>
+<!-- 
+						<product_addtocompare_infomations_heading translate="label">
+							<label>Product AddtoCompare</label>
+		            		<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		            		<sort_order>350</sort_order>
+		            		<show_in_default>1</show_in_default>
+						</product_addtocompare_infomations_heading>
+												
+						<product_addtocompare_display translate="label">
+							<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>360</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_addtocompare_display>
+						
+						<product_addtowishlist_infomations_heading translate="label">
+							<label>Product AddtoWishlist</label>
+		            		<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		            		<sort_order>370</sort_order>
+		            		<show_in_default>1</show_in_default>
+						</product_addtowishlist_infomations_heading>
+												
+						<product_addtowishlist_display translate="label">
+							<label>Display</label>
+		            		<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+		            		<sort_order>380</sort_order>
+		            		<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</product_addtowishlist_display> -->
+					
+					</fields>
+				</product_display_setting>	
+                <author_information translate="label">
+                    <label>Author Information</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>The Ajaxcart Pro Extension is developed and supported by &lt;a href="http://www.magentech.com/"&gt;www.MagenTech.com&lt;/a&gt;.
+							 If you need any support or have any question please contact us at &lt;a href="mailto:support@magentech.com"&gt;support@magentech.com.&lt;/a&gt;
+                    </comment>
+                </author_information>				                            
+			</groups>
+        </cartpro_cfg>
+    </sections>
+</config>

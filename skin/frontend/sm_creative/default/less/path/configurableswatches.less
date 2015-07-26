@@ -1,0 +1,236 @@
+/* ============================================ *
+ * Configurable Swatches
+ * ============================================ */
+/* Clears */
+.clearfix:after,
+.configurable-swatch-list:after,
+.product-view .product-options .swatch-attr:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* General Swatch Styling */
+.swatch-link,
+.swatch-label {
+    display: block;
+    text-transform: uppercase;
+}
+
+.swatch-link {
+    border: 1px solid #cccccc;
+    margin: 0 0 3px;
+}
+
+.swatch-link:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.swatch-link .x {
+    display: none;
+    text-indent: -999em;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: url(../../images/bg_x.png) center no-repeat transparent;
+    z-index: 10;
+}
+
+.swatch-link.has-image .swatch-label {
+    position: relative;
+}
+
+.swatch-link.has-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #fff;
+}
+
+.configurable-swatch-list {
+    clear: both;
+}
+
+
+.configurable-swatch-list .not-available .x {
+    display: block;
+}
+
+.configurable-swatch-list .not-available .swatch-link {
+    border-color: #ededed;
+    position: relative;
+}
+
+.configurable-swatch-list .not-available .swatch-link.has-image img {
+    opacity: 0.4;
+}
+
+.configurable-swatch-list .not-available .swatch-label {
+    color: #aaa;
+    background: #fff;
+}
+
+.configurable-swatch-list .wide-swatch .swatch-label {
+    padding: 0 6px;
+}
+
+.configurable-swatch-list .not-available a:focus {
+    outline: 0;
+}
+
+
+#narrow-by-list dd .swatch-link {
+    border: none;
+    line-height: 25px;
+    margin-right: 2px;
+    text-align: left;
+}
+
+#narrow-by-list dd .swatch-link.has-image {
+    line-height: inherit;
+}
+
+
+
+#narrow-by-list dd .swatch-label {
+    display: block;
+    float: left;
+    line-height: 1.5em;
+    margin: 0 5px 0 0;
+    padding: 1px 5px;
+    white-space: nowrap;
+    border:1px solid #ddd;
+}
+
+#narrow-by-list dd .configurable-swatch-list li a:hover .swatch-label{
+    border-color:#3399cc;
+}
+
+
+#narrow-by-list dd .has-image .swatch-label {
+    padding: 0;
+}
+
+@media only screen and (max-width: 770px) {
+    #narrow-by-list dd .configurable-swatch-list li:nth-child(odd) {
+        clear: left;
+    }
+}
+
+.currently .swatch-current {
+    position: relative;
+}
+
+.currently .swatch-current .btn-remove {
+    margin-top: -10px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+
+.currently .swatch-current span {
+    display: block;
+    float: left;
+}
+
+.currently .swatch-link {
+    display: inline-block;
+    margin: 0 0 0 3px;
+}
+
+.currently .swatch-link:hover {
+    border-color: #cccccc;
+    cursor: default;
+}
+
+/* Other Swatch States */
+.configurable-swatch-list .hover .swatch-link,
+.configurable-swatch-list .selected .swatch-link,
+.swatch-link:hover {
+    border-color: #3399cc;
+}
+
+.configurable-swatch-box {
+    background: none !important;
+}
+
+.configurable-swatch-box select.swatch-select {
+    display: none;
+}
+
+.configurable-swatch-box .validation-advice {
+    margin: 0 0 5px;
+    background: #df280a;
+    padding: 2px 5px !important;
+    font-weight: bold;
+    color: #fff !important;
+    float: left;
+    display: block;
+    border-radius: 3px;
+}
+
+.configurable-swatch-list li{
+  display:inline-block;
+
+  .swatch-label{
+    text-align: center;
+  }
+}
+
+.product-image .configurable-swatch-list{
+  text-align: center;
+}
+
+#narrow-by-list .configurable-swatch-list li{
+  width:33%;
+  float:left;
+}
+.configurable-swatch-list li a{
+  padding-left:0px!important;
+}
+.configurable-swatch-list li a:before{
+  display: none;
+}
+
+#layered-navigation #narrow-by-list dd .configurable-swatch-list li a:hover:after,
+#layered-navigation #narrow-by-list dd .configurable-swatch-list li a.checked:after{
+  display: none;
+}
+
+.products-grid .product-image .hidden{
+  display:none!important;
+}
+
+.products-grid .configurable-swatch-list{
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  width:100%;
+  z-index:10;
+}
+
+.yt-product-detail .product-options .option-config{
+  margin-left:0px;
+  margin-right:0px;
+}
+
+.product-image-gallery img{
+  display: none!important;
+}
+
+.product-addcart .btn-cart.out-of-stock{
+  background-color:#e0e0e0!important;
+  border-color:#e0e0e0!important;
+  &:hover{
+    background-color:#e0e0e0!important;
+    border-color:#e0e0e0!important;
+    color: #666!important;
+
+    &:before{
+      background-position: right center;
+    }
+  }
+}

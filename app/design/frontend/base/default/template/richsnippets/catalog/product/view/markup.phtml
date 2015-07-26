@@ -1,0 +1,96 @@
+<?php
+/**
+ * Magpleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Richsnippets
+ * @copyright  Copyright (c) 2014-2015 Magpleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+/** @var $this Magpleasure_Richsnippets_Block_Catalog_Product_View_Markup */
+/** @var $_priceModel Mage_Bundle_Model_Product_Price */
+
+?>
+<?php if ($this->_helper()->getConfigValue('general', 'enabled')): ?>
+    <?php $_product = $this->getProduct() ?>
+    <div style="display:none !important">
+        <?php $_image = Mage::helper('catalog/image')->init($_product, 'small_image')->resize(125, 125); ?>
+        <meta itemprop="image" content="<?php echo $_image; ?>">
+        <meta itemprop="name" content="<?php echo $this->escapeHtml($_product->getName()); ?>">
+        <meta itemprop="description" content="<?php echo $this->escapeHtml($_product->getDescription()); ?>">
+        <meta itemprop="productID" content="<?php echo $_product->getSku(); ?>">
+    </div>
+    <div style="display:none !important" itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+        <?php if (Mage_Catalog_Model_Product_Type::TYPE_GROUPED == $_product->getTypeId()): ?>
+            <meta itemprop="price" content="<?php echo $this->_helper()->getGroupedProductPrice($_product); ?>">
+            <?php $_available = $_product->isAvailable() && count($_product->getTypeInstance()->getAssociatedProducts()) > 0; ?>
+            <meta itemprop="availability"
+                  content="<?php echo $_available ? 'http://schema.org/InStock' : 'http://schema.org/OutOfStock'; ?>">
+        <?php else: ?>
+            <?php if (Mage_Catalog_Model_Product_Type::TYPE_BUNDLE == $_product->getTypeId()): ?>
+                <?php $_priceModel = Mage::getModel('bundle/product_price'); ?>
+                <?php $_configuredPrice = $this->_helper()->getConfiguredPrice($_product); ?>
+                <?php $_minPrice = method_exists($_priceModel, 'getTotalPrices') ?
+                    $_priceModel->getTotalPrices($_product, 'min', 1) :
+                    $_priceModel->getPrices($_product, 'min'); ?>
+                <meta itemprop="price"
+                      content="<?php echo round($_configuredPrice ? $_configuredPrice : $_minPrice, 2); ?>">
+                <div style="display:none!important" itemscope itemprop="priceSpecification"
+                     itemtype="http://schema.org/PriceSpecification">
+                    <meta itemprop="priceCurrency"
+                          content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>">
+                    <meta itemprop="minPrice" content="<?php echo round($_minPrice, 2); ?>">
+                    <?php $_maxPrice = method_exists($_priceModel, 'getTotalPrices') ?
+                        $_priceModel->getTotalPrices($_product, 'max', 1) :
+                        $_priceModel->getPrices($_product, 'max'); ?>
+                    <meta itemprop="maxPrice" content="<?php echo round($_maxPrice, 2); ?>">
+                </div>
+            <?php elseif (
+                method_exists(new Mage(), 'getEdition') &&
+                Mage::EDITION_ENTERPRISE == Mage::getEdition() &&
+                Enterprise_GiftCard_Model_Catalog_Product_Type_Giftcard::TYPE_GIFTCARD == $_product->getTypeId()
+            ): ?>
+                <meta itemprop="price"
+                      content="<?php echo round($_product->getPriceModel()->getMinAmount($_product), 2); ?>">
+            <?php else: ?>
+                <meta itemprop="price"
+                      content="<?php echo round($_product->getPriceModel()->getFinalPrice(null, $_product), 2); ?>">
+            <?php endif; ?>
+            <meta itemprop="availability"
+                  content="<?php echo $_product->isAvailable() ? 'http://schema.org/InStock' : 'http://schema.org/OutOfStock'; ?>">
+        <?php endif; ?>
+        <meta itemprop="priceCurrency"
+              content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>">
+    </div>
+    <?php $_reviews = $this->getReviews()->addRateVotes(); ?>
+    <?php if ($_reviews && count($_reviews)): ?>
+        <div style="display: none !important" itemscope itemprop="aggregateRating" itemtype="http://schema.org/AggregateRating">
+            <meta itemprop="ratingValue" content="<?php echo round($this->getAverageRating() * 5 / 100, 1); ?>">
+            <meta itemprop="ratingCount" content="<?php echo $this->getReviewsCount(); ?>">
+        </div>
+        <div style="display: none !important">
+            <?php foreach ($_reviews as $_review): ?>
+                <?php if ($_rating = $this->getReviewRating($_review)): ?>
+                    <div itemscope itemprop="review" itemtype="http://schema.org/Review">
+                        <meta itemprop="about" content="<?php echo $this->getProduct()->getName(); ?>">
+                        <meta itemprop="description" content="<?php echo $this->escapeHtml($_review->getTitle()) ?>">
+                        <meta itemprop="reviewBody" content="<?php echo $this->escapeHtml($_review->getDetail()); ?>">
+                        <meta itemprop="author" content="<?php echo $this->escapeHtml($_review->getNickname()); ?>">
+                        <meta itemprop="datePublished" content="<?php echo date('Y-m-d', strtotime($_review->getCreatedAt())) ?>">
+                        <div style="display: none !important" itemscope itemprop="reviewRating" itemtype="http://schema.org/Rating">
+                            <meta itemprop="ratingValue" content="<?php echo round($_rating * 5 / 100, 1); ?>">
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

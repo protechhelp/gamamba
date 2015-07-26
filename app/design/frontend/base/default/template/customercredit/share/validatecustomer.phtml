@@ -1,0 +1,70 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if ($this->getVerifyEnable()): ?>
+    <?php
+    $email = $this->getRequest()->getParam('customercredit_email_input');
+    $amount_credit = $this->getRequest()->getParam('customercredit_value_input');
+    $is_check_email = $this->getRequest()->getParam('check_send_email');
+    $description = $this->getRequest()->getParam('customer-credit-share-message');
+    $code_id = $this->getRequest()->getParam('id');
+    ?>
+    <div class="box-account box-info box-customercredit-share" style="display: inline-block; width: 98%; margin-bottom: 10px;">
+        <div class="box-head">
+            <h2><?php echo $this->__('Send Credit to friend') ?></h2>
+        </div>
+        <div class="customercredit_show_verify_code" id="customercredit_show_verify_code">
+            <form action="<?php echo $this->getFormActionUrl(); ?>" method="post" id="verify-code-form" style="float: left">
+                <p>
+                    <strong>
+                        <?php echo $this->__('Enter verify code from your email: ') ?>
+                    </strong>
+                </p>
+                <div class="input-box" style="margin-bottom: 15px;float: left;">
+                    <input style="width: 230px; " type="text" class="input-text required-entry " id="customer_credit_code" name="customercreditcode" value="<?php echo $this->getVerifyCode(); ?>"/>
+                    <input type="hidden"value="<?php echo $email; ?>"id="customercredit_value_emailhide" name="email_hide"/>
+                    <input type="hidden"value="<?php echo $amount_credit; ?>"id="customercredit_value_amounthide" name="amount_hide"/>
+                    <input type="hidden"value="<?php echo $description; ?>"id="customercredit_value_messagehide" name="message_hide"/>
+                    <?php if (isset($code_id)): ?>
+                        <input type="hidden"value="<?php echo $code_id; ?>"id="customercredit_credir_code_id" name="credit_code_id_hide"/>
+                    <?php endif; ?>
+                </div>
+                <button style="float: left;margin-left: 12px" class="button" title="<?php echo $this->__('Submit Code') ?>" type="submit">
+                    <span><span><?php echo $this->__('Submit Code') ?></span></span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var dataForm = new VarienForm('verify-code-form', true);
+    </script>
+    <div class="box-account box-info box-customercredit-history" style="float: left;margin-top: 10px">
+        <div class="box-head">
+            <h2><?php echo $this->__('Credit Code List') ?></h2>
+        </div>
+        <?php echo $this->getChildHtml() ?>
+    </div>
+<?php endif ?>

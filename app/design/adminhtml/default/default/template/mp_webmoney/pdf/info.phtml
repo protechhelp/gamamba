@@ -1,0 +1,49 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Webmoney
+ * @version    1.0.1
+ * @copyright  Copyright (c) 2010-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+?>
+<?php /** @var $this Magpleasure_Webmoney_Block_Info  */ ?>
+
+<?php echo $this->escapeHtml($this->getMethod()->getTitle()) ?>
+    {{pdf_row_separator}}
+
+<?php if ($this->getTransactionId()): ?>
+    <?php echo $this->__("Transaction ID"); ?>: <?php echo $this->getTransactionId(); ?>
+    {{pdf_row_separator}}
+<?php endif; ?>
+<?php if ($this->getInvoiceId()): ?>
+    <?php echo $this->__("Invoice ID"); ?>: <?php echo $this->getInvoiceId(); ?>
+    {{pdf_row_separator}}
+<?php endif; ?>
+<?php if ($this->getPayerWmId()): ?>
+    <?php echo $this->__("Payer WMID"); ?>: <?php echo $this->getPayerWmId(); ?>
+    {{pdf_row_separator}}
+<?php endif; ?>
+<?php if ($this->getPayerPurse()): ?>
+    <?php echo $this->__("Payer Purse"); ?>: <?php echo $this->getPayerPurse(); ?>
+    {{pdf_row_separator}}
+<?php endif; ?>

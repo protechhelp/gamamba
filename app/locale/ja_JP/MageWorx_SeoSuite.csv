@@ -1,0 +1,78 @@
+"<b>Template variables</b><br />[<i>attribute</i>] &mdash; e.g. [name], [price], [manufacturer], [color] &mdash; will be replaced with the respective product attribute value or removed if  value is not available<br />[<i>attribute1|attribute2|...</i>] &mdash; e.g. [manufacturer|brand] &mdash; if the first attribute value is not available for the product the second will be used and so on untill it finds a value<br />[<i>prefix</i> {<i>attribute</i>} <i>suffix</i>] or<br />[<i>prefix</i> {<i>attribute1|attribute2|...</i>} <i>suffix</i>] &mdash; e.g. [({color} color)] &mdash; if an attribute value is available it will be prepended with prefix and appended with suffix, either prefix or suffix can be used alone<br />Additional variables available for Product Meta Title only: [category], [categories]<br /><b>Examples</b><br /><u>Product URL Key</u><br />[name] [by {manufacturer|brand}] [{color} color] [for {price}] will be transformed into<br />htc-touch-diamond-by-htc-black-color-for-517-50<br /><u>Product Meta Title</u><br />[name] [by {manufacturer|brand}] [({color} color)] [for {price}] [in {categories}] will be transformed into<br />HTC Touch Diamond by HTC (Black color) for � 517.50 in Cell Phones - Electronics","<b>テンプレート変数</b><br />[<i>属性</i>] &mdash; 例 [name], [price], [manufacturer], [color] &mdash; 値が利用可能で無い場合、該当の商品の属性と置き換えられるか削除されます。<br />[<i>属性1|属性2|...</i>] &mdash; 例 [manufacturer|brand] &mdash; 商品の１番目の属性値が利用可能で無い場合、２番目またはその次、またはその次と値が存在する物が使用されます。<br />[<i>接頭辞</i> {<i>属性</i>} <i>接尾辞</i>] または<br />[<i>接頭辞</i> {<i>属性1|属性2|...</i>} <i>接尾辞</i>] &mdash; 例 [({color} color)] &mdash; 属性値が利用可能である場合、接頭辞と接尾辞がそれぞれ追加されます。接頭辞または接尾辞は単体で使用可能です。<br />商品Meta Titleとして利用可能な追加属性は次のみです： [category], [categories]<br /><b>例</b><br /><u>Product URL Key</u><br />[name] [by {manufacturer|brand}] [{color} color] [for {price}] は、次の様になります。<br />htc-touch-diamond-by-htc-black-color-for-517-50<br /><u>Product Meta Title</u><br />[name] [by {manufacturer|brand}] [({color} color)] [for {price}] [in {categories}] は次の様になります。<br />HTC Touch Diamond by HTC (Black color) for $517.50 in Cell Phones - Electronics"
+"NOINDEX, FOLLOW Robots Meta Header For Additional Pages","追加ページへのNOINDEX、FOLLOW Robotsメタヘッダ"
+"NOINDEX, FOLLOW Robots Meta Header For Pages Without Content","コンテンツ無しページへのNOINDEX、FOLLOW Robotsメタヘッダ"
+Action,アクション
+Add Canonical URL Meta Header,カノニカルURLメタヘッダ追加
+Add Trailing Slash,トレイリングスラッシュ追加
+Apply URL template to all products,全ての商品にURLテンプレートを適用する
+Apply,適用
+Back,戻る
+Can be either a full action name or a request path. Wildcard allowed<br/><b>Examples</b>:<br/>review_product_*<br/>review/product/*<br/>rss_*<br/>rss/*,フルアクション名またはリクエストパスのどちらかを使用可能です。ワイルドカード使用可能。<br/><b>例</b>：<br/>review_product_*<br/>review/product/*<br/>rss_*<br/>rss/*
+Canonical URL Meta Header will not be added for these pages,カノニカルURLメタヘッダはこれらページには追加されません
+Canonical URL,カノニカルURL
+Catalog URL rewrites reindexed (100%)...,カタログURLリライトが再インデックスされました（100％）...
+Categories Report,カテゴリーレポート
+Category Name,カテゴリー名
+Caterogies,カテゴリー
+Checkout Pages,チェックアウトページ
+CMS Report,CMSレポート
+CMS,CMS
+Contact Us Page,お問い合わせページ
+Content Heading,コンテンツヘッディング
+Customer Account Pages,お客様アカウントページ
+Done,完了
+Duplicate,複製
+Edit,編集
+For use with <b>Use categories path for product URLs</b> setting<br/><b>Use Default</b> will use categories path related to the current categories path for product URL<br/><b>Use Longest</b> will use the longest categories path for product URL<br/><b>Use Shortest</b> will use the shortest categories path for product URL,「<b>商品URLとしてカテゴリーパスを使用する</b>」設定と共に使用します。<br/><b>既定値を使用</b>は、商品URLとして現在のカテゴリーパスに関連するカテゴリーパスを使用します。<br/><b>最長を使用</b>は、商品URLとして最も長いカテゴリーパスを使用します。<br/><b>最短を使用</b>は、商品URLとして最も短いカテゴリーパスを使用します。
+form %s to %s,%sから%sへ
+form %s,%sから
+Generate,生成
+Ignore Pages,ページを無視する
+Leave blank to use Product Meta Title Template,商品メタタイトルテンプレートを使用する場合は空欄
+Leave blank to use Product URL Key Template,商品URLキーテンプレートを使用する場合は空欄
+Level,レベル
+Long,ロング
+MageWorx &gt; SEO Suite,MageWorx &gt; SEOスイート
+Meta Description,Meta説明
+Meta Title,Metaタイトル
+Missing,不足
+Most search engines use up to 150.,多くの検索エンジンは最大150を使用します。
+Most search engines use up to 70.,多くの検索エンジンは最大70を使用します。
+Product Canonical URL,商品カノニカルURL
+Product Compare Pages,商品比較ページ
+Product Meta Title Template. See below for details,商品メタタイトルテンプレート。詳細は下記を参照。
+Product Meta Title,商品メタタイトル
+Product Name,商品名
+Product Review Pages,商品レビューページ
+Product Short Meta Description,商品簡易メタディスクリプション
+Product URL Key and Meta Title Templates,商品URLキーおよびメタタイトルテンプレート
+Product URL Key Template. See below for details,商品URLキーテンプレート。詳細は下記を参照。
+Product URL Key,商品URLキー
+Products Report,商品レポート
+Products,商品
+Report has been successfully generated.,レポートが正常に生成されました。
+Robots,Robots
+RSS Feeds,RSSフィード
+Search Pages,検索ページ
+Send Product Pages,商品ページを送信
+SEO Suite,SEOスイート
+Starting apply product URL key template...,商品URLキーテンプレートの適用を開始中...
+Starting reindex catalog URL rewrites...,カタログURLリライトの再インデックスを開始中...
+Starting to calculate store\'s category data...,ストアのカテゴリーデータ計算を開始中...
+Starting to calculate store\'s CMS data...,ストアのCMSデータ計算を開始中...
+Starting to calculate store\'s product data...,ストアの商品データ計算を開始中...
+Tag Pages,ページをタグする
+Title,タイトル
+Total %1$s, processed %2$s records (%3$s%%)...,全%1$s中、%2$sレコードを処理済（%3$s%%）...
+Total %1$s, processed %2$s records (%3$s%%)...,全%1$s中、%2$sレコードを処理済（%3$s%%）...
+Type,タイプ
+Url,URL
+Use Config,設定を使用
+Use Longest,最長を使用
+Use product short description for Description Meta Tag instead of full description,フルディスクリプションの代わりに簡易メタディスクリプションをディスクリプションメタタグとして使用する
+Use Root,ルートを使用
+Use Shortest,最短を使用
+View Duplicates,複製を確認
+Wishlist Pages,欲しい物リストページ
+You need to generate the report due to recent changes.,最新の変更にはレポートを生成してください。
+You’ve entered <span>0</span> character(s).,<span>0</span>文字を入力しました。

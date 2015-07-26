@@ -1,0 +1,53 @@
+<!--@subject A customer credit from {{htmlescape var=$sendername}} @-->
+<!--@vars
+{"htmlescape var=$name":"Recipient Name",
+"htmlescape var=$sendername":"Sender name",
+"var code":"Customer Credit Code",
+"var balance":"Customer Credit Balance",
+"var status":"Status",
+"htmlescape var=$message":"Message",
+"var expiredat":"Expired At"}
+@-->
+
+<!--@styles
+body,td { background:#FFFFFF; margin:0; padding:0; color:#2f2f2f; font:13px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+pre{ white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;}
+@-->
+
+<div style="font:13px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=''}}">
+                            <img src="{{skin url='images/logo_email.gif' _area='frontend'}}" alt="{{var store.getFrontendName()}}"  style="margin-bottom:10px;" border="0"/>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p>
+                                <strong>Dear {{htmlescape var=$name}}</strong>,<br/>
+                                <strong>{{var store.getFrontendName()}}</strong> has just received a request from your account to transfer <b>{{var value}}</b> to the email <a href="{{var recipient_email}}">{{var recipient_email}}</a>
+                            <br/>
+                            </p>
+                            <p>
+                                If this is true, please enter the verification code below in the credit sharing:
+                            </p>
+                                <input type="text" value="{{var emailcode}}" name="redemption" style="width:272px; border:1px solid #999999; color:#FF7200; font-weight:bold;" readonly="true" />
+                            
+                            <p>Yours sincerely,<br/><strong>{{var store.getFrontendName()}}</strong></p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

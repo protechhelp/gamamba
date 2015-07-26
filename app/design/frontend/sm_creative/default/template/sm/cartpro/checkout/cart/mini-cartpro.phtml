@@ -1,0 +1,316 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Shoping cart sidebar
+ *
+ * @see Mage_Checkout_Block_Cart_Sidebar
+ */
+
+?>
+<?php
+$config = $this->getData();
+list($mini_cartpro_display, $mini_cartpro_effect_selector, $mini_cartpro_effect_toggle, $mini_cartpro_effect_duration) = array($config['mini_cartpro_display'],$config['mini_cartpro_effect_selector'],$config['mini_cartpro_effect_toggle'],$config['mini_cartpro_effect_duration'] ) ;
+?>
+<?php if ($mini_cartpro_display ):?>
+<?php $_items = $this->getRecentItems() ?>
+<?php $uq = uniqid('_uq'); ?>
+<script type="text/javascript">
+	 //<![CDATA[
+	 	mincart = new CartForm('minicart-form<?php echo $uq ?>', '', '<?php echo $this->getUrl('checkout/cart/updatePost') ?>');
+	 	minicartpro_id='';	 	
+	 	if (typeof isShow == 'undefined') isShow = false;
+	 	if (typeof isEffect == 'undefined') isEffect = false;
+	 	if (typeof overEffect == 'undefined') overEffect = false;
+	 	if (typeof outEffect == 'undefined') outEffect = false;
+	 //]]>
+</script>
+<div class="block mini-cartpro sm-cartpro">
+	<?php $_cartQty = $this->getSummaryCount() ?>
+	<div class="block-title">
+		<?php if(count($_items)){ ?>
+		<div class="btn-toggle show-cart-button">
+			<div class="detail-minicart">
+            	<span class="count-item">
+                	<?php if ( $_cartQty > 1 ){ ?>
+                    <span class="txt-item"><?php echo $_cartQty?></span>
+                    <?php } else { ?>
+                        <span class="txt-item"><?php echo $_cartQty?></span>
+                    <?php }?>
+					<span class="count-item-bg"></span>
+                </span>
+				<?php //echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+			</div>
+			
+		</div>
+        
+		<script type="text/javascript">
+		 	//<![CDATA[
+				<?php if($mini_cartpro_effect_selector =='hover'){ ?>
+					Event.observe($$('.mini-cartpro')[0], 'mouseenter', function(event) {
+						if (minicartpro_id) clearTimeout(minicartpro_id);
+						minicartpro_id = setTimeout(function(){
+							if(outEffect) { outEffect.cancel();}
+							if($$('.mini-cartpro .block-content')[0].getHeight()!=''){
+								$$('.mini-cartpro .block-content')[0].setStyle({height:''});
+							}		
+							if(isShow){ return; }	
+							overEffect =  Effect.toggle(
+								$$('.mini-cartpro .block-content')[0], 
+								'<?php echo $mini_cartpro_effect_toggle ?>', 
+								{
+									duration:<?php echo $mini_cartpro_effect_duration?>,
+									beforeStart: function(){overEffect.effects ; },	
+									//beforeSetup: function(){ console.log('mouseout beforeSetup'); },
+									//afterSetup: function(){ console.log('mouseout afterSetup'); },
+									//beforeUpdate: function(){ console.log('mouseout beforeUpdate'); },
+									//afterUpdate: function(){ console.log('mouseout afterUpdate'); },
+									//afterFinish: function(){ console.log('mouseout afterFinish'); },
+								}
+							); 
+							isShow=!isShow;
+							$$('.mini-cartpro .btn-toggle')[0].removeClassName('show');
+						}, 100);
+					});				
+					Event.observe($$('.mini-cartpro')[0], 'mouseleave', function(event) {
+						if (minicartpro_id) clearTimeout(minicartpro_id);
+						minicartpro_id = setTimeout(function(){
+							if(overEffect) {overEffect.cancel();}
+							if($$('.mini-cartpro .block-content')[0].getHeight()!=''){
+								$$('.mini-cartpro .block-content')[0].setStyle({height:''});
+							}
+
+							if(!isShow){ return; }
+							outEffect =  Effect.toggle(
+								$$('.mini-cartpro .block-content')[0], 
+								'<?php echo $mini_cartpro_effect_toggle ?>', 
+								{
+									duration:<?php echo $mini_cartpro_effect_duration?>,
+									beforeStart: function(){ outEffect.effects; }
+								}
+							);
+							isShow=!isShow;
+							$$('.mini-cartpro .btn-toggle')[0].addClassName('show');							
+						}, 100);	
+					});		
+					
+				<?php } else { ?>
+					$$('.mini-cartpro .btn-toggle')[0].onclick = function(e){
+						Effect.toggle($$('.mini-cartpro .block-content')[0], '<?php echo $mini_cartpro_effect_toggle ?>', {duration:<?php echo $mini_cartpro_effect_duration?>}); 
+						isShow=!isShow;
+						(isShow)?$$('.mini-cartpro .btn-toggle')[0].addClassName('show'):$$('.mini-cartpro .btn-toggle')[0].removeClassName('show');
+						//$$('.mini-cartpro .btn-toggle')[0].toggleClass("show");
+					}
+				<?php } ?>			
+		 	//]]>
+		    </script>
+		
+		<?php }else { ?>
+			<div class="btn-toggle show-cart-button">
+				<div class="detail-minicart">
+                	<span class="count-item">
+						<?php if ( $_cartQty > 1 ){ ?>
+						<span class="txt-item"><?php echo $_cartQty?></span>
+						<?php } else { ?>
+							<span class="txt-item"><?php echo "0";?></span>
+						<?php }?>
+						<span class="count-item-bg"></span>
+					</span>
+				</div>
+			</div>
+            
+            <script type="text/javascript">
+		 	//<![CDATA[
+				<?php if($mini_cartpro_effect_selector =='hover'){ ?>
+					Event.observe($$('.mini-cartpro')[0], 'mouseenter', function(event) {
+						if (minicartpro_id) clearTimeout(minicartpro_id);
+						minicartpro_id = setTimeout(function(){
+							if(outEffect) { outEffect.cancel();}
+							if($$('.mini-cartpro .block-content')[0].getHeight()!=''){
+								$$('.mini-cartpro .block-content')[0].setStyle({height:''});
+							}		
+							if(isShow){ return; }	
+							overEffect =  Effect.toggle(
+								$$('.mini-cartpro .block-content')[0], 
+								'<?php echo $mini_cartpro_effect_toggle ?>', 
+								{
+									duration:<?php echo $mini_cartpro_effect_duration?>,
+									beforeStart: function(){overEffect.effects ; },	
+									//beforeSetup: function(){ console.log('mouseout beforeSetup'); },
+									//afterSetup: function(){ console.log('mouseout afterSetup'); },
+									//beforeUpdate: function(){ console.log('mouseout beforeUpdate'); },
+									//afterUpdate: function(){ console.log('mouseout afterUpdate'); },
+									//afterFinish: function(){ console.log('mouseout afterFinish'); },
+								}
+							); 
+							isShow=!isShow;
+							$$('.mini-cartpro .btn-toggle')[0].removeClassName('show');
+						}, 100);
+					});				
+					Event.observe($$('.mini-cartpro')[0], 'mouseleave', function(event) {
+						if (minicartpro_id) clearTimeout(minicartpro_id);
+						minicartpro_id = setTimeout(function(){
+							if(overEffect) {overEffect.cancel();}
+							if($$('.mini-cartpro .block-content')[0].getHeight()!=''){
+								$$('.mini-cartpro .block-content')[0].setStyle({height:''});
+							}
+
+							if(!isShow){ return; }
+							outEffect =  Effect.toggle(
+								$$('.mini-cartpro .block-content')[0], 
+								'<?php echo $mini_cartpro_effect_toggle ?>', 
+								{
+									duration:<?php echo $mini_cartpro_effect_duration?>,
+									beforeStart: function(){ outEffect.effects; }
+								}
+							);
+							isShow=!isShow;
+							$$('.mini-cartpro .btn-toggle')[0].addClassName('show');							
+						}, 100);	
+					});		
+					
+				<?php } else { ?>
+					$$('.mini-cartpro .btn-toggle')[0].onclick = function(e){
+						Effect.toggle($$('.mini-cartpro .block-content')[0], '<?php echo $mini_cartpro_effect_toggle ?>', {duration:<?php echo $mini_cartpro_effect_duration?>}); 
+						isShow=!isShow;
+						(isShow)?$$('.mini-cartpro .btn-toggle')[0].addClassName('show'):$$('.mini-cartpro .btn-toggle')[0].removeClassName('show');
+						//$$('.mini-cartpro .btn-toggle')[0].toggleClass("show");
+					}
+				<?php } ?>			
+		 	//]]>
+		    </script>
+			
+		<?php } ?>
+	</div>
+	<div class="block-content" style="display: none;">
+		<div class="block-inner">
+			<?php if(count($_items)){ ?>
+            <div class="head-minicart">
+            	<span class="label-products">
+                	<?php echo $this->__("Your products"); ?>
+                </span>
+                <span class="label-price">
+                	<?php echo $this->__("Price"); ?>
+                </span>
+            </div>
+			<form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post" id="minicart-form<?php echo $uq ?>">
+			<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+				<ol id="minicart-sidebar" class="mini-products-list">
+					<?php foreach($_items as $_item): 
+						echo $this->getItemHtml($_item);
+					endforeach; ?>
+				</ol>
+			</form>
+			<script type="text/javascript">decorateList('minicart-sidebar', 'none-recursive')</script>
+            
+            <div class="bottom-action actions">
+				<div class="price-total-w">										
+                    <span class="label-price-total"><?php echo $this->__('Total: ')?></span> 
+					<span class="price-total"><?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?></span>
+				</div>
+				<div class="button-wrapper">
+					<?php if($_cartQty && ($this->isPossibleOnepageCheckout() OR $this->getQuote()->getHasError())){ ?>
+					<a class="link-button btn-gotocart button" title="<?php echo $this->__('View your Cart') ?>" onclick="setLocation('<?php echo Mage::getUrl('checkout/cart/') ?>')">
+						<?php echo $this->__('Go to Cart')?>
+					</a>
+					<?php /*?><a class="link-button btn-checkout button" title="<?php echo $this->__('Checkout') ?>" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')">
+						<?php echo $this->__('Checkout')?>
+					</a><?php */?>
+					<?php  } ?>	
+				</div>
+			</div>
+            
+			<?php } else { ?>
+            
+		       <h3 style="color:#FFFFFF; background:#000; padding:10px;"><?php echo $this->__('You have no items in your shopping cart.') ?></h3>
+                
+		    <?php } ?>
+		</div>
+	</div>
+	
+</div>
+<?php endif;?>
+
+<script type="text/javascript">
+     //<![CDATA[
+    jQuery(document).ready(function($){    
+        //click button quantity of products
+        $('.mini-cartpro input.quantity-controls').each(function(){
+            $(this).click(function(){    
+                $(this).parent().parent().children().remove('.update-minicart-message');
+                qty = $(this).parent().prev().attr('value');
+                qty_stock     = $(this).parent().prev().attr('data-stock');
+                min_qty_stock = $(this).parent().prev().attr('data-min-qty');
+                max_qty_stock = $(this).parent().prev().attr('data-max-qty');                
+                max_qty       = eval(qty-qty_stock);
+                max_default   = eval(qty-max_qty_stock);
+                min_qty       = eval(min_qty_stock-qty);    
+                
+                if( min_qty > 0 ){                    
+                    $(this).parent().parent().append('<p class="update-minicart-message">The minimum quantity allowed for purchase is '+min_qty_stock+'</p>');
+                    return false;
+                }
+                else if( max_qty > 0 ){    
+                    $(this).parent().parent().append('<p class="update-minicart-message">The maximum quantity allowed for purchase is '+qty_stock+'</p>');
+                    return false;
+                }
+                else if( max_default > 0 ){
+                    $(this).parent().parent().append('<p class="update-minicart-message">The maximum quantity allowed for purchase is '+max_qty_stock+'</p>');    
+                    return false;
+                }
+            });    
+        });
+        
+        //change input quantity of products
+        $('.mini-cartpro .qty').each(function(){
+            $(this).change(function(){    
+                $(this).parent().children().remove('.update-minicart-message');                
+                $('.mini-cartpro .btn-update').css({'display':'inline-block'});
+                qty = $(this).attr('value');
+                qty_stock     = $(this).attr('data-stock');
+                min_qty_stock = $(this).attr('data-min-qty');
+                max_qty_stock = $(this).attr('data-max-qty');                
+                max_qty       = eval(qty-qty_stock);
+                max_default   = eval(qty-max_qty_stock);
+                min_qty       = eval(min_qty_stock-qty);    
+                
+                if( min_qty > 0 ){                    
+                    $(this).parent().append('<p class="update-minicart-message">The minimum quantity allowed for purchase is '+min_qty_stock+'</p>');
+                    return false;
+                }
+                else if( max_qty > 0 ){    
+                    $(this).parent().append('<p class="update-minicart-message">The maximum quantity allowed for purchase is '+qty_stock+'</p>');
+                    return false;
+                }
+                else if( max_default > 0 ){
+                    $(this).parent().append('<p class="update-minicart-message">The maximum quantity allowed for purchase is '+max_qty_stock+'</p>');    
+                    return false;
+                }
+            });    
+        });        
+    });
+     //]]>
+</script>

@@ -1,0 +1,131 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+$_product = $this->getProduct();
+$_creditAmount = $this->getCreditAmount($_product);
+$_formData = $this->getFormConfigData();
+$currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+?>
+<div class="customercredit-product-info">
+    <?php if ($_creditAmount['type'] == 'range'): ?>
+        <p></p><p>
+            <label for="amount"><?php echo $this->__('Enter Price:') ?></label>
+            <input id="amount" name="amount" class="input-text required-entry validate-greater-than-zero" onchange="validateInputRange(this);" value="<?php echo $_formData->getAmount() ?>" />
+            (<span class="price"><?php echo $_creditAmount['from_txt'] ?></span> -  <span class="price"><?php echo $_creditAmount['to_txt'] ?></span>)
+            <br /><br />
+            <?php echo $this->__('Credit Rate: ') ?>
+            <?php
+            $rate = $_product->getCreditRate();
+            echo $rate;
+            ?>
+            <br><?php echo $this->__('Credit Value: ') ?>
+            <span class="value" id="value"><?php echo Mage::helper('core')->currency($_creditAmount['from'] * $rate); ?></span>
+            <script type="text/javascript">
+                //<![CDATA[
+                function validateInputRange(el) {
+                    var credit_mount_min = <?php echo $_creditAmount['from'] ?>;
+                    var credit_mount_max = <?php echo $_creditAmount['to'] ?>;
+                    el.value = document.getElementById('amount').value;
+                    var rate = <?php echo $rate; ?>;
+                    if (el.value < credit_mount_min)
+                        el.value = credit_mount_min;
+                    if (el.value > credit_mount_max)
+                        el.value = credit_mount_max;
+
+                    document.getElementById('value').innerHTML = '<?php echo $currencySymbol; ?>' + el.value * rate;
+                }
+                //]]>
+            </script>
+        </p>
+    <?php elseif ($_creditAmount['type'] == 'dropdown'): ?>
+        <p></p><p>
+            <label for="amount"><?php echo $this->__('Select Price:') ?></label>
+            <select id="amount" name="amount" class="required-entry select" onchange="changeValue(this);">
+                <?php $options = array_combine($_creditAmount['options'], $_creditAmount['options_txt']) ?>
+                <?php foreach ($options as $value => $label): ?>
+                    <option value="<?php echo $value ?>" <?php if ($value == $_formData->getAmount()) echo 'selected' ?> ><?php echo $label ?></option>
+                <?php endforeach ?>
+            </select>
+        </p>
+        </br>
+        <?php echo $this->__('Credit Rate: ') ?>
+        <?php
+        $rate = $_product->getCreditRate();
+        echo $rate;
+        ?>
+        <br><?php echo $this->__('Credit Value: ') ?>
+        <span class="value" id="value"><?php echo Mage::helper('core')->currency($_creditAmount['options'][0] * $rate); ?></span>
+      
+        <script type="text/javascript">
+            function changeValue(el) {
+                var rate = <?php echo $rate; ?>;
+                el.value = document.getElementById('amount').value;
+                document.getElementById('value').innerHTML = '<?php echo $currencySymbol; ?>' + el.value * rate;
+            }
+        </script>
+
+    <?php elseif ($_creditAmount['type'] == 'static'): ?>
+        <div class="price-box">
+            <span class="regular-price">
+                <span class="price">
+                    <?php //echo $_creditAmount['value_txt'] ?>
+                    <input type="hidden" name="amount" value="<?php echo $_creditAmount['value'] ?>" />
+                </span>
+            </span>
+        </div>
+        </br>
+        <?php echo $this->__('Credit Rate: ') ?>
+        <?php
+        $rate = $_product->getCreditRate();
+        echo $rate;
+        ?>
+        <br><?php echo $this->__('Credit Value: ') ?>
+        <span class="value" id="value"><?php echo Mage::helper('core')->currency($_product->getCreditValue()); ?></span>
+    <?php elseif ($_creditAmount['type'] == 'any'): ?>
+        <p></p><p>
+            <label for="amount"><?php echo $this->__('Enter Amount:') ?></label>
+            <input id="amount" name="amount" onchange="changeValue(this)" class="input-text required-entry validate-greater-than-zero" value="<?php echo $_formData->getAmount() ?>" />
+        </p>
+        </br>
+        <?php echo $this->__('Credit Rate: ') ?>
+        <?php
+        $rate = $_product->getCreditRate();
+        echo $rate;
+        ?>
+        <br><?php echo $this->__('Credit Value: ') ?>
+        <span class="value" id="value"><?php echo Mage::helper('core')->currency($_product->getCreditValue()); ?></span>
+
+        <script type="text/javascript">
+            function changeValue(el) {
+                var rate = <?php echo $rate; ?>;
+                el.value = document.getElementById('amount').value;
+                document.getElementById('value').innerHTML = '<?php echo $currencySymbol; ?>' + el.value * rate;
+            }
+        </script>
+    <?php endif ?>
+    <p></p>
+</div>

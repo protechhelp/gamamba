@@ -1,0 +1,171 @@
+.yt_menu_left{
+  margin-bottom:40px;
+  float: left;
+  width: 100%;
+  background-color: #444444;
+  .btn_categories{
+      background-color:@theme-color;
+      padding: 5px 20px;
+      height: 45px;
+      position: relative;
+      &:before{
+        position: absolute;
+        content: "";
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #000;
+        opacity: 0.2;
+      }
+      span{
+        color:#fff;
+        font-weight:bold;
+        font-size:166.67%; 
+        font-family: @googlefont;
+        &:before{
+          font-family: 'FontAwesome';
+          content: "\f00b";
+          margin-right: 5px;
+          font-size: 14px;
+        }     
+      }
+  }
+  .yt-menu-content{
+    font-family: @googlefont;
+    font-size: 108.33%;
+  }
+}
+#nav {
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	font-family: @googlefont;
+	> li{
+		float: left;
+		width: 100%;
+		position: relative;
+		border-bottom: 1px solid #555555;
+		&.active ,&:hover{
+		}
+		&.parent{			
+			> a{
+				position:relative;
+				&:after{
+					position: absolute;
+					right: 20px;
+					top:7px;
+					content: "\f0da";
+					font-family: 'FontAwesome';
+					color: #fff;
+				}
+			}
+			&:hover{
+				>a{
+					&:after{
+					  color: @theme-color;
+					}
+					>span{
+						color: @theme-color;
+					}
+				}
+			}
+		}
+
+	 	> a{
+			padding:7px 20px;
+			display:inline-block;
+			width:100%;
+			> span{
+				color: #fff;
+			}
+			&:hover{
+				> span{
+					color: @theme-color;
+				}				
+			}
+		} 
+
+		&.over > ul { 
+		   left: 100%;
+		}
+
+		&.level0{	
+			position: relative;
+			&:before{
+				position: absolute;
+				content: "";
+				bottom: -20px;
+				left: 0;
+				background: transparent;
+				width: 100%;
+				height: 20px;
+			};
+		}		
+	}
+
+
+	li{
+		position: relative;
+		> ul { 
+			background: #fff;
+			box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+		}	
+		ul li a{
+			position: relative;
+			padding-left: 15px;	
+			&:before{
+				background: url("../../images/ico-menuitem.png") no-repeat;
+				position: absolute;
+				content: "";
+				left: 0;
+				top: 4px;
+				width: 8px;
+				height: 8px;							
+			}								
+		}
+	}
+
+	ul {
+		position: absolute;
+		min-width:220px;
+		padding: 0;
+		top: 0;
+		left: -10000px;
+		margin: 0;
+		z-index:9;
+		border-top: 2px solid @theme-color;
+		padding: 0;
+
+		li {
+			float: none;
+			padding: 6px 20px;
+			&:before{
+				position: absolute;
+				content: "";
+				top: 0;
+				right: -2px;
+				background: transparent;
+				width: 2px;
+				height: 100%;
+			}
+			&.first{
+				padding-top: 15px;
+			}			
+			&.last{
+				padding-bottom: 15px;
+			}
+		}		
+	}
+
+	li.over > ul li.over > ul { 
+		left: 221px; 
+		top: 0;
+	}
+
+	li.over ul ul { 
+		left: -10000px; 
+	}
+
+}

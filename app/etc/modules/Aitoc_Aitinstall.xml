@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aitoc_Aitsys>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Aitoc_Aitsys>
+        <Aitoc_Aitinstall>
+            <active>false</active>
+            <codePool>community</codePool>
+        </Aitoc_Aitinstall>
+    </modules>
+</config>

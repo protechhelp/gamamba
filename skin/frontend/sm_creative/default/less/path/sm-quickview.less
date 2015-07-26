@@ -1,0 +1,94 @@
+
+.sm_quickview_handler:focus{
+	outline:none outline;
+}
+
+.fancybox-lock .zoomContainer{
+	-webkit-transform:none!important;
+}
+
+.fancybox-lock .zoomContainer .zoomLens,
+.fancybox-lock .zoomContainer .zoomWindow {
+	z-index:8021!important;
+}
+
+.quickview-main .product-image-thumbs li:first-child{
+	margin-left:0;
+}
+
+
+.quickview-main .product-collateral{
+	display:none;
+}
+
+.products-list li.item .f-fix .sm_quickview_handler{
+	float:left;
+}
+
+/*----------------------------quick view custom for theme----------------------------------------*/
+/*.catalog-product-view .fancybox-wrap .fancybox-close:before,
+.catalog-product-view .fancybox-wrap .fancybox-close {
+	display:none;
+}*/
+	
+.fancybox-wrap .fancybox-outer, 
+.fancybox-wrap .fancybox-inner{
+	background-color:#fff;
+}
+.fancybox-wrap .fancybox-skin{
+	background-color:#fff;
+	padding:0px !important;
+}
+.quickview-main .yt-product-detail .yt-detail-left{
+}
+.quickview-main .yt-product-detail .more-views .jCarouselLite > ul > li{	
+}
+/*.fancybox-wrap .fancybox-title-float-wrap .child,*/
+/*.quickview-main .fancybox-title,*/
+.quickview-main .category-image,
+.quickview-main .yt-product-detail .addthis_toolbox,
+.quickview-main .yt-product-detail .popup-btn.hidden-phone > a,
+.quickview-main .yt-product-detail .tab-product-detail{
+	display:none;
+}
+.quickview-main .yt-product-detail .more-views.slide-gallery{
+	text-align:justify;
+}
+
+.sm_quickview_handler{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top: -15px;
+	margin-left: -63px;
+	opacity: 0;
+	z-index:10;
+	height: 30px;
+	line-height: 28px;
+	padding: 0 20px 0 38px;
+	background-color: @theme-color;
+	background-image: url(../../images/icon-quickview.png);
+	background-repeat: no-repeat;
+	background-position: 15px center;
+	font-size: 107.69%;
+	font-family: @googlefont;
+	border-radius: @border-radius;
+	color: #fff;
+	&:before{
+		position: absolute;
+		top: 0;
+		left: 0;
+		content: "";
+		background: #fff;
+		opacity: 0.1;
+		width: 100%;
+		height: 100%;
+	}
+	&:hover{
+		background-color: @theme-color-active;
+	}
+}
+
+.sm_quickview_handler:hover{
+	color: #fff;
+}

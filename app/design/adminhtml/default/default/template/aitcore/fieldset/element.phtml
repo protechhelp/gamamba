@@ -1,0 +1,43 @@
+<?php
+/**
+ * Configurable Checkout
+ *
+ * @category:    Aitoc
+ * @package:     Aitoc_Aitconfcheckout
+ * @version      2.1.27
+ * @license:     2qI6oAD8hvvkjMutXwa7Vp1gcsMrnxn0DqZRLmfWz9
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+/* @var $this Aitoc_Aitsys_Block_Form_Element_Renderer */
+$module  = $this->getModule();
+$_helper  = Mage::helper('aitsys');
+$_element = $this->getElement();
+if (!$_element->getNoDisplay()): ?>
+<tr class='module'>
+    <?php if ($_element->getType()=='hidden'): ?>
+    <td colspan="3" class="hidden" valign="middle"><?php echo trim($_element->getElementHtml()) ?></td>
+    <?php else: ?>
+    <td class="value">
+        <?php echo trim($_element->getElementHtml()) ?>
+    </td>
+    <td class="label">
+        <?php echo trim($_element->getLabelHtml()) ?>
+        <?php if($_element->getInfo()): ?>
+        <div class='serial'>
+            <?php echo $_element->getInfo(); ?>
+        </div>
+        <?php endif; ?>
+        <?php if ($_element->getNote()): ?>
+        <div class='note'>
+            <?php echo $_element->getNote()?>
+        </div>
+        <?php endif ?>
+    </td>
+    <td id="note_<?php echo $_element->getId()?>">
+            <a target="_blank" href="<?php echo $_helper->tool()->getAitocUrl(); ?>how-to-get-support.html"><?php echo $_helper->__('How to get support') ?></a> |
+            <a target="_blank" href="<?php echo $_helper->tool()->getAitocUrl(); ?>aitcprod/license/list/"><?php echo $_helper->__('Register license') ?></a> |
+            <?php echo $_helper->getModuleSupportLink($module, false) ?>
+    </td>
+    <?php endif; ?>
+</tr>
+<?php endif; ?>

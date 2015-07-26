@@ -1,0 +1,67 @@
+<!--@subject Warning: {{var codetype}}s {{depend available}}are getting low.{{/depend}}{{depend none}}have all been used!{{/depend}}@-->
+<!--
+* ModifyMage Solutions (http://ModifyMage.com)
+* Serial Codes - Serial Numbers, Product Codes, PINs, and More
+*
+* NOTICE OF LICENSE
+* This source code is owned by ModifyMage Solutions and distributed for use under the
+* provisions, terms, and conditions of our Commercial Software License Agreement which
+* is bundled with this package in the file LICENSE.txt. This license is also available
+* through the world-wide-web at this URL: http://www.modifymage.com/software-license
+* If you do not have a copy of this license and are unable to obtain it through the
+* world-wide-web, please email us at license@modifymage.com so we may send you a copy.
+*
+* @category		Mmsmods
+* @package		Mmsmods_Serialcodes
+* @author		David Upson
+* @copyright	Copyright 2013 by ModifyMage Solutions
+* @license		http://www.modifymage.com/software-license
+*
+* vars	{{product}}
+*		{{available}}
+*		{{none}}
+*		{{codetype}}
+*		{{pool}}
+*		{{order}} object
+-->
+<html>
+<head>
+<style type="text/css">
+	body,td {color:#000000;font:12px Arial;}
+</style>
+</head>
+<body>
+<div>
+<table cellspacing="0" cellpadding="0" border="0" width="98%">
+<tr>
+	<td valign="top">
+<!-- header starts here -->
+		<table cellspacing="0" cellpadding="0" border="0" width="650px">
+			<tr>
+				<td>
+					<!-- YOUR HEADER HERE -->
+					<a href="{{store url=''}}"><img src="{{skin url='images/logo_email.gif' _area='frontend'}}" alt="{{var order.getStoreGroupName()}}" style="margin-bottom:10px;" border="0"/></a>
+				</td>
+			</tr>
+		</table>
+<!-- middle starts here -->
+		<table cellspacing="0" cellpadding="0" border="0" width="650">
+			<tr>
+				<td valign="top">
+					<p><br />To Whom It May Concern,</p>
+					{{depend available}}<p><b>You are getting low on {{var codetype}}s in the {{var pool}} code pool.</b></p>{{/depend}}
+					{{depend none}}<h3><b>You have run out of {{var codetype}}s in the {{var pool}} code pool!</b></h3>{{/depend}}
+					<p><b>Product:</b> {{var product}}<br />
+					<b>Code Pool:</b> {{var pool}}<br />
+					<b>Code Type:</b> {{var codetype}}<br />
+					<b>Number of Available Codes:</b> {{var available}}</p>
+					{{depend available}}<p><b>Please take appropriate action.</b></p>{{/depend}}
+					{{depend none}}<h3><b>Immediate action is required!</b></h3>{{/depend}}
+					<!-- ADD ADDITIONAL INSTRUCTIONS HERE -->
+					<p>Sincerely,<br/><br/><strong>{{var order.getStoreGroupName()}}</strong></p>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table></div></body></html>

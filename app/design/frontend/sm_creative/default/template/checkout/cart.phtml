@@ -1,0 +1,130 @@
+<?php
+/*
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ * DISCLAIMER
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+
+
+<div class="cart_main_top">
+<div class="cart">
+<div class="title-buttons cart_main">
+	<div class="page-title"><h1><?php echo $this->__('My Basket') ?></h1> <h2><?php if($this->getContinueShoppingUrl()): ?>
+                                <button type="button" title="<?php echo $this->__('Continue Shopping') ?>" class="button btn-continue" onclick="setLocation('<?php echo $this->getContinueShoppingUrl() ?>')"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+                            <?php endif; ?></h2></div>
+</div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <fieldset>
+            <table id="shopping-cart-table" class="data-table cart-table">
+
+            <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                <thead>
+                    <tr>
+                    	<th colspan="<?php echo $mergedCells; ?>"></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="hidden-mobile">Cover</th>
+                        <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="hidden-mobile"></th>
+                        <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+                        <?php /*?><th rowspan="<?php echo $mergedCells; ?>" class="a-center hidden-mobile"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th><?php */?>
+                        <?php endif ?>
+                        <th class="a-center" colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="a-center"><?php echo $this->__('Qty') ?></th>
+                        <th class="a-center" colspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Subtotal') ?></th>
+                        
+                    </tr>
+                    <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <tr>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
+                    </tr>
+                    <?php endif; ?>
+                </thead>
+                
+                <tbody>
+                <?php foreach($this->getItems() as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+            <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+        </fieldset>
+    </form>
+    <div class="cart-collaterals">
+        <div class="col2-set">
+        	<div class="row">
+            
+	            <?php /*?><div class="col-1 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+	                <?php echo $this->getChildHtml('crosssell') ?>
+	            </div><?php */?>
+                
+	            <div class=" col-lg-9 col-md-9 col-sm-7 col-xs-12">
+	                <?php /* Extensions placeholder */ ?>
+	                <?php echo $this->getChildHtml('checkout.cart.extra') ?>
+	                <?php echo $this->getChildHtml('coupon') ?>
+	                <?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+	            </div>
+	            <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
+			        <div class="totals">
+			            <?php echo $this->getChildHtml('totals'); ?>
+			            <?php if(!$this->hasError()): ?>
+							<!-- <ul class="checkout-types"> -->
+<!--                                --><?php //foreach ($this->getMethods('methods') as $method): ?>
+<!--                                    --><?php //if ($methodHtml = $this->getMethodHtml($method)): ?>
+<!--                                    <li>--><?php //echo $methodHtml; ?><!--</li>-->
+<!--                                    --><?php //endif; ?>
+<!--                                --><?php //endforeach; ?>
+<!--                            </ul>-->
+
+                            
+                            
+                           
+			            <?php endif; ?>
+			        </div>
+		        </div>
+	        </div>
+        </div>
+        <div class="go_patment_main">
+    	<form id="cart-checkoutform-form" method="post" action="<?php echo $this->getUrl('checkout/cart/checkout')?>">
+         	
+        	<h3><input id="newsletter" class="input-text required-entry validate-email" type="text" placeholder="Your e-mail address" maxlength="128" name="email"></h3>
+            <h2><input type="submit" value="Go to payment" class="button btn-proceed-checkout btn-checkout"></h2>
+           
+    	</form>
+         <script type="text/javascript">
+                                //<![CDATA[
+                                var cartCheckoutformFormDetails = new VarienForm('cart-checkoutform-form');
+                                //]]>
+                            </script>
+    </div>
+    </div>	
+</div>
+</div>

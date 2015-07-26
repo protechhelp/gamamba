@@ -1,0 +1,156 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @see Mage_Catalog_Block_Product_List_Toolbar
+ */
+?>
+<?php if($this->getCollection()->getSize()){ 
+	$pager = $this->getPagerHtml();
+	$mode = $this->getLayout()->createBlock('catalog/product_list_toolbar')->setChild('product_list_toolbar_pager', $pager)->getCurrentMode();
+?>
+<div class="toolbar">
+	<?php if( $this->isExpanded() ){ ?>
+	<div class="toolbar-inner">
+		<div class="view-mode-wrap col-lg-4 col-md-3 col-sm-4 col-xs-12">
+		<?php if( $this->isEnabledViewSwitcher() ): ?>		
+			<!-- <div class="view-mode-wrap"> -->
+	        	<!-- <span class="view-mode-label"><?php //echo $this->__('View as:') ?></span> -->
+				<div class="view-mode">
+					<?php $_modes = $this->getModes(); 
+					$pager = $this->getPagerHtml();
+					$mode = $this->getLayout()->createBlock('catalog/product_list_toolbar')->setChild('product_list_toolbar_pager', $pager)->getCurrentMode();
+					//var_dump($mode);
+					?>
+					<?php if($_modes && count($_modes)>1): ?>
+					<?php foreach ($this->getModes() as $_code=>$_label): ?>
+					<?php if($this->isModeActive($_code)): ?>
+					<strong title="<?php echo $_label ?>"
+						class="<?php if(strtolower($_code) == 'list'){echo "listing-icon";}else{echo "listing-grid-icon";} ?> <?php echo strtolower($_code); ?>">
+					</strong>
+					<?php else: ?>
+					<a href="<?php echo $this->getModeUrl($_code) ?>"
+						title="<?php echo $_label ?>"
+						class="<?php if(strtolower($_code) == 'grid'){echo "listing-grid-icon";}else{echo "listing-icon";} ?> <?php echo strtolower($_code); ?>">
+					</a>
+					<?php endif; ?>
+					<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+			<!-- </div> -->
+		<?php endif; ?>
+		</div>
+		
+		<div class="toolbar-center col-lg-4 col-md-5 col-sm-8 col-xs-12">
+			<div class="sort-by-wrap">
+				<div class="sort-by">
+					<label><?php echo $this->__('Sort by') ?></label>                   
+					<div class="select-new">
+						<div class="select-inner">
+                        	<div class="overwrite-sortby"></div>							                            
+                            <ul id="sort_by">
+                            <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+                            	<li>
+                                	<a href="<?php echo $this->getOrderUrl($_key, 'asc') ?>" <?php if($this->isOrderCurrent($_key)): ?> class="selected"<?php endif; ?>><?php echo $this->__($_order) ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                            </ul>
+						</div>
+					</div>
+					<?php if($this->getCurrentDirection() == 'desc'): ?>
+					<a class="set-asc arrow-up" href="<?php echo $this->getOrderUrl(null, 'asc') ?>" title="<?php echo $this->__('Set Ascending Direction') ?>"></a>
+					<?php else: ?>
+					<a class="set-desc arrow-down" href="<?php echo $this->getOrderUrl(null, 'desc') ?>" title="<?php echo $this->__('Set Descending Direction') ?>"></a>
+					<?php endif; ?>
+				</div>
+			</div>
+			<div class="limiter-wrap">
+                <div class="limiter">                	
+                    <label><?php echo $this->__('Show') ?> </label>
+                    <div class="select-new">
+                        <div class="select-inner">
+                            <div class="overwrite-limiter"></div>							                            
+                            <ul id="limiter">
+                            <?php
+                            $limit= Mage::app()->getRequest()->getParam('limit');
+                            $i = 0;
+                            foreach ($this->getAvailableLimit() as  $_key=>$_limit): 
+                            	$i++;
+                            	?>
+                                <li>
+                                    <a href="<?php echo $this->getLimitUrl($_key) ?>" <?php if($this->isLimitCurrent($_key)||($limit=='' && $i==1 /*&& $this->isLimitCurrent($_key)*/)): ?> class="selected"<?php endif; ?>><?php echo $_limit ?></a>
+                                </li>                               
+                            <?php endforeach; ?>
+                            </ul>							
+                        </div>
+                    </div>
+                    <!-- <label class="label-page"><?php //echo $this->__('per page') ?> </label> -->
+                </div>
+            </div>
+        </div>
+        <div class="pager-wrapper col-lg-4 col-md-4 col-sm-12 col-xs-12">
+			<!-- <div class="pager-wrapper">  -->               
+	            <div class="pagination-wrap">
+	                <div class="inner">
+	                    <?php echo $this->getPagerHtml() ?>
+	                </div>
+	            </div>
+		
+			<?php if(!Mage::registry('block_show_pagination')){
+				Mage::register('block_show_pagination',$this);
+			} ?>
+			<!-- </div> -->
+		</div>
+	<?php } ?>
+
+	</div>
+</div>
+<script>
+jQuery(document).ready(function($){ 
+	$(".sort-by-wrap .overwrite-sortby").html($('#sort_by li a.selected').html());	
+	$(".limiter-wrap .overwrite-limiter").html($('#limiter li a.selected').html());		
+	<?php if($limit == '' && $mode == 'grid') {?>
+		$('.category-products #limiter li:first-child a').removeClass('selected');
+	<?php } ?>
+	
+		/* $(".overwrite-sortby").click(function(){
+			$(this).next('ul').toggleClass('active_dropdown');
+			
+			$(".limiter-wrap .select-inner ul").removeClass("active_dropdown");
+		});
+		
+		$(".overwrite-limiter").click(function(){
+			$(this).next('ul').toggleClass('active_dropdown');
+			
+			$(".sort-by-wrap .select-inner ul").removeClass("active_dropdown");
+		}); */
+});
+</script>
+
+<?php } ?>

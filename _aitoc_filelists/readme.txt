@@ -1,0 +1,1 @@
+These files are needed for ../aitoc_uninstall.sh

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aureatelabs_AdvancedCheckout>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Aitoc_Aitconfcheckout/>
+            </depends>
+        </Aureatelabs_AdvancedCheckout>
+    </modules>
+</config>

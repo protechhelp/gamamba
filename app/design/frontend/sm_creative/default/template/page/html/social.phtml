@@ -1,0 +1,28 @@
+<?php 
+global $var_yttheme;
+?>
+<div class="socials-wrap">
+	<span class="socials-title"><?php echo $this->__('FOLLOW US:') ?></span>
+	<ul>
+		<?php if( $var_yttheme->getParam('show_facebook') == 1 ){ ?>
+			<li><a title="<?php echo $var_yttheme->getParam('facebook_name');?>" href="https://www.facebook.com/Gamamba" target="_blank" data-icon="F"><?php //echo $var_yttheme->getParam('facebook_name');?></a></li>
+		<?php }?>
+		<?php if( $var_yttheme->getParam('show_twitter') == 1 ){ ?>
+			<li><a title="<?php echo $var_yttheme->getParam('twitter_name');?>" href="<?php echo $var_yttheme->getParam('twitter_url');?>" target="_blank" data-icon="L"><?php //echo $var_yttheme->getParam('twitter_name');?></a></li>
+		<?php }?>
+		<?php if( $var_yttheme->getParam('show_google') == 1 ){ ?>
+			<li><a title="<?php echo $var_yttheme->getParam('google_name');?>" href="<?php echo $var_yttheme->getParam('google_url');?>" target="_blank" data-icon="G"><?php //echo $var_yttheme->getParam('google_name');?></a></li>
+		<?php }?>
+		
+		<?php if( $var_yttheme->getParam('show_linkedin') == 1 ){ ?>
+			<li><a title="<?php echo $var_yttheme->getParam('linkedin_name');?>" href="<?php echo $var_yttheme->getParam('linkedin_url');?>" target="_blank" data-icon="I"><?php //echo $var_yttheme->getParam('linkedin_name');?></a></li>
+		<?php }?>
+		<?php if( $var_yttheme->getParam('show_flickr') == 1 ){ ?>
+			<li><a title="<?php echo $var_yttheme->getParam('flickr_name');?>" href="<?php echo $var_yttheme->getParam('flickr_url');?>" target="_blank" data-icon="N"><?php //echo $var_yttheme->getParam('flickr_name');?></a></li>
+		<?php }?>
+		<?php if( $var_yttheme->getParam('show_pinterest') == 1 ){ ?>
+			<li><a title="<?php echo $var_yttheme->getParam('pinterest_name');?>" href="<?php echo $var_yttheme->getParam('pinterest_url');?>" target="_blank" data-icon=":"><?php //echo $var_yttheme->getParam('pinterest_name');?></a></li>
+		<?php }?>			
+	</ul>
+</div>    
+			

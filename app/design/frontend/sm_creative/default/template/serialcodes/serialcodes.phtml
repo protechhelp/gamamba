@@ -1,0 +1,29 @@
+<?php 
+
+if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+     $customerData = Mage::getSingleton('customer/session')->getCustomer();
+      $customerId = $customerData->getId();
+ }
+$items = Mage::getModel('sales/order')->getCollection()
+    ->join(array('item' => 'sales/order_item'), 'main_table.entity_id = item.order_id')
+    ->addFieldToFilter('customer_id', $customerId);
+$count = count($items); ?>
+
+	 <table class="data-table">
+	   <tr>
+	     <th>Product Name</th>
+		 <th>Product Key</th>
+	   </tr>
+<?php  if($count >= 1 ){  
+     foreach($items as $item){ ?>
+	 <tr>
+	     <td><?php  echo $item->getName();?></td>
+		 <td><?php  echo $item->getSerialCodes();?></td>
+	   </tr>
+
+	 
+	 <?php 
+	}
+	}
+ ?>
+ 	 </table>
