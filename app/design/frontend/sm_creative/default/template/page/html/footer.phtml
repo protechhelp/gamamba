@@ -159,23 +159,25 @@ $t(document).ready(function() {
 setInterval(function(){
     var $sample = $t(".customer_credit_main_top");
     var $sample2 = $t(".customer_credit_main_bottom");
-	
-    if($sample.is(":hover")) {
-		
-       $sample2.show();
-    }
-    else {
-       
-        if($sample2.is(":hover")) {
-			
-           $sample2.show();
+
+    if ($sample.length) {
+        if($sample.is(":hover")) {
+
+            $sample2.show();
         }
         else {
-           
-           $sample2.hide();
+
+            if($sample2.is(":hover")) {
+
+                $sample2.show();
+            }
+            else {
+
+                $sample2.hide();
+            }
+
         }
-		
-    }  
+    }
 }, 200);
 
 
