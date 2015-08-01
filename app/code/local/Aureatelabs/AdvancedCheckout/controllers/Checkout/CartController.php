@@ -20,7 +20,8 @@ class Aureatelabs_AdvancedCheckout_Checkout_CartController extends Mage_Checkout
             $customer->setFirstname($CustomerName[0])
                 ->setLastname($CustomerName[0])
                 ->setEmail($email)
-                ->setPassword('123456');
+                ->setPassword($customer->generatePassword());
+            $customer->sendPasswordReminderEmail();
             try{
                 $customer->save();
             }

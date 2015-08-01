@@ -92,7 +92,7 @@ class AW_Helpdesk3_Block_Adminhtml_Ticket_Edit_Form_CustomerSummary extends Mage
             $url = $this->getUrl('adminhtml/customer/edit', array('id' => $customerId));
             $label .= "<a href='{$url}' target='_blank'>{$customerName}</a><br/>";
         }
-        $label .= "&lt{$customerEmail}&gt";
+        $label .= "{$customerEmail}";
         return $label;
     }
 

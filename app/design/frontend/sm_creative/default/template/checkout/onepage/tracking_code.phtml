@@ -1,0 +1,26 @@
+<?php
+/*
+ * Facebook tracking code template
+ */
+
+$_orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+$_order = Mage::getModel('sales/order')->loadByIncrementId($_orderId);
+$_orderTotal = $_order->getGrandTotal();
+$_orderCurrency = Mage::app()->getLocale()->currency($_order->getOrderCurrencyCode())->getShortName();?>
+
+<!-- Facebook Conversion Code for Checkouts - GAM - PIX1 -->
+<script>(function() {
+        var _fbq = window._fbq || (window._fbq = []);
+        if (!_fbq.loaded) {
+            var fbds = document.createElement('script');
+            fbds.async = true;
+            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(fbds, s);
+            _fbq.loaded = true;
+        }
+    })();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', '6027678632764', {'value':'<?php echo $_orderTotal; ?>','currency':'<?php echo $_orderCurrency; ?>'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6027678632764&amp;cd[value]=<?php echo $_orderTotal; ?>&amp;cd[currency]=<?php echo $_orderCurrency; ?>&amp;noscript=1" /></noscript>

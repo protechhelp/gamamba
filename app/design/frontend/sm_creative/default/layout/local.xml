@@ -6,4 +6,21 @@
             <action method="addItem"><type>skin_css</type><name>css/ajaxscroll/ias.css</name></action>
         </reference>
     </catalog_category_layered>
+
+    <checkout_onepage_success translate="label">
+        <reference name="head">
+            <block type="core/template" name="tracking_code" before="-" template="checkout/onepage/tracking_code.phtml"/>
+            <block type="cms/block" name="my_left_block" before="-">
+                <action method="setBlockId"><block_id>success_tracking</block_id></action>
+            </block>
+        </reference>
+    </checkout_onepage_success>
+
+    <customer_account>
+        <!-- Mage_Sales -->
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="aw_hdu3"><name>support</name><path>helpdesk/customer</path><label>My Support Tickets</label></action>
+        </reference>
+
+    </customer_account>
 </layout>
