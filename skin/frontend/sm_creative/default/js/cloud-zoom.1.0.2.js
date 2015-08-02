@@ -170,6 +170,12 @@
 		We need the dummy background image as IE does not trap mouse events on
 		transparent parts of a div.
 		*/
+            var mousetrap_block = jQuery('.mousetrap');
+
+            if (mousetrap_block.length > 0) {
+                mousetrap_block.remove();
+            }
+
             $mouseTrap = jWin.parent().append(format("<div class='mousetrap' style='background-image:url(\".\");z-index:999;position:absolute;width:%0px;height:%1px;left:%2px;top:%3px;\'></div>", sImg.outerWidth(), sImg.outerHeight(), 0, 0)).find(':last');
 
             //////////////////////////////////////////////////////////////////////			

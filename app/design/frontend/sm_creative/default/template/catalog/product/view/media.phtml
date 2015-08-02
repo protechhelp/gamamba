@@ -62,10 +62,10 @@ if ($_product->getImage() != 'no_selection' && $_product->getImage()){
 				<a id="yt_popup" class="fancybox-button" data-fancybox-group="button" href="<?php echo $this->helper('catalog/image')->init($_product, 'small_image'); ?>">
 					Zoom
 				</a>
-				<?php foreach ($this->getGalleryImages() as $_image){ ?>	
+				<?php foreach ($this->getGalleryImages() as $_image){ ?>
 					<a style="display:none;" class="fancybox-button fancybox-image-hidden " data-fancybox-group="button" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile())?>">
 					</a>
-				<?php }?>			
+				<?php }?>
 			</div>
 		</div>
 	</div>
@@ -89,21 +89,21 @@ if ($_product->getImage() != 'no_selection' && $_product->getImage()){
 <div class="more-views slide-gallery">
 	<div class="jCarouselLite">
 		<ul>
-			<?php foreach ($this->getGalleryImages() as $_image): 
+			<?php foreach ($this->getGalleryImages() as $_image):
 				if($_image->getFile() == $_product->getImage()):?>
 			<li style="width: 110px; height: 156px;">
 				<a onclick="$$('.cloud-zoom-gallery').each(function(e,i){e.removeClassName('actived');});this.addClassName('actived')"
-					class="cloud-zoom-gallery actived"rel="useZoom: 'yt_cloudzoom', smallImage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>'"
+					class="cloud-zoom-gallery actived" rel="useZoom: 'yt_cloudzoom', smallImage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>'"
 					href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>"
-					title="<?php echo $this->htmlEscape($_image->getLabel()) ?>"> 
+					title="<?php echo $this->htmlEscape($_image->getLabel()) ?>">
 					<img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'small_image', $_image->getFile()); ?>"
 						alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"
 						title="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
 				</a>
 			</li>
-			<?php 
+			<?php
 			endif;
-			endforeach; 
+			endforeach;
 			?>
 			<?php foreach ($this->getGalleryImages() as $_image):
 			if($_image->getFile() != $_product->getImage()):	?>
@@ -214,6 +214,38 @@ if ($_product->getImage() != 'no_selection' && $_product->getImage()){
 
 
 <script type="text/javascript">
+	function setMiddleImage(position) {
+		var image,
+			link;
+
+		if (position === 'next') {
+			image = jQuery('.jCarouselLite .selected').next();
+		} else {
+			image = jQuery('.jCarouselLite .selected').prev();
+		}
+
+		link = image.find('a');
+		link.click();
+
+		jQuery('.jCarouselLite li').each(function() {
+			this.removeClassName('actived');
+		});
+		image.addClass('selected');
+
+		jQuery('.cloud-zoom-gallery').each(function() {
+			this.removeClassName('actived');
+		});
+		link.addClass('actived');
+	}
+
+	jQuery('.next').click(function() {
+		setMiddleImage('next');
+	});
+
+	jQuery('.prev').click(function() {
+		setMiddleImage('prev');
+	});
+
 	jQuery(document).ready(function($){
 		$('.product-options .configurable-swatch-list .swatch-label').has('img').click(function(){
 			setTimeout(function(){
@@ -222,7 +254,7 @@ if ($_product->getImage() != 'no_selection' && $_product->getImage()){
 				$('#yt_popup').attr('href',href);
 				$('#yt_cloudzoom').attr('href',href);
 				$('#yt_cloudzoom img').attr('src',href);
-				$('.cloud-zoom, .cloud-zoom-gallery').CloudZoom();	
+				$('.cloud-zoom, .cloud-zoom-gallery').CloudZoom();
 			}, 500);
 
 		});	
@@ -237,8 +269,10 @@ if ($_product->getImage() != 'no_selection' && $_product->getImage()){
 				}
 				
 			}, 500);
-		});	
+		});
 
+		jQuery('.prev').click();
+		setMiddleImage('next');
 	});
 </script>
 
